@@ -7,12 +7,12 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>人间失格</title>
+<title>Tags - 人间失格</title>
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="人间失格">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
@@ -83,7 +83,7 @@
             
             <div class="navbar-start">
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/">Home</a>
                 
                 <a class="navbar-item"
@@ -92,7 +92,7 @@
                 <a class="navbar-item"
                 href="/categories">Categories</a>
                 
-                <a class="navbar-item"
+                <a class="navbar-item is-active"
                 href="/tags">Tags</a>
                 
                 <a class="navbar-item"
@@ -124,202 +124,18 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-16T15:18:06.977Z">2019-11-16</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 352 words)
-                </span>
-                
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
                 
             </div>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/16/Sort/">Hello World</a>
-            
-        </h1>
-        <div class="content">
-            <p>#八大基本排序  </p>
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><pre><code> public static void bubbleSort(int[] arr) {
-    boolean flag = false;
-    for (int i = 0; i &lt; arr.length - 1; i++) {
-        for (int j = 0; j &lt; arr.length - 1 - i; j++) {
-            if (arr[j] &gt; arr[j + 1]) {
-                exchange(arr, j, j + 1);
-                flag = true;
-            }
-        }
-        if (flag) {
-            flag = false;
-        } else {
-            break;
-        }
-    }
-}</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code>public static void selectSort(int[] arr) {
-    for (int i = 0; i &lt; arr.length - 1; i++) {
-        int min = arr[i];
-        int minIndex = i;
-        for (int j = i + 1; j &lt; arr.length; j++) {
-            if (min &gt; arr[j]) {
-                min = arr[j];
-                minIndex = j;
-            }
-        }
-        if (minIndex != i) {
-            exchange(arr, minIndex, i);
-        }
-    }
-}</code></pre><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><pre><code>for (int i = 1; i &lt; arr.length; i++) {
-    for (int j = i; j &gt; 0; j--) {
-        if (arr[j] &lt; arr[j - 1]) {
-            exchange(arr, j, j - 1);
-        }
-    }
-}</code></pre><h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><pre><code>public static void shellSort(int[] arr) {
-    for (int gap = (arr.length - 1) / 2; gap &gt;= 1; gap /= 2) {
-        for (int i = gap; i &lt; arr.length; i++) {
-            for (int j = i; j &gt; gap - 1; j -= gap) {
-                if (arr[j] &lt; arr[j - gap]) {
-                    exchange(arr, j, j - gap);
-                }
-            }
-        }
-    }
-}</code></pre><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><pre><code>public static void quickSort(int[] arr, int start, int end) {
-        if (start&gt;=end){
-            return;
-        }
-        int left = start;
-        int right =end;
-        int pivot = arr[left];
-        while (left&lt;=right&amp;&amp;arr[left]&lt;pivot){
-            left++;
-        }
-        while (left&lt;=right&amp;&amp;arr[right]&gt;pivot){
-            right--;
-        }
-        if (left&lt;=right){
-            exchange(arr,left++,right--);
-        }
-        quickSort(arr,start,right);
-        quickSort(arr,left,end);
-
-}</code></pre><h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><pre><code>public static void mergeSort(int[] arr, int left, int right, int[] temp) {
-
-if (left &gt;= right) {
-    return;
-}//只有拆成一个元素的时候才开始合并。秒啊
-    int mid = (left + right) / 2;
-
-    mergeSort(arr, left, mid, temp);
-    mergeSort(arr, mid + 1, right, temp);
-    merge(arr, left, mid, right, temp);
-}</code></pre><hr>
-<pre><code>private static void merge(int[] arr, int left, int right, int mid, int[] temp) {
-    int start = left;
-    int end = mid+1;
-    int t = left;
-
-    while (start&lt;=mid&amp;&amp;end&lt;=right){
-        if (arr[start]&lt;=arr[end]){
-            temp[t++]=arr[start++];
-        }else {
-            temp[t++]=arr[end++];
-        }
-    }
-
-    while (start&lt;=mid){
-        temp[t++]=arr[start++];
-    }
-    while (end&lt;=right){
-        temp[t++]=arr[end++];
-    }
-
-    for (int i =left;i&lt;=right;i++) {
-        arr[i]=temp[i];
-    }
-}</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2>
-        </div>
-        
-        
-        
     </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-16T10:56:09.459Z">2019-11-16</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a minute read (About 123 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/11/16/hello-world/">Hello World</a>
-            
-        </h1>
-        <div class="content">
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-</div>
+</div></div>
                 
 
 
