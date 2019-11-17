@@ -46,14 +46,14 @@
   };
 </script>
 
-  <meta name="description" content="#八大基本排序   冒泡排序1234567891011121314151617public static void bubbleSort(int[] arr) &amp;#123;      boolean flag = false;      for (int i = 0; i &amp;lt; arr.length - 1; i++) &amp;#123;          for (int j = 0; j &amp;">
+  <meta name="description" content="#八大基本排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sort">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;16&#x2F;Sort&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="#八大基本排序   冒泡排序1234567891011121314151617public static void bubbleSort(int[] arr) &amp;#123;      boolean flag = false;      for (int i = 0; i &amp;lt; arr.length - 1; i++) &amp;#123;          for (int j = 0; j &amp;">
+<meta property="og:description" content="#八大基本排序">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-17T03:59:23.326Z">
+<meta property="og:updated_time" content="2019-11-17T15:30:49.316Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/11/16/Sort/">
@@ -183,7 +183,7 @@
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/16/Sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
       <meta itemprop="name" content="陈广">
       <meta itemprop="description" content="">
     </span>
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 11:59:23" itemprop="dateModified" datetime="2019-11-17T11:59:23+08:00">2019-11-17</time>
+                <time title="修改时间：2019-11-17 23:30:49" itemprop="dateModified" datetime="2019-11-17T23:30:49+08:00">2019-11-17</time>
               </span>
 
           
@@ -227,7 +227,9 @@
         <hr>
 <hr>
 <p>#八大基本排序  </p>
+<a id="more"></a>
 <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> static <span class="built_in">void</span> bubbleSort(<span class="built_in">int</span>[] arr) &#123;</span><br><span class="line">      <span class="built_in">bool</span>ean flag = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">0</span>; j &lt; arr.length - <span class="number">1</span> - i; j++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                  exchange(arr, j, j + <span class="number">1</span>);</span><br><span class="line">                  flag = <span class="literal">true</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">              flag = <span class="literal">false</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static void selectSort(int[] arr) &#123;</span><br><span class="line">       <span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; arr.<span class="built_in">length</span> - <span class="number">1</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">           int <span class="built_in">min</span> = arr[<span class="built_in">i</span>];</span><br><span class="line">           int minIndex = <span class="built_in">i</span>;</span><br><span class="line">           <span class="keyword">for</span> (int <span class="built_in">j</span> = <span class="built_in">i</span> + <span class="number">1</span>; <span class="built_in">j</span> &lt; arr.<span class="built_in">length</span>; <span class="built_in">j</span>++) &#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="built_in">min</span> &gt; arr[<span class="built_in">j</span>]) &#123;</span><br><span class="line">                   <span class="built_in">min</span> = arr[<span class="built_in">j</span>];</span><br><span class="line">                   minIndex = <span class="built_in">j</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (minIndex != <span class="built_in">i</span>) &#123;</span><br><span class="line">               exchange(arr, minIndex, <span class="built_in">i</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static void insertSort(int[] arr) &#123;</span><br><span class="line">       <span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt; arr.<span class="built_in">length</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">           <span class="keyword">for</span> (int <span class="built_in">j</span> = <span class="built_in">i</span>; <span class="built_in">j</span> &gt; <span class="number">0</span>; <span class="built_in">j</span>--) &#123;</span><br><span class="line">               <span class="keyword">if</span> (arr[<span class="built_in">j</span>] &lt; arr[<span class="built_in">j</span> - <span class="number">1</span>]) &#123;</span><br><span class="line">                   exchange(arr, <span class="built_in">j</span>, <span class="built_in">j</span> - <span class="number">1</span>);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a><strong><em>希尔排序</em></strong></h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static void shellSort(int[] arr) &#123;</span><br><span class="line">    <span class="keyword">for</span> (int gap = (arr.<span class="built_in">length</span> - <span class="number">1</span>) / <span class="number">2</span>; gap &gt;= <span class="number">1</span>; gap /= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (int <span class="built_in">i</span> = gap; <span class="built_in">i</span> &lt; arr.<span class="built_in">length</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (int <span class="built_in">j</span> = <span class="built_in">i</span>; <span class="built_in">j</span> &gt; gap - <span class="number">1</span>; <span class="built_in">j</span> -= gap) &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[<span class="built_in">j</span>] &lt; arr[<span class="built_in">j</span> - gap]) &#123;</span><br><span class="line">                    exchange(arr, <span class="built_in">j</span>, <span class="built_in">j</span> - gap);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -307,6 +309,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="陈广"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
   <p class="site-author-name" itemprop="name">陈广</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -319,6 +323,18 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
   </nav>
 </div>
   <div class="feed-link motion-element">
@@ -326,8 +342,30 @@
       <i class="fa fa-rss"></i>RSS
     </a>
   </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/18844683936" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;18844683936" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mackxin" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mackxin" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/" title="http:&#x2F;&#x2F;mackxin.com&#x2F;" rel="noopener" target="_blank">Mackxin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/nav.html" title="http:&#x2F;&#x2F;mackxin.com&#x2F;nav.html" rel="noopener" target="_blank">馨客栈导航</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -377,6 +415,8 @@
   </div>
 
   
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
