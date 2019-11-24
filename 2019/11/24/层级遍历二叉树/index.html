@@ -46,14 +46,18 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="人间失格">
-<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;a&#x2F;BFS&#x2F;index.html">
+  <meta name="description" content="层级遍历二叉树 分析: ​        二叉树的层次遍历通常实现方式为使用队列不断压入节点遍历,每次取出队列首个元素遍历左右子节点，继续压入子节点即可。 1234567891011121314151617181920212223242526272829&#x2F;&#x2F;层级遍历  public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; levelOrder(TreeNode root)">
+<meta name="keywords" content="二叉树,BFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="层级遍历二叉树">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E5%B1%82%E7%BA%A7%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
+<meta property="og:description" content="层级遍历二叉树 分析: ​        二叉树的层次遍历通常实现方式为使用队列不断压入节点遍历,每次取出队列首个元素遍历左右子节点，继续压入子节点即可。 1234567891011121314151617181920212223242526272829&#x2F;&#x2F;层级遍历  public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; levelOrder(TreeNode root)">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-24T08:13:48.948Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hansoncheng.com/a/BFS/">
+<link rel="canonical" href="https://hansoncheng.com/2019/11/24/%E5%B1%82%E7%BA%A7%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
 
 <script id="page-configurations">
@@ -61,13 +65,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: BFS | 人间失格</title>
+  <title>层级遍历二叉树 | 人间失格</title>
   
 
 
@@ -172,90 +176,104 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">BFS
-          <small>标签</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/24/%E5%B1%82%E7%BA%A7%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          层级遍历二叉树
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-11-24 15:34:37 / 修改时间：16:13:48" itemprop="dateCreated datePublished" datetime="2019-11-24T15:34:37+08:00">2019-11-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
+        <p>层级遍历二叉树</p>
+<p>分析:</p>
+<p>​        <strong>二叉树的层次遍历通常实现方式为使用队列不断压入节点遍历,每次取出队列首个元素遍历左右子节点，继续压入子节点即可。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//层级遍历</span></span><br><span class="line">  <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; levelOrder(TreeNode root) &#123;</span><br><span class="line">      List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">if</span> (root==<span class="keyword">null</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> result;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//创建一个对列，把起始节点都放到里面去（第一层节点）</span></span><br><span class="line">      Queue&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">      queue.offer(root);</span><br><span class="line">      <span class="comment">//while 对列不为空，处理队列中的节点，并拓展出新的节点</span></span><br><span class="line">      <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">          List&lt;Integer&gt; currentLevel = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">          <span class="comment">//for上一层的节点拓展下一层的节点</span></span><br><span class="line">          <span class="keyword">int</span> size = queue.size();</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">              TreeNode node = queue.poll();</span><br><span class="line">              currentLevel.add(node.val);</span><br><span class="line">              </span><br><span class="line">              <span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">                  queue.offer(node.left);</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                  queue.offer(node.right);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          result.add(currentLevel);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-24T16:36:06+08:00"
-              content="2019-11-24">
-          11-24
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/" itemprop="url">
-            <span itemprop="name">判断一个图是不是树状结构</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-24T15:34:37+08:00"
-              content="2019-11-24">
-          11-24
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/11/24/%E5%B1%82%E7%BA%A7%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91/" itemprop="url">
-            <span itemprop="name">层级遍历二叉树</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-11-24T12:13:08+08:00"
-              content="2019-11-24">
-          11-24
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/11/24/%E4%BB%8E%E5%8F%B3%E8%BE%B9%E8%A7%82%E5%AF%9F%E4%BA%8C%E5%8F%89%E6%A0%91/" itemprop="url">
-            <span itemprop="name">从右边观察二叉树</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+<p><a href="https://www.jiuzhang.com/solution/binary-tree-level-order-traversal/" target="_blank" rel="noopener">转自九章算法</a></p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/a/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+              <a href="/a/BFS/" rel="tag"># BFS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/24/%E8%AF%81%E6%98%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E9%A2%97BST/" rel="next" title="证明二叉树是不是一颗BST">
+                  <i class="fa fa-chevron-left"></i> 证明二叉树是不是一颗BST
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/" rel="prev" title="判断一个图是不是树状结构">
+                  判断一个图是不是树状结构 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
