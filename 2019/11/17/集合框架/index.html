@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="先上图">
+  <meta name="description" content="先上图  &amp;lt;!-- more --&amp;gt; List 有序可重复，可以排序，有三种遍历方式  通过下标和size（）来遍历 用迭代器遍历 用forEach  ArrayList： 底层是动态数组,这个数组先有一个初始大小，如果list中添加的元素超过这个大小后，就新创建一个数组，大小是这个数组的二倍，然后把原来数组中的元素复制进来。由于底层是数组，查询快，在中间增加和删除慢 LinkedLi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集合框架">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;17&#x2F;%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="先上图">
+<meta property="og:description" content="先上图  &amp;lt;!-- more --&amp;gt; List 有序可重复，可以排序，有三种遍历方式  通过下标和size（）来遍历 用迭代器遍历 用forEach  ArrayList： 底层是动态数组,这个数组先有一个初始大小，如果list中添加的元素超过这个大小后，就新创建一个数组，大小是这个数组的二倍，然后把原来数组中的元素复制进来。由于底层是数组，查询快，在中间增加和删除慢 LinkedLi">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdnimg.cn&#x2F;20190919111553966.png?x-oss-process=image&#x2F;watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMjA0NzA5,size_16,color_FFFFFF,t_70">
 <meta property="og:updated_time" content="2019-11-17T15:29:59.231Z">
@@ -220,31 +220,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>先上图<br><img src="https://img-blog.csdnimg.cn/20190919111553966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMjA0NzA5,size_16,color_FFFFFF,t_70" alt="">  </p>
-<a id="more"></a>
-<h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><p>有序可重复，可以排序，有三种遍历方式  </p>
+        <p>先上图
+<img src="https://img-blog.csdnimg.cn/20190919111553966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMjA0NzA5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>&lt;!-- more --&gt;</p>
+<h1>List</h1>
+<p>有序可重复，可以排序，有三种遍历方式</p>
 <ol>
-<li>通过下标和size（）来遍历  </li>
-<li>用迭代器遍历  </li>
+<li>通过下标和size（）来遍历</li>
+<li>用迭代器遍历</li>
 <li>用forEach</li>
 </ol>
-<h2 id="ArrayList："><a href="#ArrayList：" class="headerlink" title="ArrayList："></a>ArrayList：</h2><p>底层是动态数组,这个数组先有一个初始大小，如果list中添加的元素超过这个大小后，就新创建一个数组，大小是这个数组的二倍，然后把原来数组中的元素复制进来。由于底层是数组，查询快，在中间增加和删除慢</p>
-<h2 id="LinkedList："><a href="#LinkedList：" class="headerlink" title="LinkedList："></a>LinkedList：</h2><p>底层是一个双向链表，查询慢，增删快，因为查询需要一个节点一个节点的找。在中间插入和删除快。删除的话只需要  </p>
-<pre><code><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span>.<span class="title">pre</span>.<span class="attr">next=</span><span class="keyword">node</span>.<span class="title">next</span>;  </span><br><span class="line"><span class="keyword">node</span>.<span class="title">next</span>.pre =<span class="keyword">node</span>.<span class="title">pre</span>;</span><br></pre></td></tr></table></figure></code></pre><h1 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h1><p>无序不可重复 （输入顺序和输出顺序不一致） 有两种遍历方式  </p>
+<h2>ArrayList：</h2>
+<p>底层是动态数组,这个数组先有一个初始大小，如果list中添加的元素超过这个大小后，就新创建一个数组，大小是这个数组的二倍，然后把原来数组中的元素复制进来。由于底层是数组，查询快，在中间增加和删除慢</p>
+<h2>LinkedList：</h2>
+<p>底层是一个双向链表，查询慢，增删快，因为查询需要一个节点一个节点的找。在中间插入和删除快。删除的话只需要</p>
+<pre><code><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span>.<span class="title">pre</span>.<span class="attr">next=</span><span class="keyword">node</span>.<span class="title">next</span>;  </span><br><span class="line"><span class="keyword">node</span>.<span class="title">next</span>.pre =<span class="keyword">node</span>.<span class="title">pre</span>;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1>Set</h1>
+<p>无序不可重复 （输入顺序和输出顺序不一致） 有两种遍历方式</p>
 <ol>
-<li>迭代器  </li>
-<li>forEach  </li>
+<li>迭代器</li>
+<li>forEach</li>
 </ol>
-<h2 id="HashSet-（无序不可重复）"><a href="#HashSet-（无序不可重复）" class="headerlink" title="HashSet  （无序不可重复）"></a>HashSet  （无序不可重复）</h2><p>底层是HashMap，哈希表结构依赖于hashCode（）和equals（）方法，保证唯一性是通过先判断hashCode（）是否相同，如果相同的话判断equals（）返回的是否为true  </p>
-<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><p>底层是TreeMap，可以排序，分为 自然排序和比较器排序  </p>
+<h2>HashSet  （无序不可重复）</h2>
+<p>底层是HashMap，哈希表结构依赖于hashCode（）和equals（）方法，保证唯一性是通过先判断hashCode（）是否相同，如果相同的话判断equals（）返回的是否为true</p>
+<h2>TreeSet</h2>
+<p>底层是TreeMap，可以排序，分为 自然排序和比较器排序</p>
 <ol>
-<li>自然排序：元素具备比较性，让元素所属的类实现Comparable接口  </li>
-<li>比较器排序：集合具备比较性，给TreeSet的构造中传一个比较器接口的子类对象Comparator<br>唯一性是根据comparator方法的返回值是否为0来决定的  <h2 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h2>底层依赖哈希表和链表。哈希表保证元素的唯一性，链表保证元素有序  </li>
+<li>自然排序：元素具备比较性，让元素所属的类实现Comparable接口</li>
+<li>比较器排序：集合具备比较性，给TreeSet的构造中传一个比较器接口的子类对象Comparator<br>
+唯一性是根据comparator方法的返回值是否为0来决定的<br>
+##	LinkedHashSet<br>
+底层依赖哈希表和链表。哈希表保证元素的唯一性，链表保证元素有序</li>
 </ol>
-<h1 id="Map-（无序-key不可重复）"><a href="#Map-（无序-key不可重复）" class="headerlink" title="Map  （无序  key不可重复）"></a>Map  （无序  key不可重复）</h1><p>转换成keySet和EntrySet来遍历  </p>
-<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>是基于哈希表的Map实现，哈希表保证键的唯一性。</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><p>是Map接口的哈希表和链表的实现，有序。由哈希表保证键的唯一性，链表保证有序。  </p>
-<h1 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h1><p>是基于红黑树的Map接口实现。  </p>
+<h1>Map  （无序  key不可重复）</h1>
+<p>转换成keySet和EntrySet来遍历</p>
+<h2>HashMap</h2>
+<p>是基于哈希表的Map实现，哈希表保证键的唯一性。</p>
+<h2>LinkedHashMap</h2>
+<p>是Map接口的哈希表和链表的实现，有序。由哈希表保证键的唯一性，链表保证有序。</p>
+<h1>TreeMap</h1>
+<p>是基于红黑树的Map接口实现。</p>
 
     </div>
 
@@ -266,6 +282,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/20/%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C-1/" rel="prev" title="路径之和">
+                  路径之和 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -304,7 +323,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#List"><span class="nav-number">1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList："><span class="nav-number">1.1.</span> <span class="nav-text">ArrayList：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList："><span class="nav-number">1.2.</span> <span class="nav-text">LinkedList：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set"><span class="nav-number">2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet-（无序不可重复）"><span class="nav-number">2.1.</span> <span class="nav-text">HashSet  （无序不可重复）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeSet"><span class="nav-number">2.2.</span> <span class="nav-text">TreeSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">2.3.</span> <span class="nav-text">LinkedHashSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map-（无序-key不可重复）"><span class="nav-number">3.</span> <span class="nav-text">Map  （无序  key不可重复）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">3.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">3.2.</span> <span class="nav-text">LinkedHashMap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TreeMap"><span class="nav-number">4.</span> <span class="nav-text">TreeMap</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">ArrayList：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">LinkedList：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">HashSet  （无序不可重复）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">TreeSet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">Map  （无序  key不可重复）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.1.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.2.</span> <span class="nav-text">LinkedHashMap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">TreeMap</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -320,20 +339,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
