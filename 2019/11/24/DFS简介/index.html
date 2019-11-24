@@ -46,18 +46,18 @@
   };
 </script>
 
-  <meta name="description" content="描述给一棵二叉树，找到有最大平均值的子树。返回子树的根结点">
-<meta name="keywords" content="二叉树,分治法,打擂台">
+  <meta name="description" content="什么时候用DFS 找所有方案的题，一定是DFS 所有DFS的题，要么是排列，要么是组合">
+<meta name="keywords" content="DFS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树最大平均值的子树">
-<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;21&#x2F;%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%AD%90%E6%A0%91&#x2F;index.html">
+<meta property="og:title" content="DFS简介">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;DFS%E7%AE%80%E4%BB%8B&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="描述给一棵二叉树，找到有最大平均值的子树。返回子树的根结点">
+<meta property="og:description" content="什么时候用DFS 找所有方案的题，一定是DFS 所有DFS的题，要么是排列，要么是组合">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-24T05:24:07.222Z">
+<meta property="og:updated_time" content="2019-11-24T11:55:27.299Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hansoncheng.com/2019/11/21/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%AD%90%E6%A0%91/">
+<link rel="canonical" href="https://hansoncheng.com/2019/11/24/DFS%E7%AE%80%E4%BB%8B/">
 
 
 <script id="page-configurations">
@@ -71,7 +71,7 @@
   };
 </script>
 
-  <title>二叉树最大平均值的子树 | 人间失格</title>
+  <title>DFS简介 | 人间失格</title>
   
 
 
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/21/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%AD%90%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/24/DFS%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -194,7 +194,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          二叉树最大平均值的子树
+          DFS简介
         </h1>
 
         <div class="post-meta">
@@ -203,16 +203,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-11-21 08:40:43" itemprop="dateCreated datePublished" datetime="2019-11-21T08:40:43+08:00">2019-11-21</time>
+              <time title="创建时间：2019-11-24 18:54:38 / 修改时间：19:55:27" itemprop="dateCreated datePublished" datetime="2019-11-24T18:54:38+08:00">2019-11-24</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:24:07" itemprop="dateModified" datetime="2019-11-24T13:24:07+08:00">2019-11-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -236,26 +230,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>描述<br>给一棵二叉树，找到有最大平均值的子树。返回子树的根结点</p>
-<a id="more"></a>
-
-<p>样例<br>样例 1</p>
-<p>输入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>         <span class="number">11</span></span><br><span class="line">  /   \     /     \</span><br><span class="line">    <span class="number">1</span>     <span class="number">2</span>   <span class="number">4</span>       -<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>输出：11(它是一个TreeNode)<br>样例 2</p>
-<p>输入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>        <span class="number">11</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>输出：11(它是一个TreeNode)<br>————————————————</p>
-<blockquote>
-</blockquote>
-<p>&lt;! –more –&gt;</p>
+        <p><strong>什么时候用DFS</strong></p>
+<p>找所有方案的题，一定是DFS</p>
+<p>所有DFS的题，要么是排列，要么是组合</p>
 
     </div>
 
@@ -265,26 +242,21 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/a/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
-              <a href="/a/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag"># 分治法</a>
-              <a href="/a/%E6%89%93%E6%93%82%E5%8F%B0/" rel="tag"># 打擂台</a>
+              <a href="/a/DFS/" rel="tag"># DFS</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%90%E6%A0%91/" rel="next" title="二叉树和的最小子树">
-                  <i class="fa fa-chevron-left"></i> 二叉树和的最小子树
+                <a href="/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/" rel="next" title="判断一个图是不是树状结构">
+                  <i class="fa fa-chevron-left"></i> 判断一个图是不是树状结构
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C/" rel="prev" title="数据库的操作">
-                  数据库的操作 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
