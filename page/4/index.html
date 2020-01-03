@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%90%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E4%B8%8D%E6%98%AF%E5%9B%9E%E6%96%87%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%90%E6%A0%91/" class="post-title-link" itemprop="url">二叉树和的最小子树</a>
+            <a href="/2019/12/28/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E4%B8%8D%E6%98%AF%E5%9B%9E%E6%96%87%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">判断一个链表是不是回文结构</a>
         </h1>
 
         <div class="post-meta">
@@ -201,26 +201,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-20 23:27:19" itemprop="dateCreated datePublished" datetime="2019-11-20T23:27:19+08:00">2019-11-20</time>
+              <time title="创建时间：2019-12-28 14:26:23" itemprop="dateCreated datePublished" datetime="2019-12-28T14:26:23+08:00">2019-12-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:23:56" itemprop="dateModified" datetime="2019-11-24T13:23:56+08:00">2019-11-24</time>
+                <time title="修改时间：2020-01-03 20:56:48" itemprop="dateModified" datetime="2020-01-03T20:56:48+08:00">2020-01-03</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
 
           
 
@@ -233,17 +222,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>给一棵二叉树, 找到和为最小的子树, 返回其根节点。</p>
-<h3 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h3><p>例1:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入:</span><br><span class="line">     <span class="number">1</span></span><br><span class="line">   /   \</span><br><span class="line"> -<span class="number">5</span>     <span class="number">2</span></span><br><span class="line"> / \   /  \</span><br><span class="line"><span class="number">0</span>   <span class="number">2</span> -<span class="number">4</span>  -<span class="number">5</span> </span><br><span class="line"> </span><br><span class="line">输出:<span class="number">1</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%9A%84%E6%9C%80%E5%B0%8F%E5%AD%90%E6%A0%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>思路1： 把这个链表遍历，放到一个栈中，比对这个栈和链表是否相等</p>
+<img src="../../my/image-20191228142941519.png" alt="image-20191228142941519" style="zoom:33%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need n extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		Stack&lt;Node&gt; stack = <span class="keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">		Node cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			stack.push(cur);</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head.value != stack.pop().value) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			head = head.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>思路2：两个指针，快指针一次走两步，慢指针一次走一步，当快指针走完的时候，慢指针刚好走到中点的位置</p>
+<p>，然后慢指针后面的部分压栈。</p>
+<img src="../../my/image-20191228143304823.png" alt="image-20191228143304823" style="zoom:33%;" />
+
+<p>然后从头遍历链表，和栈一一比对，当栈弹完了都相同，就返回true</p>
+<p>思路3：（面试）</p>
+<p>还是两个指针，快指针一次走两步，慢指针一次走一步，当快指针走完的时候，慢指针刚好走到中点的位置</p>
+<img src="../../my/image-20191228143745858.png" alt="image-20191228143745858" style="zoom: 50%;" />
+
+<p>然后从中点逆序，然后左右两个变量，都从1开始，每走一步比对一不一样。走到中点位置（有一个为null），停。</p>
+<p>不管一不一样都要走到中点的位置，然后把用户的链表还原；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need O(1) extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome3</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Node n1 = head;</span><br><span class="line">		Node n2 = head;</span><br><span class="line">		<span class="keyword">while</span> (n2.next != <span class="keyword">null</span> &amp;&amp; n2.next.next != <span class="keyword">null</span>) &#123; <span class="comment">// find mid node</span></span><br><span class="line">			n1 = n1.next; <span class="comment">// n1 -&gt; mid</span></span><br><span class="line">			n2 = n2.next.next; <span class="comment">// n2 -&gt; end</span></span><br><span class="line">		&#125;</span><br><span class="line">		n2 = n1.next; <span class="comment">// n2 -&gt; right part first node</span></span><br><span class="line">		n1.next = <span class="keyword">null</span>; <span class="comment">// mid.next -&gt; null</span></span><br><span class="line">		Node n3 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (n2 != <span class="keyword">null</span>) &#123; <span class="comment">// right part convert</span></span><br><span class="line">			n3 = n2.next; <span class="comment">// n3 -&gt; save next node</span></span><br><span class="line">			n2.next = n1; <span class="comment">// next of right node convert</span></span><br><span class="line">			n1 = n2; <span class="comment">// n1 move</span></span><br><span class="line">			n2 = n3; <span class="comment">// n2 move</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		n3 = n1;<span class="comment">// n3 -&gt; save last node</span></span><br><span class="line">		n2 = head;<span class="comment">// n2 -&gt; left first node</span></span><br><span class="line">		<span class="keyword">boolean</span> res = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span> &amp;&amp; n2 != <span class="keyword">null</span>) &#123; <span class="comment">// check palindrome</span></span><br><span class="line">			<span class="keyword">if</span> (n1.value != n2.value) &#123;</span><br><span class="line">				res = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n1 = n1.next; <span class="comment">// left to mid</span></span><br><span class="line">			n2 = n2.next; <span class="comment">// right to mid</span></span><br><span class="line">		&#125;</span><br><span class="line">		n1 = n3.next;  </span><br><span class="line">		n3.next = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span>) &#123; <span class="comment">// recover list</span></span><br><span class="line">			n2 = n1.next;</span><br><span class="line">			n1.next = n3;</span><br><span class="line">			n3 = n1;</span><br><span class="line">			n1 = n2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -262,7 +263,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -276,7 +277,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/" class="post-title-link" itemprop="url">二叉树的所有路径</a>
+            <a href="/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">打印两个有序链表的公共部分</a>
         </h1>
 
         <div class="post-meta">
@@ -285,26 +286,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-11-20 23:03:41" itemprop="dateCreated datePublished" datetime="2019-11-20T23:03:41+08:00">2019-11-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:23:45" itemprop="dateModified" datetime="2019-11-24T13:23:45+08:00">2019-11-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
+              <time title="创建时间：2019-12-28 14:02:47 / 修改时间：14:05:50" itemprop="dateCreated datePublished" datetime="2019-12-28T14:02:47+08:00">2019-12-28</time>
             </span>
 
           
@@ -318,24 +302,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>给定一个二叉树，返回所有从根节点到叶子节点的路径。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:</p>
-<p>输入:</p>
-<pre><code>   1
- /   \
-2     3
- \
-  5</code></pre><p>输出: [“1-&gt;2-&gt;5”, “1-&gt;3”]</p>
-<p>解释: 所有根节点到叶子节点的路径为: 1-&gt;2-&gt;5, 1-&gt;3</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/20/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>用归并排序中的外排merge的那部分思想，只有相等的时候才打印，不相等的时候直接到下一个节点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCommonPart</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Common Part: "</span>);</span><br><span class="line">		<span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head1.value &lt; head2.value) &#123;</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head1.value &gt; head2.value) &#123;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(head1.value + <span class="string">" "</span>);</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -354,7 +324,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/20/%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C-1/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -368,7 +338,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/20/%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C-1/" class="post-title-link" itemprop="url">路径之和</a>
+            <a href="/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/" class="post-title-link" itemprop="url">在行和列都排好序的矩阵中找数</a>
         </h1>
 
         <div class="post-meta">
@@ -377,26 +347,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-11-20 22:48:38" itemprop="dateCreated datePublished" datetime="2019-11-20T22:48:38+08:00">2019-11-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:24:13" itemprop="dateModified" datetime="2019-11-24T13:24:13+08:00">2019-11-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
+              <time title="创建时间：2019-12-28 12:56:00 / 修改时间：13:48:25" itemprop="dateCreated datePublished" datetime="2019-12-28T12:56:00+08:00">2019-12-28</time>
             </span>
 
           
@@ -410,25 +363,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例:<br>给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>      5
-     / \
-    4   8
-   /   / \
-  11  13  4
- /  \    / \
-7    2  5   1</code></pre><p>返回：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">   [<span class="number">5</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">2</span>],</span><br><span class="line">   [<span class="number">5</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/20/%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <img src="../../my/image-20191228133954520.png" alt="image-20191228133954520" style="zoom:50%;" />
+
+<p>如题，如图，找4这个数。</p>
+<p>可以从右上角开始找6，</p>
+<p>6比4 大，</p>
+<p>所以6下面的就可以排除了，</p>
+<p>向左走一位是5，</p>
+<p>5 也比4大，</p>
+<p>再向左走是3，</p>
+<p>3比4 小，</p>
+<p>所以3左边的都比4小，</p>
+<p>向下走一位是5，</p>
+<p>5比4 大，</p>
+<p>所以向左走一位，是2，</p>
+<p>2比4小，</p>
+<p>所以向下走一位是4，</p>
+<p>找到啦。</p>
+<img src="../../my/image-20191228134430876.png" alt="image-20191228134430876" style="zoom:50%;" />
+
+<p>时间复杂度是O（m+n）的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isContains</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> row = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> col = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (row &lt; matrix.length &amp;&amp; col &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (matrix[row][col] == K) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][col] &gt; K) &#123;</span><br><span class="line">				col--;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				row++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[][] &#123; &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;,<span class="comment">// 0</span></span><br><span class="line">				&#123; <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span> &#125;,<span class="comment">// 1</span></span><br><span class="line">				&#123; <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span> &#125;,<span class="comment">// 2</span></span><br><span class="line">				&#123; <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">50</span> &#125;,<span class="comment">// 3</span></span><br><span class="line">				&#123; <span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">68</span>, <span class="number">69</span>, <span class="number">70</span>, <span class="number">71</span> &#125;,<span class="comment">// 4</span></span><br><span class="line">				&#123; <span class="number">96</span>, <span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">111</span>, <span class="number">122</span> &#125;,<span class="comment">// 5</span></span><br><span class="line">				&#123; <span class="number">166</span>, <span class="number">176</span>, <span class="number">186</span>, <span class="number">187</span>, <span class="number">190</span>, <span class="number">195</span>, <span class="number">200</span> &#125;,<span class="comment">// 6</span></span><br><span class="line">				&#123; <span class="number">233</span>, <span class="number">243</span>, <span class="number">321</span>, <span class="number">341</span>, <span class="number">356</span>, <span class="number">370</span>, <span class="number">380</span> &#125; <span class="comment">// 7</span></span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">int</span> K = <span class="number">233</span>;</span><br><span class="line">		System.out.println(isContains(matrix, K));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -447,7 +404,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -493,20 +450,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -558,7 +515,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
