@@ -46,19 +46,19 @@
   };
 </script>
 
-  <meta name="description" content="设计： 准备两个栈 ，一个是data栈 一个是min栈 data栈压入一个4， min 也栈压入一个4; data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4   此时data在压入一个3，min栈：3&amp;lt;4 比min栈栈顶小，就压入3；  如果data栈压入一个6，min栈栈顶3小，重复压入一个3  data栈">
+  <meta name="description" content="设计： 准备两个栈 ，一个是data栈 一个是min栈 data栈压入一个4， min 也栈压入一个4; data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4    此时data在压入一个3，min栈：3&amp;lt;4 比min栈栈顶小，就压入3；   如果data栈压入一个6，min栈栈顶3小，重复压入一个3  dat">
 <meta property="og:type" content="article">
 <meta property="og:title" content="实现一个特殊的栈，基本功能上添加返回栈中最小元素的操作">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;26&#x2F;%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="设计： 准备两个栈 ，一个是data栈 一个是min栈 data栈压入一个4， min 也栈压入一个4; data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4   此时data在压入一个3，min栈：3&amp;lt;4 比min栈栈顶小，就压入3；  如果data栈压入一个6，min栈栈顶3小，重复压入一个3  data栈">
+<meta property="og:description" content="设计： 准备两个栈 ，一个是data栈 一个是min栈 data栈压入一个4， min 也栈压入一个4; data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4    此时data在压入一个3，min栈：3&amp;lt;4 比min栈栈顶小，就压入3；   如果data栈压入一个6，min栈栈顶3小，重复压入一个3  dat">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;my&#x2F;image-20191226174010154.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;my&#x2F;image-20191226174158870.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;my&#x2F;image-20191226174300641.png">
-<meta property="og:updated_time" content="2019-12-26T11:01:39.624Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;GsPNgE.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;yZrF4P.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;iapZ2m.png">
+<meta property="og:updated_time" content="2020-01-05T13:10:34.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;my&#x2F;image-20191226174010154.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;GsPNgE.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/12/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C/">
 
@@ -206,10 +206,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-26 17:30:34 / 修改时间：19:01:39" itemprop="dateCreated datePublished" datetime="2019-12-26T17:30:34+08:00">2019-12-26</time>
+              <time title="创建时间：2019-12-26 17:30:34" itemprop="dateCreated datePublished" datetime="2019-12-26T17:30:34+08:00">2019-12-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-05 21:10:34" itemprop="dateModified" datetime="2020-01-05T21:10:34+08:00">2020-01-05</time>
+              </span>
 
           
 
@@ -226,11 +232,13 @@
 <p>准备两个栈 ，一个是data栈 一个是min栈</p>
 <p>data栈压入一个4， min 也栈压入一个4;</p>
 <p>data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4 </p>
-<p><img src="../../my/image-20191226174010154.png" alt="image-20191226174010154"></p>
+<img src="https://upload.cc/i1/2020/01/05/GsPNgE.png" alt="image-20191226174010154" style="zoom:50%;" />
+
 <p>此时data在压入一个3，min栈：3&lt;4 比min栈栈顶小，就压入3；</p>
-<p><img src="../../my/image-20191226174158870.png" alt="image-20191226174158870"></p>
+<img src="https://upload.cc/i1/2020/01/05/yZrF4P.png" alt="image-20191226174158870" style="zoom: 50%;" />
+
 <p>如果data栈压入一个6，min栈栈顶3小，重复压入一个3</p>
-<p><img src="../../my/image-20191226174300641.png" alt="image-20191226174300641"></p>
+<p><img src="https://upload.cc/i1/2020/01/05/iapZ2m.png" alt="image-20191226174300641"></p>
 <p>data栈是一个正常的栈。min栈栈顶就是这个data栈中的最小元素</p>
 <p>如果要弹出一个数的时候，data弹一个数，min弹一个数。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStack1</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackData;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackMin;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">MyStack1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.stackData = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.stackMin = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> newNum)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123; <span class="comment">//如果min栈为空，就压入头一个数</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (newNum &lt; <span class="keyword">this</span>.getmin()) &#123;<span class="comment">//如果当前数比min栈栈顶（栈顶就是最小的数）还要小，就把这个数压到min中；</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="keyword">int</span> newMin = <span class="keyword">this</span>.stackMin.peek();<span class="comment">//如果min栈栈顶更小的话，就把min栈栈顶重复压入min栈中</span></span><br><span class="line">                  <span class="keyword">this</span>.stackMin.push(newMin);</span><br><span class="line">             &#125;</span><br><span class="line">            <span class="comment">//data栈同时压入这个数</span></span><br><span class="line">			<span class="keyword">this</span>.stackData.push(newNum);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackData.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//同时弹出</span></span><br><span class="line">			<span class="keyword">this</span>.stackMin.pop();</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackData.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackMin.peek();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
@@ -312,7 +320,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

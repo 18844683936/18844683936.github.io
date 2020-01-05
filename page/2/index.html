@@ -177,6 +177,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">二叉树的序列化和反序列化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-02 15:05:23" itemprop="dateCreated datePublished" datetime="2020-01-02T15:05:23+08:00">2020-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-03 08:10:34" itemprop="dateModified" datetime="2020-01-03T08:10:34+08:00">2020-01-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="序列化（先序）："><a href="#序列化（先序）：" class="headerlink" title="序列化（先序）："></a>序列化（先序）：</h1><img src="../../my/image-20200102150642789.png" alt="image-20200102150642789" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByPre</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="comment">//如果为空</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//当前的String是value+！</span></span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">       <span class="comment">//当前节点加上左树的字符串，加上右数的字符串</span></span><br><span class="line">	res += serialByPre(head.left);</span><br><span class="line">	res += serialByPre(head.right);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByPreString</span><span class="params">(String preStr)</span> </span>&#123;</span><br><span class="line">	String[] values = preStr.split(<span class="string">"!"</span>);</span><br><span class="line">       <span class="comment">//把数组放到队列里，可以依次弹出</span></span><br><span class="line">	Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != values.length; i++) &#123;</span><br><span class="line">		queue.offer(values[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reconPreOrder(queue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给我一个队列，我还给你一个树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconPreOrder</span><span class="params">(Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">	String value = queue.poll();</span><br><span class="line">	<span class="keyword">if</span> (value.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node head = <span class="keyword">new</span> Node(Integer.valueOf(value));</span><br><span class="line">	head.left = reconPreOrder(queue);</span><br><span class="line">	head.right = reconPreOrder(queue);</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="按层序列化"><a href="#按层序列化" class="headerlink" title="按层序列化"></a>按层序列化</h1><img src="../../my/image-20200103080010347.png" alt="image-20200103080010347" style="zoom:50%;" />
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByLevel</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.left.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.left);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.right.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.right);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="按层反序列化"><a href="#按层反序列化" class="headerlink" title="按层反序列化"></a>按层反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByLevelString</span><span class="params">(String levelStr)</span> </span>&#123;</span><br><span class="line">		String[] values = levelStr.split(<span class="string">"!"</span>);</span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">		Node head = generateNodeByString(values[index++]);</span><br><span class="line">		Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">		<span class="keyword">if</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(head);</span><br><span class="line">		&#125;</span><br><span class="line">		Node node = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			node = queue.poll();</span><br><span class="line">			node.left = generateNodeByString(values[index++]);</span><br><span class="line">			node.right = generateNodeByString(values[index++]);</span><br><span class="line">			<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> head;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">generateNodeByString</span><span class="params">(String val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (val.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Node(Integer.valueOf(val));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/30/%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -356,95 +433,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/29/struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/29/struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">struts和springMVC的区别</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-29 15:55:16 / 修改时间：17:29:02" itemprop="dateCreated datePublished" datetime="2019-12-29T15:55:16+08:00">2019-12-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="struts的springMVC的区别。"><a href="#struts的springMVC的区别。" class="headerlink" title="struts的springMVC的区别。"></a>struts的springMVC的区别。</h1><p>（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。</p>
-<p>（2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性</p>
-<h4 id="SpringMVC创键是在该类上添加-Controller注解就可以了。"><a href="#SpringMVC创键是在该类上添加-Controller注解就可以了。" class="headerlink" title="SpringMVC创键是在该类上添加@Controller注解就可以了。"></a>SpringMVC创键是在该类上添加@Controller注解就可以了。</h4><p>Struts前台向后台传递数据方式：</p>
-<p>表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
-<ol>
-<li><p>和Action中属性名一致</p>
-</li>
-<li><p>封装成POJO，写在类的属性中，如果这样，前台获取值需要类名.属性名  </p>
-</li>
-<li><p>实现ModelDriven接口，前台就不用类名.属性名了，直接属性名。</p>
-<p>action中的属性都要有getSet方法</p>
-</li>
-</ol>
-<p>SpringMVC：</p>
-<ol>
-<li><p>只要和请求的方法的形参的参数名相同就可以了，</p>
-</li>
-<li><p>还可以使用request.getParametor()来获取</p>
-</li>
-<li><p>把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，</p>
-<p>此时前台中得name的值就不是参数名了，而是pojo的属性名。</p>
-<p>如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。</p>
-<p>后台向前台传值</p>
-<p>struts直接操作对应的属性就可以</p>
-<p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
-<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
-</li>
-</ol>
-<p>跳转到前台页面：</p>
-<p>struts用return一个字符串，并在action标签中配置result标签 name= “字符串名” 标签的值是该jsp页面的全路径 </p>
-<p>springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -495,7 +483,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
