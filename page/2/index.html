@@ -208,7 +208,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-05 19:55:56" itemprop="dateModified" datetime="2020-01-05T19:55:56+08:00">2020-01-05</time>
+                <time title="修改时间：2020-01-06 21:44:55" itemprop="dateModified" datetime="2020-01-06T21:44:55+08:00">2020-01-06</time>
               </span>
 
           
@@ -222,16 +222,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="../../my/image-20200103182919585.png" alt="image-20200103182919585" style="zoom:50%;" />
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg" style="zoom: 33%;" />
 
-<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="../../my/image-20200103183821296.png" alt="image-20200103183821296" style="zoom:50%;" />
+
+<p>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</p>
+<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
 
 <p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5 id="评判标准2-："><a href="#评判标准2-：" class="headerlink" title="评判标准2 ："></a>评判标准2 ：</h5><img src="../../my/image-20200103183720106.png" alt="image-20200103183720106" style="zoom:50%;" />
+<h5 id="评判标准2-："><a href="#评判标准2-：" class="headerlink" title="评判标准2 ："></a>评判标准2 ：</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
 
 <p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
 <p>例如：</p>
-<img src="../../my/image-20200103184338413.png" alt="image-20200103184338413" style="zoom: 50%;" />
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg" alt="image-20200103184338413" style="zoom: 50%;" />
 
 
 
@@ -295,7 +297,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 08:10:34" itemprop="dateModified" datetime="2020-01-03T08:10:34+08:00">2020-01-03</time>
+                <time title="修改时间：2020-01-06 21:47:26" itemprop="dateModified" datetime="2020-01-06T21:47:26+08:00">2020-01-06</time>
               </span>
 
           
@@ -309,13 +311,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="序列化（先序）："><a href="#序列化（先序）：" class="headerlink" title="序列化（先序）："></a>序列化（先序）：</h1><img src="../../my/image-20200102150642789.png" alt="image-20200102150642789" style="zoom:50%;" />
+          <h1 id="序列化（先序）："><a href="#序列化（先序）：" class="headerlink" title="序列化（先序）："></a>序列化（先序）：</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eyqmomj20zv0pbjzr.jpg" alt="image-20200102150642789" style="zoom: 33%;" />
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByPre</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="comment">//如果为空</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//当前的String是value+！</span></span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">       <span class="comment">//当前节点加上左树的字符串，加上右数的字符串</span></span><br><span class="line">	res += serialByPre(head.left);</span><br><span class="line">	res += serialByPre(head.right);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByPreString</span><span class="params">(String preStr)</span> </span>&#123;</span><br><span class="line">	String[] values = preStr.split(<span class="string">"!"</span>);</span><br><span class="line">       <span class="comment">//把数组放到队列里，可以依次弹出</span></span><br><span class="line">	Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != values.length; i++) &#123;</span><br><span class="line">		queue.offer(values[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reconPreOrder(queue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给我一个队列，我还给你一个树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconPreOrder</span><span class="params">(Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">	String value = queue.poll();</span><br><span class="line">	<span class="keyword">if</span> (value.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node head = <span class="keyword">new</span> Node(Integer.valueOf(value));</span><br><span class="line">	head.left = reconPreOrder(queue);</span><br><span class="line">	head.right = reconPreOrder(queue);</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="按层序列化"><a href="#按层序列化" class="headerlink" title="按层序列化"></a>按层序列化</h1><img src="../../my/image-20200103080010347.png" alt="image-20200103080010347" style="zoom:50%;" />
+<h1 id="按层序列化"><a href="#按层序列化" class="headerlink" title="按层序列化"></a>按层序列化</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eza7tbj20ym0lcjya.jpg" alt="image-20200103080010347" style="zoom: 33%;" />
 
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByLevel</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.left.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.left);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.right.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.right);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -372,7 +374,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 11:36:05" itemprop="dateModified" datetime="2020-01-06T11:36:05+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-06 21:52:04" itemprop="dateModified" datetime="2020-01-06T21:52:04+08:00">2020-01-06</time>
               </span>
 
           
@@ -386,14 +388,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="F:/blogPic/image-20191230223327822.png" alt="image-20191230223327822" style="zoom:50%;" />
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiweijj20vm0e0wjk.jpg" alt="image-20191230223327822" style="zoom: 33%;" />
 
 <p>中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。</p>
 <p>如果一个节点，假如说X，</p>
 <p>如果X有右子树，那么X</p>
 <p>的后继节点一定是这个右子树最左的节点</p>
 <p>如果X没有右子树，那么向上找，什么时候停。找到当前节点是父节点的左孩子停，那个父节点就是原始节点的后继节点</p>
-<img src="F:/blogPic/image-20191230225619863.png" alt="image-20191230225619863" style="zoom: 67%;" />
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiyj3zj20ig0h80x5.jpg" alt="image-20191230225619863" style="zoom: 50%;" />
 
 <p>如果是6，那么我就找，那一颗数的左子树是以6结尾的，就是3嘛</p>
 <p>如果是7，那一颗树的左子树是以7结尾的，米有啊，所以7的后继不存在，</p>
@@ -487,7 +489,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
