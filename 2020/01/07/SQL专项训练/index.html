@@ -46,22 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="title: SQL练习date: 2020-01-06 11:42:28tags:   )  sc 成绩表    查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc s1, sc s2​	where ​			s1.s = s2.s &#x2F;&#x2F;同一个学生			s1.c=1, s2.c">
+  <meta name="description" content=")  sc 成绩表    查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc s1, sc s2​	where ​			s1.s = s2.s &#x2F;&#x2F;同一个学生			s1.c=1, s2.c = 2&#x2F;&#x2F; 同一个学生的1课程和2课程			s1.score&amp;gt;s2.score&#x2F;&#x2F;同">
+<meta name="keywords" content="sql,面试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL练习">
-<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;06&#x2F;SQL%E7%BB%83%E4%B9%A0&#x2F;index.html">
+<meta property="og:title" content="SQL专项训练">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;07&#x2F;SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="title: SQL练习date: 2020-01-06 11:42:28tags:   )  sc 成绩表    查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc s1, sc s2​	where ​			s1.s = s2.s &#x2F;&#x2F;同一个学生			s1.c=1, s2.c">
+<meta property="og:description" content=")  sc 成绩表    查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc s1, sc s2​	where ​			s1.s = s2.s &#x2F;&#x2F;同一个学生			s1.c=1, s2.c = 2&#x2F;&#x2F; 同一个学生的1课程和2课程			s1.score&amp;gt;s2.score&#x2F;&#x2F;同">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59ctm9vj209904hgm4.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cr63wj204303nwel.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cqj9qj206003jdfx.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cs23mj205n09sq3k.jpg">
-<meta property="og:updated_time" content="2020-01-07T02:19:04.819Z">
+<meta property="og:updated_time" content="2020-01-07T02:22:35.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59ctm9vj209904hgm4.jpg">
 
-<link rel="canonical" href="https://hansoncheng.com/2020/01/06/SQL%E7%BB%83%E4%B9%A0/">
+<link rel="canonical" href="https://hansoncheng.com/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/">
 
 
 <script id="page-configurations">
@@ -75,7 +76,7 @@
   };
 </script>
 
-  <title>SQL练习 | 人间失格</title>
+  <title>SQL专项训练 | 人间失格</title>
   
 
 
@@ -185,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/06/SQL%E7%BB%83%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -198,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SQL练习
+          SQL专项训练
         </h1>
 
         <div class="post-meta">
@@ -207,16 +208,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-06 11:42:28" itemprop="dateCreated datePublished" datetime="2020-01-06T11:42:28+08:00">2020-01-06</time>
+              <time title="创建时间：2020-01-07 10:20:21 / 修改时间：10:22:35" itemprop="dateCreated datePublished" datetime="2020-01-07T10:20:21+08:00">2020-01-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 10:19:04" itemprop="dateModified" datetime="2020-01-07T10:19:04+08:00">2020-01-07</time>
-              </span>
 
           
 
@@ -229,8 +224,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>title: SQL练习<br>date: 2020-01-06 11:42:28<br>tags:  </p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img">)<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
+        <p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img">)<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
 <p>sc 成绩表</p>
 <p> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img"></p>
 <ol>
@@ -395,7 +389,7 @@
 <p>1）请写出一条SQL语句，查询出每个客户的所有订单并安地址排序，要求输出格式如下：</p>
 <p>adress    client_name    phone    order_id</p>
 <p>2)请写出一条SQL语句，查询出每个客户订购的图书总价，要求输出格式如下：</p>
-<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;              </p>
+<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;             </p>
 
     </div>
 
@@ -404,21 +398,25 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/a/sql/" rel="tag"># sql</a>
+              <a href="/a/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2020/01/05/hash%E8%A1%A8/" rel="next" title="hash表">
-                  <i class="fa fa-chevron-left"></i> hash表
+                <a href="/2020/01/06/SQL%E7%BB%83%E4%B9%A0/" rel="next" title="SQL练习">
+                  <i class="fa fa-chevron-left"></i> SQL练习
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" rel="prev" title="SQL专项训练">
-                  SQL专项训练 <i class="fa fa-chevron-right"></i>
+                <a href="/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/" rel="prev" title="设计RandomPool">
+                  设计RandomPool <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

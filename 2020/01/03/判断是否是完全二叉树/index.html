@@ -46,19 +46,19 @@
   };
 </script>
 
-  <meta name="description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点">
-<meta name="keywords" content="二叉树,完全二叉树">
+  <meta name="description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：左右两个孩子不全  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都">
+<meta name="keywords" content="二叉树,BFS,完全二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="判断是否是完全二叉树">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;03&#x2F;%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点">
+<meta property="og:description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：左右两个孩子不全  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689aakpj20ok07p40a.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689cp6pj20pf0bl42c.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6898p7aj20f20h1whv.jpg">
-<meta property="og:updated_time" content="2020-01-06T13:44:55.430Z">
+<meta property="og:updated_time" content="2020-01-07T00:14:35.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg">
 
@@ -216,7 +216,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:44:55" itemprop="dateModified" datetime="2020-01-06T21:44:55+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-07 08:14:35" itemprop="dateModified" datetime="2020-01-07T08:14:35+08:00">2020-01-07</time>
               </span>
 
           
@@ -237,7 +237,7 @@
 <h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
 
 <p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5 id="评判标准2-："><a href="#评判标准2-：" class="headerlink" title="评判标准2 ："></a>评判标准2 ：</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
+<h5 id="评判标准2-：左右两个孩子不全"><a href="#评判标准2-：左右两个孩子不全" class="headerlink" title="评判标准2 ：左右两个孩子不全"></a>评判标准2 ：左右两个孩子不全</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
 
 <p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
 <p>例如：</p>
@@ -265,6 +265,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/a/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
+              <a href="/a/BFS/" rel="tag"># BFS</a>
               <a href="/a/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 完全二叉树</a>
           </div>
 
@@ -321,7 +322,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准1：有右孩子没有左孩子，就不行"><span class="nav-number">1.</span> <span class="nav-text">评判标准1：有右孩子没有左孩子，就不行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准2-："><span class="nav-number">2.</span> <span class="nav-text">评判标准2 ：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准1：有右孩子没有左孩子，就不行"><span class="nav-number">1.</span> <span class="nav-text">评判标准1：有右孩子没有左孩子，就不行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准2-：左右两个孩子不全"><span class="nav-number">2.</span> <span class="nav-text">评判标准2 ：左右两个孩子不全</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -337,7 +338,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -350,7 +351,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
