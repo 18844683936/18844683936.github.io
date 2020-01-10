@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="人间失格" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="黑名单问题    有一个需求，100亿个url是黑名单， 当你想搜索一些东西的时候，我不想显示某一些url ，100亿个url 都是 64字节， 当搜索某一个url的时候，我会返回一个true或者false ，如果这个url在黑名单里，返回true， 如果不在黑单里，返回false 如果用一个hashSet来搞的话，至少需要6400亿个字节（其实远远不止） 也就是640G的内存，如果这样的话，不是">
+<meta name="keywords" content="哈希表,布隆过滤器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="布隆过滤器">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;09&#x2F;%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8&#x2F;index.html">
+<meta property="og:site_name" content="人间失格">
+<meta property="og:description" content="黑名单问题    有一个需求，100亿个url是黑名单， 当你想搜索一些东西的时候，我不想显示某一些url ，100亿个url 都是 64字节， 当搜索某一个url的时候，我会返回一个true或者false ，如果这个url在黑名单里，返回true， 如果不在黑单里，返回false 如果用一个hashSet来搞的话，至少需要6400亿个字节（其实远远不止） 也就是640G的内存，如果这样的话，不是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqluproufj210w0ikdlq.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlv7l8rqj20xp0fbwk9.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlvnre9kj20lt06zdhv.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlw1jllmj20zr0iiahc.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlwloq4sj20q40890us.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlwxcwtbj213h0av40w.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlxabj08j20v80bndig.jpg">
+<meta property="og:updated_time" content="2020-01-09T12:59:29.009Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqluproufj210w0ikdlq.jpg">
+
+<link rel="canonical" href="https://hansoncheng.com/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>布隆过滤器 | 人间失格</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">人间失格</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">陈广</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          布隆过滤器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-09 18:10:37 / 修改时间：20:59:29" itemprop="dateCreated datePublished" datetime="2020-01-09T18:10:37+08:00">2020-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong><em>黑名单问题</em></strong> </p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqluproufj210w0ikdlq.jpg" alt="image-20200109182041298" style="zoom:33%;" />
+
+<p>有一个需求，100亿个url是黑名单，</p>
+<p>当你想搜索一些东西的时候，我不想显示某一些url ，100亿个url 都是 64字节，</p>
+<p>当搜索某一个url的时候，我会返回一个true或者false ，如果这个url在黑名单里，返回true，</p>
+<p>如果不在黑单里，返回false</p>
+<p>如果用一个hashSet来搞的话，至少需要6400亿个字节（其实远远不止）</p>
+<p>也就是640G的内存，如果这样的话，不是很好做</p>
+<p>也可以用hash函数分流，放到不同的机器上，但是也会浪费机器</p>
+<p>所以我想不用hashSet 用其他的set 来搞，这个就是布隆过滤器</p>
+<p>这个有失误率</p>
+<p>如果你有一个url 确实属于黑名单，一定会返回true 但是，有时候一个url不是黑名单，也有可能</p>
+<p>返回true（宁可错杀一千，不可放过一个）</p>
+<p>是某种类型的集合，但是有失误率的。</p>
+<p>如果碰到这类题，你可以先用哈希函数分流来搞。浪费空间。</p>
+<p>问：允许有极低的失误率么？可以有</p>
+<p>布隆过滤器</p>
+<p>是一个比特类型的map</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlv7l8rqj20xp0fbwk9.jpg" alt="image-20200109185250333" style="zoom:33%;" />
+
+<p>我有一个数组，长度为1000.</p>
+<p>这个数组每一个位置上是一个32bit</p>
+<p>一个int是4个字节，32位比特。</p>
+<p>假如我要把第30000个bit描黑。我需要</p>
+<p>30000/32 得到第几个桶。937</p>
+<p>30000%32 得到这个桶的第几个bit应该被描黑 ，16</p>
+<p>第937个桶里第16位应该被描黑</p>
+<p>1 左移16位得到 第16位为1 </p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlvnre9kj20lt06zdhv.jpg" alt="image-20200109185802940" style="zoom:25%;" />
+
+<p>然后和arr[937]   |  1&lt;&lt;16 . 因为arr[937] 初始值是00000000，所以做或运算后该位置就被标记了</p>
+<p>url 根据一个hash函数算出一个hash值，这个hash值再去取模m，这样得到0到m-1位置上的一个，算出来的位置描黑。</p>
+<p>布隆过滤器是准备K个hash函数 ，这个url 经过hash函数 ，url经过第一个hash函数的时候，描黑，经过第二个hash函数的时候，描黑，有可能两个hash函数打到同一个位置，已经描黑的就继续黑下去，这K个hash函数时相互独立的</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlw1jllmj20zr0iiahc.jpg" alt="image-20200109192110599" style="zoom:33%;" />
+
+<p>一个url 经过k个hash函数，对应的K个位置上描黑，这个url 叫做进到布隆过滤器里面了，</p>
+<p>接下来，每一个url 都这么算，然后加到这个bit类型的数组里，所以你准备的这个比特类型的数组应该长一些，要不这100亿个url 进行描黑后，就全黑了，查就没有意义了</p>
+<p>怎么查？</p>
+<p>我现在黑名单加载完了，整个这个bit类型的数组相当多的位置被描黑了</p>
+<p>当我查一个url 的时候，怎么知道这个url在不在这个黑名单里？</p>
+<p>这个url 经过K个hash函数，算出了K个位置，如果这K个位置都是黑的，我就说，这个url 在这个黑名单里</p>
+<p>如果算出的hash函数有一个不是黑的，我就说这个url 不在黑名单里</p>
+<p>如果你的数组很小，都被描黑了，在进来的每一个url不都在黑名单里了？ 就没有意义了</p>
+<p>所以我可以调整数组的大小和hash 函数的个数来调整失误率。</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwloq4sj20q40890us.jpg" alt="image-20200109193952422" style="zoom:50%;" />
+
+<p>数组长度和失误率的关系</p>
+<p>m是数组长度（bit），</p>
+<p>n是样本量（100亿）</p>
+<p>p是预期失误率 （万分之一：0.0001）</p>
+<p>算一下：16G（实际空间 16*8Gbit）</p>
+<p>第二个公式：确定hash函数的个数</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwxcwtbj213h0av40w.jpg" alt="image-20200109195148004" style="zoom:33%;" />
+
+<p>第三个公式：确定真实失误率：</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlxabj08j20v80bndig.jpg" alt="image-20200109195522405" style="zoom:33%;" />
+
+<p>问：经典结构</p>
+<p>布隆过滤器的原理：</p>
+<p>每一个url经过几个hash函数对应的位置上描黑，所有的黑名单上的每一个url 都描黑后，整个布隆过滤器上的bit类型的数组就相当位置被描黑了。当我检查url的时候怎么检查？计算k个hash函数对应的位置 ，所有的位置都是黑的，我就认为在布隆过滤器里，否则就认为不在</p>
+<p>参数是：布隆过滤器比特类型的数组一共有多少个bit由样本量和预期失误率来决定</p>
+<p>这个bit 除以8 之后才是实际使用的字节</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/a/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag"># 哈希表</a>
+              <a href="/a/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag"># 布隆过滤器</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/08/spring%E6%A1%86%E6%9E%B6/" rel="next" title="spring框架">
+                  <i class="fa fa-chevron-left"></i> spring框架
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/01/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" rel="prev" title="一致性哈希">
+                  一致性哈希 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="陈广"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+  <p class="site-author-name" itemprop="name">陈广</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/18844683936" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;18844683936" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mackxin" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mackxin" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/" title="http:&#x2F;&#x2F;mackxin.com&#x2F;" rel="noopener" target="_blank">Mackxin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/nav.html" title="http:&#x2F;&#x2F;mackxin.com&#x2F;nav.html" rel="noopener" target="_blank">馨客栈导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈广</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
