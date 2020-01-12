@@ -177,6 +177,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/16/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/16/%E6%A1%B6%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">桶排序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-16 22:19:34" itemprop="dateCreated datePublished" datetime="2019-12-16T22:19:34+08:00">2019-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:24:48" itemprop="dateModified" datetime="2020-01-06T22:24:48+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><p>桶排序不是基于比较的排序，是</p>
+<ol>
+<li><p>给你一个数组arr1[2   ]，告诉你这个数组的范围是0到60的</p>
+</li>
+<li><p>生成一个长度为61的数组arr2[  ]，初始值都为0</p>
+</li>
+<li><p>遇到一个元素比如说2，就在该位置的词频+1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">计数排序：</span><br><span class="line"><span class="comment">//arr1:</span></span><br><span class="line">arr1[<span class="number">2</span>,<span class="number">2</span>,<span class="number">6</span>...]</span><br><span class="line"><span class="comment">//遇到一个元素比如说2，就在该位置的词频+1</span></span><br><span class="line">arr2[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>....]</span><br><span class="line">     <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span></span><br><span class="line"><span class="comment">//arr1[]中如果还有2 的话该位置在加一</span></span><br><span class="line">arr2[<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>....]</span><br><span class="line">     <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span></span><br><span class="line"><span class="comment">//arr1[]中如果还有6 的话该位置在加一     </span></span><br><span class="line">arr2[<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>....]</span><br><span class="line">     <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span></span><br><span class="line"><span class="comment">//遍历arr1完成后 就会形成一个词频表arr2   </span></span><br><span class="line">arr2[<span class="number">7</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>....]</span><br><span class="line">     <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>   </span><br><span class="line"><span class="comment">//表示0这个数出现了7次，1这个数出现了3次...</span></span><br><span class="line">所以结果应该是：</span><br><span class="line">    <span class="number">0000000</span>[<span class="number">7</span>个<span class="number">0</span>]<span class="number">111</span>[<span class="number">3</span>个<span class="number">1</span>]...</span><br><span class="line">就可以看这个词频表就可以得到排序</span><br><span class="line">准备一个数组，遍历一下数组，重构一下数组 遍历三回。O(N)的时间复杂度</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>这个比较基于的不是比较。而是桶。桶是一种数据状况出现的词频，是容器，按照数据状况设计的一个容器，然后把每一个东西扔到他各自归属的桶里</p>
+<p>​    补充问题：</p>
+<p>​                给定一个数组，如果排序字后相邻两数的最大差值，要求时间复杂度O(N)，且要求不能用非基于比较的排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">排序前：[<span class="number">3</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">7</span>]</span><br><span class="line">排序后：[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">相邻两数的最大差值</span><br><span class="line">          <span class="number">1</span> <span class="number">1</span> <span class="number">3</span> <span class="number">1</span></span><br><span class="line">    也就是<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="桶划分"><a href="#桶划分" class="headerlink" title="桶划分"></a>桶划分</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//给你一个数组，先求出最大值和最小值比如说0-99</span></span><br><span class="line"><span class="comment">//如果最大值和最小值相等 ，代表这个数组也就只有这一种数，直接返回0就可以了</span></span><br><span class="line"><span class="comment">//把arr1分成10份，放入arr2的10个桶中</span></span><br><span class="line"><span class="comment">//0号桶是0-9 ，1号桶是10-19 ，9号桶是90-99</span></span><br><span class="line"><span class="comment">//如果arr1中有一个76.就放入7号桶中</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：如果有N个数，就搞出N+1个桶来。然后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxGap</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//如果这个数组为null或者只有一个值或者没有值，直接返回0.</span></span><br><span class="line">	<span class="keyword">if</span> (nums == <span class="keyword">null</span> || nums.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       </span><br><span class="line">	<span class="keyword">int</span> len = nums.length;</span><br><span class="line">	<span class="keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">	<span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line">       <span class="comment">//遍历一次得到数组中的最小值和最大值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		min = Math.min(min, nums[i]);</span><br><span class="line">		max = Math.max(max, nums[i]);</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//如果最小值和最大值相等，返回0.</span></span><br><span class="line">	<span class="keyword">if</span> (min == max) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//创建3个长度+1的数组。用来共同描述一个桶的信息。</span></span><br><span class="line">	<span class="keyword">boolean</span>[] hasNum = <span class="keyword">new</span> <span class="keyword">boolean</span>[len + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span>[] maxs = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span>[] mins = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> bid = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">		bid = bucket(nums[i], len, min, max);</span><br><span class="line">		mins[bid] = hasNum[bid] ? Math.min(mins[bid], nums[i]) : nums[i];</span><br><span class="line">		maxs[bid] = hasNum[bid] ? Math.max(maxs[bid], nums[i]) : nums[i];</span><br><span class="line">		hasNum[bid] = <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> lastMax = maxs[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (; i &lt;= len; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (hasNum[i]) &#123;</span><br><span class="line">			res = Math.max(res, mins[i] - lastMax);</span><br><span class="line">			lastMax = maxs[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bucket</span><span class="params">(<span class="keyword">long</span> num, <span class="keyword">long</span> len, <span class="keyword">long</span> min, <span class="keyword">long</span> max)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="keyword">int</span>) ((num - min) * len / (max - min));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/16/%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -382,93 +469,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">递归分治的时间复杂度</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-07 16:26:28" itemprop="dateCreated datePublished" datetime="2019-12-07T16:26:28+08:00">2019-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-27 08:13:13" itemprop="dateModified" datetime="2019-12-27T08:13:13+08:00">2019-12-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>master公式</p>
-<p>T（N） = a*T(N/b) +O(N^d)</p>
-<ol>
-<li><p>log(b,a)  &gt; d  —-&gt;  O(N^ log(b,a))</p>
-</li>
-<li><p>log(b,a)  = d  —-&gt;  O(N^d * logN)</p>
-</li>
-<li><p>log(b,a)  &lt; d  —-&gt;  O(N^d)</p>
-</li>
-</ol>
-<p>   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
-<p>   限制条件：划分子问题的规模是一样的</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -519,7 +519,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
