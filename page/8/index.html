@@ -177,6 +177,159 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">打印两个有序链表的公共部分</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-28 14:02:47" itemprop="dateCreated datePublished" datetime="2019-12-28T14:02:47+08:00">2019-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:05:01" itemprop="dateModified" datetime="2020-01-06T22:05:01+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用归并排序中的外排merge的那部分思想，只有相等的时候才打印，不相等的时候直接到下一个节点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCommonPart</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Common Part: "</span>);</span><br><span class="line">		<span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head1.value &lt; head2.value) &#123;</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head1.value &gt; head2.value) &#123;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(head1.value + <span class="string">" "</span>);</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/" class="post-title-link" itemprop="url">在行和列都排好序的矩阵中找数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-28 12:56:00" itemprop="dateCreated datePublished" datetime="2019-12-28T12:56:00+08:00">2019-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:23:59" itemprop="dateModified" datetime="2020-01-06T22:23:59+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="https://upload.cc/i1/2020/01/05/8ODvfQ.png" style="zoom:33%;" />
+
+<p>如题，如图，找4这个数。</p>
+<p>可以从右上角开始找6，</p>
+<p>6比4 大，</p>
+<p>所以6下面的就可以排除了，</p>
+<p>向左走一位是5，</p>
+<p>5 也比4大，</p>
+<p>再向左走是3，</p>
+<p>3比4 小，</p>
+<p>所以3左边的都比4小，</p>
+<p>向下走一位是5，</p>
+<p>5比4 大，</p>
+<p>所以向左走一位，是2，</p>
+<p>2比4小，</p>
+<p>所以向下走一位是4，</p>
+<p>找到啦。</p>
+<img src="https://upload.cc/i1/2020/01/05/8U7uD3.png" style="zoom: 33%;" />
+
+<p>时间复杂度是O（m+n）的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isContains</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> row = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> col = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (row &lt; matrix.length &amp;&amp; col &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (matrix[row][col] == K) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][col] &gt; K) &#123;</span><br><span class="line">				col--;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				row++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[][] &#123; &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;,<span class="comment">// 0</span></span><br><span class="line">				&#123; <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span> &#125;,<span class="comment">// 1</span></span><br><span class="line">				&#123; <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span> &#125;,<span class="comment">// 2</span></span><br><span class="line">				&#123; <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">50</span> &#125;,<span class="comment">// 3</span></span><br><span class="line">				&#123; <span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">68</span>, <span class="number">69</span>, <span class="number">70</span>, <span class="number">71</span> &#125;,<span class="comment">// 4</span></span><br><span class="line">				&#123; <span class="number">96</span>, <span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">111</span>, <span class="number">122</span> &#125;,<span class="comment">// 5</span></span><br><span class="line">				&#123; <span class="number">166</span>, <span class="number">176</span>, <span class="number">186</span>, <span class="number">187</span>, <span class="number">190</span>, <span class="number">195</span>, <span class="number">200</span> &#125;,<span class="comment">// 6</span></span><br><span class="line">				&#123; <span class="number">233</span>, <span class="number">243</span>, <span class="number">321</span>, <span class="number">341</span>, <span class="number">356</span>, <span class="number">370</span>, <span class="number">380</span> &#125; <span class="comment">// 7</span></span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">int</span> K = <span class="number">233</span>;</span><br><span class="line">		System.out.println(isContains(matrix, K));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E4%B9%8B%E5%AD%97%E5%BD%A2%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -253,171 +406,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">旋转矩阵</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 19:51:04" itemprop="dateCreated datePublished" datetime="2019-12-26T19:51:04+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:09:07" itemprop="dateModified" datetime="2020-01-06T22:09:07+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> c = matrix.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> d = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (a &lt; c) &#123;</span><br><span class="line">            rotateEdge(matrix, a++, b++, c--, d--);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rotateEdge</span><span class="params">(<span class="keyword">int</span>[][] m, <span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> times = d - b;</span><br><span class="line">        <span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != times; i++) &#123;</span><br><span class="line">            tmp = m[a][b + i];</span><br><span class="line">            m[a][b + i] = m[c - i][b];</span><br><span class="line">            m[c - i][b] = m[c][d - i];</span><br><span class="line">            m[c][d - i] = m[a + i][d];</span><br><span class="line">            m[a + i][d] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan72v4fxqj20uy0hotc2.jpg" alt="image-20191227080515382" style="zoom:50%;" />
-
-
-
-<p>times 表示的是有几个出发点，一行有3个数就有2个触发点，一行有4个数就有三个出发点。d-b也就是这个意思</p>
-<p>for循环中的 i 表示 出发点 . 第一个是（a，b） 第二个是（a，b+1）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">用队列实现栈，用栈实现队列</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 18:15:13" itemprop="dateCreated datePublished" datetime="2019-12-26T18:15:13+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:12:10" itemprop="dateModified" datetime="2020-01-06T22:12:10+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="队列结构实现栈"><a href="#队列结构实现栈" class="headerlink" title="队列结构实现栈"></a>队列结构实现栈</h3><p>准备两个队列。栈结构是先进后出的；</p>
-<p>向这个结构中放入1，2，3，4，5  返回的应该是 5，4，3，2，1</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rc1asj20zd0eytde.jpg" alt="image-20191226181957454" style="zoom:50%;" />
-
-<p>现在用户让你返回一个：</p>
-<p>你让1，2，3，4 到help队列中 </p>
-<p>把data队列中剩下的5 给用户返回。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoQueuesStack</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; queue;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; help;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TwoQueuesStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">		help = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">           <span class="comment">//数永远只进data队列</span></span><br><span class="line">		queue.add(pushInt);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (queue.size() != <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		help.add(res);</span><br><span class="line">		swap();</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//出的时候，把data队列中只留一个。剩下的都给help队列</span></span><br><span class="line">		<span class="keyword">while</span> (queue.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//把这最后一个进队列的数保存，弹出（相当于弹栈）</span></span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		swap();<span class="comment">//交换两个栈的引用</span></span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Queue&lt;Integer&gt; tmp = help;</span><br><span class="line">		help = queue;</span><br><span class="line">		queue = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="栈实现队列"><a href="#栈实现队列" class="headerlink" title="栈实现队列"></a>栈实现队列</h3><p>两个栈，push  pop</p>
-<p>用户添加一个数，永远放到push栈中。</p>
-<p>用户拿一个数，永远从pop栈中拿</p>
-<p>比如压栈1，2，3，4，5</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rhqb0j20rm0kejvd.jpg" alt="image-20191226185631836" style="zoom:50%;" />
-
-<p>用户需要拿一个数。就把push栈中所有的东西都给pop栈。顺序就有了</p>
-<p>有两个限制：</p>
-<ol>
-<li>如果push栈决定要向pop栈中倒数据，一次性倒完</li>
-<li>如果pop栈中有东西，push栈中一定不能倒数据</li>
-</ol>
-<p>倒数据行为可以发生在任意时刻。只要满足这两个限制</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoStacksQueue</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPush;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPop;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TwoStacksQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			stackPush = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			stackPop = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">			stackPush.push(pushInt);</span><br><span class="line">             dao();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">poll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.peek();</span><br><span class="line">		&#125;</span><br><span class="line">    </span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dao</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//如果我的pop栈不为空的话，直接return，倒不了</span></span><br><span class="line">            <span class="keyword">if</span>(!stackPop.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//一次要到完</span></span><br><span class="line">          	<span class="keyword">while</span>(!stackPush.isEmpty())&#123;</span><br><span class="line">                stackPop.push(stackPush.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -463,7 +456,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -476,7 +469,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

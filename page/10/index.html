@@ -177,6 +177,169 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E7%94%A8%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%B0%8F%E5%9B%BA%E5%AE%9A%E7%9A%84%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/26/%E7%94%A8%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%B0%8F%E5%9B%BA%E5%AE%9A%E7%9A%84%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/" class="post-title-link" itemprop="url">用数组结构实现大小固定的队列和栈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-26 14:14:28" itemprop="dateCreated datePublished" datetime="2019-12-26T14:14:28+08:00">2019-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:20:03" itemprop="dateModified" datetime="2020-01-06T22:20:03+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="实现栈"><a href="#实现栈" class="headerlink" title="实现栈"></a>实现栈</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayStack</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Integer[] arr;</span><br><span class="line">		<span class="keyword">private</span> Integer size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">ArrayStack</span><span class="params">(<span class="keyword">int</span> initSize)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (initSize &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The init size is less than 0"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			arr = <span class="keyword">new</span> Integer[initSize];</span><br><span class="line">			size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> arr[size - <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> obj)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == arr.length) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is full"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			arr[size++] = obj;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Integer <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is empty"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> arr[--size];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="实现队列"><a href="#实现队列" class="headerlink" title="实现队列"></a>实现队列</h3><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan7dxaxypj20ym0j2jxy.jpg" alt="image-20191226162930396" style="zoom:50%;" />
+
+<p>start 变量表示如果我要取一个数，我要把哪一个数取出来给用户</p>
+<p>end 变量表示如果我要存一个数，我应该把他填到那个位置。</p>
+<p>这两个变量都指向0的位置</p>
+<p>单独设置一个size变量来约束start和end</p>
+<p>整个数组大小是3</p>
+<p>如果size变量没有到3</p>
+<p>就把用户新给我的数放到end位置上去 这是end和size的规则</p>
+<p>size 同时和start有约束。如果size不等于0 </p>
+<p>总把start上的数给用户。</p>
+<p>所以start和end之间是解耦的。</p>
+<p>假设用户添加一个数字7，size = 0 &lt;3  把7放到end的 位置（0） end+1 = 1。size 变成1；</p>
+<p> 用户让我加6，size = 1 &lt; 3 把6 放到end的位置（1） end+1 = 2 size + 1 = 2；</p>
+<p>用户让我返回一个数，我看size是不是0 如果size（2）不是0.就返回 start指的那个数，然后start+1  size-1 = 1； </p>
+<p>如果用户要添加一个数字5 ，就把end的位置添加5   size +1 = 2  end+1 =0。end的逻辑是只要end到底了就回到开头 end会跳回到 7 的位置（也就是头一个数0）去。</p>
+<p>用户加一个数字9 ，此时 size 为2 还没有道3 ，所以我把9 放到end的位置上。end +1 = 2 ；size +1 = 3；</p>
+<p>此时用户再添加一个数，因为size已经为3 了，所以报错；</p>
+<p>这是一个循环的队列，end一旦到底就回到开头，start一直在追这个end；</p>
+<p>这种方法和之前的队列代码不同，引入了size变量。使得代码思路更加清晰。好写。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayQueue</span> </span>&#123;</span><br><span class="line">       <span class="keyword">private</span> Integer[] arr;</span><br><span class="line">       <span class="keyword">private</span> Integer size;</span><br><span class="line">       <span class="keyword">private</span> Integer start;</span><br><span class="line">       <span class="keyword">private</span> Integer end;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">ArrayQueue</span><span class="params">(<span class="keyword">int</span> initSize)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (initSize &lt; <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The init size is less than 0"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           arr = <span class="keyword">new</span> Integer[initSize];</span><br><span class="line">           <span class="comment">//给这些变量初始值</span></span><br><span class="line">           size = <span class="number">0</span>;</span><br><span class="line">           start = <span class="number">0</span>;</span><br><span class="line">           end = <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> arr[start];</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> obj)</span> </span>&#123;</span><br><span class="line">           <span class="comment">//如果size等于length的话说明满了，不能添加了</span></span><br><span class="line">           <span class="keyword">if</span> (size == arr.length) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is full"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//添加的时候，size要+1；把该数字放到end的位置上。</span></span><br><span class="line">           size++;</span><br><span class="line">           arr[end] = obj;</span><br><span class="line">           <span class="comment">//如果end已经来到了最后一个位置的话，跳回到0，否则加一；</span></span><br><span class="line">           end = end == arr.length - <span class="number">1</span> ? <span class="number">0</span> : end + <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">poll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="comment">//如果size=0，说明队列里面已经没有东西了。</span></span><br><span class="line">           <span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is empty"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//如果不为0，size-1；</span></span><br><span class="line">           size--;</span><br><span class="line">           <span class="comment">//用tmp变量来记录此时的start，因为start要调整一下</span></span><br><span class="line">           <span class="keyword">int</span> tmp = start;</span><br><span class="line">           <span class="comment">//如果start已经来到了最后一个位置了，就调回0；否则加一；</span></span><br><span class="line">           start = start == arr.length - <span class="number">1</span> ? <span class="number">0</span> : start + <span class="number">1</span>;</span><br><span class="line">           <span class="comment">//返回start刚才指向的位置</span></span><br><span class="line">           <span class="keyword">return</span> arr[tmp];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/25/%E8%BD%AC%E5%9C%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/25/%E8%BD%AC%E5%9C%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">转圈打印矩阵</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-25 15:11:00" itemprop="dateCreated datePublished" datetime="2019-12-25T15:11:00+08:00">2019-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:23:33" itemprop="dateModified" datetime="2020-01-06T22:23:33+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan7h4bhrcj20ev0fi76l.jpg" alt="image-20191226195236865" style="zoom:50%; " />
+
+<p>思路：<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan7hte2l1j20lv0e0dis.jpg" alt="image-20191226200914912" style="zoom:33%;" /></p>
+<p>先打印一个圈</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">spiralOrderPrint</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> tR = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> tC = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> dR = matrix.length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> dC = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (tR &lt;= dR &amp;&amp; tC &lt;= dC) &#123;</span><br><span class="line">            <span class="comment">//打印完一个圈后，开始打印 里圈 </span></span><br><span class="line">			printEdge(matrix, tR++, tC++, dR--, dC--);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printEdge</span><span class="params">(<span class="keyword">int</span>[][] m, <span class="keyword">int</span> tR, <span class="keyword">int</span> tC, <span class="keyword">int</span> dR, <span class="keyword">int</span> dC)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (tR == dR) &#123;<span class="comment">//在同一行的情况下。挨个打印列 R的意思是行</span></span><br><span class="line">        </span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = tC; i &lt;= dC; i++) &#123;</span><br><span class="line">				System.out.print(m[tR][i] + <span class="string">" "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tC == dC) &#123;<span class="comment">//在同一列的情况下，挨个打印行 C的意思是列</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = tR; i &lt;= dR; i++) &#123;</span><br><span class="line">				System.out.print(m[i][tC] + <span class="string">" "</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//是一个小矩阵的时候：</span></span><br><span class="line">            <span class="comment">//保存第一个行和列</span></span><br><span class="line">			<span class="keyword">int</span> curC = tC;</span><br><span class="line">			<span class="keyword">int</span> curR = tR;</span><br><span class="line">			<span class="keyword">while</span> (curC != dC) &#123;<span class="comment">//打印第一个边，不包含下面的那个元素</span></span><br><span class="line">				System.out.print(m[tR][curC] + <span class="string">" "</span>);</span><br><span class="line">				curC++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (curR != dR) &#123;<span class="comment">//打印第二个边</span></span><br><span class="line">				System.out.print(m[curR][dC] + <span class="string">" "</span>);</span><br><span class="line">				curR++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (curC != tC) &#123;<span class="comment">//打印第三个边</span></span><br><span class="line">                </span><br><span class="line">				System.out.print(m[dR][curC] + <span class="string">" "</span>);</span><br><span class="line">				curC--;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (curR != tR) &#123;<span class="comment">//打印最后一个边</span></span><br><span class="line">				System.out.print(m[curR][tC] + <span class="string">" "</span>);</span><br><span class="line">				curR--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] matrix = &#123; &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> &#125;, &#123; <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span> &#125;, &#123; <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span> &#125;,</span><br><span class="line">				&#123; <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span> &#125; &#125;;</span><br><span class="line">		spiralOrderPrint(matrix);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/16/%E6%A1%B6%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -260,220 +423,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/16/%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/16/%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">排序</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-12-16 18:47:10 / 修改时间：20:29:20" itemprop="dateCreated datePublished" datetime="2019-12-16T18:47:10+08:00">2019-12-16</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料</p>
-<p>工程中的排序：</p>
-<pre><code>1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）
-   2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）
-   3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来
-   4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程中如果进行到数组长度小于60的话就直接使用插排了（在递归时有一个判断 如果L&gt;R-60 的话就直接插排）</code></pre><p>冒泡排序：可以实现稳点，两个相邻的树比较的时候，前面的和后面的相同，则不交换。continue？</p>
-<p>选择排序。：不可以实现稳定性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">0</span>&#125;</span><br><span class="line"><span class="comment">//原理是：找到一个最小的，第一个交换，所以 0 这个就会和第一个5交换</span></span><br><span class="line"><span class="comment">//所以第一个5 就跨越了 两个5 。所以不稳定</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>插入排序：可以实现稳定性    </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">//第一次排序后  5,6,6,7</span></span><br><span class="line"><span class="comment">//第二次向前排序的时候，如果和前面的6相同的话。就不交换了</span></span><br></pre></td></tr></table></figure>
-
-<p>归并排序：可以实现稳点性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr1 :[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]      arr2:  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">新的数组：[] </span><br><span class="line"><span class="comment">//如果arr1 的3和arr的3  相同的话，把arr1 的3 添加到新的数组中,如果相等，添加左边的</span></span><br></pre></td></tr></table></figure>
-
-<p>快速排序：不可以实现稳点性</p>
-<p>partition的过程做不成稳点性。随机选择一个数字。</p>
-<p>堆排序：不可以实现稳点性 因为在建立大根堆的过程中就把稳点性破坏了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">堆排序</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-11 22:49:25" itemprop="dateCreated datePublished" datetime="2019-12-11T22:49:25+08:00">2019-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-05 12:02:09" itemprop="dateModified" datetime="2020-01-05T12:02:09+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。</p>
-<h4 id="完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。"><a href="#完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。" class="headerlink" title="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。"></a>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</h4><p>使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。</p>
-<p>这颗树是你脑海中的，</p>
-<p>规则如下：你可以自己画图验证</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr  = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="comment">//arr[i] 的左节点是arr[2*i+1] </span></span><br><span class="line"><span class="comment">// 		   右节点是arr[2*i+2]</span></span><br><span class="line"><span class="comment">//	       父节点是arr[(i-1)/2]</span></span><br><span class="line"><span class="comment">//对于arr[ 0]来说，它的父节点是他自己</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>堆分为两种</p>
-<ol>
-<li><p>大根堆：在这颗完全二叉树中，任何一颗子树的最大的值都是这颗子树的 头部 </p>
-</li>
-<li><p>小根堆：任何一颗子树的最小的值都是这颗子树的头部</p>
-</li>
-</ol>
-<h2 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h2><ol>
-<li><p>让这个数组变成大根堆（未必有序）</p>
-</li>
-<li><p>把最后一个位置和堆顶位置交换</p>
-</li>
-<li><p>此时可以size  N-1</p>
-</li>
-<li><p>把剩下的也就是0—-n-1 之间的堆 进行从0开始的heapfiy</p>
-</li>
-<li><p>这样就会重新形成一个大根堆</p>
-</li>
-<li><p>然后把堆顶和现在最后一个节点做交换</p>
-</li>
-<li><p>以此往复，直到我堆的大小减完，最大值放在了最后。</p>
-</li>
-</ol>
-<h2 id="把一个数组变成大根堆"><a href="#把一个数组变成大根堆" class="headerlink" title="把一个数组变成大根堆"></a>把一个数组变成大根堆</h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[]arr = &#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
-
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line"> 			<span class="keyword">return</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">             <span class="comment">//一个一个添加，操作，最后该数组形成大根堆</span></span><br><span class="line"> 			heapInsert(arr, i);</span><br><span class="line"> 		&#125;</span><br><span class="line">     	<span class="comment">//得到heapsize，一开始为数组的全部	</span></span><br><span class="line"> 		<span class="keyword">int</span> size = arr.length;</span><br><span class="line">     <span class="comment">//最后一个位置上的数和0交换</span></span><br><span class="line"> 		swap(arr, <span class="number">0</span>, --size);</span><br><span class="line"> 		<span class="keyword">while</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">//然后heapify ，从0 位置开始，当前形成的堆</span></span><br><span class="line"> 			heapify(arr, <span class="number">0</span>, size);</span><br><span class="line">             <span class="comment">//然后在进行最后一个位置上的数和0位置上的数交换</span></span><br><span class="line"> 			swap(arr, <span class="number">0</span>, --size);</span><br><span class="line">             <span class="comment">//一直到堆的大小减成0，所有数据都有序了</span></span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="comment">//这里就是 </span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapInsert</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//如果我比我父节点还要大的话</span></span><br><span class="line"> 		<span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">             <span class="comment">//和父节点交换位置</span></span><br><span class="line"> 			swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">             <span class="comment">//index 回到父节点的位置，继续向上判断。直到while不满足条件</span></span><br><span class="line"> 			index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line">         <span class="comment">//如果判断到arr[0]，会和arr[0]的父节点也就是arr[(0-1)/2] 还是arr[0].作比较，不满足条件然后终止 </span></span><br><span class="line">&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//找到index 的左孩子</span></span><br><span class="line"> 		<span class="keyword">int</span> left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">         <span class="comment">//如果左孩子小于size表示左孩子存在，没有越界</span></span><br><span class="line"> 		<span class="keyword">while</span> (left &lt; size) &#123;</span><br><span class="line">             <span class="comment">//没有越界的话看看右孩子是否存在</span></span><br><span class="line">             <span class="comment">//如果右孩子（left+1就是右孩子）存在的话比较左右孩子哪一个比较大，得到比较大的孩子的下标</span></span><br><span class="line"> 			<span class="keyword">int</span> largest = left + <span class="number">1</span> &lt; size &amp;&amp; arr[left + <span class="number">1</span>] &gt; arr[left] ? left + <span class="number">1</span> : left;</span><br><span class="line"> 			<span class="comment">//比较当前节点大孩子节点，得到这棵树的最大节点的下标</span></span><br><span class="line">              largest = arr[largest] &gt; arr[index] ? largest : index;</span><br><span class="line">             <span class="comment">//如果和index相等，就退出循环。</span></span><br><span class="line"> 			<span class="keyword">if</span> (largest == index) &#123;</span><br><span class="line"> 				<span class="keyword">break</span>;</span><br><span class="line"> 			&#125;</span><br><span class="line">             <span class="comment">//如果不是index ，那就往下放</span></span><br><span class="line"> 			swap(arr, largest, index);</span><br><span class="line">             <span class="comment">//往下放的同时还要改index的值为下方节点的位置，以便于继续下放</span></span><br><span class="line"> 			index = largest;</span><br><span class="line">             <span class="comment">//对应着left也要改变才能继续下放。</span></span><br><span class="line"> 			left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> tmp = arr[i];</span><br><span class="line"> 		arr[i] = arr[j];</span><br><span class="line"> 		arr[j] = tmp;</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   建立堆的过程中</p>
-<p>   向上调整。heapInset（）</p>
-<p>   当我有一个值变小了，就要往下调整   heapfiy（）</p>
-<p>   作用：求中位数</p>
-<p>   如何求中位数呢？</p>
-<p>   要有一个大根堆，一个小根堆，</p>
-<p>   第一个数，进大根堆 5. </p>
-<p>   第二个数， 4， 大根堆放4</p>
-<p>   发现，大根堆的大小为2，小根堆的大小为0（heapsize会告诉你已经形成堆的大小）发现差值大于1.</p>
-<p>   那就在大根堆里弹出一个数到小根堆（此时heapsize-1）</p>
-<p>   在进来两个数，6，7 ，全都放到了小根堆上。此时小根堆上的heapsize为3，大根堆的是1，不平衡了</p>
-<p>   然后把小根堆的头弹出来，放到大根堆中</p>
-<p>为什么大根堆放的是较小的N/2?</p>
-<p>策略是当期数如果小于等于大根堆的堆顶，才进大根堆。如果大于大根堆的对顶就进小根堆</p>
-<p>大根堆要弹出一个数，是最大的那个数，也就是堆顶</p>
-<p>小根堆要弹出一个数，是弹出最小的那个数，放到大根堆中</p>
-<p>所以一定是较小的n/2</p>
-<ol start="7">
-<li><h2 id="系统给提供了一个堆"><a href="#系统给提供了一个堆" class="headerlink" title="系统给提供了一个堆"></a>系统给提供了一个堆</h2><p>priorityQueue 构造方法传入一个比较器</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -519,7 +473,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -532,7 +486,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
