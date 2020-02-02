@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/03/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/08/spring%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/03/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">判断是否是完全二叉树</a>
+            <a href="/2020/01/08/spring%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">spring框架</a>
         </h1>
 
         <div class="post-meta">
@@ -201,14 +201,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-03 18:25:34" itemprop="dateCreated datePublished" datetime="2020-01-03T18:25:34+08:00">2020-01-03</time>
+              <time title="创建时间：2020-01-08 08:34:58" itemprop="dateCreated datePublished" datetime="2020-01-08T08:34:58+08:00">2020-01-08</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 08:14:35" itemprop="dateModified" datetime="2020-01-07T08:14:35+08:00">2020-01-07</time>
+                <time title="修改时间：2020-01-10 08:54:46" itemprop="dateModified" datetime="2020-01-10T08:54:46+08:00">2020-01-10</time>
               </span>
 
           
@@ -222,30 +222,145 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg" style="zoom: 33%;" />
+          <h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>IoC 反转控制的概念，就是将原本在程序中手动创建HelloService对象的控制权，交由Spring框架管理</p>
+<h3 id="三种创建Bean的方式"><a href="#三种创建Bean的方式" class="headerlink" title="三种创建Bean的方式"></a>三种创建Bean的方式</h3><ol>
+<li>使用类构造器实例化(默认无参数)</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo0.ioc.HelloService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-<p>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</p>
-<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
-
-<p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5 id="评判标准2-：左右两个孩子不全"><a href="#评判标准2-：左右两个孩子不全" class="headerlink" title="评判标准2 ：左右两个孩子不全"></a>评判标准2 ：左右两个孩子不全</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
-
-<p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
-<p>例如：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg" alt="image-20200103184338413" style="zoom: 50%;" />
+<p>2.使用静态工厂方法实例化(简单工厂模式)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.spring.factory.MyBeansFactory"</span> <span class="attr">factory-method</span>=<span class="string">"createBookService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p>遇到1，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 没有 </p>
-<p>来到2，来到3，来到4，</p>
-<p>来到5，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 中了哈</p>
-<p>所以5以后的节点，6，7，8，9，10都必须是叶子节点，否则返回false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.使用实例工厂方法实例化(工厂方法模式)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.spring.factory.MyBeansFactory"</span> <span class="attr">id</span>=<span class="string">"beansFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">factory-bean</span>=<span class="string">"beansFactory"</span> <span class="attr">factory-method</span>=<span class="string">"createBookService2"</span> <span class="attr">id</span>=<span class="string">"bookService2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>由于是实例工厂，所以不能用类直接调用方法，所以需要创建工厂类，再用工厂类调用方法得到Bean对象</p>
+<h3 id="Bean对象的作用域"><a href="#Bean对象的作用域" class="headerlink" title="Bean对象的作用域"></a>Bean对象的作用域</h3><ol>
+<li>SingletonDemo </li>
+<li>prototype 原型， 每次getBean得到的都是不同的对象</li>
+<li>request 作用域是一个请求</li>
+<li>session 作用域是一个会话</li>
+<li>global - session 作用域为一个application</li>
+</ol>
+<h2 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h2><p> 依赖注入，在Spring框架负责创建Bean对象时，动态的给属性赋值</p>
+<ol>
+<li>构造方法注入</li>
+<li></li>
+</ol>
+<h2 id="AOP-面向切面编程"><a href="#AOP-面向切面编程" class="headerlink" title="AOP 面向切面编程"></a>AOP 面向切面编程</h2><p>概念 ：当一批对象具有通用的业务逻辑是，我们往往会写一个工具类来同一实现该业务</p>
+<p>，从而提高代码的复用性。AOP可以帮助我们管理这个工具类，降低他与使用者</p>
+<p>之间的耦合度。</p>
+<ol>
+<li>AOP可以管理工具类</li>
+<li>AOP可以进调用工具类的代码写入其使用者的方法中</li>
+<li>AOP的前提是工具类及其使用者都</li>
+</ol>
+<p><img src="F:/blogPic/image-20200108135531895.png" alt="image-20200108135531895"></p>
+<p>黑话：</p>
+<ol>
+<li><p>切面对象：工具类</p>
+</li>
+<li><p>目标对象：切入点所在的类</p>
+</li>
+<li><p>通知：切入点所在的时机</p>
+</li>
+<li><p>切入点：哪些方法调用工具类</p>
+</li>
+</ol>
+<p>springAOP中的代理 用动态代理和cglib代理</p>
+<pre><code>1. 如果实现了接口使用动态代理， 通过接口进行代理
+ 2. 如果没有实现接口使用cglib代理，通过继承得到子类进行代理</code></pre><p>在XML 中配置AOP</p>
+<ol>
+<li><p>编写目标对象</p>
+</li>
+<li><p>编写切面对象</p>
+<p> 实现特定的接口来告诉要进行哪一种通知 ，比如MethodInterceptor 就是环绕通知，MethodBeforeAdvice 就是前置通知</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现特定的接口来告诉要进行哪一种通知</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogAroundAdvice</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(MethodInvocation methodInvocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"删除前记录日志"</span>);</span><br><span class="line">        Object proceed = methodInvocation.proceed();</span><br><span class="line">        System.out.println(<span class="string">"删除后记录日志"</span>);</span><br><span class="line">        <span class="keyword">return</span> proceed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置目标对象--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.service.UserServiceImpl"</span> <span class="attr">id</span>=<span class="string">"userService"</span>/&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--配置切面对象--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.util.LogBeforeAdvice"</span> <span class="attr">id</span>=<span class="string">"logBeforeAdvice"</span>/&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span> <span class="attr">id</span>=<span class="string">"bean"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;property name="proxyTargetClass" value="true"/&gt;  cglib代理--&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyInterfaces"</span> <span class="attr">value</span>=<span class="string">"cn.hqyj.service.UserService"</span>/&gt;</span><span class="comment">&lt;!--动态代理--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"logBeforeAdvice"</span>/&gt;</span> <span class="comment">&lt;!--interceptorNames 表示拦截，其实切面对象就相当于一个拦截器--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"userService"</span>/&gt;</span><span class="comment">&lt;!--目标对象:直接写目标对象，相当于把对象中的所有的方法全部都代理--&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不想拦截目标对象类的所有方法的话 可以修改 interceptorNames属性 value的值 ，设置成一个过滤器，只拦截指定的方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factoryBean"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"bookService"</span>/&gt;</span><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyTargetClass"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span><span class="comment">&lt;!--使用cglig代理进行代理--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"advisor"</span>/&gt;</span><span class="comment">&lt;!--配置过滤器，指定方法进行代理,同时也告诉了配置哪一个切面对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置过滤器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.RegexpMethodPointcutAdvisor"</span> <span class="attr">id</span>=<span class="string">"advisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"logAroundAdvice"</span>/&gt;</span><span class="comment">&lt;!--配置哪一个切面对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"patterns"</span> <span class="attr">value</span>=<span class="string">".*delete.*"</span>/&gt;</span><span class="comment">&lt;!--要代理的方法--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>第二种代理方法：</p>
+<p>全自动代理模式：</p>
+<p>也需要创建目标对象和创建切面类</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1 创建目标类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"customerDao"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo4.aop.CustomerDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 2 创建切面类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAdvice"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo4.aop.MyAdvice"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--定义切入点myPointCut对应的具体方法 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* com.farsight.demo4.aop.*.*(..))"</span> <span class="attr">id</span>=<span class="string">"myPointCut"</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- myAdvice代表一个切面组件，要切入到myPointCut所对应的切入点方法中 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"myAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointCut"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="AspectJ-AOP"><a href="#AspectJ-AOP" class="headerlink" title="AspectJ AOP"></a>AspectJ AOP</h2><p>编写切面类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAspactJAdvice</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myBefore</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是前置通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterReturning</span><span class="params">(JoinPoint joinPoint,Object ref)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是后置通知"</span>+joinPoint.getSignature().getName()+<span class="string">"    返回值为： "</span>+ref);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAround</span><span class="params">(ProceedingJoinPoint joinPoint)</span><span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是环绕前前前前前前通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">        joinPoint.proceed();</span><br><span class="line">        System.out.println(<span class="string">"这是环绕后后后后后后通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterThrowing</span><span class="params">(JoinPoint joinPoint,Throwable e)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"抛出异常啦"</span>);</span><br><span class="line">        System.out.println(<span class="string">"抛出异常通知 ： "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfter</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"最终通知"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在xml中的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--创建目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.service.UserServiceImpl"</span> <span class="attr">id</span>=<span class="string">"userService"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--创建切面对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.util.MyAspactJAdvice"</span> <span class="attr">id</span>=<span class="string">"aspactJAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!----&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">"aspactJAdvice"</span>&gt;</span> <span class="comment">&lt;!--配置切面类的所在--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"myPointcut"</span> <span class="attr">expression</span>=<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span> /&gt;</span><span class="comment">&lt;!--配置要切入的方法（切入点）--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"myAround"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myAround方法为环绕通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"myBefore"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myBefore方法为前置通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"myAfter"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myAfter方法为后置通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"myAfterThrowing"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span> <span class="attr">throwing</span>=<span class="string">"e"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定切面类的myAfterThrowing方法为抛异常后通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"myAfterReturning"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span> <span class="attr">returning</span>=<span class="string">"ref"</span>/&gt;</span> </span><br><span class="line">         <span class="comment">&lt;!--指定切面类的myAfterReturning方法为返回值后通知--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="用注解来配置AOP"><a href="#用注解来配置AOP" class="headerlink" title="用注解来配置AOP"></a>用注解来配置AOP</h2><p>首先XML中要开启注解配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">&lt;!--开启AOP注解配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--配置注解扫描的包--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.hqyj"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后编写切面类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAspactJAdvice</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myBefore</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是前置通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">myPointCut</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(value = <span class="string">"myPointCut()"</span>,returning = <span class="string">"ref"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterReturning</span><span class="params">(JoinPoint joinPoint,Object ref)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是后置通知"</span>+joinPoint.getSignature().getName()+<span class="string">"    返回值为： "</span>+ref);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAround</span><span class="params">(ProceedingJoinPoint joinPoint)</span><span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是环绕前前前前前前通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">        joinPoint.proceed();</span><br><span class="line">        System.out.println(<span class="string">"这是环绕后后后后后后通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterThrowing</span>(throwing = <span class="string">"e"</span>,value = <span class="string">"myPointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterThrowing</span><span class="params">(JoinPoint joinPoint,Throwable e)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"抛出异常啦"</span>);</span><br><span class="line">        System.out.println(<span class="string">"抛出异常通知 ： "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(value = <span class="string">"myPointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfter</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"最终通知"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><p>概念：平常我们每对数据库操作一次就会创建一个数据库连接，然后对数据库操作，然后在关闭连接。这样极大部分的时间都浪费在获取连接和销毁连接上了，使用数据库连接池，里面放着连接，需要的时候从连接池中获取一个连接，操作完毕后也不需要释放连接，就把连接归还给连接池。这样就提高了效率。</p>
+<h2 id="SpringDao"><a href="#SpringDao" class="headerlink" title="SpringDao"></a>SpringDao</h2><p>springDao创建会话需要jdbcTemplate。而这个属性有两种方法获得，第一种就是继承父类JdbcDaoSupport，第二种是在Dao中自己定义一个属性 叫 jdbcTemplate。</p>
+<p>不论继承父类还是定义属性，都需要一个jdbcTemplate来创建回话。但是jdbcTemplate创建会话一定需要一个连接池才能够正常使用，所以继承父类的话，同时继承父类的两个属性，只需要给DataSource来赋值，父类就有代码自动给jdbcTemplate注入DataSource属性                                                                                  就可以得到一个可用的jdbcTemplate来如果自己写jdbcTemplate 的话，jdbcTemplate 也依赖连接池来创建链接，所以 jdbcTemplate 中也有一个DataSource属性配好DataSource后，就可以正常使用</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h3><table>
+<thead>
+<tr>
+<th align="center">传播行为</th>
+<th align="center">A有事务B的情况</th>
+<th align="center">A没有事务B的情况</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">required</td>
+<td align="center">使用A的事务</td>
+<td align="center">自己创建一个新的事务</td>
+</tr>
+<tr>
+<td align="center">supports</td>
+<td align="center">使用A的事务</td>
+<td align="center">不使用事务</td>
+</tr>
+<tr>
+<td align="center">mandatory 强制</td>
+<td align="center">使用A的事务</td>
+<td align="center">抛出异常</td>
+</tr>
+<tr>
+<td align="center">requires_new</td>
+<td align="center">把A挂起，创建新的事务</td>
+<td align="center">创建新的事务</td>
+</tr>
+<tr>
+<td align="center">not_supported ,不支持</td>
+<td align="center">把A挂起，不使用事务</td>
+<td align="center">不使用事务</td>
+</tr>
+<tr>
+<td align="center">never</td>
+<td align="center">抛异常</td>
+<td align="center">不使用事务</td>
+</tr>
+<tr>
+<td align="center">nested ，嵌套</td>
+<td align="center">A和B底层采用保存点机制，形成嵌套事务</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 事务管理器 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>= <span class="string">"txManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置数据源 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSourceId"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 开启注解配置事务 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"txManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)</span><br></pre></td></tr></table></figure>
 
 
       
@@ -266,7 +381,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -280,7 +395,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">二叉树的序列化和反序列化</a>
+            <a href="/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/" class="post-title-link" itemprop="url">设计RandomPool</a>
         </h1>
 
         <div class="post-meta">
@@ -289,16 +404,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-02 15:05:23" itemprop="dateCreated datePublished" datetime="2020-01-02T15:05:23+08:00">2020-01-02</time>
+              <time title="创建时间：2020-01-07 20:09:37 / 修改时间：21:02:07" itemprop="dateCreated datePublished" datetime="2020-01-07T20:09:37+08:00">2020-01-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:47:26" itemprop="dateModified" datetime="2020-01-06T21:47:26+08:00">2020-01-06</time>
-              </span>
 
           
 
@@ -311,18 +420,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="序列化（先序）："><a href="#序列化（先序）：" class="headerlink" title="序列化（先序）："></a>序列化（先序）：</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eyqmomj20zv0pbjzr.jpg" alt="image-20200102150642789" style="zoom: 33%;" />
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoapgyadwj20s9096n40.jpg" alt="image-20200107201125059" style="zoom:50%;" />
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByPre</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="comment">//如果为空</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//当前的String是value+！</span></span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">       <span class="comment">//当前节点加上左树的字符串，加上右数的字符串</span></span><br><span class="line">	res += serialByPre(head.left);</span><br><span class="line">	res += serialByPre(head.right);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>准备两张hash表，一个size变量</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaq3uv6dj20wb0b4ad1.jpg" alt="image-20200107201518949" style="zoom: 50%;" />
 
-<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByPreString</span><span class="params">(String preStr)</span> </span>&#123;</span><br><span class="line">	String[] values = preStr.split(<span class="string">"!"</span>);</span><br><span class="line">       <span class="comment">//把数组放到队列里，可以依次弹出</span></span><br><span class="line">	Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != values.length; i++) &#123;</span><br><span class="line">		queue.offer(values[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reconPreOrder(queue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给我一个队列，我还给你一个树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconPreOrder</span><span class="params">(Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">	String value = queue.poll();</span><br><span class="line">	<span class="keyword">if</span> (value.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node head = <span class="keyword">new</span> Node(Integer.valueOf(value));</span><br><span class="line">	head.left = reconPreOrder(queue);</span><br><span class="line">	head.right = reconPreOrder(queue);</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A进来了，就在map中存东西</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaqikwjpj20xd0eydjz.jpg" alt="image-20200107201639929" style="zoom:33%;" />
 
-<h1 id="按层序列化"><a href="#按层序列化" class="headerlink" title="按层序列化"></a>按层序列化</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eza7tbj20ym0lcjya.jpg" alt="image-20200103080010347" style="zoom: 33%;" />
+<p>第一个map 含义： A是第0个进来的，</p>
+<p>第二个map含义：第0个进来的是A</p>
+<p>size ++;</p>
+<p>正着查，反着查，都放到map中</p>
+<p>B进来了，map中存东西。size++</p>
+<p>假设一直存到Z ：</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaquu4hwj20yp0ogn3u.jpg" alt="image-20200107202100853" style="zoom:50%;" />
 
+<p>在不考虑remove和random 功能的情况下，可以这样做</p>
+<p><strong><em>因为我有大小Size，所以我用Math随机出0-25中的一个数，用这个数字做key查询map2 把value返回 ，绝对等概率</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random)*size);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByLevel</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.left.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.left);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.right.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.right);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果考虑remove的话</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoar5p81uj20tl0mq430.jpg" alt="image-20200107203330304" style="zoom:50%;" />
 
-<h1 id="按层反序列化"><a href="#按层反序列化" class="headerlink" title="按层反序列化"></a>按层反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByLevelString</span><span class="params">(String levelStr)</span> </span>&#123;</span><br><span class="line">		String[] values = levelStr.split(<span class="string">"!"</span>);</span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">		Node head = generateNodeByString(values[index++]);</span><br><span class="line">		Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">		<span class="keyword">if</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(head);</span><br><span class="line">		&#125;</span><br><span class="line">		Node node = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			node = queue.poll();</span><br><span class="line">			node.left = generateNodeByString(values[index++]);</span><br><span class="line">			node.right = generateNodeByString(values[index++]);</span><br><span class="line">			<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> head;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">generateNodeByString</span><span class="params">(String val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (val.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Node(Integer.valueOf(val));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我remove 掉一个key </p>
+<p>如果进行其他操作，直接在map1，map2中remove掉的话会有问题</p>
+<p>假设删掉后12，这样的话，0-999区间就会有一个洞。</p>
+<p>假设删掉999个,</p>
+<p>然后我再随机获取的时候拿到的index 在map中没有的话，我重新在random 还是没有，这样复杂度就会上升</p>
+<p>解决方法：</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoark25c4j20xu0nyte5.jpg" alt="image-20200107204155942" style="zoom: 50%;" />
+
+<p>假设要删除Str17</p>
+<p>我把Str999 扔到str17上（map1）</p>
+<p>在让17对应的字符串是Str999（map2）</p>
+<p>然后我删掉最后一条记录</p>
+<p>然后我把size从1000变成999</p>
+<p>产生洞的时候，我用最后一条数据去填这个洞，然后index 还是连续的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pool</span>&lt;<span class="title">K</span>&gt; </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;K, Integer&gt; keyIndexMap;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;Integer, K&gt; indexKeyMap;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Pool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.keyIndexMap = <span class="keyword">new</span> HashMap&lt;K, Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.indexKeyMap = <span class="keyword">new</span> HashMap&lt;Integer, K&gt;();</span><br><span class="line">			<span class="keyword">this</span>.size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//要判断map中存不存在，不存在的话才加</span></span><br><span class="line">			<span class="keyword">if</span> (!<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(key, <span class="keyword">this</span>.size);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(<span class="keyword">this</span>.size++, key);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">int</span> deleteIndex = <span class="keyword">this</span>.keyIndexMap.get(key);</span><br><span class="line">                <span class="comment">//--size是最后一个元素的位置</span></span><br><span class="line">				<span class="keyword">int</span> lastIndex = --<span class="keyword">this</span>.size;</span><br><span class="line">                <span class="comment">//把最后一个位置上的key拿出来</span></span><br><span class="line">				K lastKey = <span class="keyword">this</span>.indexKeyMap.get(lastIndex);</span><br><span class="line">                <span class="comment">//把最后一条记录填在原本要删的记录上</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(lastKey, deleteIndex);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(deleteIndex, lastKey);</span><br><span class="line">                <span class="comment">//然后remove掉最后一条记录</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.remove(key);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.remove(lastIndex);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> K <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> randomIndex = (<span class="keyword">int</span>) (Math.random() * <span class="keyword">this</span>.size); <span class="comment">// 0 ~ size -1</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.indexKeyMap.get(randomIndex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -343,7 +478,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/30/%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -357,7 +492,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/30/%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/" class="post-title-link" itemprop="url">打印二叉树的后继节点</a>
+            <a href="/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" class="post-title-link" itemprop="url">SQL专项训练</a>
         </h1>
 
         <div class="post-meta">
@@ -367,14 +502,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-30 22:30:00" itemprop="dateCreated datePublished" datetime="2019-12-30T22:30:00+08:00">2019-12-30</time>
+              <time title="创建时间：2020-01-07 10:20:21" itemprop="dateCreated datePublished" datetime="2020-01-07T10:20:21+08:00">2020-01-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:52:04" itemprop="dateModified" datetime="2020-01-06T21:52:04+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-09 21:03:07" itemprop="dateModified" datetime="2020-01-09T21:03:07+08:00">2020-01-09</time>
               </span>
 
           
@@ -388,29 +523,172 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiweijj20vm0e0wjk.jpg" alt="image-20191230223327822" style="zoom: 33%;" />
+          <p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
+<p>​                学生表s                                                             老师表                              课程表                                                                                                                            </p>
+<p> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
+<ol>
+<li>查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure>
 
-<p>中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。</p>
-<p>如果一个节点，假如说X，</p>
-<p>如果X有右子树，那么X</p>
-<p>的后继节点一定是这个右子树最左的节点</p>
-<p>如果X没有右子树，那么向上找，什么时候停。找到当前节点是父节点的左孩子停，那个父节点就是原始节点的后继节点</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiyj3zj20ig0h80x5.jpg" alt="image-20191230225619863" style="zoom: 50%;" />
+<ol start="2">
+<li>查询所有课程成绩小于60分的同学的学号和姓名</li>
+</ol>
+<p>​                所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure>
 
-<p>如果是6，那么我就找，那一颗数的左子树是以6结尾的，就是3嘛</p>
-<p>如果是7，那一颗树的左子树是以7结尾的，米有啊，所以7的后继不存在，</p>
-<p>通过x的父指针，找到x的父，如果我发现X是这个父节点的左孩子，那不行，没有找到，指针继续指向现在节点的父节点，看看原来的那个节点是不是这个父节点的右孩子。如果是这个节点就是后继节点。</p>
-<p>比如说11：</p>
-<p>有没有右子树？ 没有。那就找那一颗树的左子树是11.。</p>
-<p>先用父指针找到父节点5，看看5的左子树是不是11，不是。</p>
-<p>继续向上找5的父节点是2,2的左子树是4，不是2，所以2也不是11的后继节点</p>
-<p>继序向上找2的父节点是1,1的左子树是2，找到了，所以11的后继节点就是1；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//找后继节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getSuccessorNode</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">   </span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; <span class="comment">//如果当前节点的右子树不为空，说明有右子树。</span></span><br><span class="line">			<span class="keyword">return</span> getLeftMost(node.right);<span class="comment">//如果有右子树，就找到右子树上最左的节点</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//如果没有右子树，就找父节点</span></span><br><span class="line">			Node parent = node.parent;</span><br><span class="line">            <span class="comment">//如果父节点为空，就返回，因为最后一个节点没有后继，就会一直向上窜</span></span><br><span class="line">			<span class="keyword">while</span> (parent != <span class="keyword">null</span> &amp;&amp; parent.left != node) &#123;<span class="comment">//如果当前节点不等于父节点的左孩子，就转着while。如果当前节点等于父节点的左孩子的话，就找到了，停</span></span><br><span class="line">                <span class="comment">//向上窜，</span></span><br><span class="line">				node = parent;</span><br><span class="line">				parent = node.parent;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> parent;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个node是莫一颗子树的头部，找到这颗子树的最左的节点</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getLeftMost</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//在不为空的情况下，一路向右，就找到了最右的节点了</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">while</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> node;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+<ol start="3">
+<li><p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="找前驱节点"><a href="#找前驱节点" class="headerlink" title="找前驱节点"></a>找前驱节点</h2><p>如果有左子树，就是左子树最右的节点</p>
-<p>如果没有左子树，就向上找，当前节点是父节点的右孩子就停</p>
+
+</li>
+</ol>
+<ol start="4">
+<li><p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
+<p>技巧：把符合in中条件的记录都选出来 用到了分组 和 having</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
+</li>
+</ol>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加’*’的字段为该表的主键Client(客户表a)</p>
+<table>
+<thead>
+<tr>
+<th>*client_id</th>
+<th>client_name</th>
+<th>phone</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Zhao</td>
+<td>82880000</td>
+<td>朝阳区</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Qian</td>
+<td>82880002</td>
+<td>海淀区</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sun</td>
+<td>82881000</td>
+<td>朝阳区</td>
+</tr>
+</tbody></table>
+<p>Book(图书表d)</p>
+<table>
+<thead>
+<tr>
+<th>*book_id</th>
+<th>book_name</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>21</td>
+<td>管理学</td>
+<td>30.00</td>
+</tr>
+<tr>
+<td>22</td>
+<td>计算机网络</td>
+<td>50.00</td>
+</tr>
+<tr>
+<td>23</td>
+<td>国家地理杂志</td>
+<td>90.00</td>
+</tr>
+<tr>
+<td>24</td>
+<td>西游记</td>
+<td>20.00</td>
+</tr>
+</tbody></table>
+<p>Order2(订单表c10)</p>
+<table>
+<thead>
+<tr>
+<th>*order_id</th>
+<th>booki_id</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>11</td>
+<td>21</td>
+<td>5</td>
+</tr>
+<tr>
+<td>12</td>
+<td>22</td>
+<td>2</td>
+</tr>
+<tr>
+<td>13</td>
+<td>23</td>
+<td>2</td>
+</tr>
+<tr>
+<td>14</td>
+<td>24</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<p>ClientOrder(客户订单表b1)</p>
+<table>
+<thead>
+<tr>
+<th>*client_id</th>
+<th>*order_id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>11</td>
+</tr>
+<tr>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>1）请写出一条SQL语句，查询出每个客户的所有订单并安地址排序，要求输出格式如下：</p>
+<p>adress    client_name    phone    order_id</p>
+<p>2)请写出一条SQL语句，查询出每个客户订购的图书总价，要求输出格式如下：</p>
+<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;             </p>
 
       
     </div>
@@ -430,7 +708,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -476,7 +754,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -489,7 +767,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

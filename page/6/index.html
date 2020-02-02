@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/30/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%B8%83%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/06/SQL%E7%BB%83%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/30/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%B8%83%EF%BC%88%E9%9D%9E%E9%80%92%E5%BD%92%EF%BC%89/" class="post-title-link" itemprop="url">二叉树的遍布（非递归）</a>
+            <a href="/2020/01/06/SQL%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">SQL练习</a>
         </h1>
 
         <div class="post-meta">
@@ -201,14 +201,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-30 19:46:02" itemprop="dateCreated datePublished" datetime="2019-12-30T19:46:02+08:00">2019-12-30</time>
+              <time title="创建时间：2020-01-06 11:42:28" itemprop="dateCreated datePublished" datetime="2020-01-06T11:42:28+08:00">2020-01-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:54:02" itemprop="dateModified" datetime="2020-01-06T21:54:02+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-09 21:03:02" itemprop="dateModified" datetime="2020-01-09T21:03:02+08:00">2020-01-09</time>
               </span>
 
           
@@ -222,39 +222,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h1><p>先序遍历，和BFS很像，用栈实现的。先压右  后压左，所以栈里面从栈顶到栈低的顺序是逆序的，先压的右，后压的左，那么就是先弹左，后弹右。所以就是当前节点在前，左， 右 。</p>
-<p>为啥不用队列，这是二叉树遍历，遍历到底需要找父节点，需要向上走，栈结构天然提供了向上走的结构。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(TreeNode head)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (head==<span class="keyword">null</span>)</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">       stack.add(head);</span><br><span class="line">       <span class="keyword">while</span> (!stack.isEmpty())&#123;</span><br><span class="line">           head = stack.pop();</span><br><span class="line">           System.out.println(head.val);</span><br><span class="line">           <span class="keyword">if</span> (head.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">               stack.add(head.right);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (head.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">               stack.add(head.left);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+          <ol>
+<li>把列看成变量，把where 后面看成if（flag）里的exp 里的表达式</li>
+<li>哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure>
 
+<p>1&gt;2 的表达式永远为false 所以一行也取不到</p>
+<p>既然是变量，就可以比较和运算，</p>
+<p>where是对表中的数据发挥作用，查询出数据来</p>
+<p>where发挥作用是，表示并没有discount列，发挥完才有discount列，所以，对结果中的列，要用having</p>
+<p>再次筛选，就要用having</p>
+<p>列就是变量，在每一行上，列的值都在变化。</p>
+<p>Where 条件是表达式，在哪一行上表达式为真。哪一行就取出来</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg" alt="image-20200108204009669"></p>
+<p>update main set num = num-(num%10) where num between 20 and 39</p>
+<p>把num 一定当成变量来看，因此num/10 取整 再乘以10</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure>
 
-
-<h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6mtv7rfj20xl0evtbq.jpg" alt="image-20191230202234502.png" style="zoom:50%;" />
-
-<p>1压到栈中</p>
-<p>head向左移动</p>
-<p>h还不等于null，</p>
-<p>head向左移动</p>
-<p>会把当前节点的左边界全部压入栈中</p>
-<p>一直到4的左孩子是空，这个过程就停了</p>
-<p>再次进入这个while的时候，还会继续while 因为虽然head为空了，但是栈不为空，所以就会继续</p>
-<p>现在走进else分支</p>
-<p>栈中弹出一个节点，然后打印这个节点</p>
-<p>head然后向右移动</p>
-<p>结束</p>
-<hr>
-<p>当前节点为空，从栈中拿一个，打印，然后当前节点向右跑</p>
-<p>如果当前节点不为空，当前节点压入栈，当前节点向左跑</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">c</span><span class="params">(TreeNode head)</span></span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (head!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">while</span> (head!=<span class="keyword">null</span>||!stack.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">if</span> (head!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                    stack.push(head);</span><br><span class="line">                    head = head.left;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    head = stack.pop();</span><br><span class="line">                    System.out.println(head.val);</span><br><span class="line">                    head = head.right;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h1><p>左右中，</p>
-<p>先序遍历顺序：中左右</p>
-<p>改吧改吧就能改成 中 右 左 ，就是先压left 后压right，换一下顺序</p>
-<p>然后不打印，放到一个新的栈中，</p>
-<p>新的栈弹出时会把他逆序，也就变成了 左右中的顺序了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">posOrderUnRecur1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	System.out.print(<span class="string">"pos-order: "</span>);</span><br><span class="line">	<span class="keyword">if</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">		Stack&lt;Node&gt; s1 = <span class="keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">		Stack&lt;Node&gt; s2 = <span class="keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">		s1.push(head);</span><br><span class="line">		<span class="keyword">while</span> (!s1.isEmpty()) &#123;</span><br><span class="line">			head = s1.pop();</span><br><span class="line">			s2.push(head);</span><br><span class="line">			<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">				s1.push(head.left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">				s1.push(head.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (!s2.isEmpty()) &#123;</span><br><span class="line">			System.out.print(s2.pop().value + <span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>count（字段）和count（*）的区别，count（字段）查出来的是该字段不为null的所有行数，</p>
+<p>而count（*）会查出绝对行数，就算着一行全是null ，也算一行</p>
+<p>count（*） 和count（1）的区别</p>
+<p>对于myisam引擎来说是没有区别的 ，内部有一个计数变量</p>
+<p>对于innodb的话，count（*） 真的会傻不拉几的一行一行的数，效率极低</p>
+<p>一般聚合函数不单独使用，要配合分组一起用。这样意义更大</p>
+<p>严格的讲，以group by a，b，c为例，则select的列，只能在a，b，c里选择，语义上才没有矛盾</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzk6hf2j20dg0960ve.jpg" alt="image-20200109074542203"></p>
+<p>先计算所有人的平均分。</p>
+<p>select avg(score) ,name from result group by(name)</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzz8aiwj20i806qaci.jpg" alt="image-20200109080311830"></p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0d44nbj20jw0a9gq6.jpg" alt="image-20200109080604644"></p>
+<p>用score进行逻辑运算，挂科的标记成1，没有挂科的标记成0</p>
+<p>挂科数就是g的sum结果</p>
+<p>综合上面的两个sql语句</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0v7o7xj20h507tq5k.jpg" alt="image-20200109081022282"></p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm15ebucj20ih06q41h.jpg" alt="image-20200109081143171"></p>
 
       
     </div>
@@ -274,7 +276,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/29/struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/05/hash%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -288,7 +290,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/29/struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">struts和springMVC的区别</a>
+            <a href="/2020/01/05/hash%E8%A1%A8/" class="post-title-link" itemprop="url">hash表</a>
         </h1>
 
         <div class="post-meta">
@@ -298,14 +300,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-29 15:55:16" itemprop="dateCreated datePublished" datetime="2019-12-29T15:55:16+08:00">2019-12-29</time>
+              <time title="创建时间：2020-01-05 18:38:03" itemprop="dateCreated datePublished" datetime="2020-01-05T18:38:03+08:00">2020-01-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-12 23:08:35" itemprop="dateModified" datetime="2020-01-12T23:08:35+08:00">2020-01-12</time>
+                <time title="修改时间：2020-01-07 20:59:29" itemprop="dateModified" datetime="2020-01-07T20:59:29+08:00">2020-01-07</time>
               </span>
 
           
@@ -319,52 +321,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="struts的springMVC的区别。"><a href="#struts的springMVC的区别。" class="headerlink" title="struts的springMVC的区别。"></a>struts的springMVC的区别。</h1><p>（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。</p>
-<p>（2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性</p>
-<h4 id="SpringMVC创键是在该类上添加-Controller注解就可以了。"><a href="#SpringMVC创键是在该类上添加-Controller注解就可以了。" class="headerlink" title="SpringMVC创键是在该类上添加@Controller注解就可以了。"></a>SpringMVC创键是在该类上添加@Controller注解就可以了。</h4><ul>
-<li>请求方式1:</li>
-</ul>
-<p>​    前台路径：类名别名！方法名.action </p>
-<p>​    后台 配置动态方法常量,</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.UserAction"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <p>hash函数：</p>
+<ol>
+<li>输入域是无穷大的</li>
+<li>输出域是固定的</li>
+<li>输入的参数如果相同的话，输出的也是相同的</li>
+<li>当输入不一样，也有可能得到相同的输出值</li>
+<li>假如输入域是0-99，输出域是0-2</li>
+</ol>
+<img src="https://upload.cc/i1/2020/01/05/k4rAYN.png" style="zoom:33%;" />
 
-<ul>
-<li>请求方式2:</li>
-</ul>
-<p>​    前台路径：类名_方法名.action </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.&#123;1&#125;"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>​    离散型，均匀分布的性质。 0 ，1， 2 差不多都是 33 个</p>
+<p>输出和输入的规律无关 比如 陈广1 和陈广2 经过hash处理后 输出可能会差别特别大。 而且在整个输出域均匀分布 </p>
+<p>hash表的细节</p>
+<p>有一个数组。比如大小是17. </p>
+<p>有一个map key 是 A value 是 2</p>
+<p>我先用key得到一个hash值，然后在对17取模就可以得到一个数字 假设是2。</p>
+<p>我先看看 2 的位置有没有元素，没有。就直接挂在 2的位置</p>
+<p>假设 还有一个map key 是A value 是 3；</p>
+<p>去数组还是找2的位置。已经有元素的是A ，比对value的值， 如果不同，替换原来value的值，相当于修改操作。</p>
+<p>如果这个数组里面没有A ，就加上一个A ,value 是3；</p>
+<p>就是如果冲突了，就往上挂，一个链表而已。 </p>
+<p>数组上每个位置的元素都是均匀涨的。</p>
+<p>比说我某个链的长度是3了，那么其它链的长度也差不多是3了</p>
+<p>此时，我就进行hash表的扩容 </p>
+<p>为什么扩容呢？因为我觉得这个链表的长度已经是5了。在多的话会影响效率。</p>
+<p>原来的数组大小是17.现在假设扩容后是104.</p>
+<p>以前都是对17取模，现在对104取模。原来的就失效了。</p>
+<p>所以就要把每个数据取出来重新用hash函数算一下，算完之后对104取模。重新分配他在哪一个桶里。</p>
+<p>为什么能到达O（1）呢？</p>
+<p>如果每次扩容的时候，都让长度扩大一倍，到n的时候要扩 logn的复杂度。问题是 我可以把容量扩大5倍，这样效率又要快。但还不是O（1）</p>
+<p>实际上，还可以进行离线扩容</p>
+<p>当链表已经到5了，我用的时候还用这个hash表，我在离线的时候进行扩容，当扩容结束后，在把所有的请求打到新的hash表上</p>
+<p>因为有很多的优化技巧，所以很快，可以说是O（1）的</p>
+<p>JVM中还是有一个桶，每一个桶里放一颗红黑树，是一颗平衡搜索二叉树。这样做出来的hash表</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaob3815j20js0mhwh8.jpg" alt="image-20200107193927838" style="zoom:33%;" />
 
+<p>但是经典的结构是桶里面放链表</p>
 <hr>
-<p>Struts前台向后台传递数据方式：</p>
-<p>表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
-<ol>
-<li><p>和Action中属性名一致</p>
-</li>
-<li><p>封装成POJO，写在类的属性中，如果这样，前台获取值需要类名.属性名  </p>
-</li>
-<li><p>实现ModelDriven接口，前台就不用类名.属性名了，直接属性名。</p>
-<p>action中的属性都要有getSet方法</p>
-</li>
-</ol>
-<p>SpringMVC：</p>
-<ol>
-<li><p>只要和请求的方法的形参的参数名相同就可以了，</p>
-</li>
-<li><p>还可以使用request.getParametor()来获取</p>
-</li>
-<li><p>把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，</p>
-<p>此时前台中得name的值就不是参数名了，而是pojo的属性名。</p>
-<p>如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。</p>
-<p>后台向前台传值</p>
-<p>struts直接操作对应的属性就可以</p>
-<p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
-<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
-</li>
-</ol>
-<p>跳转到前台页面：</p>
-<p>struts用return一个字符串，并在action标签中配置result标签 name= “字符串名” 标签的值是该jsp页面的全路径 </p>
-<p>springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);</p>
+<h3 id="题1：-大文件"><a href="#题1：-大文件" class="headerlink" title="题1： 大文件"></a>题1： 大文件</h3><p>有一个大文件，每一行都有一个字符串，我想把重复的字符串打印出来</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaotrt14j20j80a841i.jpg" alt="image-20200107194502671" style="zoom: 50%;" />
 
+<p>问：你给我多少台机器啊？</p>
+<p>答：1000台</p>
+<p>你把机器编号，从0 到999</p>
+<p>问：文件存在哪里啊？</p>
+<p>答：存在一个分布式系统上</p>
+<p>问：我想处理这个大文件，按行读，又没有高效的工具啊？</p>
+<p>答: 有，你就告诉我怎么处理把</p>
+<hr>
+<p>我用这个高效的工具把每一行的数据读出来文本</p>
+<p>利用hash函数生成一个hashCode</p>
+<p>用hashCode对1000取模</p>
+<p>如果是0，就把这条文本扔给0机器</p>
+<p>如果是3，就把这条文本扔给3机器</p>
+<p>如果是999，就把这条文本扔给999机器</p>
+<p>这样一来就把大文本分到1000台机器上</p>
+<p>而且相同的文本一定会分到一台机器上（相同的输入，一定会有相同的输出，取模后还是相同的）</p>
+<p>这样的话，你有多少中不同的种类，就可以均匀的分布的1000台机器上。</p>
+<p>如果分完之后每一个的大小还是太大，</p>
+<p>你在每一台机器上把这个文件用hash函数分成小文件</p>
+<p>然后每一台机器上可以跑并行任务</p>
+<p>这样的话，就可以了。用hash函数做分流</p>
+<h3 id="hash函数相同输入相同输出，不同输入，均匀分布的特性"><a href="#hash函数相同输入相同输出，不同输入，均匀分布的特性" class="headerlink" title="hash函数相同输入相同输出，不同输入，均匀分布的特性"></a>hash函数相同输入相同输出，不同输入，均匀分布的特性</h3>
       
     </div>
 
@@ -383,7 +402,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -397,7 +416,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/28/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">两个链表相交的一系列问题</a>
+            <a href="/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/" class="post-title-link" itemprop="url">求完全二叉树节点的个数</a>
         </h1>
 
         <div class="post-meta">
@@ -407,14 +426,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-28 19:48:03" itemprop="dateCreated datePublished" datetime="2019-12-28T19:48:03+08:00">2019-12-28</time>
+              <time title="创建时间：2020-01-03 19:33:22" itemprop="dateCreated datePublished" datetime="2020-01-03T19:33:22+08:00">2020-01-03</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:56:45" itemprop="dateModified" datetime="2020-01-06T21:56:45+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-06 22:38:32" itemprop="dateModified" datetime="2020-01-06T22:38:32+08:00">2020-01-06</time>
               </span>
 
           
@@ -428,71 +447,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="判断链表是否有环"><a href="#判断链表是否有环" class="headerlink" title="判断链表是否有环"></a>判断链表是否有环</h3><p>函数：如果这个单链表有环，返回第一个入环的节点，如果没有环，返回null</p>
-<h4 id="方法1-hashSet"><a href="#方法1-hashSet" class="headerlink" title="方法1 hashSet"></a>方法1 hashSet</h4><p>用hashSet，链表遍历一圈，把各个节点都放入到set中去，判断每个节点是否以前加入到set中过，如果以前加入到set中过就是有环，并且这个节点就是第一个入环的节点如果遍历到空节点，就是没有环。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Node <span class="title">hasCircle2</span> <span class="params">(Node head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="keyword">null</span>||head.next ==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Node&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Node cur = head;</span><br><span class="line">        <span class="keyword">while</span> (cur!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(cur))&#123;</span><br><span class="line">                <span class="keyword">return</span> cur;</span><br><span class="line">            &#125;</span><br><span class="line">            set.add(cur);</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <p>要求 ： 时间复杂度小于O(n)</p>
+<p>如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg" style="zoom:50%;" />
 
+<p>首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的</p>
+<p>然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节点数满足公式 2的3次方-1 + 当前节点   就是2的3次方</p>
+<p>右树也是完全二叉树，递归求右树的节点个数，子问题和母问题等效</p>
+<p>情况2：右子树的左边界不是L-1,也就是左子树也不一定满，但是根据定义，右子树一定是满的，就可以求出右子树的节点个数-2；</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg" style="zoom:50%;" />
 
-
-
-<h4 id="方法2：不用hashSet"><a href="#方法2：不用hashSet" class="headerlink" title="方法2：不用hashSet"></a>方法2：不用hashSet</h4><ol>
-<li><p>准备两个指针，快指针，慢指针，快指针一次走两步，慢指针一次走一步</p>
-</li>
-<li><p>如果有环，快指针和慢指针一定会相遇</p>
-</li>
-<li><p>如果快指针走的过程中遇到null了，就必然没环。</p>
-</li>
-<li><p>相遇的时候，快指针回到开头，一次走一步</p>
-</li>
-<li><p>这样的话，快指针和慢指针一定会在入环节点相遇</p>
-</li>
-<li><p>返回快指针</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">hasCircle</span> <span class="params">(Node head)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>||head.next.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         Node slow = head.next;</span><br><span class="line">         Node fast = head.next.next;</span><br><span class="line">         <span class="keyword">while</span> (slow != fast)&#123;<span class="comment">//注意这里是不等于</span></span><br><span class="line">             <span class="keyword">if</span> (fast.next==<span class="keyword">null</span>||fast.next.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             slow= slow.next;</span><br><span class="line">             fast =fast.next.next;</span><br><span class="line">         &#125;</span><br><span class="line">         fast = head;</span><br><span class="line">         <span class="keyword">while</span> (fast != slow)&#123; <span class="comment">//注意这里是不等于</span></span><br><span class="line">             fast=fast.next;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> fast;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h3 id="两个链表的相交问题"><a href="#两个链表的相交问题" class="headerlink" title="两个链表的相交问题"></a>两个链表的相交问题</h3><h4 id="如果两个链表都没有环，就是两个无环链表相交的问题"><a href="#如果两个链表都没有环，就是两个无环链表相交的问题" class="headerlink" title="如果两个链表都没有环，就是两个无环链表相交的问题"></a>如果两个链表都没有环，就是两个无环链表相交的问题</h4><h5 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h5><p>你把链表1 放到hash中，然后遍历链表2，</p>
-<p>链表2 每遍历一个节点，你都查，看看这个节点再不在set里</p>
-<p>第一个在的，就是第一个相交的节点 </p>
-<p>如果head2 遍历到空都没有一个相同的节点在set中</p>
-<p>说明没有相交</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop3</span><span class="params">(Node head1,Node head2)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (head1==<span class="keyword">null</span>||head2==<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         HashSet&lt;Node&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">         Node cur1 = head1;</span><br><span class="line">         <span class="keyword">while</span> (cur1!=<span class="keyword">null</span>)&#123;</span><br><span class="line">             set.add(cur1);</span><br><span class="line">             cur1=cur1.next;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         Node cur2 = head2;</span><br><span class="line">         <span class="keyword">while</span> (cur2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">if</span> (set.contains(cur2))&#123;</span><br><span class="line">                 <span class="keyword">return</span> cur2;</span><br><span class="line">             &#125;</span><br><span class="line">             cur2 = cur2.next;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="方法2-不用hashSet"><a href="#方法2-不用hashSet" class="headerlink" title="方法2:不用hashSet"></a>方法2:不用hashSet</h5><p>先遍历链表1 ，统计链表1 的长度，以及拿到链表1 的最后一个节点</p>
-<p>得到了长度1 和最后一个节点1</p>
-<p>在遍历链表2 ，统计链表2 的长度，以及拿到链表2的最后一个节点</p>
-<p>得到了长度2 和最后一个节点2</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6owx2xuj20d8071gnj.jpg" alt="image-20191229112019548" style="zoom: 50%;" />
-
-<p>先判断end1等不等与end2（是不是同一个节点）</p>
-<p>如果end1 不等于end2 ，他俩不可能相交</p>
-<p>如果end1 等于end2 ，说明相交，但不一定是第一个相交的那个节点</p>
-<p>如果len1 =100； len2 = 80；</p>
-<p>那么head1先走20步，然后head1和head2 同时走，</p>
-<p>他俩一定会走到第一个相交的节点处</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node cur1 = head1;</span><br><span class="line">    Node cur2 = head2;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (cur1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">        n++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cur2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        cur2 = cur2.next;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果end1！=end2 不相交</span></span><br><span class="line">    <span class="keyword">if</span> (cur1 != cur2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//相交 ，然后cur1 代表长链表，cur2 代表短链表</span></span><br><span class="line">    cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">    cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">    n = Math.abs(n);</span><br><span class="line">    <span class="comment">//相交，长链表先走</span></span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        n--;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">        cur2 = cur2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="如果两个链表都有环，就是两个有环链表相交问题"><a href="#如果两个链表都有环，就是两个有环链表相交问题" class="headerlink" title="如果两个链表都有环，就是两个有环链表相交问题"></a>如果两个链表都有环，就是两个有环链表相交问题</h4><p>有三种情况：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6owz6qyj214i0nadp0.jpg" alt="image-20191229115555769" style="zoom:33%;" />
-
-<p>如果loop1 ==loop2 就是第二种结构</p>
-<p>第一个相交的节点在上面，这就等同于无环链表相交。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            <span class="comment">//这里就和刚才单链表的相交问题高度一致</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果loop1 ！= loop2</p>
-<p>可能是结构1 或者结构3</p>
-<p>让loop1 继续不断通过next向下走，如果loop1都转回自己了，还没有遇到loop2.，</p>
-<p>就是第一种结构，两个链表不相交，返回null</p>
-<p>如果loop1 向下走的过程中遇到了loop2，</p>
-<p>就是第二种结构。返回loop1和loop2 都行，都是第一个相交的节点</p>
-<p>结束</p>
-<h4 id="如果一个链表有环，一个链表无环，则这两个链表不相交"><a href="#如果一个链表有环，一个链表无环，则这两个链表不相交" class="headerlink" title="如果一个链表有环，一个链表无环，则这两个链表不相交"></a>如果一个链表有环，一个链表无环，则这两个链表不相交</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line">		<span class="keyword">public</span> Node next;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.value = data;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getIntersectNode</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//得到第一个入环的节点。</span></span><br><span class="line">		Node loop1 = getLoopNode(head1);</span><br><span class="line">		Node loop2 = getLoopNode(head2);</span><br><span class="line">        <span class="comment">//如果都没有环，就是两个无环链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 == <span class="keyword">null</span> &amp;&amp; loop2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> noLoop(head1, head2);<span class="comment">//两个无环链表的相交问题</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果都有环，两个有环链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 != <span class="keyword">null</span> &amp;&amp; loop2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//把链表1 的第一个入环节点和头结点传进去，链表2 的第一个入环节节点和头结点传进去</span></span><br><span class="line">			<span class="keyword">return</span> bothLoop(head1, loop1, head2, loop2);<span class="comment">//返回的是两个有环链表第一个相交的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//loop1和loop2 中有一个为空，一个不为空，这种情况下不可能相交</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">	*  不用hash表返回第一个入环节点</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getLoopNode</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span> || head.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//快指针一次走两步，慢指针一次走一步</span></span><br><span class="line">		Node n1 = head.next; <span class="comment">// n1 -&gt; slow</span></span><br><span class="line">		Node n2 = head.next.next; <span class="comment">// n2 -&gt; fast</span></span><br><span class="line">        <span class="comment">//快指针和慢指针在环中相遇的时候就停</span></span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">            <span class="comment">//如果快指针先走完整个链表，还没有碰到慢指针，直接返回，没有环</span></span><br><span class="line">			<span class="keyword">if</span> (n2.next == <span class="keyword">null</span> || n2.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n2 = n2.next.next;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//走到这里说明刚才快指针和慢指针相遇了</span></span><br><span class="line">        <span class="comment">//快指针到头结点，两个指针一次走一步，来找到入环节点</span></span><br><span class="line">		n2 = head; <span class="comment">// n2 -&gt; walk again from head</span></span><br><span class="line">        <span class="comment">//再次碰头的时候，就是那个入环节点了</span></span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">			n2 = n2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> n1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//两个无环链表相交的问题</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//head 1 ,head2 遍历</span></span><br><span class="line">		Node cur1 = head1;</span><br><span class="line">		Node cur2 = head2;</span><br><span class="line">        <span class="comment">//head1遍历的时候n++，head2 遍历的时候n--;所以n代表的是两个链表长度的差值</span></span><br><span class="line">		<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (cur1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">			n++;</span><br><span class="line">            <span class="comment">//cur1 就是链表1最后一个节点</span></span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (cur2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">			n--;</span><br><span class="line">             <span class="comment">//cur2 就是链表2最后一个节点</span></span><br><span class="line">			cur2 = cur2.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果最后一个节点都不相同，就不相交，返回null</span></span><br><span class="line">		<span class="keyword">if</span> (cur1 != cur2) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果n&gt;0的话，cur1（也就是长链表）就是 head1 ，否则就是head2</span></span><br><span class="line">		cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">        <span class="comment">//cur2 就作为另一个短链表，如果长链表是head1 ，cur2 就是head2</span></span><br><span class="line">		cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">        <span class="comment">//n取正数</span></span><br><span class="line">		n = Math.abs(n);</span><br><span class="line">        <span class="comment">//让长链表先走n步</span></span><br><span class="line">		<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">			n--;</span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//然后两个链表一起走，当cur1和cur2相等的时候，就是第一个相交的节点了</span></span><br><span class="line">		<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">			cur2 = cur2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cur1;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//两个有环链表相交的问题</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">bothLoop</span><span class="params">(Node head1, Node loop1, Node head2, Node loop2)</span> </span>&#123;</span><br><span class="line">		Node cur1 = <span class="keyword">null</span>;</span><br><span class="line">		Node cur2 = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//如果loop1和loop2相等的话，就是结构二，就成了单链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            <span class="comment">//这里就和刚才单链表的相交问题高度一致</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;<span class="comment">//这里不再是null ，而是loop</span></span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//如果loop1 和loop2 不等，就看看是第一种结构还是第三种结构</span></span><br><span class="line">            <span class="comment">//也就是让loop1转</span></span><br><span class="line">			cur1 = loop1.next;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">                <span class="comment">//在转的过程中如果有一个节点是loop2的话，就是第三种结构，相交</span></span><br><span class="line">				<span class="keyword">if</span> (cur1 == loop2) &#123;</span><br><span class="line">                    <span class="comment">//随便retrun一个loop1或者loop2</span></span><br><span class="line">					<span class="keyword">return</span> loop1;</span><br><span class="line">				&#125;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//如果转一圈之后还是没哟找到loop2。说明就是第一中结构，不相交，放回null</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p>那么就是<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg" style="zoom:33%;" /></p>
+<p>在对左子树进行递归</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -513,7 +480,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -559,7 +526,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -572,7 +539,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/16/%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/16/%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">排序</a>
+            <a href="/2019/12/26/%E6%97%8B%E8%BD%AC%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">旋转矩阵</a>
         </h1>
 
         <div class="post-meta">
@@ -200,10 +200,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-12-16 18:47:10 / 修改时间：20:29:20" itemprop="dateCreated datePublished" datetime="2019-12-16T18:47:10+08:00">2019-12-16</time>
+              <time title="创建时间：2019-12-26 19:51:04" itemprop="dateCreated datePublished" datetime="2019-12-26T19:51:04+08:00">2019-12-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:09:07" itemprop="dateModified" datetime="2020-01-06T22:09:07+08:00">2020-01-06</time>
+              </span>
 
           
 
@@ -216,26 +222,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料</p>
-<p>工程中的排序：</p>
-<pre><code>1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）
-   2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）
-   3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来
-   4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程中如果进行到数组长度小于60的话就直接使用插排了（在递归时有一个判断 如果L&gt;R-60 的话就直接插排）</code></pre><p>冒泡排序：可以实现稳点，两个相邻的树比较的时候，前面的和后面的相同，则不交换。continue？</p>
-<p>选择排序。：不可以实现稳定性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">0</span>&#125;</span><br><span class="line"><span class="comment">//原理是：找到一个最小的，第一个交换，所以 0 这个就会和第一个5交换</span></span><br><span class="line"><span class="comment">//所以第一个5 就跨越了 两个5 。所以不稳定</span></span><br></pre></td></tr></table></figure>
+          <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> c = matrix.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> d = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (a &lt; c) &#123;</span><br><span class="line">            rotateEdge(matrix, a++, b++, c--, d--);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rotateEdge</span><span class="params">(<span class="keyword">int</span>[][] m, <span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> times = d - b;</span><br><span class="line">        <span class="keyword">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != times; i++) &#123;</span><br><span class="line">            tmp = m[a][b + i];</span><br><span class="line">            m[a][b + i] = m[c - i][b];</span><br><span class="line">            m[c - i][b] = m[c][d - i];</span><br><span class="line">            m[c][d - i] = m[a + i][d];</span><br><span class="line">            m[a + i][d] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan72v4fxqj20uy0hotc2.jpg" alt="image-20191227080515382" style="zoom:50%;" />
 
 
 
-<p>插入排序：可以实现稳定性    </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">//第一次排序后  5,6,6,7</span></span><br><span class="line"><span class="comment">//第二次向前排序的时候，如果和前面的6相同的话。就不交换了</span></span><br></pre></td></tr></table></figure>
-
-<p>归并排序：可以实现稳点性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr1 :[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]      arr2:  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">新的数组：[] </span><br><span class="line"><span class="comment">//如果arr1 的3和arr的3  相同的话，把arr1 的3 添加到新的数组中,如果相等，添加左边的</span></span><br></pre></td></tr></table></figure>
-
-<p>快速排序：不可以实现稳点性</p>
-<p>partition的过程做不成稳点性。随机选择一个数字。</p>
-<p>堆排序：不可以实现稳点性 因为在建立大根堆的过程中就把稳点性破坏了。</p>
+<p>times 表示的是有几个出发点，一行有3个数就有2个触发点，一行有4个数就有三个出发点。d-b也就是这个意思</p>
+<p>for循环中的 i 表示 出发点 . 第一个是（a，b） 第二个是（a，b+1）</p>
 
       
     </div>
@@ -255,7 +249,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -269,7 +263,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">堆排序</a>
+            <a href="/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">用队列实现栈，用栈实现队列</a>
         </h1>
 
         <div class="post-meta">
@@ -279,26 +273,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-11 22:49:25" itemprop="dateCreated datePublished" datetime="2019-12-11T22:49:25+08:00">2019-12-11</time>
+              <time title="创建时间：2019-12-26 18:15:13" itemprop="dateCreated datePublished" datetime="2019-12-26T18:15:13+08:00">2019-12-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-05 12:02:09" itemprop="dateModified" datetime="2020-01-05T12:02:09+08:00">2020-01-05</time>
+                <time title="修改时间：2020-01-06 22:12:10" itemprop="dateModified" datetime="2020-01-06T22:12:10+08:00">2020-01-06</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
 
           
 
@@ -311,62 +294,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。</p>
-<h4 id="完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。"><a href="#完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。" class="headerlink" title="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。"></a>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</h4><p>使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。</p>
-<p>这颗树是你脑海中的，</p>
-<p>规则如下：你可以自己画图验证</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr  = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="comment">//arr[i] 的左节点是arr[2*i+1] </span></span><br><span class="line"><span class="comment">// 		   右节点是arr[2*i+2]</span></span><br><span class="line"><span class="comment">//	       父节点是arr[(i-1)/2]</span></span><br><span class="line"><span class="comment">//对于arr[ 0]来说，它的父节点是他自己</span></span><br></pre></td></tr></table></figure>
+          <h3 id="队列结构实现栈"><a href="#队列结构实现栈" class="headerlink" title="队列结构实现栈"></a>队列结构实现栈</h3><p>准备两个队列。栈结构是先进后出的；</p>
+<p>向这个结构中放入1，2，3，4，5  返回的应该是 5，4，3，2，1</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rc1asj20zd0eytde.jpg" alt="image-20191226181957454" style="zoom:50%;" />
 
+<p>现在用户让你返回一个：</p>
+<p>你让1，2，3，4 到help队列中 </p>
+<p>把data队列中剩下的5 给用户返回。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoQueuesStack</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; queue;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; help;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TwoQueuesStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">		help = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">           <span class="comment">//数永远只进data队列</span></span><br><span class="line">		queue.add(pushInt);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (queue.size() != <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		help.add(res);</span><br><span class="line">		swap();</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//出的时候，把data队列中只留一个。剩下的都给help队列</span></span><br><span class="line">		<span class="keyword">while</span> (queue.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//把这最后一个进队列的数保存，弹出（相当于弹栈）</span></span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		swap();<span class="comment">//交换两个栈的引用</span></span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Queue&lt;Integer&gt; tmp = help;</span><br><span class="line">		help = queue;</span><br><span class="line">		queue = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="栈实现队列"><a href="#栈实现队列" class="headerlink" title="栈实现队列"></a>栈实现队列</h3><p>两个栈，push  pop</p>
+<p>用户添加一个数，永远放到push栈中。</p>
+<p>用户拿一个数，永远从pop栈中拿</p>
+<p>比如压栈1，2，3，4，5</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rhqb0j20rm0kejvd.jpg" alt="image-20191226185631836" style="zoom:50%;" />
 
-<p>堆分为两种</p>
+<p>用户需要拿一个数。就把push栈中所有的东西都给pop栈。顺序就有了</p>
+<p>有两个限制：</p>
 <ol>
-<li><p>大根堆：在这颗完全二叉树中，任何一颗子树的最大的值都是这颗子树的 头部 </p>
-</li>
-<li><p>小根堆：任何一颗子树的最小的值都是这颗子树的头部</p>
-</li>
+<li>如果push栈决定要向pop栈中倒数据，一次性倒完</li>
+<li>如果pop栈中有东西，push栈中一定不能倒数据</li>
 </ol>
-<h2 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h2><ol>
-<li><p>让这个数组变成大根堆（未必有序）</p>
-</li>
-<li><p>把最后一个位置和堆顶位置交换</p>
-</li>
-<li><p>此时可以size  N-1</p>
-</li>
-<li><p>把剩下的也就是0—-n-1 之间的堆 进行从0开始的heapfiy</p>
-</li>
-<li><p>这样就会重新形成一个大根堆</p>
-</li>
-<li><p>然后把堆顶和现在最后一个节点做交换</p>
-</li>
-<li><p>以此往复，直到我堆的大小减完，最大值放在了最后。</p>
-</li>
-</ol>
-<h2 id="把一个数组变成大根堆"><a href="#把一个数组变成大根堆" class="headerlink" title="把一个数组变成大根堆"></a>把一个数组变成大根堆</h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[]arr = &#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>倒数据行为可以发生在任意时刻。只要满足这两个限制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoStacksQueue</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPush;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPop;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TwoStacksQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			stackPush = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			stackPop = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">			stackPush.push(pushInt);</span><br><span class="line">             dao();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">poll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.peek();</span><br><span class="line">		&#125;</span><br><span class="line">    </span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dao</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//如果我的pop栈不为空的话，直接return，倒不了</span></span><br><span class="line">            <span class="keyword">if</span>(!stackPop.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//一次要到完</span></span><br><span class="line">          	<span class="keyword">while</span>(!stackPush.isEmpty())&#123;</span><br><span class="line">                stackPop.push(stackPush.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line"> 			<span class="keyword">return</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">             <span class="comment">//一个一个添加，操作，最后该数组形成大根堆</span></span><br><span class="line"> 			heapInsert(arr, i);</span><br><span class="line"> 		&#125;</span><br><span class="line">     	<span class="comment">//得到heapsize，一开始为数组的全部	</span></span><br><span class="line"> 		<span class="keyword">int</span> size = arr.length;</span><br><span class="line">     <span class="comment">//最后一个位置上的数和0交换</span></span><br><span class="line"> 		swap(arr, <span class="number">0</span>, --size);</span><br><span class="line"> 		<span class="keyword">while</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">//然后heapify ，从0 位置开始，当前形成的堆</span></span><br><span class="line"> 			heapify(arr, <span class="number">0</span>, size);</span><br><span class="line">             <span class="comment">//然后在进行最后一个位置上的数和0位置上的数交换</span></span><br><span class="line"> 			swap(arr, <span class="number">0</span>, --size);</span><br><span class="line">             <span class="comment">//一直到堆的大小减成0，所有数据都有序了</span></span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="comment">//这里就是 </span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapInsert</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//如果我比我父节点还要大的话</span></span><br><span class="line"> 		<span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">             <span class="comment">//和父节点交换位置</span></span><br><span class="line"> 			swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">             <span class="comment">//index 回到父节点的位置，继续向上判断。直到while不满足条件</span></span><br><span class="line"> 			index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line">         <span class="comment">//如果判断到arr[0]，会和arr[0]的父节点也就是arr[(0-1)/2] 还是arr[0].作比较，不满足条件然后终止 </span></span><br><span class="line">&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//找到index 的左孩子</span></span><br><span class="line"> 		<span class="keyword">int</span> left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">         <span class="comment">//如果左孩子小于size表示左孩子存在，没有越界</span></span><br><span class="line"> 		<span class="keyword">while</span> (left &lt; size) &#123;</span><br><span class="line">             <span class="comment">//没有越界的话看看右孩子是否存在</span></span><br><span class="line">             <span class="comment">//如果右孩子（left+1就是右孩子）存在的话比较左右孩子哪一个比较大，得到比较大的孩子的下标</span></span><br><span class="line"> 			<span class="keyword">int</span> largest = left + <span class="number">1</span> &lt; size &amp;&amp; arr[left + <span class="number">1</span>] &gt; arr[left] ? left + <span class="number">1</span> : left;</span><br><span class="line"> 			<span class="comment">//比较当前节点大孩子节点，得到这棵树的最大节点的下标</span></span><br><span class="line">              largest = arr[largest] &gt; arr[index] ? largest : index;</span><br><span class="line">             <span class="comment">//如果和index相等，就退出循环。</span></span><br><span class="line"> 			<span class="keyword">if</span> (largest == index) &#123;</span><br><span class="line"> 				<span class="keyword">break</span>;</span><br><span class="line"> 			&#125;</span><br><span class="line">             <span class="comment">//如果不是index ，那就往下放</span></span><br><span class="line"> 			swap(arr, largest, index);</span><br><span class="line">             <span class="comment">//往下放的同时还要改index的值为下方节点的位置，以便于继续下放</span></span><br><span class="line"> 			index = largest;</span><br><span class="line">             <span class="comment">//对应着left也要改变才能继续下放。</span></span><br><span class="line"> 			left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> tmp = arr[i];</span><br><span class="line"> 		arr[i] = arr[j];</span><br><span class="line"> 		arr[j] = tmp;</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   建立堆的过程中</p>
-<p>   向上调整。heapInset（）</p>
-<p>   当我有一个值变小了，就要往下调整   heapfiy（）</p>
-<p>   作用：求中位数</p>
-<p>   如何求中位数呢？</p>
-<p>   要有一个大根堆，一个小根堆，</p>
-<p>   第一个数，进大根堆 5. </p>
-<p>   第二个数， 4， 大根堆放4</p>
-<p>   发现，大根堆的大小为2，小根堆的大小为0（heapsize会告诉你已经形成堆的大小）发现差值大于1.</p>
-<p>   那就在大根堆里弹出一个数到小根堆（此时heapsize-1）</p>
-<p>   在进来两个数，6，7 ，全都放到了小根堆上。此时小根堆上的heapsize为3，大根堆的是1，不平衡了</p>
-<p>   然后把小根堆的头弹出来，放到大根堆中</p>
-<p>为什么大根堆放的是较小的N/2?</p>
-<p>策略是当期数如果小于等于大根堆的堆顶，才进大根堆。如果大于大根堆的对顶就进小根堆</p>
-<p>大根堆要弹出一个数，是最大的那个数，也就是堆顶</p>
-<p>小根堆要弹出一个数，是弹出最小的那个数，放到大根堆中</p>
-<p>所以一定是较小的n/2</p>
-<ol start="7">
-<li><h2 id="系统给提供了一个堆"><a href="#系统给提供了一个堆" class="headerlink" title="系统给提供了一个堆"></a>系统给提供了一个堆</h2><p>priorityQueue 构造方法传入一个比较器</p>
-</li>
-</ol>
 
       
     </div>
@@ -386,7 +337,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -400,7 +351,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">递归分治的时间复杂度</a>
+            <a href="/2019/12/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实现一个特殊的栈，基本功能上添加返回栈中最小元素的操作</a>
         </h1>
 
         <div class="post-meta">
@@ -410,26 +361,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-07 16:26:28" itemprop="dateCreated datePublished" datetime="2019-12-07T16:26:28+08:00">2019-12-07</time>
+              <time title="创建时间：2019-12-26 17:30:34" itemprop="dateCreated datePublished" datetime="2019-12-26T17:30:34+08:00">2019-12-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-27 08:13:13" itemprop="dateModified" datetime="2019-12-27T08:13:13+08:00">2019-12-27</time>
+                <time title="修改时间：2020-01-06 22:16:55" itemprop="dateModified" datetime="2020-01-06T22:16:55+08:00">2020-01-06</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-            </span>
 
           
 
@@ -442,18 +382,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>master公式</p>
-<p>T（N） = a*T(N/b) +O(N^d)</p>
-<ol>
-<li><p>log(b,a)  &gt; d  —-&gt;  O(N^ log(b,a))</p>
-</li>
-<li><p>log(b,a)  = d  —-&gt;  O(N^d * logN)</p>
-</li>
-<li><p>log(b,a)  &lt; d  —-&gt;  O(N^d)</p>
-</li>
-</ol>
-<p>   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
-<p>   限制条件：划分子问题的规模是一样的</p>
+          <p>设计：</p>
+<p>准备两个栈 ，一个是data栈 一个是min栈</p>
+<p>data栈压入一个4， min 也栈压入一个4;</p>
+<p>data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4 </p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bvecjj20xk0klteb.jpg" alt="image-20191226174010154" style="zoom: 33%;" />
+
+<p>此时data在压入一个3，min栈：3&lt;4 比min栈栈顶小，就压入3；</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bihc7j20ws0i2q87.jpg" alt="image-20191226174158870" style="zoom: 33%;" />
+
+<p>如果data栈压入一个6，min栈栈顶3小，重复压入一个3</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bz0ruj20u20ijafe.jpg" alt="image-20191226174300641" style="zoom:33%;" />
+
+<p>data栈是一个正常的栈。min栈栈顶就是这个data栈中的最小元素</p>
+<p>如果要弹出一个数的时候，data弹一个数，min弹一个数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStack1</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackData;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackMin;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">MyStack1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.stackData = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.stackMin = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> newNum)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123; <span class="comment">//如果min栈为空，就压入头一个数</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (newNum &lt; <span class="keyword">this</span>.getmin()) &#123;<span class="comment">//如果当前数比min栈栈顶（栈顶就是最小的数）还要小，就把这个数压到min中；</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="keyword">int</span> newMin = <span class="keyword">this</span>.stackMin.peek();<span class="comment">//如果min栈栈顶更小的话，就把min栈栈顶重复压入min栈中</span></span><br><span class="line">                  <span class="keyword">this</span>.stackMin.push(newMin);</span><br><span class="line">             &#125;</span><br><span class="line">            <span class="comment">//data栈同时压入这个数</span></span><br><span class="line">			<span class="keyword">this</span>.stackData.push(newNum);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackData.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//同时弹出</span></span><br><span class="line">			<span class="keyword">this</span>.stackMin.pop();</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackData.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackMin.peek();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -473,7 +417,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -519,7 +463,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -532,7 +476,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
