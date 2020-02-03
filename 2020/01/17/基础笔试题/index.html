@@ -46,28 +46,32 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="人间失格">
-<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="面向对象的特征  封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。  编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中">
+<meta name="keywords" content="面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础笔试题">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
+<meta property="og:description" content="面向对象的特征  封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。  编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-03T00:20:07.927Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hansoncheng.com/page/2/">
+<link rel="canonical" href="https://hansoncheng.com/2020/01/17/%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>人间失格</title>
+  <title>基础笔试题 | 人间失格</title>
   
 
 
@@ -173,96 +177,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/18/%E8%B4%AA%E5%BF%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/18/%E8%B4%AA%E5%BF%83/" class="post-title-link" itemprop="url">贪心</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-18 08:15:26 / 修改时间：09:35:22" itemprop="dateCreated datePublished" datetime="2020-01-18T08:15:26+08:00">2020-01-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <h3 id="什么是字典序？"><a href="#什么是字典序？" class="headerlink" title="什么是字典序？"></a>什么是字典序？</h3><p>就是在字典中出现的次数。</p>
-<p>比如“abc” 在“c”前面出现</p>
-<p>严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较</p>
-<p>比如说“abc” 和“bce”哪一个字典序小啊？</p>
-<p> abc和bce表示3位都是26进制的数，那么abc较小</p>
-<p>长度不等的时候？比如“abc”，“b”</p>
-<p>此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的</p>
-<p>‘abc’ 和‘b00’比较</p>
-<p>abc较小，因为最高位的b要比a大，</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有一个字符串数组，请你拼接字符串，</p>
-<p>比如’’ab”,”cd”,”ef”   请你拼接成字典序最小的那种方式，</p>
-<p>结果是abcdef</p>
-<p>可以按照字符串的序列排好然后拼接么？</p>
-<p>不行，比如：</p>
-<img src="F:/blogPic/image-20200118084218288.png" alt="image-20200118084218288" style="zoom:33%;" />
-
-<p>bba不是最小的，bab才是最小的，所以不能这样干。<br>所以排序策略：</p>
-<img src="F:/blogPic/image-20200118084637992.png" alt="image-20200118084637992" style="zoom:50%;" />
-
-<p>第二种是对的</p>
-<p>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> (a + b).compareTo(b + a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">lowestString</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//按照我的排序规则排序</span></span><br><span class="line">		Arrays.sort(strs, <span class="keyword">new</span> MyComparator());</span><br><span class="line">		String res = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">			res += strs[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="什么是贪心？"><a href="#什么是贪心？" class="headerlink" title="什么是贪心？"></a>什么是贪心？</h2><p><strong>给你一个指标，每一个样本分出一个优先来</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/17/%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -276,8 +194,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/17/%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">基础笔试题</a>
+          基础笔试题
         </h1>
 
         <div class="post-meta">
@@ -308,7 +225,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2>面向对象的特征</h2>
+        <h2>面向对象的特征</h2>
 <ol>
 <li>封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。</li>
 <li>继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类</li>
@@ -599,160 +516,42 @@ private 本类</p>
 <h2>Collection 和 Collections 的区别</h2>
 <p>Collection 是 List 和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分，线程安全化，乱序等</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/a/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/" rel="next" title="前缀树">
+                  <i class="fa fa-chevron-left"></i> 前缀树
+                </a>
+            </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/" class="post-title-link" itemprop="url">前缀树</a>
-        </h1>
+            <span class="post-nav-divider"></span>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-15 18:08:45" itemprop="dateCreated datePublished" datetime="2020-01-15T18:08:45+08:00">2020-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-18 08:10:23" itemprop="dateModified" datetime="2020-01-18T08:10:23+08:00">2020-01-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前缀树其实也是树</p>
-<p>比如说有几个字符串   “abc”，</p>
-<p>还有一个头节点</p>
-<img src="F:/blogPic/image-20200115193802178.png" alt="image-20200115193802178" style="zoom:50%;" />
-
-<p><strong><em>要把“abc”这个字符串加到这棵树上</em></strong></p>
-<p>这个头节点没有走向a的路，所以</p>
-<img src="F:/blogPic/image-20200115193833100.png" alt="image-20200115193833100" style="zoom:50%;" />
-
-<p>注意，字母是填在路上的</p>
-<p>然后看当前节点有没有一条走向b的路。没有，然后添加一个节点</p>
-<img src="F:/blogPic/image-20200115194046183.png" alt="image-20200115194046183" style="zoom:50%;" />
-
-<p>有没有走向c的路？没有，那就添加一个节点</p>
-<img src="F:/blogPic/image-20200115194207954.png" alt="image-20200115194207954" style="zoom:50%;" />
-
-<p><strong><em>现在还要把“bce”添加到这棵树中</em></strong></p>
-<p>从头节点开始有没有走向b的路？没有，所以添加一个节点：（因为前缀不同，上来就走了两条路）</p>
-<img src="F:/blogPic/image-20200115194409660.png" alt="image-20200115194409660" style="zoom:50%;" />
-
-<p>以此类推，吧“bce”添加进去后，树的形状是：</p>
-<img src="F:/blogPic/image-20200115194505542.png" alt="image-20200115194505542" style="zoom:50%;" />
-
-<p><strong><em>现在，要把“abd” 加入到这颗树中</em></strong></p>
-<ul>
-<li><p>头节点有没有走向a的路？<strong><em>有</em></strong></p>
-<p> 复用，不重复建造节点</p>
-</li>
-<li><p>然后看走向a的那个节点有没有走向b的路？ 有</p>
-<p>继续复用</p>
-</li>
-<li><p>然后看走向b的这个节点有没有走向d的路？没有</p>
-<p>创建一个节点，路径为d：</p>
-</li>
-</ul>
-  <img src="F:/blogPic/image-20200115194935342.png" alt="image-20200115194935342" style="zoom:50%;" />
-
-<p><strong>同样的道理，把“bef ”加入到树中</strong></p>
-<img src="F:/blogPic/image-20200115195141249.png" alt="image-20200115195141249" style="zoom:50%;" />
-
-<h3 id="作用1"><a href="#作用1" class="headerlink" title="作用1"></a>作用1</h3><p>​        比如现在已经加入了n个字符串</p>
-<p>​        <strong>我想让你查一下，是否某一个字符串是以“be”开始的</strong></p>
-<p>​        很好查的。有走向b的路么？有，有走向e的路么？有。</p>
-<p>​        所以一定有字符串是以be开头的</p>
-<h3 id="作用2"><a href="#作用2" class="headerlink" title="作用2"></a>作用2</h3><p>​        <strong>现在查一下，你加的字符串中，有没有加入过“be”这个字符串</strong></p>
-<p>​        以前的结构不够用了，因为be是被复用的，无法找出加没加过be。</p>
-<p>​        <strong>所以现在加上一个属性：有多少个字符串是以此字符结尾的</strong></p>
-<p>​        此时：刚才那棵树就变成了这个样子：</p>
-<img src="F:/blogPic/image-20200115201130131.png" alt="image-20200115201130131" style="zoom:50%;" />
-
-<p>​        如果你找be 的话，你找到e后看看这个节点是0还是几？</p>
-<p>​        就可以找到有多少个字符串是以be结尾的了</p>
-<h3 id="作用3"><a href="#作用3" class="headerlink" title="作用3"></a>作用3</h3><p>​        我给你一个字符串</p>
-<p>​        <strong>请你告诉我，有多少个字符串以他作为前缀？</strong></p>
-<p>​        <strong>在加入一个数据项：每一个节点被划过多少次</strong></p>
-<p>​        就可以统计出有多少个了</p>
-<p><strong>代码细节</strong>：</p>
-<p><strong>如何检查下一个路存不存在</strong>？</p>
-<p>因为你提前准备好了26条路，而且都没有挂东西，都是null</p>
-<p>检查一条路指的节点是不是null这件事来标记这条路存在不存在</p>
-<p>删除的时候，怎么插入的就怎么删，但是有一点区别</p>
-<img src="F:/blogPic/image-20200115212421247.png" alt="image-20200115212421247" style="zoom:80%;" />
-
-<p>我要删除abc的话，就是沿途path–，最后end-1</p>
-<p>但是如果删的时候，词频已经是1个了，比如说kgzte </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        <span class="comment">//有多少个字符串到达过这个节点</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> path;</span><br><span class="line">        <span class="comment">//有多少个字符串是以这个个节点结尾的</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line">        <span class="comment">//这个是路，比如说，强行规定只能是26个字母,小写，a-z</span></span><br><span class="line">		<span class="keyword">public</span> TrieNode[] nexts;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			path = <span class="number">0</span>;</span><br><span class="line">			end = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//那这个节点就有26条路</span></span><br><span class="line">			nexts = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这个就是头</span></span><br><span class="line">		<span class="keyword">private</span> TrieNode root;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//删除</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//存在才删嘛，不存在直接返回</span></span><br><span class="line">			<span class="keyword">if</span> (search(word) != <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">				TrieNode node = root;</span><br><span class="line">				<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">					index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                    <span class="comment">//如果path--变成0了，底下的直接为null，然后return</span></span><br><span class="line">					<span class="keyword">if</span> (--node.nexts[index].path == <span class="number">0</span>) &#123;</span><br><span class="line">						node.nexts[index] = <span class="keyword">null</span>;</span><br><span class="line">						<span class="keyword">return</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					node = node.nexts[index];</span><br><span class="line">				&#125;</span><br><span class="line">				node.end--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询和插入一样，都是挨个儿找，只不过最后不进行path++，而是把该节点的node返回</span></span><br><span class="line">        <span class="comment">//来判断有么有该字符串</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (word == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//如果下一个是null的话，表名根本就么有这个字符串</span></span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> node.end;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//求某一个字符串，前缀的数量是多少</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">prefixNumber</span><span class="params">(String pre)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (pre == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = pre.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="comment">//如果找的找的发现没有了，说明没有这个前缀</span></span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">             <span class="comment">//找到最后一个字符停，看他的path是多少</span></span><br><span class="line">			<span class="keyword">return</span> node.path;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuoa"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoac"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoab"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoad"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuoa"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuoa"</span>));</span><br><span class="line">		System.out.println(trie.prefixNumber(<span class="string">"zuo"</span>));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2020/01/18/%E8%B4%AA%E5%BF%83/" rel="prev" title="贪心">
+                  贪心 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
 
 
           </div>
@@ -781,6 +580,7 @@ private 本类</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">面向对象的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">访问权限修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">基本数据类型有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">数据类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">float f=3.4;是否正确</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">7.</span> <span class="nav-text">switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">8.</span> <span class="nav-text">Thread类的sleep和wait 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">9.</span> <span class="nav-text">当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">10.</span> <span class="nav-text">线程的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">11.</span> <span class="nav-text">synchronized关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">12.</span> <span class="nav-text">List Set Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">13.</span> <span class="nav-text">java中的流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">14.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">15.</span> <span class="nav-text">打印所有文件（递归）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">16.</span> <span class="nav-text">jdbc 操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">17.</span> <span class="nav-text">Statement和PreparedStatement有什么区别？哪个性能更好？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">18.</span> <span class="nav-text">连接池：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">19.</span> <span class="nav-text">六原则一法则：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">20.</span> <span class="nav-text">事务的ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">21.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">22.</span> <span class="nav-text">&amp;和&amp;&amp;，|和| |区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">23.</span> <span class="nav-text">全局变量、局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">24.</span> <span class="nav-text">方法的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">25.</span> <span class="nav-text">do-while和while区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">26.</span> <span class="nav-text">final、fianlly、finalize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">27.</span> <span class="nav-text">父子类实例化对象过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">28.</span> <span class="nav-text">访问权限修饰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">29.</span> <span class="nav-text">抽象类接口的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">30.</span> <span class="nav-text">StringBuffer和StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">31.</span> <span class="nav-text">Collection 和 Collections 的区别</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
