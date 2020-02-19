@@ -177,6 +177,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">递归分治的时间复杂度</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-07 16:26:28" itemprop="dateCreated datePublished" datetime="2019-12-07T16:26:28+08:00">2019-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-27 08:13:13" itemprop="dateModified" datetime="2019-12-27T08:13:13+08:00">2019-12-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>master公式</p>
+<p>T（N） = a*T(N/b) +O(N^d)</p>
+<ol>
+<li><p>log(b,a)  &gt; d  —-&gt;  O(N^ log(b,a))</p>
+</li>
+<li><p>log(b,a)  = d  —-&gt;  O(N^d * logN)</p>
+</li>
+<li><p>log(b,a)  &lt; d  —-&gt;  O(N^d)</p>
+</li>
+</ol>
+<p>   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
+<p>   限制条件：划分子问题的规模是一样的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E5%B0%8F%E5%92%8C%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -342,72 +429,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/25/web/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/25/web/" class="post-title-link" itemprop="url">web</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-25 11:46:29 / 修改时间：22:58:33" itemprop="dateCreated datePublished" datetime="2019-11-25T11:46:29+08:00">2019-11-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>块元素有：<div><p><h1-6><ol><ul><br>        1.默认独占一行<br>        2.没有宽度时，默认占满一排<br>        3.<br>内嵌元素有：<a> <span> <img> <sub> &lt;sup支持所有css命令&gt; <strong>（和 b） <em>(和i 都是斜体)<br>        1.同排 可以继续跟同类的标签<br>        2.内容撑开宽度<br>        3.不支持宽和高<br>        4.不支持上下的margin，左右支持margin<br>        5.支持padding<br>border ： 1px solid red; 边界的属性<br>margin ：外边距<br>padding：块边界和块文字之间的距离<br>height：块的高度<br>weith：快的长度<br>height 和 weith 不能被内嵌元素识别<br>display:inline ; 块元素转换内嵌元素  不支持宽和高，margin值支持左右<br>display:block; 内嵌元素转换块元素<br>display:inline-block; 转换成行内块元素，支持所有css样式 </p>
-<p>·<h1 align="center"> 标题 居中 right left（默认）<br>文字格式： font - family 字体<br>            font-size 字号<br>            color 颜色<br>            <strong> <b> 加粗标签<br>            <sup><sub> 上下标 标签<br>            <del>  删除标签<br>            <em> <i> 斜体</p>
-<p>设置样式的两种方式<br>首先：行内样式优先于内部样式<br>    行内样式 用style属性来实现：属性里面有样式名 样式值 样式名 样式值<br>    空格 用 &nbsp;<br>    由于文字标签属于内嵌元素，所以不能自动换行，需要<br/><br>    设置文字格式的方法有两：<br>        利用标签 style<br>        利用行间样式css</p>
-<p>​        </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">段落格式</span><br><span class="line">段落标记 <span class="tag">&lt;<span class="name">p</span>&gt;</span> 段落标签 ，块元素  自动换行，随着网页的宽度</span><br><span class="line"><span class="tag">&lt;<span class="name">nobr</span>&gt;</span> 取消文字换行</span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span>换行</span><br><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span> 保留原始的排版方式</span><br><span class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span> 居中对齐</span><br><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span>fdsfdsa<span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span>自动缩进</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span> 设置水平线的宽度和高度</span><br><span class="line">width size color align noshade（去掉水平线的阴影） 设置分割线的样式 style = "border :1px dashed red"</span><br><span class="line"></span><br><span class="line">列表 ul 无序列表 ●、○、■等开头的，没有顺序的列表项目，</span><br><span class="line">			ol有序列表  按照数字或字母等顺序排列列表项目 </span><br><span class="line">		</span><br><span class="line">			给无序列表去 前面的东西 style = "list-style : none;" 写在ul里</span><br><span class="line">			无序列表的默认符号是●</span><br><span class="line">			type 的属性 有 disc  circle square  写在ul里</span><br><span class="line">图片：<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">""</span>/&gt;</span> </span><br><span class="line">	alt 图片不能显示是显示的内容</span><br><span class="line">	title 光标放上去 显示的内容</span><br><span class="line">	height</span><br><span class="line">	width</span><br><span class="line">	border 边框</span><br><span class="line">	hspace 图像水平间距</span><br><span class="line">	vspace 图像垂直间距</span><br></pre></td></tr></table></figure>
-
-
-<p>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​    </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -458,7 +479,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -177,6 +177,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/springmvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/12/springmvc/" class="post-title-link" itemprop="url">springmvc</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-12 22:35:45 / 修改时间：22:46:34" itemprop="dateCreated datePublished" datetime="2020-01-12T22:35:45+08:00">2020-01-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>表现层四件事</p>
+<h3 id="响应jsp页面请求"><a href="#响应jsp页面请求" class="headerlink" title="响应jsp页面请求"></a>响应jsp页面请求</h3><ul>
+<li><p>后台：</p>
+<pre><code>Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
+Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
+如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
+如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</code></pre></li>
+<li><p>前台jsp</p>
+<ol>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;add.action"</span>&gt;</span>提交请求<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+<span class="comment"><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
+</li>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">" "</span> <span class="attr">name</span>=<span class="string">"myform"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交请求"</span>  <span class="attr">onclick</span>=<span class="string">"add()"</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">form</span></span>
+    &lt;script&gt;
+        function add(){
+        document.myform.action = "<span class="tag">&lt;<span class="name">%=basePath%</span>&gt;</span>add.action";
+        document.myform.submit();
+        }
+    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></code></pre>
+</li>
+</ol>
+<p>​            </p>
+<h3 id="获取jsp页面的值"><a href="#获取jsp页面的值" class="headerlink" title="获取jsp页面的值"></a>获取jsp页面的值</h3><p>​        表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
+<p>​        只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
+</li>
+</ul>
+<h3 id="向jsp页面传值"><a href="#向jsp页面传值" class="headerlink" title="向jsp页面传值"></a>向jsp页面传值</h3><p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
+<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
+<h3 id="跳转jsp页面"><a href="#跳转jsp页面" class="headerlink" title="跳转jsp页面"></a>跳转jsp页面</h3><p>​    springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);<br>​    </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/mybatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -399,127 +488,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-09 18:10:37 / 修改时间：20:59:29" itemprop="dateCreated datePublished" datetime="2020-01-09T18:10:37+08:00">2020-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong><em>黑名单问题</em></strong> </p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqluproufj210w0ikdlq.jpg" alt="image-20200109182041298" style="zoom:33%;" />
-
-<p>有一个需求，100亿个url是黑名单，</p>
-<p>当你想搜索一些东西的时候，我不想显示某一些url ，100亿个url 都是 64字节，</p>
-<p>当搜索某一个url的时候，我会返回一个true或者false ，如果这个url在黑名单里，返回true，</p>
-<p>如果不在黑单里，返回false</p>
-<p>如果用一个hashSet来搞的话，至少需要6400亿个字节（其实远远不止）</p>
-<p>也就是640G的内存，如果这样的话，不是很好做</p>
-<p>也可以用hash函数分流，放到不同的机器上，但是也会浪费机器</p>
-<p>所以我想不用hashSet 用其他的set 来搞，这个就是布隆过滤器</p>
-<p>这个有失误率</p>
-<p>如果你有一个url 确实属于黑名单，一定会返回true 但是，有时候一个url不是黑名单，也有可能</p>
-<p>返回true（宁可错杀一千，不可放过一个）</p>
-<p>是某种类型的集合，但是有失误率的。</p>
-<p>如果碰到这类题，你可以先用哈希函数分流来搞。浪费空间。</p>
-<p>问：允许有极低的失误率么？可以有</p>
-<p>布隆过滤器</p>
-<p>是一个比特类型的map</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlv7l8rqj20xp0fbwk9.jpg" alt="image-20200109185250333" style="zoom:33%;" />
-
-<p>我有一个数组，长度为1000.</p>
-<p>这个数组每一个位置上是一个32bit</p>
-<p>一个int是4个字节，32位比特。</p>
-<p>假如我要把第30000个bit描黑。我需要</p>
-<p>30000/32 得到第几个桶。937</p>
-<p>30000%32 得到这个桶的第几个bit应该被描黑 ，16</p>
-<p>第937个桶里第16位应该被描黑</p>
-<p>1 左移16位得到 第16位为1 </p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlvnre9kj20lt06zdhv.jpg" alt="image-20200109185802940" style="zoom:25%;" />
-
-<p>然后和arr[937]   |  1&lt;&lt;16 . 因为arr[937] 初始值是00000000，所以做或运算后该位置就被标记了</p>
-<p>url 根据一个hash函数算出一个hash值，这个hash值再去取模m，这样得到0到m-1位置上的一个，算出来的位置描黑。</p>
-<p>布隆过滤器是准备K个hash函数 ，这个url 经过hash函数 ，url经过第一个hash函数的时候，描黑，经过第二个hash函数的时候，描黑，有可能两个hash函数打到同一个位置，已经描黑的就继续黑下去，这K个hash函数时相互独立的</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlw1jllmj20zr0iiahc.jpg" alt="image-20200109192110599" style="zoom:33%;" />
-
-<p>一个url 经过k个hash函数，对应的K个位置上描黑，这个url 叫做进到布隆过滤器里面了，</p>
-<p>接下来，每一个url 都这么算，然后加到这个bit类型的数组里，所以你准备的这个比特类型的数组应该长一些，要不这100亿个url 进行描黑后，就全黑了，查就没有意义了</p>
-<p>怎么查？</p>
-<p>我现在黑名单加载完了，整个这个bit类型的数组相当多的位置被描黑了</p>
-<p>当我查一个url 的时候，怎么知道这个url在不在这个黑名单里？</p>
-<p>这个url 经过K个hash函数，算出了K个位置，如果这K个位置都是黑的，我就说，这个url 在这个黑名单里</p>
-<p>如果算出的hash函数有一个不是黑的，我就说这个url 不在黑名单里</p>
-<p>如果你的数组很小，都被描黑了，在进来的每一个url不都在黑名单里了？ 就没有意义了</p>
-<p>所以我可以调整数组的大小和hash 函数的个数来调整失误率。</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwloq4sj20q40890us.jpg" alt="image-20200109193952422" style="zoom:50%;" />
-
-<p>数组长度和失误率的关系</p>
-<p>m是数组长度（bit），</p>
-<p>n是样本量（100亿）</p>
-<p>p是预期失误率 （万分之一：0.0001）</p>
-<p>算一下：16G（实际空间 16*8Gbit）</p>
-<p>第二个公式：确定hash函数的个数</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwxcwtbj213h0av40w.jpg" alt="image-20200109195148004" style="zoom:33%;" />
-
-<p>第三个公式：确定真实失误率：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlxabj08j20v80bndig.jpg" alt="image-20200109195522405" style="zoom:33%;" />
-
-<p>问：经典结构</p>
-<p>布隆过滤器的原理：</p>
-<p>每一个url经过几个hash函数对应的位置上描黑，所有的黑名单上的每一个url 都描黑后，整个布隆过滤器上的bit类型的数组就相当位置被描黑了。当我检查url的时候怎么检查？计算k个hash函数对应的位置 ，所有的位置都是黑的，我就认为在布隆过滤器里，否则就认为不在</p>
-<p>参数是：布隆过滤器比特类型的数组一共有多少个bit由样本量和预期失误率来决定</p>
-<p>这个bit 除以8 之后才是实际使用的字节</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -570,7 +538,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

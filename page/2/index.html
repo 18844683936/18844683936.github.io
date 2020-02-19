@@ -177,6 +177,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/18/%E9%93%9C%E6%9D%BF%E5%88%87%E9%87%91%E6%9D%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/18/%E9%93%9C%E6%9D%BF%E5%88%87%E9%87%91%E6%9D%A1/" class="post-title-link" itemprop="url">铜板切金条</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-18 09:30:03" itemprop="dateCreated datePublished" datetime="2020-01-18T09:30:03+08:00">2020-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-20 09:56:46" itemprop="dateModified" datetime="2020-01-20T09:56:46+08:00">2020-01-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="F:/blogPic/image-20200118093232022.png" alt="image-20200118093232022"></p>
+<p>切得过程中未必要挨着。吧  </p>
+<p>如果一个数组：[1,4,2,3,5],</p>
+<p>你也可以先切1和5.</p>
+<p>做法：先切出一个9（4+2+3）和6（1+5）</p>
+<p>然后把6切成1+5</p>
+<p>所以说，你只要切出这些部分就可以了</p>
+<p><strong>这是一个标准的哈夫曼编码问题</strong></p>
+<p><strong>子节点合并在一起的代价是加起来的和</strong></p>
+<p>就是把所有的叶子节点加起来生成一颗树</p>
+<img src="F:/blogPic/image-20200118094902220.png" alt="image-20200118094902220" style="zoom:50%;" />
+
+<p>把这个数组放到小根堆里</p>
+<p>[1,2,6,4,3,7,1,8]</p>
+<p>拿出两个数 ：肯定是那两个1，把他俩合并，产生一个2，<strong>代价是2</strong></p>
+<p>然后把这个2仍回到小根堆里面</p>
+<p>数组变成：[2,6,4,3,7,8,2]</p>
+<p>再拿出两个最小的，是两个2，把他俩合并，产生一个4，<strong>代价是4</strong></p>
+<p>然后把4仍回到小根堆里</p>
+<p>数组变成：[6,3,7,8,4,4]</p>
+<p>在拿出两个最小的，4 和3 ，把他俩合并，产生一个7，<strong>代价是7</strong></p>
+<p>数组变成[6,7,8,7,4]</p>
+<p>在拿出两个最小的，4 和6 ，把他俩合并，产生一个10，<strong>代价是10</strong></p>
+<p>数组变成[10,8,7,7]</p>
+<p>在拿出两个最小的，7和7 ，把他俩合并，产生一个14，<strong>代价是14</strong></p>
+<p>数组变成[10,8,14]</p>
+<p>在拿出两个最小的，8和14，把他俩合并，产生一个22，<strong>代价是22</strong></p>
+<p>数组变成[10,22]</p>
+<p>在拿出两个最小的，10和22，把他俩合并，产生一个32，<strong>代价是32</strong></p>
+<p>数组变成[32]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lessMoney</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">		PriorityQueue&lt;Integer&gt; pQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">			pQ.add(arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (pQ.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">			cur = pQ.poll() + pQ.poll();</span><br><span class="line">			sum += cur;</span><br><span class="line">			pQ.add(cur);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sum;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>一个花费数组和一个利润数组，表示一个是这个项目的花费，一个是这个项目的利润，</p>
+<p>然后给你一个初始资金W，并且每次只能做一个项目 ，你如果最多做K个项目的情况下，</p>
+<p>都做完，或者是做不下去了的时候，停</p>
+<p>问最终你的钱剩下多少。</p>
+<img src="F:/blogPic/image-20200118162207256.png" alt="image-20200118162207256" style="zoom: 67%;" />
+
+<p>第一步：生成每一个项目</p>
+<p>第二部：准备一个小根堆，谁花费低，谁在头部，把项目都放进去</p>
+<p>然后看初始资金。</p>
+<p>在小根堆里面依次弹出头部，只要比W初始资金小的都弹出来，</p>
+<p>弹出来之后放到一个大根堆里面，是根据收益高组成的大根堆</p>
+<p><strong>小根堆里放的是所有的项目，而大根堆里放的是所有解锁的项目</strong></p>
+<p>从大根堆里面弹出一个项目来，这个项目一定是所有解锁的项目中收益最高的，</p>
+<p>做完这个项目后，初始资金就会增加，</p>
+<p>然后我在看看新的初始资金能不能解锁一个新的项目</p>
+<p>把解锁的新的项目在扔到大根堆里面去</p>
+<p>大根堆里面在选一个利益最大的项目做</p>
+<p>这样来回，一直做K个 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="comment">//每个项目就是一个点，p是利润，c花费</span></span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">int</span> p;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.p = p;</span><br><span class="line">			<span class="keyword">this</span>.c = c;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这是花费低的比较器，谁花费低，谁放上面</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MinCostComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Node</span>&gt; </span>&#123;</span><br><span class="line">        </span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Node o1, Node o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o1.c - o2.c;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//这是收益的比较器，谁收益高，谁放上面</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxProfitComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Node</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Node o1, Node o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o2.p - o1.p;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//K是做多少个项目，W是总共有多少钱</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findMaximizedCapital</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> W, <span class="keyword">int</span>[] Profits, <span class="keyword">int</span>[] Capital)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//形成节点（项目）</span></span><br><span class="line">		Node[] nodes = <span class="keyword">new</span> Node[Profits.length];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Profits.length; i++) &#123;</span><br><span class="line">			nodes[i] = <span class="keyword">new</span> Node(Profits[i], Capital[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//准备一个花费的小根堆，谁小谁放上面</span></span><br><span class="line">		PriorityQueue&lt;Node&gt; minCostQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> MinCostComparator());</span><br><span class="line">        <span class="comment">//准备一个利润的大根堆，谁大谁在上面</span></span><br><span class="line">		PriorityQueue&lt;Node&gt; maxProfitQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> MaxProfitComparator());</span><br><span class="line">        <span class="comment">//把所有的项目，加到小根堆里面去</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes.length; i++) &#123;</span><br><span class="line">			minCostQ.add(nodes[i]);</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//我要依次左项目了</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">            <span class="comment">//所有被解锁的项目，你们都到利润谁大谁在上面的大根堆去</span></span><br><span class="line">			<span class="keyword">while</span> (!minCostQ.isEmpty() &amp;&amp; minCostQ.peek().c &lt;= W)&#123; <span class="comment">//如果花费最少的那个项目小于总的钱</span></span><br><span class="line">                <span class="comment">//那么该项目弹出来，放到大根堆中</span></span><br><span class="line">                maxProfitQ.add(minCostQ.poll());</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//如果大根堆空了，说明没有项目可以做了，不得不停</span></span><br><span class="line">			<span class="keyword">if</span> (maxProfitQ.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">return</span> W;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//我做了一个利润最大的项目，然后本金+利润</span></span><br><span class="line">			W += maxProfitQ.poll().p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> W;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="宣讲会例子"><a href="#宣讲会例子" class="headerlink" title="宣讲会例子"></a>宣讲会例子</h2><p><img src="F:/blogPic/image-20200118172622253.png" alt="image-20200118172622253"></p>
+<p>贪心策略：按照结束时间来排序，然后淘汰掉因为做这个项目做不了的项目</p>
+<img src="F:/blogPic/image-20200118173208434.png" alt="image-20200118173208434" style="zoom:67%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是宣讲会	</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Program</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> start;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Program</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.start = start;</span><br><span class="line">			<span class="keyword">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//按照谁先结束谁在前的比较器</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ProgramComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Program</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Program o1, Program o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o1.end - o2.end;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bestArrange</span><span class="params">(Program[] programs, <span class="keyword">int</span> cur)</span> </span>&#123;</span><br><span class="line">		Arrays.sort(programs, <span class="keyword">new</span> ProgramComparator());</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; programs.length; i++) &#123;</span><br><span class="line">            <span class="comment">//如果这个项目时刻是比当前时刻大的话，可以安排</span></span><br><span class="line">			<span class="keyword">if</span> (cur &lt;= programs[i].start) &#123;</span><br><span class="line">				result++;</span><br><span class="line">                <span class="comment">//当前时刻就来到的项目的结束时刻了</span></span><br><span class="line">				cur = programs[i].end;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/18/%E8%B4%AA%E5%BF%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -294,7 +421,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-03 08:20:07" itemprop="dateModified" datetime="2020-02-03T08:20:07+08:00">2020-02-03</time>
+                <time title="修改时间：2020-02-03 17:46:38" itemprop="dateModified" datetime="2020-02-03T17:46:38+08:00">2020-02-03</time>
               </span>
 
           
@@ -308,20 +435,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2>面向对象的特征</h2>
-<ol>
+          <h2 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h2><ol>
 <li>封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。</li>
 <li>继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类</li>
-<li>多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。
-<ul>
+<li>多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。<ul>
 <li>编译器多态：方法重载</li>
 <li>运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类</li>
 </ul>
 </li>
 <li>抽象：就是把现实生活中的对象抽象成类，对象的行为作为类的方法，对象的属性，作为类的属性</li>
 </ol>
-<h2>访问权限修饰符</h2>
-<table>
+<h2 id="访问权限修饰符"><a href="#访问权限修饰符" class="headerlink" title="访问权限修饰符"></a>访问权限修饰符</h2><table>
 <thead>
 <tr>
 <th></th>
@@ -331,8 +455,7 @@
 <th>private</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>本类</td>
 <td>ok</td>
 <td>ok</td>
@@ -360,199 +483,101 @@
 <td></td>
 <td></td>
 </tr>
-</tbody>
-</table>
-<h2>基本数据类型有哪些?</h2>
-<p>基本数据类型：byte short int long float double char boolean
-引用数据类型：数组，接口，类</p>
-<h2>数据类型转换</h2>
-<ol>
+</tbody></table>
+<h2 id="基本数据类型有哪些"><a href="#基本数据类型有哪些" class="headerlink" title="基本数据类型有哪些?"></a>基本数据类型有哪些?</h2><p>基本数据类型：byte short int long float double char boolean<br>引用数据类型：数组，接口，类 </p>
+<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><ol>
 <li>char 能转成int int 不能转成char</li>
-<li>整形的（byte short int long ）可以自动类型转换成浮点型的（float，double）
-如果同是整型或是浮点型的话，站位少的可以自动转换为占位多的</li>
-<li>short byte 在进行运算时先转成整型，在运算，所以结果是整型。 +=符号可以自动类型转换
-自增，自减运算符
-i=1;
-i=i++;
-结果是1；</li>
+<li>整形的（byte short int long ）可以自动类型转换成浮点型的（float，double）<br>如果同是整型或是浮点型的话，站位少的可以自动转换为占位多的</li>
+<li>short byte 在进行运算时先转成整型，在运算，所以结果是整型。 +=符号可以自动类型转换<br>自增，自减运算符<br>i=1;<br>i=i++;<br>结果是1；</li>
 </ol>
-<h2>float f=3.4;是否正确</h2>
-<p>不对，3.4默认是double 类型，而double类型不能自动类型转换为float类型 因该是3.4f</p>
-<h2>short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</h2>
-<p>前面的有错，short类型参加运算时都要转换成int类型进行运算，所以右边最后是int类型，而左边是short类型，short类型不能自动类型转换为int类型</p>
+<h2 id="float-f-3-4-是否正确"><a href="#float-f-3-4-是否正确" class="headerlink" title="float f=3.4;是否正确"></a>float f=3.4;是否正确</h2><p>不对，3.4默认是double 类型，而double类型不能自动类型转换为float类型 因该是3.4f</p>
+<h2 id="short-s1-1-s1-s1-1-有错吗-short-s1-1-s1-1-有错吗？"><a href="#short-s1-1-s1-s1-1-有错吗-short-s1-1-s1-1-有错吗？" class="headerlink" title="short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？"></a>short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</h2><p>前面的有错，short类型参加运算时都要转换成int类型进行运算，所以右边最后是int类型，而左边是short类型，short类型不能自动类型转换为int类型</p>
 <p>后面的没错，因为扩展赋值运算符强制转换</p>
-<h2>switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</h2>
-<p>byte short int char  java7后支持String</p>
-<h2>Thread类的sleep和wait 的区别</h2>
-<p><strong>sleep()方法</strong>正在执行的线程主动让出CPU（然后CPU就可以去执行其他任务），在sleep指定时间后CPU再回到该线程继续往下执行(注意：sleep方法只让出了CPU，而并不会释放同步资源锁！！！)</p>
-<p>wait方法,当前线程让自己暂时退让出同步资源锁，以便其他正在等待该资源的线程得到该资源进而运行，只有调用了该对象的notify()方法，之前调用wait()的线程才会解除wait状态，可以去参与竞争同步资源锁，进而得到执行。</p>
-<p>sleep 方法 是 线程类Thread的静态方法，使线程暂停指定的时间 ，把CPU让出来，然后cpu去执行其他任务，时间到后，该线程进入就绪状态，抢到CPU后继续执行该线程 ,并不会释放同步资源锁
-wait 方法 是 Object类的方法，使线程退出同步资源锁，进入到等待队列，以便其他正在等待该资源的线程得到该资源，调用notify/notifyAll 唤醒指定线程或者所有线程，进入到就绪状态，然后抢cpu</p>
-<p>原文链接：https://blog.csdn.net/u012050154/article/details/50903326</p>
-<h2>当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</h2>
-<p>不能，因为要进入方法B，就需要一个锁对象，有因为已经有线程进入了A方法了，说明锁对象已经被占用，则方法B的线程就会去等锁池中等待。</p>
-<h2>线程的三种方式</h2>
-<ol>
-<li>
-<ul>
-<li>
-<p>继承Thread类 重写run放方法</p>
+<h2 id="switch-是否能作用在byte-上，是否能作用在long-上，是否能作用在String上"><a href="#switch-是否能作用在byte-上，是否能作用在long-上，是否能作用在String上" class="headerlink" title="switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上"></a>switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</h2><p>byte short int char  java7后支持String</p>
+<h2 id="Thread类的sleep和wait-的区别"><a href="#Thread类的sleep和wait-的区别" class="headerlink" title="Thread类的sleep和wait 的区别"></a>Thread类的sleep和wait 的区别</h2><p> <strong>sleep()方法</strong>正在执行的线程主动让出CPU（然后CPU就可以去执行其他任务），在sleep指定时间后CPU再回到该线程继续往下执行(注意：sleep方法只让出了CPU，而并不会释放同步资源锁！！！) </p>
+<p>wait方法,当前线程让自己暂时退让出同步资源锁，以便其他正在等待该资源的线程得到该资源进而运行，只有调用了该对象的notify()方法，之前调用wait()的线程才会解除wait状态，可以去参与竞争同步资源锁，进而得到执行。 </p>
+<p>sleep 方法 是 线程类Thread的静态方法，使线程暂停指定的时间 ，把CPU让出来，然后cpu去执行其他任务，时间到后，该线程进入就绪状态，抢到CPU后继续执行该线程 ,并不会释放同步资源锁<br>wait 方法 是 Object类的方法，使线程退出同步资源锁，进入到等待队列，以便其他正在等待该资源的线程得到该资源，调用notify/notifyAll 唤醒指定线程或者所有线程，进入到就绪状态，然后抢cpu</p>
+<p>原文链接：<a href="https://blog.csdn.net/u012050154/article/details/50903326" target="_blank" rel="noopener">https://blog.csdn.net/u012050154/article/details/50903326</a></p>
+<h2 id="当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B"><a href="#当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B" class="headerlink" title="当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B"></a>当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</h2><p>不能，因为要进入方法B，就需要一个锁对象，有因为已经有线程进入了A方法了，说明锁对象已经被占用，则方法B的线程就会去等锁池中等待。</p>
+<h2 id="线程的三种方式"><a href="#线程的三种方式" class="headerlink" title="线程的三种方式"></a>线程的三种方式</h2><ol>
+<li><ul>
+<li><p>继承Thread类 重写run放方法</p>
 </li>
-<li>
-<p>new 该类</p>
+<li><p>new 该类</p>
 </li>
-<li>
-<p>该类.start();</p>
+<li><p>该类.start();</p>
 </li>
 </ul>
 </li>
-<li>
-<ul>
+<li><ul>
 <li>实现Runnable接口重写run方法</li>
 <li>new 类名（）；</li>
 <li>new Thread（该类名）；</li>
 <li>th.start()；</li>
 </ul>
 </li>
-<li>
-<p>new Thread（new Runnable（）{</p>
+<li><p>new Thread（new Runnable（）{</p>
+<p>​        重写run方法</p>
+<p>}）.start()；</p>
 </li>
 </ol>
-<p>​		重写run方法</p>
-<p>}）.start()；</p>
-<h2>synchronized关键字的用法</h2>
-<p>synchronized（锁对象）{代码}  锁对象相同能同步，锁对象 不同不能同步</p>
+<h2 id="synchronized关键字的用法"><a href="#synchronized关键字的用法" class="headerlink" title="synchronized关键字的用法"></a>synchronized关键字的用法</h2><p>synchronized（锁对象）{代码}  锁对象相同能同步，锁对象 不同不能同步</p>
 <p>synchronized 实例方法，锁对象是this。两个线程如果用同一个对象访问能同步</p>
 <p>synchronized 静态方法 锁对象是 该类.class  ，无论如何都能同步</p>
-<h2>List Set Map</h2>
-<p><strong>List  特性</strong>：有序可重复
-<strong>常用方法</strong>：
-		add () 添加一个元素
-		addAll() 参数是一个实现了Connection的集合。将这个集合中的所有元素都添加到集合中
-		remove()传一个下标 remove掉该下标上的元素，返回true或者false 传一个Object remove掉第一次出现的		该元素。
-		clear()清空集合
-		set()两个参数。第一个参数是下标，第二个参数数Object 用指定的元素替换集合中指定位置的元素
-		get();参数是下标,得到该下标的元素
-		size();返回集合的大小
-		toArray()
-<strong>遍历</strong>：
-	有三种方法
-	foreach   iterat or  普通for
-<strong>排序</strong>：
-	1.让元素具有比较性,让元素实现Comparable接口重写CompareTo()方法; 然后使用工具了collections.sort(list);
-	2.使用 collections.sort(list，new Comparator(){
-		重写Compare()接口；
-	});
-<strong>实现List接口的有ArrayList Vector LinkedList</strong>
-	ArrayList 底层是动态数组，查询块，从中间增加删除慢 线程不安全 速度快。可以使用
-	List list = Collections.synchronizedList(new ArrayList(...)); 来线程安全化</p>
+<h2 id="List-Set-Map"><a href="#List-Set-Map" class="headerlink" title="List Set Map"></a>List Set Map</h2><p><strong>List  特性</strong>：有序可重复<br><strong>常用方法</strong>：<br>        add () 添加一个元素<br>        addAll() 参数是一个实现了Connection的集合。将这个集合中的所有元素都添加到集合中<br>        remove()传一个下标 remove掉该下标上的元素，返回true或者false 传一个Object remove掉第一次出现的        该元素。<br>        clear()清空集合<br>        set()两个参数。第一个参数是下标，第二个参数数Object 用指定的元素替换集合中指定位置的元素<br>        get();参数是下标,得到该下标的元素<br>        size();返回集合的大小<br>        toArray()<br><strong>遍历</strong>：<br>    有三种方法<br>    foreach   iterat or  普通for<br><strong>排序</strong>：<br>    1.让元素具有比较性,让元素实现Comparable接口重写CompareTo()方法; 然后使用工具了collections.sort(list);<br>    2.使用 collections.sort(list，new Comparator(){<br>        重写Compare()接口；<br>    });<br><strong>实现List接口的有ArrayList Vector LinkedList</strong><br>    ArrayList 底层是动态数组，查询块，从中间增加删除慢 线程不安全 速度快。可以使用<br>    List list = Collections.synchronizedList(new ArrayList(…)); 来线程安全化</p>
 <p>​    LinkedList 底层是双向链表，查询慢，增删快。线程不安全，速度快</p>
-<p>​	Vector 底层是数组，查询块，增删慢，线程安全 速度慢（已过时）</p>
-<p><strong>Set 特性</strong>：无序不可重复
-	<strong>常用方法</strong>：
-		add,remove,contans,size,clear
-	<strong>遍历</strong>
-		foreach iterator
-	<strong>实现set接口的有TreeSet 和 HashSet LinkedHashSet</strong></p>
-<p><strong>TreeSet</strong></p>
+<p>​    Vector 底层是数组，查询块，增删慢，线程安全 速度慢（已过时）</p>
+<p><strong>Set 特性</strong>：无序不可重复<br>    <strong>常用方法</strong>：<br>        add,remove,contans,size,clear<br>    <strong>遍历</strong><br>        foreach iterator<br>    <strong>实现set接口的有TreeSet 和 HashSet LinkedHashSet</strong></p>
+<p><strong>TreeSet</strong> </p>
 <p>底层是红黑树（平衡二叉搜索树） 平衡：对于任何一个节点，左右子树的高度之差不能超过1  ，二叉搜索树： 对于任何一个节点，左子树都比该节点小，右子树都比该节点大。</p>
 <p><strong>如果要存自定义的类必须定义比较规则</strong>：</p>
-<p>1.集合的元素具有比较性  元素实现Comparable接口 重写Compareto方法
-2.集合本身具有比较性   创建集合的时候传递一个匿名内部类 new Comparor()</p>
-<p><strong>HashSet</strong>
-<strong>如果要存自定义的类，那么自定义类中需要重写hashCode()和equals()</strong>
-<em>底层是哈希表。经典的哈希表结构是由数组+链表的形式构成的。hash函数的输入是无穷大，输出是一个有限的区间。相同的输入得到相同的输出。输出的值都均匀分布。</em>
-<em>先使用hash函数得到一个哈希值然后取模数组长度放到对应的桶中。比如说 元素A 放到1号桶中，再次向集合中放元素A的话得到相同的桶位置，然后使用equals看看相不相等。相等就证明是同一个元素。不进行操作。</em>
-<em>如果添加一个元素B  经过计算后也是放到1号桶中。然后使用equals看看相不相等。不相等，证明不是同一个元素，然后和链表的第二个元素比较看看相不相等，以此类推，如果都不相等，就在链表的最后添加该元素</em>
-<em>java中的Hash表是数组+红黑树的结构。</em></p>
+<p>1.集合的元素具有比较性  元素实现Comparable接口 重写Compareto方法<br>2.集合本身具有比较性   创建集合的时候传递一个匿名内部类 new Comparor() </p>
+<p><strong>HashSet</strong><br><strong>如果要存自定义的类，那么自定义类中需要重写hashCode()和equals()</strong><br><em>底层是哈希表。经典的哈希表结构是由数组+链表的形式构成的。hash函数的输入是无穷大，输出是一个有限的区间。相同的输入得到相同的输出。输出的值都均匀分布。</em><br><em>先使用hash函数得到一个哈希值然后取模数组长度放到对应的桶中。比如说 元素A 放到1号桶中，再次向集合中放元素A的话得到相同的桶位置，然后使用equals看看相不相等。相等就证明是同一个元素。不进行操作。</em><br><em>如果添加一个元素B  经过计算后也是放到1号桶中。然后使用equals看看相不相等。不相等，证明不是同一个元素，然后和链表的第二个元素比较看看相不相等，以此类推，如果都不相等，就在链表的最后添加该元素</em><br><em>java中的Hash表是数组+红黑树的结构。</em></p>
 <p><strong>LinkedHashSet</strong> 保证输入和输出有序。</p>
-<p><strong>Map 特性：key - value  key 无序不可重复</strong>
-	<strong>常用方法</strong>：
-		put
-		remove
-		clear
-		containsKey
-		containsValue
-	<strong>遍历</strong>：</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</span><br><span class="line">		Set&lt;Map.Entry&lt;String, String&gt;&gt; set = map.entrySet();</span><br><span class="line">		<span class="keyword">for</span> (Map.Entry&lt;String,String&gt; entry: set) &#123;</span><br><span class="line">			System.out.println(entry.getKey()+<span class="string">"---"</span>+entry.getValue());</span><br><span class="line">		&#125;</span><br><span class="line"><span class="number">2</span>.keySet</span><br><span class="line">        Set&lt;String&gt; keySet = map.keySet();</span><br><span class="line">		<span class="keyword">for</span> (String s : keySet)&#123;</span><br><span class="line">			System.out.println(<span class="string">"key:"</span>+s+<span class="string">"---value:"</span>+map.get(s));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>HashMap</strong> : 底层是哈希表   线程不安全，效率高。能存null，如果需要将自定义类对象作为HashMap的key，那么自定义类中需要重写hashCode()和equals()
-<strong>TreeMap</strong> 底层是红黑树 如果将自定义的对象作为key 的话吗，那么需要给自定义的类实现Compareable接口或者在TreeMap的构造器中new Comparator();</p>
-<p><strong>ConcurrentHashMap 线程安全，效率也高</strong>
-<strong>hashTable 线程安全，效率低 ，不能存null。</strong></p>
-<h2>java中的流</h2>
-<p>字节流和字符流 还有缓冲流和转换流和对象流;
-FileInputStream BufferedInputStream ObjectInputStream,InputStreamReader
-FileReader  BufferedReader</p>
-<h2>序列化</h2>
-<p><strong>就是把对象变成字节序列。便于网络传输</strong></p>
-<p>oos =new ObjectOutputStream(new FileOutputStream(&quot;&quot;));
-oos.writeObject(new Product());
-Product这个类要实现Serializable接口。有get set方法。如果属性使用transient，static修饰，该属性的值不能被序列化。</p>
-<p><strong>反序列化就是把字节序列变成对象。</strong>
-	ObjectInputStream(new FileInputStream(&quot;&quot;));
-	ois.readObject();</p>
-<h2>打印所有文件（递归）</h2>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">digui</span><span class="params">()</span></span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"F:\\学习文件\\刘意视频\\刘意视频源码\\day20_递归_字节流"</span>);</span><br><span class="line">    printName(file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">(File file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (file==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    File[] files = file.listFiles();</span><br><span class="line">    <span class="keyword">for</span> (File temp:files)&#123;</span><br><span class="line">        <span class="keyword">if</span> (temp.isDirectory())&#123;</span><br><span class="line">            printName(temp);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(temp.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2>jdbc 操作数据库</h2>
-<p>1.加载驱动：class.forName(&quot;数据库连包&quot;);
-2.获取连接：driverManner.getConnection();
-3.创建sql con.preparedStatement(&quot;&quot;); ps.setInt(1,&quot;&quot;);
-4.执行sql ps.excuteQuery();
-5.处理结果 while(rs.next){rs.getInt(&quot;empno&quot;);}
-6.关闭流</p>
-<h2>Statement和PreparedStatement有什么区别？哪个性能更好？</h2>
-<p>1.可以带参参数，避免了麻烦且不安全的字符串拼接，防止sql注入
-2.性能高，因为每一个preparestatement都和一个sql模板绑定在一起，先把sql模板传给数据库，数据库检验，编译，然后传参，第二次执行的时候就直接传参就行了。</p>
-<h2>连接池：</h2>
-<p>创建连接和销毁连接需要耗费大量的资源，尤其是服务器不在本地，需要tcp3次握手来创建连接，4次挥手关闭连接，所以事先创建好若干个连放入pool中，使用的时候直接从池中拿试用完毕后也不需要关闭，归还给连接池就可以。提升了系统访问数据库的效率，连接池也就是典型的空间换时间的列子</p>
-<h2>六原则一法则：</h2>
-<p>单一职责原则：一个类只做他应该做的事情<br>
-开闭原则；一个软件体系只对扩开房，对修改关闭
-依赖倒置原则：面向接口编程
-里氏替换原则：子类可以替换父类
-接口隔离原则：一个接口的功能应该小儿专，不能大而全
-合成聚合复用原则：推荐使用合成或者聚合的关系来复用代码
-迪米特法则：一个类应该对其他类尽可能少的了解</p>
-<h2>事务的ACID</h2>
-<p>原子性：事务中的操作时不可再分割的，要么全部成功，要么全部失败
-一致性：事务操作前后业务数据保持一致
-隔离性：事务并发操作的时候要隔离开来
-持久性：数据到达数据库后不能再出现意外，哪怕是数据库崩溃了，也要通过日志来回复过来</p>
-<h2>垃圾回收机制</h2>
-<ol>
+<p><strong>Map 特性：key - value  key 无序不可重复</strong><br>    <strong>常用方法</strong>：<br>        put<br>        remove<br>        clear<br>        containsKey<br>        containsValue<br>    <strong>遍历</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</span><br><span class="line">		Set&lt;Map.Entry&lt;String, String&gt;&gt; set = map.entrySet();</span><br><span class="line">		<span class="keyword">for</span> (Map.Entry&lt;String,String&gt; entry: set) &#123;</span><br><span class="line">			System.out.println(entry.getKey()+<span class="string">"---"</span>+entry.getValue());</span><br><span class="line">		&#125;</span><br><span class="line"><span class="number">2</span>.keySet</span><br><span class="line">        Set&lt;String&gt; keySet = map.keySet();</span><br><span class="line">		<span class="keyword">for</span> (String s : keySet)&#123;</span><br><span class="line">			System.out.println(<span class="string">"key:"</span>+s+<span class="string">"---value:"</span>+map.get(s));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>HashMap</strong> : 底层是哈希表   线程不安全，效率高。能存null，如果需要将自定义类对象作为HashMap的key，那么自定义类中需要重写hashCode()和equals()<br><strong>TreeMap</strong> 底层是红黑树 如果将自定义的对象作为key 的话吗，那么需要给自定义的类实现Compareable接口或者在TreeMap的构造器中new Comparator();</p>
+<p><strong>ConcurrentHashMap 线程安全，效率也高</strong><br><strong>hashTable 线程安全，效率低 ，不能存null。</strong></p>
+<h2 id="java中的流"><a href="#java中的流" class="headerlink" title="java中的流"></a>java中的流</h2><p>字节流和字符流 还有缓冲流和转换流和对象流;<br>FileInputStream BufferedInputStream ObjectInputStream,InputStreamReader<br>FileReader  BufferedReader</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p><strong>就是把对象变成字节序列。便于网络传输</strong></p>
+<p>oos =new ObjectOutputStream(new FileOutputStream(“”));<br>oos.writeObject(new Product());<br>Product这个类要实现Serializable接口。有get set方法。如果属性使用transient，static修饰，该属性的值不能被序列化。</p>
+<p><strong>反序列化就是把字节序列变成对象。</strong><br>    ObjectInputStream(new FileInputStream(“”));<br>    ois.readObject();</p>
+<h2 id="打印所有文件（递归）"><a href="#打印所有文件（递归）" class="headerlink" title="打印所有文件（递归）"></a>打印所有文件（递归）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">digui</span><span class="params">()</span></span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"F:\\学习文件\\刘意视频\\刘意视频源码\\day20_递归_字节流"</span>);</span><br><span class="line">    printName(file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">(File file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (file==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    File[] files = file.listFiles();</span><br><span class="line">    <span class="keyword">for</span> (File temp:files)&#123;</span><br><span class="line">        <span class="keyword">if</span> (temp.isDirectory())&#123;</span><br><span class="line">            printName(temp);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(temp.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="jdbc-操作数据库"><a href="#jdbc-操作数据库" class="headerlink" title="jdbc 操作数据库"></a>jdbc 操作数据库</h2><p>1.加载驱动：class.forName(“数据库连包”);<br>2.获取连接：driverManner.getConnection();<br>3.创建sql con.preparedStatement(“”); ps.setInt(1,””);<br>4.执行sql ps.excuteQuery();  返回一个ResultSet rs   </p>
+<ul>
+<li>ps.excute() 增删改放回false  查询返回true。然后在调用getResultSet() 和getUpdateCount（）来处理数据</li>
+<li>ps.excuteUpdate() 增删改用这个，返回影响行数</li>
+</ul>
+<p>5.处理结果 while(rs.next){rs.getInt(“empno”);}<br>6.关闭流</p>
+<h2 id="Statement和PreparedStatement有什么区别？哪个性能更好？"><a href="#Statement和PreparedStatement有什么区别？哪个性能更好？" class="headerlink" title="Statement和PreparedStatement有什么区别？哪个性能更好？"></a>Statement和PreparedStatement有什么区别？哪个性能更好？</h2><p>1.可以带参参数，避免了麻烦且不安全的字符串拼接，防止sql注入<br>2.性能高，因为每一个preparestatement都和一个sql模板绑定在一起，先把sql模板传给数据库，数据库检验，编译，然后传参，第二次执行的时候就直接传参就行了。</p>
+<h2 id="连接池："><a href="#连接池：" class="headerlink" title="连接池："></a>连接池：</h2><p>创建连接和销毁连接需要耗费大量的资源，尤其是服务器不在本地，需要tcp3次握手来创建连接，4次挥手关闭连接，所以事先创建好若干个连放入pool中，使用的时候直接从池中拿试用完毕后也不需要关闭，归还给连接池就可以。提升了系统访问数据库的效率，连接池也就是典型的空间换时间的列子</p>
+<h2 id="六原则一法则："><a href="#六原则一法则：" class="headerlink" title="六原则一法则："></a>六原则一法则：</h2><p>单一职责原则：一个类只做他应该做的事情<br>开闭原则；一个软件体系只对扩开房，对修改关闭<br>依赖倒置原则：面向接口编程<br>里氏替换原则：子类可以替换父类<br>接口隔离原则：一个接口的功能应该小儿专，不能大而全<br>合成聚合复用原则：推荐使用合成或者聚合的关系来复用代码<br>迪米特法则：一个类应该对其他类尽可能少的了解</p>
+<h2 id="事务的ACID"><a href="#事务的ACID" class="headerlink" title="事务的ACID"></a>事务的ACID</h2><p>原子性：事务中的操作时不可再分割的，要么全部成功，要么全部失败<br>一致性：事务操作前后业务数据保持一致<br>隔离性：事务并发操作的时候要隔离开来<br>持久性：数据到达数据库后不能再出现意外，哪怕是数据库崩溃了，也要通过日志来回复过来</p>
+<h2 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h2><ol>
 <li>一个对象被创建后放置在JVM的堆内存中，只有当程序中没其他的对象引用他时才有可能被释放</li>
 <li>垃圾回收机制是系统级守护线程，用来跟踪正在使用的对象，检查并回收不在使用的变量</li>
 <li>可以有效的解决因为动态内存废品导致的两大问题，因垃圾过多导致内存耗尽，因为非法的释放内存导致内存的非法引用</li>
 <li>可以调用System.gc 和 Runtime.gc 来催促系统尽快回收垃圾，但是垃圾回收机制对于程序员来时是透明的，不能精准的操控垃圾回收机制</li>
 <li>JVM会让对象调用finallize方法来进行回收，但是finallize可能会造成该对象的复活，导致垃圾回收机制取消该内存的释放，如果垃圾回收机制抛出异常，不会导致程序终止</li>
 </ol>
-<h2>&amp;和&amp;&amp;，|和| |区别</h2>
-<p>单一个&amp; | 的话要判断左右两边的，如果是短路&amp;&amp;，左边是false 就不判断右边的了 ||如果左边是true，就不判断右边的了</p>
-<h2>全局变量、局部变量</h2>
-<p>全局变量：类中方法外，系统默认给初始值。如果是final修饰的话必须在声明的时候就赋值
-局部变量：定义在方法里，形参。</p>
-<h2>方法的参数</h2>
-<p>参数是基本数据类型 ， 形参的改变不影响实参</p>
+<h2 id="amp-和-amp-amp-，-和-区别"><a href="#amp-和-amp-amp-，-和-区别" class="headerlink" title="&amp;和&amp;&amp;，|和| |区别"></a>&amp;和&amp;&amp;，|和| |区别</h2><p>单一个&amp; | 的话要判断左右两边的，如果是短路&amp;&amp;，左边是false 就不判断右边的了 ||如果左边是true，就不判断右边的了</p>
+<h2 id="全局变量、局部变量"><a href="#全局变量、局部变量" class="headerlink" title="全局变量、局部变量"></a>全局变量、局部变量</h2><p>全局变量：类中方法外，系统默认给初始值。如果是final修饰的话必须在声明的时候就赋值<br>局部变量：定义在方法里，形参。</p>
+<h2 id="方法的参数"><a href="#方法的参数" class="headerlink" title="方法的参数"></a>方法的参数</h2><p>参数是基本数据类型 ， 形参的改变不影响实参</p>
 <p>参数是引用数据类型， 如果该参数不指向其他内存的话，形参的改变影响实参</p>
-<h2>do-while和while区别</h2>
-<p>do while 先执行一次，在判断</p>
+<h2 id="do-while和while区别"><a href="#do-while和while区别" class="headerlink" title="do-while和while区别"></a>do-while和while区别</h2><p>do while 先执行一次，在判断</p>
 <p>while 先 判断 在执行</p>
-<h2>final、fianlly、finalize</h2>
-<p>final 修饰类，类不能被继承，修饰方法，方法不能被重写，修饰属性，修饰基本数据类型，该值不能改变，修饰引用数据类型，该变量不能指向新的内存空间，修饰 全局变量，必须在声明的时候赋值，修饰局部变量，可以后赋值</p>
+<h2 id="final、fianlly、finalize"><a href="#final、fianlly、finalize" class="headerlink" title="final、fianlly、finalize"></a>final、fianlly、finalize</h2><p>final 修饰类，类不能被继承，修饰方法，方法不能被重写，修饰属性，修饰基本数据类型，该值不能改变，修饰引用数据类型，该变量不能指向新的内存空间，修饰 全局变量，必须在声明的时候赋值，修饰局部变量，可以后赋值</p>
 <p>finally 和 try catch 配合使用，用于异常处理，不论try 里面 报不报异常，都会指向finally</p>
 <p>finalize 用来提醒垃圾回收机制过来回收这个内存</p>
-<h2>父子类实例化对象过程</h2>
-<p>父类静态</p>
+<h2 id="父子类实例化对象过程"><a href="#父子类实例化对象过程" class="headerlink" title="父子类实例化对象过程"></a>父子类实例化对象过程</h2><p>父类静态</p>
 <p>子类静态</p>
 <p>父类构造代码块，父类构造方法</p>
 <p>子类构造代码块，子类构造方法</p>
-<h2>访问权限修饰</h2>
-<p>public 所有
-protected 本类，本包，父子类
-default 本类，本包
-private 本类</p>
-<h2>抽象类接口的区别</h2>
-<table>
+<h2 id="访问权限修饰"><a href="#访问权限修饰" class="headerlink" title="访问权限修饰"></a>访问权限修饰</h2><p>public 所有<br>protected 本类，本包，父子类<br>default 本类，本包<br>private 本类</p>
+<h2 id="抽象类接口的区别"><a href="#抽象类接口的区别" class="headerlink" title="抽象类接口的区别"></a>抽象类接口的区别</h2><table>
 <thead>
 <tr>
 <th></th>
@@ -560,8 +585,7 @@ private 本类</p>
 <th>接口</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>构造方法</td>
 <td>有</td>
 <td>没有</td>
@@ -591,146 +615,10 @@ private 本类</p>
 <td>默认是default</td>
 <td>默认是public</td>
 </tr>
-</tbody>
-</table>
-<h2>StringBuffer和StringBuilder</h2>
-<p>StringBuffer 线程安全，效率低，StringBuilder 线程不安全，效率高</p>
+</tbody></table>
+<h2 id="StringBuffer和StringBuilder"><a href="#StringBuffer和StringBuilder" class="headerlink" title="StringBuffer和StringBuilder"></a>StringBuffer和StringBuilder</h2><p>StringBuffer 线程安全，效率低，StringBuilder 线程不安全，效率高</p>
 <p>为了解决字符串频繁拼接，导致频繁的创建无用的对象影响性能，多线程用Buffer，单线程用Builder 方法为append</p>
-<h2>Collection 和 Collections 的区别</h2>
-<p>Collection 是 List 和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分，线程安全化，乱序等</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/" class="post-title-link" itemprop="url">前缀树</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-15 18:08:45" itemprop="dateCreated datePublished" datetime="2020-01-15T18:08:45+08:00">2020-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-18 08:10:23" itemprop="dateModified" datetime="2020-01-18T08:10:23+08:00">2020-01-18</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前缀树其实也是树</p>
-<p>比如说有几个字符串   “abc”，</p>
-<p>还有一个头节点</p>
-<img src="F:/blogPic/image-20200115193802178.png" alt="image-20200115193802178" style="zoom:50%;" />
-
-<p><strong><em>要把“abc”这个字符串加到这棵树上</em></strong></p>
-<p>这个头节点没有走向a的路，所以</p>
-<img src="F:/blogPic/image-20200115193833100.png" alt="image-20200115193833100" style="zoom:50%;" />
-
-<p>注意，字母是填在路上的</p>
-<p>然后看当前节点有没有一条走向b的路。没有，然后添加一个节点</p>
-<img src="F:/blogPic/image-20200115194046183.png" alt="image-20200115194046183" style="zoom:50%;" />
-
-<p>有没有走向c的路？没有，那就添加一个节点</p>
-<img src="F:/blogPic/image-20200115194207954.png" alt="image-20200115194207954" style="zoom:50%;" />
-
-<p><strong><em>现在还要把“bce”添加到这棵树中</em></strong></p>
-<p>从头节点开始有没有走向b的路？没有，所以添加一个节点：（因为前缀不同，上来就走了两条路）</p>
-<img src="F:/blogPic/image-20200115194409660.png" alt="image-20200115194409660" style="zoom:50%;" />
-
-<p>以此类推，吧“bce”添加进去后，树的形状是：</p>
-<img src="F:/blogPic/image-20200115194505542.png" alt="image-20200115194505542" style="zoom:50%;" />
-
-<p><strong><em>现在，要把“abd” 加入到这颗树中</em></strong></p>
-<ul>
-<li><p>头节点有没有走向a的路？<strong><em>有</em></strong></p>
-<p> 复用，不重复建造节点</p>
-</li>
-<li><p>然后看走向a的那个节点有没有走向b的路？ 有</p>
-<p>继续复用</p>
-</li>
-<li><p>然后看走向b的这个节点有没有走向d的路？没有</p>
-<p>创建一个节点，路径为d：</p>
-</li>
-</ul>
-  <img src="F:/blogPic/image-20200115194935342.png" alt="image-20200115194935342" style="zoom:50%;" />
-
-<p><strong>同样的道理，把“bef ”加入到树中</strong></p>
-<img src="F:/blogPic/image-20200115195141249.png" alt="image-20200115195141249" style="zoom:50%;" />
-
-<h3 id="作用1"><a href="#作用1" class="headerlink" title="作用1"></a>作用1</h3><p>​        比如现在已经加入了n个字符串</p>
-<p>​        <strong>我想让你查一下，是否某一个字符串是以“be”开始的</strong></p>
-<p>​        很好查的。有走向b的路么？有，有走向e的路么？有。</p>
-<p>​        所以一定有字符串是以be开头的</p>
-<h3 id="作用2"><a href="#作用2" class="headerlink" title="作用2"></a>作用2</h3><p>​        <strong>现在查一下，你加的字符串中，有没有加入过“be”这个字符串</strong></p>
-<p>​        以前的结构不够用了，因为be是被复用的，无法找出加没加过be。</p>
-<p>​        <strong>所以现在加上一个属性：有多少个字符串是以此字符结尾的</strong></p>
-<p>​        此时：刚才那棵树就变成了这个样子：</p>
-<img src="F:/blogPic/image-20200115201130131.png" alt="image-20200115201130131" style="zoom:50%;" />
-
-<p>​        如果你找be 的话，你找到e后看看这个节点是0还是几？</p>
-<p>​        就可以找到有多少个字符串是以be结尾的了</p>
-<h3 id="作用3"><a href="#作用3" class="headerlink" title="作用3"></a>作用3</h3><p>​        我给你一个字符串</p>
-<p>​        <strong>请你告诉我，有多少个字符串以他作为前缀？</strong></p>
-<p>​        <strong>在加入一个数据项：每一个节点被划过多少次</strong></p>
-<p>​        就可以统计出有多少个了</p>
-<p><strong>代码细节</strong>：</p>
-<p><strong>如何检查下一个路存不存在</strong>？</p>
-<p>因为你提前准备好了26条路，而且都没有挂东西，都是null</p>
-<p>检查一条路指的节点是不是null这件事来标记这条路存在不存在</p>
-<p>删除的时候，怎么插入的就怎么删，但是有一点区别</p>
-<img src="F:/blogPic/image-20200115212421247.png" alt="image-20200115212421247" style="zoom:80%;" />
-
-<p>我要删除abc的话，就是沿途path–，最后end-1</p>
-<p>但是如果删的时候，词频已经是1个了，比如说kgzte </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        <span class="comment">//有多少个字符串到达过这个节点</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> path;</span><br><span class="line">        <span class="comment">//有多少个字符串是以这个个节点结尾的</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line">        <span class="comment">//这个是路，比如说，强行规定只能是26个字母,小写，a-z</span></span><br><span class="line">		<span class="keyword">public</span> TrieNode[] nexts;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			path = <span class="number">0</span>;</span><br><span class="line">			end = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//那这个节点就有26条路</span></span><br><span class="line">			nexts = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这个就是头</span></span><br><span class="line">		<span class="keyword">private</span> TrieNode root;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//删除</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//存在才删嘛，不存在直接返回</span></span><br><span class="line">			<span class="keyword">if</span> (search(word) != <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">				TrieNode node = root;</span><br><span class="line">				<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">					index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                    <span class="comment">//如果path--变成0了，底下的直接为null，然后return</span></span><br><span class="line">					<span class="keyword">if</span> (--node.nexts[index].path == <span class="number">0</span>) &#123;</span><br><span class="line">						node.nexts[index] = <span class="keyword">null</span>;</span><br><span class="line">						<span class="keyword">return</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					node = node.nexts[index];</span><br><span class="line">				&#125;</span><br><span class="line">				node.end--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询和插入一样，都是挨个儿找，只不过最后不进行path++，而是把该节点的node返回</span></span><br><span class="line">        <span class="comment">//来判断有么有该字符串</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (word == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//如果下一个是null的话，表名根本就么有这个字符串</span></span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> node.end;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//求某一个字符串，前缀的数量是多少</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">prefixNumber</span><span class="params">(String pre)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (pre == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = pre.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="comment">//如果找的找的发现没有了，说明没有这个前缀</span></span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">             <span class="comment">//找到最后一个字符停，看他的path是多少</span></span><br><span class="line">			<span class="keyword">return</span> node.path;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuoa"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoac"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoab"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoad"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuoa"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuoa"</span>));</span><br><span class="line">		System.out.println(trie.prefixNumber(<span class="string">"zuo"</span>));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<h2 id="Collection-和-Collections-的区别"><a href="#Collection-和-Collections-的区别" class="headerlink" title="Collection 和 Collections 的区别"></a>Collection 和 Collections 的区别</h2><p>Collection 是 List 和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分，线程安全化，乱序等</p>
 
       
     </div>
@@ -796,7 +684,7 @@ private 本类</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
