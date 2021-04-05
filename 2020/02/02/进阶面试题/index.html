@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>进阶面试题 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Servlet接口中有哪些方法？ 生命周期是什么？（重点）有5个方法，其中有三个是生命周期方法  init（） 创建Servlet立即执行初始化方法  service（）参数是request，response  执行主要功能  destory（） 销毁Servlet 之前执行的方法   还有两个方法： ​        getServletConfig() 获取xml中的配置 ​        g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进阶面试题">
+<meta property="og:url" content="http://example.com/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Servlet接口中有哪些方法？ 生命周期是什么？（重点）有5个方法，其中有三个是生命周期方法  init（） 创建Servlet立即执行初始化方法  service（）参数是request，response  执行主要功能  destory（） 销毁Servlet 之前执行的方法   还有两个方法： ​        getServletConfig() 获取xml中的配置 ​        g">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="f:/blogPic/image-20200211093809204.png">
+<meta property="og:image" content="f:/blogPic/image-20200214091224845.png">
+<meta property="og:image" content="f:/blogPic/image-20200214100014499.png">
+<meta property="og:image" content="f:/blogPic/image-20200313095654248.png">
+<meta property="article:published_time" content="2020-02-02T07:54:22.000Z">
+<meta property="article:modified_time" content="2020-03-30T12:30:28.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:/blogPic/image-20200211093809204.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-进阶面试题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2020-02-02T07:54:22.000Z" itemprop="datePublished">2020-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      进阶面试题
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Servlet接口中有哪些方法？-生命周期是什么？（重点）"><a href="#Servlet接口中有哪些方法？-生命周期是什么？（重点）" class="headerlink" title="Servlet接口中有哪些方法？ 生命周期是什么？（重点）"></a>Servlet接口中有哪些方法？ 生命周期是什么？（重点）</h2><p>有5个方法，其中有三个是生命周期方法</p>
+<ul>
+<li><p>init（） 创建Servlet立即执行初始化方法</p>
+</li>
+<li><p>service（）参数是request，response  执行主要功能</p>
+</li>
+<li><p>destory（） 销毁Servlet 之前执行的方法</p>
+</li>
+</ul>
+<p>还有两个方法：</p>
+<p>​        getServletConfig() 获取xml中的配置</p>
+<p>​        getServletInfo（）获取Servlet信息</p>
+<h2 id="转发和重定向的区别"><a href="#转发和重定向的区别" class="headerlink" title="转发和重定向的区别"></a>转发和重定向的区别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>转发</th>
+<th>重定向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求次数</td>
+<td>一次请求一次响应</td>
+<td>两次请求，两次响应</td>
+</tr>
+<tr>
+<td>行为</td>
+<td>服务器行为</td>
+<td>客户端行为</td>
+</tr>
+<tr>
+<td>网址变化</td>
+<td>不变</td>
+<td>改变</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>访问资源</td>
+<td>只能访问本项目</td>
+<td>可以访问其他项目</td>
+</tr>
+<tr>
+<td>request能否带值</td>
+<td>能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<h2 id="Mybatis中-和-的区别"><a href="#Mybatis中-和-的区别" class="headerlink" title="Mybatis中#{}和${}的区别"></a>Mybatis中#{}和${}的区别</h2><ul>
+<li>#{}能够防止sql注入，不能字符串拼接</li>
+<li>${}不能防止sql注入，能够字符串拼接</li>
+<li>如果是参数是基本数据类型+String类型的话，#{随便写}，${只能写value}</li>
+<li>如果是参数是Pojo的话，#和$中{都是Pojo中的属性值}</li>
+</ul>
+<h2 id="get-和-post-的区别"><a href="#get-和-post-的区别" class="headerlink" title="get 和 post 的区别"></a>get 和 post 的区别</h2><ul>
+<li>get：提交的数据拼接在url后面，速度快不安全，长度有限制64KB。</li>
+<li>post: url到服务器后，服务器根据url到客户端获取提交的数据。速度慢安全，长度无限制。</li>
+</ul>
+<h2 id="jsp中的九大内置对象"><a href="#jsp中的九大内置对象" class="headerlink" title="jsp中的九大内置对象"></a>jsp中的九大内置对象</h2><p> out  输出流<br> page this<br> config 相当于ServletConfig,用来加载xml中的信息<br> exception 错误页面才有的对象<br> pageContext 一个顶9个，召唤其它<br> request  相当于HttpServletRequest，代表一个请求<br> response 一个响应<br> session  一次会话<br> application 代表整个项目</p>
+<h2 id="jsp和Servlet的区别"><a href="#jsp和Servlet的区别" class="headerlink" title="jsp和Servlet的区别"></a>jsp和Servlet的区别</h2><p>jsp 的本质就是Servlet的简易形式，是html + Serlvet ,用来简化页面的生成，jsp更加侧重于视图， Servlet侧重于逻辑控制</p>
+<h2 id="jsp中的作用域"><a href="#jsp中的作用域" class="headerlink" title="jsp中的作用域"></a>jsp中的作用域</h2><p>page ：本页面的对象和属性</p>
+<p>request ： 一个请求中的对象和属性</p>
+<p>session： 一次会话中的对象和属性</p>
+<p>application： 一个项目的对象和属性</p>
+<h2 id="实现会话跟踪的技术有哪些"><a href="#实现会话跟踪的技术有哪些" class="headerlink" title="实现会话跟踪的技术有哪些"></a>实现会话跟踪的技术有哪些</h2><p>url重写 ， 设置表单隐藏项，cookie ，httpSession</p>
+<h2 id="过滤器有哪些作用和用法"><a href="#过滤器有哪些作用和用法" class="headerlink" title="过滤器有哪些作用和用法"></a>过滤器有哪些作用和用法</h2><p>可以改变请求的内容，重设报头信息，然后发送给目标资源</p>
+<p>用来用户认证，记录和审核用户的请求，对用户发送的数据进行过滤和替换，压缩资源的大小；</p>
+<p>对客户端的请求统一编码和对客户端进行验证</p>
+<p>实现Filter接口，同时重写Filter接口的三个方法：</p>
+<p>   init(FilterConfig config)   用于获取FilterConfig对象</p>
+<p>   doFilter(ServletRequest request,ServeltResponse response,FilterChain chain)  进行过滤处理一些业务</p>
+<p>   destroy()   销毁Filter</p>
+<h2 id="Servlet获取用户提交的数据"><a href="#Servlet获取用户提交的数据" class="headerlink" title="Servlet获取用户提交的数据"></a>Servlet获取用户提交的数据</h2><p>用request.getParameter(),如果是复选框，用getParameterValues()或者getParameterMap()</p>
+<h2 id="什么是ORM"><a href="#什么是ORM" class="headerlink" title="什么是ORM"></a>什么是ORM</h2><p>对象关系映射，就是javaBean和数据库中的表的映射</p>
+<h2 id="Mybatis中命名空间的作用"><a href="#Mybatis中命名空间的作用" class="headerlink" title="Mybatis中命名空间的作用"></a>Mybatis中命名空间的作用</h2><p> mybatis中为每一个映射文件添加一个namespace，这样不同的映射文件中sql语句的id相同也不会有冲突，只要定义的sql语句在该映射文件中id唯一就可以 。</p>
+<h2 id="Mybatis中的动态sql是什么意思"><a href="#Mybatis中的动态sql是什么意思" class="headerlink" title="Mybatis中的动态sql是什么意思"></a>Mybatis中的动态sql是什么意思</h2><p>写复杂的sql时，需要拼接sql语句，动态sql就是解决这个问题的。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;array&quot;</span> <span class="attr">index</span>=<span class="string">&quot;index&quot;</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">          #&#123;item&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;title != null&quot;</span>&gt;</span></span><br><span class="line">              and title = #&#123;title&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;content != null&quot;</span>&gt;</span></span><br><span class="line">              and content = #&#123;content&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">              and owner = &quot;owner1&quot;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;title != null&quot;</span>&gt;</span></span><br><span class="line">          and title = #&#123;title&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="IOC-和-DI"><a href="#IOC-和-DI" class="headerlink" title="IOC 和 DI"></a>IOC 和 DI</h2><p>IOC 是控制反转，以前都是手动创建对象，现在有框架来创建对象</p>
+<p>注解创建 @Component @Controller @Service @Repository</p>
+<ul>
+<li><p>无参构造创建</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;helloService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.farsight.demo0.ioc.HelloService&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>静态工厂方法</p>
+</li>
+<li><p>实例工厂方法</p>
+</li>
+</ul>
+<p>DI是依赖注入，就是给刚才IOC创建的对象赋值</p>
+<p>注解注入 @AutoWired        @Resource        @AutoWired@Qulifiler</p>
+<ul>
+<li>构造方法注入，</li>
+<li>setter注入</li>
+<li>p命名空间注入</li>
+</ul>
+<p>一般来说，非必须的属性使用setter 必须的属性使用构造方法注入</p>
+<h2 id="bean对象的作用域"><a href="#bean对象的作用域" class="headerlink" title="bean对象的作用域"></a>bean对象的作用域</h2><ol>
+<li>Singleton 单例，在容器中只创建一次，每次getBean得到的都是同一个对象</li>
+<li>prototype 原型， 每次getBean得到的都是不同的对象</li>
+<li>request 作用域是一个请求</li>
+<li>session 作用域是一个会话</li>
+<li>global - session 作用域为一个application</li>
+</ol>
+<h2 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h2><p>概念 ：当一批对象具有通用的业务逻辑是，我们往往会写一个工具类来同一实现该业务</p>
+<p>，从而提高代码的复用性。AOP可以帮助我们管理这个工具类，降低他与使用者</p>
+<p>之间的耦合度。</p>
+<ol>
+<li>AOP可以管理工具类</li>
+<li>AOP可以进调用工具类的代码写入其使用者的方法中</li>
+<li>AOP的前提是工具类及其使用者都</li>
+</ol>
+<h2 id="如何理解横切关注"><a href="#如何理解横切关注" class="headerlink" title="如何理解横切关注"></a>如何理解横切关注</h2><p>关注的就是那些与业务逻辑无关但又不可缺少的功能点（日志，事务，安全性），横切就是把这些业务逻辑抽取出来。</p>
+<h2 id="黑"><a href="#黑" class="headerlink" title="黑"></a>黑</h2><ol>
+<li>切面对象：工具类</li>
+<li>目标对象：切入点所在的类</li>
+<li>通知：切入点所在的时机</li>
+<li>切入点：哪些方法调用工具类</li>
+</ol>
+<h2 id="springmvc-工作原理"><a href="#springmvc-工作原理" class="headerlink" title="springmvc 工作原理"></a>springmvc 工作原理</h2><p><img src="F:/blogPic/image-20200211093809204.png" alt="image-20200211093809204"></p>
+<h2 id="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"><a href="#Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗" class="headerlink" title="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"></a>Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗</h2><p>SessionFactory 是线程安全的，可以并发访问，Session 是 线程不安全的，两个线程不能够共享同一个session，为了保证Service和Dao层的session是同一个session，可以使用ThreadLocal 把Session绑定到线程上。</p>
+<p><img src="F:/blogPic/image-20200214091224845.png" alt="image-20200214091224845"></p>
+<p>当获取一方的数据的时候，多方的Set集合中没有多方的数据，就是关联级别的延迟加载</p>
+<p>lazy = true 代表延迟加载，不执行select语句</p>
+<p>在 set标签上写 lazy = true （默认）表示关联级别的延迟加载</p>
+<p>load 不执行select </p>
+<p>使用到主表的数据   执行主表的select</p>
+<p>使用到关联表的数据， 执行关联表的select</p>
+<p>lazy 还能等于extra 用啥查啥，节省内存（主要是count 加载一条，其他的大概全部都加载）</p>
+<p><img src="F:/blogPic/image-20200214100014499.png" alt="image-20200214100014499"></p>
+<p>fetch属性 为join 就变成多表查询了，以前一个get 只get改类，如果为join 就会把相关联的表也弄出来</p>
+<p>延迟加载不可用了</p>
+<p>fetch 属性为 select 的时候，意思就是执行两条sql 语句。这样就是默认的</p>
+<h2 id="session和application-的区别"><a href="#session和application-的区别" class="headerlink" title="session和application 的区别"></a>session和application 的区别</h2><ol>
+<li>作用域不同<ul>
+<li>session是用户级别的，application是web应用级别的，是一个全局作用域</li>
+<li>一个用户一个session ，每一个用户的session的各不相同。</li>
+<li>一个web应用一个application</li>
+</ul>
+</li>
+<li>生命周期不同<ul>
+<li>session 在登陆后创建，在用户注销，关闭浏览器的时候销毁</li>
+<li>application 在创建web应用程序的时候创建，在关闭应用是销毁</li>
+</ul>
+</li>
+</ol>
+<h2 id="实例化Servlet-有哪些方法"><a href="#实例化Servlet-有哪些方法" class="headerlink" title="实例化Servlet 有哪些方法"></a>实例化Servlet 有哪些方法</h2><ol>
+<li>第一次请求Servlet的时候</li>
+<li>在web.xml 中的Servlet标签中配置 loadon-startup标签，tomcat在启动的时候就会创建Servlet</li>
+</ol>
+<h2 id="Tomcat中的目录"><a href="#Tomcat中的目录" class="headerlink" title="Tomcat中的目录"></a>Tomcat中的目录</h2><p>bin ， lib ，logs ，config ，webapps， temp， work </p>
+<h2 id="Cookie-和Session的区别"><a href="#Cookie-和Session的区别" class="headerlink" title="Cookie 和Session的区别"></a>Cookie 和Session的区别</h2><ol>
+<li><p>cookie存储在客户端，不安全，Session存在服务器，安全</p>
+</li>
+<li><p>cookie 可以存放用户名等不重要的信息，可以减缓服务器的压力，session 存储比较重要的信息，session 会存在 服务器上，会占用内存</p>
+</li>
+<li><p>单个cookie保存的数据不能超过4k，很多浏览器最多保存20个cookie</p>
+</li>
+</ol>
+<p>Activity生命周期</p>
+<p> onCreate 第一个生命周期，初始化</p>
+<p>onStart： 能看见，不能交互</p>
+<p>onResume ： 能和用户交互</p>
+<p>onPause： 窗口部分被遮盖</p>
+<p>onStop： 窗口全部遮盖</p>
+<p>onRestar： 处于onStop，重新回到窗口</p>
+<p>可视生命周期：onStart onResume onPause onStop</p>
+<p>前景生命周期：onResume-onPause </p>
+<p>Activity 启动模式：</p>
+<p>​    Standard ： 默认，启动Activity每次都重新创建放到栈顶</p>
+<p>​    SingleTop：启动activity，如果栈顶有直接使用，如果栈顶没有创建</p>
+<p>​    SingelTask： 启动activity，如果栈里有，将上面对象pop出栈，使自己成为栈顶使用，如果没有，创建Activity放入栈顶使用</p>
+<p>SingleInstance ： 如果共享栈有，直接使用。如果共享栈里没有，创建对象放在共享栈使用，该activity不放入程序栈</p>
+<p>在清单配置文件中 <activity android:name  = "" android:launchMode="启动方式"></activiy></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>当前显示的是这个Activity 处于OnResume 状态。进入到list页面，显示列表窗口，Activity就处于onStop声明周期</p>
+<p>Service用来：没有显示这个页面，但是在后台依然显示，比如说音乐播放器</p>
+<p>startService 启动 stopService 停止</p>
+<p>生命周期：onCreate –onStart – onDestroy</p>
+<p>第一次启动 ： oncreate – onstart</p>
+<p>第二次启动 onstart</p>
+<p> bindService   可以传值</p>
+<p>onCreate  – onbind – onUnbind - onDestroy</p>
+<p>第一次启动 ： onCreate – onBind</p>
+<p>第二次绑定 ： onRebind</p>
+<p>startService  启动</p>
+<p> onCreate – onStart  onDestroy</p>
+<p>bindService 启动</p>
+<p>onCreate  onBind  onUnBind  onReBind on Destroy</p>
+<p>第一次执行： onCreate  onBind  第二次 ： onReBind</p>
+<p>能传值</p>
+<h2 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h2><p>intent i= new Intent（当前窗口.this,目标窗口.class）；</p>
+<p>intent i= new Intent（当前窗口.this,目标Service.class）；</p>
+<p>intent i= new Intent（）；//启动窗口使用startActivityForResult，返回窗口用这个</p>
+<p>intent i= new Intent（“myBroadcast”）；</p>
+<p>intent.putExtra(“name”,”zhangsna”);</p>
+<p>sendBroacast();</p>
+<p>安卓的四大组件：</p>
+<p>​    Activity ：窗口</p>
+<p>​    Service ： 服务</p>
+<p>BroadcastReceiver 广播接收器</p>
+<p>ContentProvider ： 内容提供者 ： 一个应用程序的数据不能访问另一个应用程序的数据，，一个应用程序通过ContentProvider对外提供数据访问的接口，其他程序可以通过他来访问</p>
+<p>主线程也就是ui线程，负责界面，处理用户的响应</p>
+<p>有anr 机制，所有的耗时操作在子线程中左，子线程不能</p>
+<p>控制ui组件</p>
+<p>在ui线程中创建Handler 对象，该对象需要重写handlerMessage方法，接受子线程发送的数据，子线程通过Handler对象调用sendMessage发送数据给ui线程</p>
+<p>xml 中 宽和高用dp 字体用 sp</p>
+<p>Android 中的  assets 目录下的东西 会原封不动的存储在设备上</p>
+<p>多媒体文件放在 raw</p>
+<p>图片放在drawble </p>
+<p>字符串 strings.xml  colors.xml arrays,xml 中防止数据</p>
+<p> 安卓可以把数据放到文件和数据库和sharedpreference</p>
+<p>Intent 可以传递 Serializable  charsequence Parcelable Bundle</p>
+<p>安卓的虚拟机 是 Dalvik</p>
+<p>安卓编译后的文件 是dex文件</p>
+<p><img src="F:/blogPic/image-20200313095654248.png" alt="image-20200313095654248"></p>
+<p>Handler  的原理</p>
+<p>负责 线程之间传递数据。把数据封装到Message对象中，通过Handler对象把Message对象发送给</p>
+<p>ui线程，ui线程将接受到Messag对象放在MessageQueue中，ui线程通过Looper把MessageQueue 中的Message取出来</p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p> 真实的数据存贮在叶子节点；非叶子节点不存贮真实的数据，只存储指引搜索方向的数据项</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/" data-id="ckn4703xo005e0svhd5fuflq0" data-title="进阶面试题" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/03/Hibernate%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hibernate总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/01/19/KMP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">KMP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/" rel="tag">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/" rel="tag">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag">分治法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" rel="tag">单向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%96%87/" rel="tag">回文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="tag">堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">完全二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">平衡二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E6%93%82%E5%8F%B0/" rel="tag">打擂台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="tag">时间复杂度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E8%B7%AF%E5%BE%84/" rel="tag">栈路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/" rel="tag">桶排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag">矩阵</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" rel="tag">表单向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE/" rel="tag">链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFS/" style="font-size: 16px;">BFS</a> <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/DFS/" style="font-size: 14px;">DFS</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 20px;">二叉树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" style="font-size: 18px;">分治法</a> <a href="/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">单向链表</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 14px;">哈希表</a> <a href="/tags/%E5%9B%9E%E6%96%87/" style="font-size: 10px;">回文</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">堆排序</a> <a href="/tags/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 12px;">完全二叉树</a> <a href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" style="font-size: 10px;">布隆过滤器</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">平衡二叉树</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">序列化</a> <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" style="font-size: 12px;">归并排序</a> <a href="/tags/%E6%89%93%E6%93%82%E5%8F%B0/" style="font-size: 12px;">打擂台</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px;">排序</a> <a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" style="font-size: 10px;">时间复杂度</a> <a href="/tags/%E6%A0%88/" style="font-size: 14px;">栈</a> <a href="/tags/%E6%A0%88%E8%B7%AF%E5%BE%84/" style="font-size: 10px;">栈路径</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14px;">框架</a> <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">桶排序</a> <a href="/tags/%E7%9F%A9%E9%98%B5/" style="font-size: 16px;">矩阵</a> <a href="/tags/%E8%A1%A8%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">表单向链表</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%93%BE/" style="font-size: 10px;">链</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14px;">链表</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 12px;">队列</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 16px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/05/hex/">hex</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/springDataJPA/">springDataJPA</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/27/%E5%AE%9A%E4%BD%8D/">contextmenustrip 定位</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/26/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E8%A1%A8%E5%A4%B4/">判断是否是表头</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/26/%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E6%A1%86%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/">设置文本框的最大长度</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

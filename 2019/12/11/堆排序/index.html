@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>堆排序 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="堆排序要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。 完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。 这颗树是你脑海中的， 规则如下：你可以自己画图验证 12345int [] arr  &#x3D; &amp;#123;1,2,3,4,5,6&amp;#125;;&#x2F;&#x2F;ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="http://example.com/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="堆排序要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。 完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。 这颗树是你脑海中的， 规则如下：你可以自己画图验证 12345int [] arr  &#x3D; &amp;#123;1,2,3,4,5,6&amp;#125;;&#x2F;&#x2F;ar">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-11T14:49:25.000Z">
+<meta property="article:modified_time" content="2020-01-05T04:02:08.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="二叉树">
+<meta property="article:tag" content="堆排序">
+<meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-堆排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2019-12-11T14:49:25.000Z" itemprop="datePublished">2019-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      堆排序
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。</p>
+<h4 id="完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。"><a href="#完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。" class="headerlink" title="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。"></a>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</h4><p>使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。</p>
+<p>这颗树是你脑海中的，</p>
+<p>规则如下：你可以自己画图验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr  = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="comment">//arr[i] 的左节点是arr[2*i+1] </span></span><br><span class="line"><span class="comment">// 		   右节点是arr[2*i+2]</span></span><br><span class="line"><span class="comment">//	       父节点是arr[(i-1)/2]</span></span><br><span class="line"><span class="comment">//对于arr[ 0]来说，它的父节点是他自己</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>堆分为两种</p>
+<ol>
+<li><p>大根堆：在这颗完全二叉树中，任何一颗子树的最大的值都是这颗子树的 头部 </p>
+</li>
+<li><p>小根堆：任何一颗子树的最小的值都是这颗子树的头部</p>
+<h2 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h2><ol>
+<li><p>让这个数组变成大根堆（未必有序）</p>
+</li>
+<li><p>把最后一个位置和堆顶位置交换</p>
+</li>
+<li><p>此时可以size  N-1</p>
+</li>
+<li><p>把剩下的也就是0—-n-1 之间的堆 进行从0开始的heapfiy</p>
+</li>
+<li><p>这样就会重新形成一个大根堆</p>
+</li>
+<li><p>然后把堆顶和现在最后一个节点做交换</p>
+</li>
+<li><p>以此往复，直到我堆的大小减完，最大值放在了最后。</p>
+</li>
+</ol>
+<h2 id="把一个数组变成大根堆"><a href="#把一个数组变成大根堆" class="headerlink" title="把一个数组变成大根堆"></a>把一个数组变成大根堆</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[]arr = &#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line"> 			<span class="keyword">return</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">             <span class="comment">//一个一个添加，操作，最后该数组形成大根堆</span></span><br><span class="line"> 			heapInsert(arr, i);</span><br><span class="line"> 		&#125;</span><br><span class="line">     	<span class="comment">//得到heapsize，一开始为数组的全部	</span></span><br><span class="line"> 		<span class="keyword">int</span> size = arr.length;</span><br><span class="line">     <span class="comment">//最后一个位置上的数和0交换</span></span><br><span class="line"> 		swap(arr, <span class="number">0</span>, --size);</span><br><span class="line"> 		<span class="keyword">while</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">//然后heapify ，从0 位置开始，当前形成的堆</span></span><br><span class="line"> 			heapify(arr, <span class="number">0</span>, size);</span><br><span class="line">             <span class="comment">//然后在进行最后一个位置上的数和0位置上的数交换</span></span><br><span class="line"> 			swap(arr, <span class="number">0</span>, --size);</span><br><span class="line">             <span class="comment">//一直到堆的大小减成0，所有数据都有序了</span></span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="comment">//这里就是 </span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapInsert</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//如果我比我父节点还要大的话</span></span><br><span class="line"> 		<span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">             <span class="comment">//和父节点交换位置</span></span><br><span class="line"> 			swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">             <span class="comment">//index 回到父节点的位置，继续向上判断。直到while不满足条件</span></span><br><span class="line"> 			index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line">         <span class="comment">//如果判断到arr[0]，会和arr[0]的父节点也就是arr[(0-1)/2] 还是arr[0].作比较，不满足条件然后终止 </span></span><br><span class="line">&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//找到index 的左孩子</span></span><br><span class="line"> 		<span class="keyword">int</span> left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">         <span class="comment">//如果左孩子小于size表示左孩子存在，没有越界</span></span><br><span class="line"> 		<span class="keyword">while</span> (left &lt; size) &#123;</span><br><span class="line">             <span class="comment">//没有越界的话看看右孩子是否存在</span></span><br><span class="line">             <span class="comment">//如果右孩子（left+1就是右孩子）存在的话比较左右孩子哪一个比较大，得到比较大的孩子的下标</span></span><br><span class="line"> 			<span class="keyword">int</span> largest = left + <span class="number">1</span> &lt; size &amp;&amp; arr[left + <span class="number">1</span>] &gt; arr[left] ? left + <span class="number">1</span> : left;</span><br><span class="line"> 			<span class="comment">//比较当前节点大孩子节点，得到这棵树的最大节点的下标</span></span><br><span class="line">              largest = arr[largest] &gt; arr[index] ? largest : index;</span><br><span class="line">             <span class="comment">//如果和index相等，就退出循环。</span></span><br><span class="line"> 			<span class="keyword">if</span> (largest == index) &#123;</span><br><span class="line"> 				<span class="keyword">break</span>;</span><br><span class="line"> 			&#125;</span><br><span class="line">             <span class="comment">//如果不是index ，那就往下放</span></span><br><span class="line"> 			swap(arr, largest, index);</span><br><span class="line">             <span class="comment">//往下放的同时还要改index的值为下方节点的位置，以便于继续下放</span></span><br><span class="line"> 			index = largest;</span><br><span class="line">             <span class="comment">//对应着left也要改变才能继续下放。</span></span><br><span class="line"> 			left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> tmp = arr[i];</span><br><span class="line"> 		arr[i] = arr[j];</span><br><span class="line"> 		arr[j] = tmp;</span><br><span class="line"> 	&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>建立堆的过程中</p>
+<p>向上调整。heapInset（）</p>
+<p>当我有一个值变小了，就要往下调整   heapfiy（）</p>
+<p>作用：求中位数</p>
+<p>如何求中位数呢？</p>
+<p>要有一个大根堆，一个小根堆，</p>
+<p>第一个数，进大根堆 5. </p>
+<p>第二个数， 4， 大根堆放4</p>
+<p>发现，大根堆的大小为2，小根堆的大小为0（heapsize会告诉你已经形成堆的大小）发现差值大于1.</p>
+<p>那就在大根堆里弹出一个数到小根堆（此时heapsize-1）</p>
+<p>在进来两个数，6，7 ，全都放到了小根堆上。此时小根堆上的heapsize为3，大根堆的是1，不平衡了</p>
+<p>然后把小根堆的头弹出来，放到大根堆中</p>
+</li>
+</ol>
+<p>为什么大根堆放的是较小的N/2?</p>
+<p>策略是当期数如果小于等于大根堆的堆顶，才进大根堆。如果大于大根堆的对顶就进小根堆</p>
+<p>大根堆要弹出一个数，是最大的那个数，也就是堆顶</p>
+<p>小根堆要弹出一个数，是弹出最小的那个数，放到大根堆中</p>
+<p>所以一定是较小的n/2</p>
+<ol start="7">
+<li><h2 id="系统给提供了一个堆"><a href="#系统给提供了一个堆" class="headerlink" title="系统给提供了一个堆"></a>系统给提供了一个堆</h2><p>priorityQueue 构造方法传入一个比较器</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/" data-id="ckn4703wk001w0svh8t3v8gxx" data-title="堆排序" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="tag">堆排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/16/%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">递归分治的时间复杂度</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/" rel="tag">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/" rel="tag">jpa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag">分治法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" rel="tag">单向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%9E%E6%96%87/" rel="tag">回文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE/" rel="tag">图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" rel="tag">堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">完全二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" rel="tag">布隆过滤器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">平衡二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="tag">归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%93%E6%93%82%E5%8F%B0/" rel="tag">打擂台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="tag">时间复杂度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88%E8%B7%AF%E5%BE%84/" rel="tag">栈路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/" rel="tag">桶排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A9%E9%98%B5/" rel="tag">矩阵</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" rel="tag">表单向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE/" rel="tag">链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag">链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFS/" style="font-size: 16px;">BFS</a> <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/DFS/" style="font-size: 14px;">DFS</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 20px;">二叉树</a> <a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/" style="font-size: 18px;">分治法</a> <a href="/tags/%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">单向链表</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 14px;">哈希表</a> <a href="/tags/%E5%9B%9E%E6%96%87/" style="font-size: 10px;">回文</a> <a href="/tags/%E5%9B%BE/" style="font-size: 10px;">图</a> <a href="/tags/%E5%A0%86%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">堆排序</a> <a href="/tags/%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 12px;">完全二叉树</a> <a href="/tags/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" style="font-size: 10px;">布隆过滤器</a> <a href="/tags/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" style="font-size: 10px;">平衡二叉树</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 10px;">并查集</a> <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">序列化</a> <a href="/tags/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" style="font-size: 12px;">归并排序</a> <a href="/tags/%E6%89%93%E6%93%82%E5%8F%B0/" style="font-size: 12px;">打擂台</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px;">排序</a> <a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" style="font-size: 10px;">时间复杂度</a> <a href="/tags/%E6%A0%88/" style="font-size: 14px;">栈</a> <a href="/tags/%E6%A0%88%E8%B7%AF%E5%BE%84/" style="font-size: 10px;">栈路径</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14px;">框架</a> <a href="/tags/%E6%A1%B6%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">桶排序</a> <a href="/tags/%E7%9F%A9%E9%98%B5/" style="font-size: 16px;">矩阵</a> <a href="/tags/%E8%A1%A8%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" style="font-size: 10px;">表单向链表</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%93%BE/" style="font-size: 10px;">链</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 14px;">链表</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 12px;">队列</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 16px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/05/hex/">hex</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/24/springDataJPA/">springDataJPA</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/27/%E5%AE%9A%E4%BD%8D/">contextmenustrip 定位</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/26/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E8%A1%A8%E5%A4%B4/">判断是否是表头</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/26/%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E6%A1%86%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/">设置文本框的最大长度</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
