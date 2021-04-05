@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" class="post-title-link" itemprop="url">二叉树的最近公共祖先</a>
+            <a href="/2019/12/11/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">堆排序</a>
         </h1>
 
         <div class="post-meta">
@@ -201,14 +201,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-23 11:20:38" itemprop="dateCreated datePublished" datetime="2019-11-23T11:20:38+08:00">2019-11-23</time>
+              <time title="创建时间：2019-12-11 22:49:25" itemprop="dateCreated datePublished" datetime="2019-12-11T22:49:25+08:00">2019-12-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:23:51" itemprop="dateModified" datetime="2019-11-24T13:23:51+08:00">2019-11-24</time>
+                <time title="修改时间：2020-01-05 12:02:09" itemprop="dateModified" datetime="2020-01-05T12:02:09+08:00">2020-01-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,21 +233,63 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p>例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</p>
-<p>  <img src="/images/binarytree.png" alt="img">  </p>
-<p>示例 1:</p>
-<p>输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>输出: 3<br>解释: 节点 5 和节点 1 的最近公共祖先是节点 3。</p>
-<p>  <a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree" target="_blank" rel="noopener">leetcode地址</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/23/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><p>要说堆排序就得知道堆是什么，堆结构就是一个完全二叉树。</p>
+<h4 id="完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。"><a href="#完全二叉树是-一颗二叉树-满足-上面的层都是满的，新的层都是从左向右的。" class="headerlink" title="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。"></a>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</h4><p>使用数组来模拟堆结构。由于完全二叉树的性质。可以用数组来模拟堆结构，也就是说，给你一个数组，你给我脑补一颗完全二叉树。</p>
+<p>这颗树是你脑海中的，</p>
+<p>规则如下：你可以自己画图验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr  = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="comment">//arr[i] 的左节点是arr[2*i+1] </span></span><br><span class="line"><span class="comment">// 		   右节点是arr[2*i+2]</span></span><br><span class="line"><span class="comment">//	       父节点是arr[(i-1)/2]</span></span><br><span class="line"><span class="comment">//对于arr[ 0]来说，它的父节点是他自己</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>堆分为两种</p>
+<ol>
+<li><p>大根堆：在这颗完全二叉树中，任何一颗子树的最大的值都是这颗子树的 头部 </p>
+</li>
+<li><p>小根堆：任何一颗子树的最小的值都是这颗子树的头部</p>
+</li>
+</ol>
+<h2 id="堆排序-1"><a href="#堆排序-1" class="headerlink" title="堆排序"></a>堆排序</h2><ol>
+<li><p>让这个数组变成大根堆（未必有序）</p>
+</li>
+<li><p>把最后一个位置和堆顶位置交换</p>
+</li>
+<li><p>此时可以size  N-1</p>
+</li>
+<li><p>把剩下的也就是0—-n-1 之间的堆 进行从0开始的heapfiy</p>
+</li>
+<li><p>这样就会重新形成一个大根堆</p>
+</li>
+<li><p>然后把堆顶和现在最后一个节点做交换</p>
+</li>
+<li><p>以此往复，直到我堆的大小减完，最大值放在了最后。</p>
+</li>
+</ol>
+<h2 id="把一个数组变成大根堆"><a href="#把一个数组变成大根堆" class="headerlink" title="把一个数组变成大根堆"></a>把一个数组变成大根堆</h2>   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[]arr = &#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
+
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line"> 			<span class="keyword">return</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">             <span class="comment">//一个一个添加，操作，最后该数组形成大根堆</span></span><br><span class="line"> 			heapInsert(arr, i);</span><br><span class="line"> 		&#125;</span><br><span class="line">     	<span class="comment">//得到heapsize，一开始为数组的全部	</span></span><br><span class="line"> 		<span class="keyword">int</span> size = arr.length;</span><br><span class="line">     <span class="comment">//最后一个位置上的数和0交换</span></span><br><span class="line"> 		swap(arr, <span class="number">0</span>, --size);</span><br><span class="line"> 		<span class="keyword">while</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">//然后heapify ，从0 位置开始，当前形成的堆</span></span><br><span class="line"> 			heapify(arr, <span class="number">0</span>, size);</span><br><span class="line">             <span class="comment">//然后在进行最后一个位置上的数和0位置上的数交换</span></span><br><span class="line"> 			swap(arr, <span class="number">0</span>, --size);</span><br><span class="line">             <span class="comment">//一直到堆的大小减成0，所有数据都有序了</span></span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line"> <span class="comment">//这里就是 </span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapInsert</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//如果我比我父节点还要大的话</span></span><br><span class="line"> 		<span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">             <span class="comment">//和父节点交换位置</span></span><br><span class="line"> 			swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">             <span class="comment">//index 回到父节点的位置，继续向上判断。直到while不满足条件</span></span><br><span class="line"> 			index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line">         <span class="comment">//如果判断到arr[0]，会和arr[0]的父节点也就是arr[(0-1)/2] 还是arr[0].作比较，不满足条件然后终止 </span></span><br><span class="line">&#125;</span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> index, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">         <span class="comment">//找到index 的左孩子</span></span><br><span class="line"> 		<span class="keyword">int</span> left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">         <span class="comment">//如果左孩子小于size表示左孩子存在，没有越界</span></span><br><span class="line"> 		<span class="keyword">while</span> (left &lt; size) &#123;</span><br><span class="line">             <span class="comment">//没有越界的话看看右孩子是否存在</span></span><br><span class="line">             <span class="comment">//如果右孩子（left+1就是右孩子）存在的话比较左右孩子哪一个比较大，得到比较大的孩子的下标</span></span><br><span class="line"> 			<span class="keyword">int</span> largest = left + <span class="number">1</span> &lt; size &amp;&amp; arr[left + <span class="number">1</span>] &gt; arr[left] ? left + <span class="number">1</span> : left;</span><br><span class="line"> 			<span class="comment">//比较当前节点大孩子节点，得到这棵树的最大节点的下标</span></span><br><span class="line">              largest = arr[largest] &gt; arr[index] ? largest : index;</span><br><span class="line">             <span class="comment">//如果和index相等，就退出循环。</span></span><br><span class="line"> 			<span class="keyword">if</span> (largest == index) &#123;</span><br><span class="line"> 				<span class="keyword">break</span>;</span><br><span class="line"> 			&#125;</span><br><span class="line">             <span class="comment">//如果不是index ，那就往下放</span></span><br><span class="line"> 			swap(arr, largest, index);</span><br><span class="line">             <span class="comment">//往下放的同时还要改index的值为下方节点的位置，以便于继续下放</span></span><br><span class="line"> 			index = largest;</span><br><span class="line">             <span class="comment">//对应着left也要改变才能继续下放。</span></span><br><span class="line"> 			left = index * <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line"> 		&#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line"> 		<span class="keyword">int</span> tmp = arr[i];</span><br><span class="line"> 		arr[i] = arr[j];</span><br><span class="line"> 		arr[j] = tmp;</span><br><span class="line"> 	&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   建立堆的过程中</p>
+<p>   向上调整。heapInset（）</p>
+<p>   当我有一个值变小了，就要往下调整   heapfiy（）</p>
+<p>   作用：求中位数</p>
+<p>   如何求中位数呢？</p>
+<p>   要有一个大根堆，一个小根堆，</p>
+<p>   第一个数，进大根堆 5. </p>
+<p>   第二个数， 4， 大根堆放4</p>
+<p>   发现，大根堆的大小为2，小根堆的大小为0（heapsize会告诉你已经形成堆的大小）发现差值大于1.</p>
+<p>   那就在大根堆里弹出一个数到小根堆（此时heapsize-1）</p>
+<p>   在进来两个数，6，7 ，全都放到了小根堆上。此时小根堆上的heapsize为3，大根堆的是1，不平衡了</p>
+<p>   然后把小根堆的头弹出来，放到大根堆中</p>
+<p>为什么大根堆放的是较小的N/2?</p>
+<p>策略是当期数如果小于等于大根堆的堆顶，才进大根堆。如果大于大根堆的对顶就进小根堆</p>
+<p>大根堆要弹出一个数，是最大的那个数，也就是堆顶</p>
+<p>小根堆要弹出一个数，是弹出最小的那个数，放到大根堆中</p>
+<p>所以一定是较小的n/2</p>
+<ol start="7">
+<li><h2 id="系统给提供了一个堆"><a href="#系统给提供了一个堆" class="headerlink" title="系统给提供了一个堆"></a>系统给提供了一个堆</h2><p>priorityQueue 构造方法传入一个比较器</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -266,7 +308,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/21/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -280,7 +322,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/21/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">平衡二叉树</a>
+            <a href="/2019/12/07/%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">递归分治的时间复杂度</a>
         </h1>
 
         <div class="post-meta">
@@ -290,15 +332,96 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-21 19:24:12" itemprop="dateCreated datePublished" datetime="2019-11-21T19:24:12+08:00">2019-11-21</time>
+              <time title="创建时间：2019-12-07 16:26:28" itemprop="dateCreated datePublished" datetime="2019-12-07T16:26:28+08:00">2019-12-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-03 08:49:23" itemprop="dateModified" datetime="2020-01-03T08:49:23+08:00">2020-01-03</time>
+                <time title="修改时间：2019-12-27 08:13:13" itemprop="dateModified" datetime="2019-12-27T08:13:13+08:00">2019-12-27</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>master公式</p>
+<p>T（N） = a*T(N/b) +O(N^d)</p>
+<ol>
+<li><p>log(b,a)  &gt; d  —-&gt;  O(N^ log(b,a))</p>
+</li>
+<li><p>log(b,a)  = d  —-&gt;  O(N^d * logN)</p>
+</li>
+<li><p>log(b,a)  &lt; d  —-&gt;  O(N^d)</p>
+</li>
+</ol>
+<p>   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
+<p>   限制条件：划分子问题的规模是一样的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/07/%E5%B0%8F%E5%92%8C%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/%E5%B0%8F%E5%92%8C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">小和问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-07 16:05:12 / 修改时间：16:25:51" itemprop="dateCreated datePublished" datetime="2019-12-07T16:05:12+08:00">2019-12-07</time>
+            </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -322,82 +445,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>证明一棵树是不是平衡二叉树</p>
-<p>平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1</p>
-<p>下面这颗树就是平衡的</p>
-<p><img src="/images/a.png" alt="haha"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/21/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+          <p>小和问题和逆序对问题 </p>
+<p>小和问题 </p>
+<p>在一个数组中，每一个数左边比当前数小的数累加起来，叫做这个数组的小和。求一个数组 的小和。 </p>
+<p>例子： </p>
+<p>[1,3,4,2,5] </p>
+<p>1左边比1小的数，没有； </p>
+<p>3左边比3小的数，1； </p>
+<p>4左边比4小的数，1、3； </p>
+<p>2左边比2小的数，1； </p>
+<p>5左边比5小的数，1、3、4、2； </p>
+<p>所以小和为1+1+3+1+1+3+4+2=16 </p>
+<hr>
+<p>这个问题是用归并排序来做的</p>
+<p>在每次合并的时候求出小和然后返回。</p>
+<p>思路：</p>
+<p>两个有序的数组，左边数组中的一个数据X比右边数组中第P个数小。那么由于是有序的数组，P后面的所有数据都比X大。所以 这次的小和就是 X ✖ （ P后面的个数 +1）. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mergeSort2</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sortProcess(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sortProcess</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (L == R) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = (R + L) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span>  sortProcess(arr, L, mid) +</span><br><span class="line">                sortProcess(arr, mid + <span class="number">1</span>, R) +</span><br><span class="line">                mergeProcess(arr, L, mid, R);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mergeProcess</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> L, <span class="keyword">int</span> mid, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[R - L + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> p1 = L;</span><br><span class="line">        <span class="keyword">int</span> p2 = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//这里开始处理小和</span></span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid &amp;&amp; p2 &lt;= R) &#123;</span><br><span class="line">            <span class="comment">//这里开始处理小和</span></span><br><span class="line">            res += arr[p1] &lt; arr[p2] ? arr[p1] * (R - p2 + <span class="number">1</span>) : <span class="number">0</span>;</span><br><span class="line">            temp[i++] = arr[p1] &lt; arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt;= mid) &#123;</span><br><span class="line">            temp[i++] = arr[p1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (p2 &lt;= R) &#123;</span><br><span class="line">            temp[i++] = arr[p2++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; temp.length; i++) &#123;</span><br><span class="line">            arr[L + i] = temp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">数据库的操作</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-21 17:58:03" itemprop="dateCreated datePublished" datetime="2019-11-21T17:58:03+08:00">2019-11-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-28 09:28:24" itemprop="dateModified" datetime="2019-11-28T09:28:24+08:00">2019-11-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -416,7 +484,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -462,7 +530,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -475,7 +543,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -527,7 +595,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

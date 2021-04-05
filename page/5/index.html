@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/19/KMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,128 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/09/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-09 18:10:37 / 修改时间：20:59:29" itemprop="dateCreated datePublished" datetime="2020-01-09T18:10:37+08:00">2020-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong><em>黑名单问题</em></strong> </p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqluproufj210w0ikdlq.jpg" alt="image-20200109182041298" style="zoom:33%;" />
-
-<p>有一个需求，100亿个url是黑名单，</p>
-<p>当你想搜索一些东西的时候，我不想显示某一些url ，100亿个url 都是 64字节，</p>
-<p>当搜索某一个url的时候，我会返回一个true或者false ，如果这个url在黑名单里，返回true，</p>
-<p>如果不在黑单里，返回false</p>
-<p>如果用一个hashSet来搞的话，至少需要6400亿个字节（其实远远不止）</p>
-<p>也就是640G的内存，如果这样的话，不是很好做</p>
-<p>也可以用hash函数分流，放到不同的机器上，但是也会浪费机器</p>
-<p>所以我想不用hashSet 用其他的set 来搞，这个就是布隆过滤器</p>
-<p>这个有失误率</p>
-<p>如果你有一个url 确实属于黑名单，一定会返回true 但是，有时候一个url不是黑名单，也有可能</p>
-<p>返回true（宁可错杀一千，不可放过一个）</p>
-<p>是某种类型的集合，但是有失误率的。</p>
-<p>如果碰到这类题，你可以先用哈希函数分流来搞。浪费空间。</p>
-<p>问：允许有极低的失误率么？可以有</p>
-<p>布隆过滤器</p>
-<p>是一个比特类型的map</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlv7l8rqj20xp0fbwk9.jpg" alt="image-20200109185250333" style="zoom:33%;" />
-
-<p>我有一个数组，长度为1000.</p>
-<p>这个数组每一个位置上是一个32bit</p>
-<p>一个int是4个字节，32位比特。</p>
-<p>假如我要把第30000个bit描黑。我需要</p>
-<p>30000/32 得到第几个桶。937</p>
-<p>30000%32 得到这个桶的第几个bit应该被描黑 ，16</p>
-<p>第937个桶里第16位应该被描黑</p>
-<p>1 左移16位得到 第16位为1 </p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlvnre9kj20lt06zdhv.jpg" alt="image-20200109185802940" style="zoom:25%;" />
-
-<p>然后和arr[937]   |  1&lt;&lt;16 . 因为arr[937] 初始值是00000000，所以做或运算后该位置就被标记了</p>
-<p>url 根据一个hash函数算出一个hash值，这个hash值再去取模m，这样得到0到m-1位置上的一个，算出来的位置描黑。</p>
-<p>布隆过滤器是准备K个hash函数 ，这个url 经过hash函数 ，url经过第一个hash函数的时候，描黑，经过第二个hash函数的时候，描黑，有可能两个hash函数打到同一个位置，已经描黑的就继续黑下去，这K个hash函数时相互独立的</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlw1jllmj20zr0iiahc.jpg" alt="image-20200109192110599" style="zoom:33%;" />
-
-<p>一个url 经过k个hash函数，对应的K个位置上描黑，这个url 叫做进到布隆过滤器里面了，</p>
-<p>接下来，每一个url 都这么算，然后加到这个bit类型的数组里，所以你准备的这个比特类型的数组应该长一些，要不这100亿个url 进行描黑后，就全黑了，查就没有意义了</p>
-<p>怎么查？</p>
-<p>我现在黑名单加载完了，整个这个bit类型的数组相当多的位置被描黑了</p>
-<p>当我查一个url 的时候，怎么知道这个url在不在这个黑名单里？</p>
-<p>这个url 经过K个hash函数，算出了K个位置，如果这K个位置都是黑的，我就说，这个url 在这个黑名单里</p>
-<p>如果算出的hash函数有一个不是黑的，我就说这个url 不在黑名单里</p>
-<p>如果你的数组很小，都被描黑了，在进来的每一个url不都在黑名单里了？ 就没有意义了</p>
-<p>所以我可以调整数组的大小和hash 函数的个数来调整失误率。</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwloq4sj20q40890us.jpg" alt="image-20200109193952422" style="zoom:50%;" />
-
-<p>数组长度和失误率的关系</p>
-<p>m是数组长度（bit），</p>
-<p>n是样本量（100亿）</p>
-<p>p是预期失误率 （万分之一：0.0001）</p>
-<p>算一下：16G（实际空间 16*8Gbit）</p>
-<p>第二个公式：确定hash函数的个数</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlwxcwtbj213h0av40w.jpg" alt="image-20200109195148004" style="zoom:33%;" />
-
-<p>第三个公式：确定真实失误率：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlxabj08j20v80bndig.jpg" alt="image-20200109195522405" style="zoom:33%;" />
-
-<p>问：经典结构</p>
-<p>布隆过滤器的原理：</p>
-<p>每一个url经过几个hash函数对应的位置上描黑，所有的黑名单上的每一个url 都描黑后，整个布隆过滤器上的bit类型的数组就相当位置被描黑了。当我检查url的时候怎么检查？计算k个hash函数对应的位置 ，所有的位置都是黑的，我就认为在布隆过滤器里，否则就认为不在</p>
-<p>参数是：布隆过滤器比特类型的数组一共有多少个bit由样本量和预期失误率来决定</p>
-<p>这个bit 除以8 之后才是实际使用的字节</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/08/spring%E6%A1%86%E6%9E%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/08/spring%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">spring框架</a>
+            <a href="/2020/01/19/KMP/" class="post-title-link" itemprop="url">KMP</a>
         </h1>
 
         <div class="post-meta">
@@ -322,14 +201,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-08 08:34:58" itemprop="dateCreated datePublished" datetime="2020-01-08T08:34:58+08:00">2020-01-08</time>
+              <time title="创建时间：2020-01-19 16:18:59" itemprop="dateCreated datePublished" datetime="2020-01-19T16:18:59+08:00">2020-01-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-10 08:54:46" itemprop="dateModified" datetime="2020-01-10T08:54:46+08:00">2020-01-10</time>
+                <time title="修改时间：2020-01-20 10:44:57" itemprop="dateModified" datetime="2020-01-20T10:44:57+08:00">2020-01-20</time>
               </span>
 
           
@@ -343,145 +222,82 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>IoC 反转控制的概念，就是将原本在程序中手动创建HelloService对象的控制权，交由Spring框架管理</p>
-<h3 id="三种创建Bean的方式"><a href="#三种创建Bean的方式" class="headerlink" title="三种创建Bean的方式"></a>三种创建Bean的方式</h3><ol>
-<li>使用类构造器实例化(默认无参数)</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo0.ioc.HelloService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+          <p>str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置</p>
+<img src="F:/blogPic/image-20200120090529143.png" alt="image-20200120090529143" style="zoom:33%;" />
 
-<p>2.使用静态工厂方法实例化(简单工厂模式)</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.spring.factory.MyBeansFactory"</span> <span class="attr">factory-method</span>=<span class="string">"createBookService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>3.使用实例工厂方法实例化(工厂方法模式)</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.spring.factory.MyBeansFactory"</span> <span class="attr">id</span>=<span class="string">"beansFactory"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">factory-bean</span>=<span class="string">"beansFactory"</span> <span class="attr">factory-method</span>=<span class="string">"createBookService2"</span> <span class="attr">id</span>=<span class="string">"bookService2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>由于是实例工厂，所以不能用类直接调用方法，所以需要创建工厂类，再用工厂类调用方法得到Bean对象</p>
-<h3 id="Bean对象的作用域"><a href="#Bean对象的作用域" class="headerlink" title="Bean对象的作用域"></a>Bean对象的作用域</h3><ol>
-<li>SingletonDemo </li>
-<li>prototype 原型， 每次getBean得到的都是不同的对象</li>
-<li>request 作用域是一个请求</li>
-<li>session 作用域是一个会话</li>
-<li>global - session 作用域为一个application</li>
-</ol>
-<h2 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h2><p> 依赖注入，在Spring框架负责创建Bean对象时，动态的给属性赋值</p>
-<ol>
-<li>构造方法注入</li>
-<li></li>
-</ol>
-<h2 id="AOP-面向切面编程"><a href="#AOP-面向切面编程" class="headerlink" title="AOP 面向切面编程"></a>AOP 面向切面编程</h2><p>概念 ：当一批对象具有通用的业务逻辑是，我们往往会写一个工具类来同一实现该业务</p>
-<p>，从而提高代码的复用性。AOP可以帮助我们管理这个工具类，降低他与使用者</p>
-<p>之间的耦合度。</p>
-<ol>
-<li>AOP可以管理工具类</li>
-<li>AOP可以进调用工具类的代码写入其使用者的方法中</li>
-<li>AOP的前提是工具类及其使用者都</li>
-</ol>
-<p><img src="F:/blogPic/image-20200108135531895.png" alt="image-20200108135531895"></p>
-<p>黑话：</p>
-<ol>
-<li><p>切面对象：工具类</p>
-</li>
-<li><p>目标对象：切入点所在的类</p>
-</li>
-<li><p>通知：切入点所在的时机</p>
-</li>
-<li><p>切入点：哪些方法调用工具类</p>
-</li>
-</ol>
-<p>springAOP中的代理 用动态代理和cglib代理</p>
-<pre><code>1. 如果实现了接口使用动态代理， 通过接口进行代理
- 2. 如果没有实现接口使用cglib代理，通过继承得到子类进行代理</code></pre><p>在XML 中配置AOP</p>
-<ol>
-<li><p>编写目标对象</p>
-</li>
-<li><p>编写切面对象</p>
-<p> 实现特定的接口来告诉要进行哪一种通知 ，比如MethodInterceptor 就是环绕通知，MethodBeforeAdvice 就是前置通知</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实现特定的接口来告诉要进行哪一种通知</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogAroundAdvice</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(MethodInvocation methodInvocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"删除前记录日志"</span>);</span><br><span class="line">        Object proceed = methodInvocation.proceed();</span><br><span class="line">        System.out.println(<span class="string">"删除后记录日志"</span>);</span><br><span class="line">        <span class="keyword">return</span> proceed;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--配置目标对象--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.service.UserServiceImpl"</span> <span class="attr">id</span>=<span class="string">"userService"</span>/&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--配置切面对象--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.util.LogBeforeAdvice"</span> <span class="attr">id</span>=<span class="string">"logBeforeAdvice"</span>/&gt;</span></span><br><span class="line"> <span class="comment">&lt;!--配置AOP--&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span> <span class="attr">id</span>=<span class="string">"bean"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;property name="proxyTargetClass" value="true"/&gt;  cglib代理--&gt;</span> </span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyInterfaces"</span> <span class="attr">value</span>=<span class="string">"cn.hqyj.service.UserService"</span>/&gt;</span><span class="comment">&lt;!--动态代理--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"logBeforeAdvice"</span>/&gt;</span> <span class="comment">&lt;!--interceptorNames 表示拦截，其实切面对象就相当于一个拦截器--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"userService"</span>/&gt;</span><span class="comment">&lt;!--目标对象:直接写目标对象，相当于把对象中的所有的方法全部都代理--&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果不想拦截目标对象类的所有方法的话 可以修改 interceptorNames属性 value的值 ，设置成一个过滤器，只拦截指定的方法</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"factoryBean"</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.framework.ProxyFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"target"</span> <span class="attr">ref</span>=<span class="string">"bookService"</span>/&gt;</span><span class="comment">&lt;!--目标对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"proxyTargetClass"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span><span class="comment">&lt;!--使用cglig代理进行代理--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"interceptorNames"</span> <span class="attr">value</span>=<span class="string">"advisor"</span>/&gt;</span><span class="comment">&lt;!--配置过滤器，指定方法进行代理,同时也告诉了配置哪一个切面对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--配置过滤器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.aop.support.RegexpMethodPointcutAdvisor"</span> <span class="attr">id</span>=<span class="string">"advisor"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"advice"</span> <span class="attr">ref</span>=<span class="string">"logAroundAdvice"</span>/&gt;</span><span class="comment">&lt;!--配置哪一个切面对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"patterns"</span> <span class="attr">value</span>=<span class="string">".*delete.*"</span>/&gt;</span><span class="comment">&lt;!--要代理的方法--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>第二种代理方法：</p>
-<p>全自动代理模式：</p>
-<p>也需要创建目标对象和创建切面类</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1 创建目标类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"customerDao"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo4.aop.CustomerDao"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 2 创建切面类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"myAdvice"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo4.aop.MyAdvice"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--定义切入点myPointCut对应的具体方法 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"execution(* com.farsight.demo4.aop.*.*(..))"</span> <span class="attr">id</span>=<span class="string">"myPointCut"</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- myAdvice代表一个切面组件，要切入到myPointCut所对应的切入点方法中 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">"myAdvice"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointCut"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="AspectJ-AOP"><a href="#AspectJ-AOP" class="headerlink" title="AspectJ AOP"></a>AspectJ AOP</h2><p>编写切面类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAspactJAdvice</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myBefore</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是前置通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterReturning</span><span class="params">(JoinPoint joinPoint,Object ref)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是后置通知"</span>+joinPoint.getSignature().getName()+<span class="string">"    返回值为： "</span>+ref);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAround</span><span class="params">(ProceedingJoinPoint joinPoint)</span><span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是环绕前前前前前前通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">        joinPoint.proceed();</span><br><span class="line">        System.out.println(<span class="string">"这是环绕后后后后后后通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterThrowing</span><span class="params">(JoinPoint joinPoint,Throwable e)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"抛出异常啦"</span>);</span><br><span class="line">        System.out.println(<span class="string">"抛出异常通知 ： "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfter</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"最终通知"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在xml中的配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--创建目标对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.service.UserServiceImpl"</span> <span class="attr">id</span>=<span class="string">"userService"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--创建切面对象--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.util.MyAspactJAdvice"</span> <span class="attr">id</span>=<span class="string">"aspactJAdvice"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!----&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">"aspactJAdvice"</span>&gt;</span> <span class="comment">&lt;!--配置切面类的所在--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"myPointcut"</span> <span class="attr">expression</span>=<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span> /&gt;</span><span class="comment">&lt;!--配置要切入的方法（切入点）--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"myAround"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myAround方法为环绕通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"myBefore"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myBefore方法为前置通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">"myAfter"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span>/&gt;</span><span class="comment">&lt;!--指定切面类的myAfter方法为后置通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"myAfterThrowing"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span> <span class="attr">throwing</span>=<span class="string">"e"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定切面类的myAfterThrowing方法为抛异常后通知--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"myAfterReturning"</span> <span class="attr">pointcut-ref</span>=<span class="string">"myPointcut"</span> <span class="attr">returning</span>=<span class="string">"ref"</span>/&gt;</span> </span><br><span class="line">         <span class="comment">&lt;!--指定切面类的myAfterReturning方法为返回值后通知--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="用注解来配置AOP"><a href="#用注解来配置AOP" class="headerlink" title="用注解来配置AOP"></a>用注解来配置AOP</h2><p>首先XML中要开启注解配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">&lt;!--开启AOP注解配置--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>/&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--配置注解扫描的包--&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"cn.hqyj"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>然后编写切面类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAspactJAdvice</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Before</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myBefore</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是前置通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">myPointCut</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(value = <span class="string">"myPointCut()"</span>,returning = <span class="string">"ref"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterReturning</span><span class="params">(JoinPoint joinPoint,Object ref)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是后置通知"</span>+joinPoint.getSignature().getName()+<span class="string">"    返回值为： "</span>+ref);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around</span>(<span class="string">"execution(* cn.hqyj.service.*.*(..))"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAround</span><span class="params">(ProceedingJoinPoint joinPoint)</span><span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"这是环绕前前前前前前通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">        joinPoint.proceed();</span><br><span class="line">        System.out.println(<span class="string">"这是环绕后后后后后后通知"</span>+joinPoint.getSignature().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterThrowing</span>(throwing = <span class="string">"e"</span>,value = <span class="string">"myPointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfterThrowing</span><span class="params">(JoinPoint joinPoint,Throwable e)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"抛出异常啦"</span>);</span><br><span class="line">        System.out.println(<span class="string">"抛出异常通知 ： "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning</span>(value = <span class="string">"myPointCut()"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myAfter</span><span class="params">(JoinPoint joinPoint)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"最终通知"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h2><p>概念：平常我们每对数据库操作一次就会创建一个数据库连接，然后对数据库操作，然后在关闭连接。这样极大部分的时间都浪费在获取连接和销毁连接上了，使用数据库连接池，里面放着连接，需要的时候从连接池中获取一个连接，操作完毕后也不需要释放连接，就把连接归还给连接池。这样就提高了效率。</p>
-<h2 id="SpringDao"><a href="#SpringDao" class="headerlink" title="SpringDao"></a>SpringDao</h2><p>springDao创建会话需要jdbcTemplate。而这个属性有两种方法获得，第一种就是继承父类JdbcDaoSupport，第二种是在Dao中自己定义一个属性 叫 jdbcTemplate。</p>
-<p>不论继承父类还是定义属性，都需要一个jdbcTemplate来创建回话。但是jdbcTemplate创建会话一定需要一个连接池才能够正常使用，所以继承父类的话，同时继承父类的两个属性，只需要给DataSource来赋值，父类就有代码自动给jdbcTemplate注入DataSource属性                                                                                  就可以得到一个可用的jdbcTemplate来如果自己写jdbcTemplate 的话，jdbcTemplate 也依赖连接池来创建链接，所以 jdbcTemplate 中也有一个DataSource属性配好DataSource后，就可以正常使用</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h3><table>
+<p>求d之前的最长前缀和最长后缀的匹配程度，前缀不能包含最后一个字符，后缀也不能包含第一个字符</p>
+<table>
 <thead>
 <tr>
-<th align="center">传播行为</th>
-<th align="center">A有事务B的情况</th>
-<th align="center">A没有事务B的情况</th>
+<th></th>
+<th>前缀长度</th>
+<th>后缀长度</th>
+<th>是否相等</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">required</td>
-<td align="center">使用A的事务</td>
-<td align="center">自己创建一个新的事务</td>
+<td>1</td>
+<td>a</td>
+<td>c</td>
+<td>不相等</td>
 </tr>
 <tr>
-<td align="center">supports</td>
-<td align="center">使用A的事务</td>
-<td align="center">不使用事务</td>
+<td>2</td>
+<td>ab</td>
+<td>bc</td>
+<td>不相等</td>
 </tr>
 <tr>
-<td align="center">mandatory 强制</td>
-<td align="center">使用A的事务</td>
-<td align="center">抛出异常</td>
+<td>3</td>
+<td>abc</td>
+<td>abc</td>
+<td>相等，但他是最长的么？</td>
 </tr>
 <tr>
-<td align="center">requires_new</td>
-<td align="center">把A挂起，创建新的事务</td>
-<td align="center">创建新的事务</td>
+<td>4</td>
+<td>abcd</td>
+<td>cabc</td>
+<td>不</td>
 </tr>
 <tr>
-<td align="center">not_supported ,不支持</td>
-<td align="center">把A挂起，不使用事务</td>
-<td align="center">不使用事务</td>
+<td>5</td>
+<td>abcab</td>
+<td>bcabc</td>
+<td>不</td>
 </tr>
 <tr>
-<td align="center">never</td>
-<td align="center">抛异常</td>
-<td align="center">不使用事务</td>
-</tr>
-<tr>
-<td align="center">nested ，嵌套</td>
-<td align="center">A和B底层采用保存点机制，形成嵌套事务</td>
-<td align="center"></td>
+<td>6</td>
+<td>abcabc</td>
+<td>abcabc</td>
+<td>相等，但是前缀不能取最后一个字符，后缀不能取第一个字符，这种情况排除</td>
 </tr>
 </tbody></table>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 事务管理器 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>= <span class="string">"txManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置数据源 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"dataSourceId"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 开启注解配置事务 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">"txManager"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以d位置上的最长前缀和最长后缀的匹配程度是3。</p>
+<img src="F:/blogPic/image-20200120093157681.png" alt="image-20200120093157681" style="zoom:50%;" />
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)</span><br></pre></td></tr></table></figure>
+<p>根据str2来求这个信息。每个位置的信息都求。生成一个next数组</p>
+<p>有一个函数，你给他一个str，他给你一个数组。数组长度和str2相等，表示每个位置上的前面的那一坨字符串最长前缀和最长后缀的匹配信息。</p>
+<p>先看0位置，前面没有字符串，所以默认-1</p>
+<p>1位置是b，他前面这坨字符串是a。但问题是前缀不能包含最后一个字符，后缀不能包含第一个字符。而他有只有一个字符。所以人为规定 是0</p>
+<p>2位置前面的字符串是ab ，最长前缀和最长后缀不存在相等的情况，是0</p>
+<p>3知网前面是aba，是1</p>
+<img src="F:/blogPic/image-20200120094345676.png" alt="image-20200120094345676" style="zoom: 67%;" />
+
+
+
+<img src="F:/blogPic/image-20200120095025478.png" alt="image-20200120095025478" style="zoom:67%;" />
+
+<p>在str1中开始的位置是i位置，在str2中开始的位置是0位置，一路都相等，什么时候不等呢？</p>
+<p>X位置和Y位置没配上，</p>
+<p>之前的方法的话，就从i+1的位置重新匹配一遍</p>
+<p>str2的y位置有一个信息，y值前面的最长前缀和最长后缀的匹配程度</p>
+<p><img src="F:/blogPic/image-20200120100622590.png" alt="image-20200120100622590"></p>
+<p>y位置的信息是最长前缀和最长后缀相等的长度。所以和str1对应。位置为j。</p>
+<p>现在用从j开始和str2的0位置匹配</p>
+<p>但是现在有是和前面的那一坨一样。所以从z位置比较和x是否一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndexOf</span><span class="params">(String s, String m)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (s == <span class="keyword">null</span> || m == <span class="keyword">null</span> || m.length() &lt; <span class="number">1</span> || s.length() &lt; m.length()) &#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">char</span>[] ss = s.toCharArray();</span><br><span class="line">	<span class="keyword">char</span>[] ms = m.toCharArray();</span><br><span class="line">	<span class="keyword">int</span> si = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> mi = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span>[] next = getNextArray(ms);</span><br><span class="line">      </span><br><span class="line">	<span class="keyword">while</span> (si &lt; ss.length &amp;&amp; mi &lt; ms.length) &#123;</span><br><span class="line">            <span class="comment">//如果si指向的ss和mi指向的ms相等</span></span><br><span class="line">		<span class="keyword">if</span> (ss[si] == ms[mi]) &#123;</span><br><span class="line">			si++;</span><br><span class="line">			mi++;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (next[mi] == -<span class="number">1</span>) &#123;</span><br><span class="line">			si++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			mi = next[mi];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mi == ms.length ? si - mi : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNextArray(<span class="keyword">char</span>[] ms) &#123;</span><br><span class="line">	<span class="keyword">if</span> (ms.length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; -<span class="number">1</span> &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[ms.length];</span><br><span class="line">	next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">	next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pos = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> cn = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (pos &lt; next.length) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ms[pos - <span class="number">1</span>] == ms[cn]) &#123;</span><br><span class="line">			next[pos++] = ++cn;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (cn &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			cn = next[cn];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			next[pos++] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	String str = <span class="string">"abcabcababaccc"</span>;</span><br><span class="line">	String match = <span class="string">"ababa"</span>;</span><br><span class="line">	System.out.println(getIndexOf(str, match));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 
       
@@ -502,7 +318,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/18/%E9%93%9C%E6%9D%BF%E5%88%87%E9%87%91%E6%9D%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -516,7 +332,134 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/" class="post-title-link" itemprop="url">设计RandomPool</a>
+            <a href="/2020/01/18/%E9%93%9C%E6%9D%BF%E5%88%87%E9%87%91%E6%9D%A1/" class="post-title-link" itemprop="url">铜板切金条</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-18 09:30:03" itemprop="dateCreated datePublished" datetime="2020-01-18T09:30:03+08:00">2020-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-20 09:56:46" itemprop="dateModified" datetime="2020-01-20T09:56:46+08:00">2020-01-20</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="F:/blogPic/image-20200118093232022.png" alt="image-20200118093232022"></p>
+<p>切得过程中未必要挨着。吧  </p>
+<p>如果一个数组：[1,4,2,3,5],</p>
+<p>你也可以先切1和5.</p>
+<p>做法：先切出一个9（4+2+3）和6（1+5）</p>
+<p>然后把6切成1+5</p>
+<p>所以说，你只要切出这些部分就可以了</p>
+<p><strong>这是一个标准的哈夫曼编码问题</strong></p>
+<p><strong>子节点合并在一起的代价是加起来的和</strong></p>
+<p>就是把所有的叶子节点加起来生成一颗树</p>
+<img src="F:/blogPic/image-20200118094902220.png" alt="image-20200118094902220" style="zoom:50%;" />
+
+<p>把这个数组放到小根堆里</p>
+<p>[1,2,6,4,3,7,1,8]</p>
+<p>拿出两个数 ：肯定是那两个1，把他俩合并，产生一个2，<strong>代价是2</strong></p>
+<p>然后把这个2仍回到小根堆里面</p>
+<p>数组变成：[2,6,4,3,7,8,2]</p>
+<p>再拿出两个最小的，是两个2，把他俩合并，产生一个4，<strong>代价是4</strong></p>
+<p>然后把4仍回到小根堆里</p>
+<p>数组变成：[6,3,7,8,4,4]</p>
+<p>在拿出两个最小的，4 和3 ，把他俩合并，产生一个7，<strong>代价是7</strong></p>
+<p>数组变成[6,7,8,7,4]</p>
+<p>在拿出两个最小的，4 和6 ，把他俩合并，产生一个10，<strong>代价是10</strong></p>
+<p>数组变成[10,8,7,7]</p>
+<p>在拿出两个最小的，7和7 ，把他俩合并，产生一个14，<strong>代价是14</strong></p>
+<p>数组变成[10,8,14]</p>
+<p>在拿出两个最小的，8和14，把他俩合并，产生一个22，<strong>代价是22</strong></p>
+<p>数组变成[10,22]</p>
+<p>在拿出两个最小的，10和22，把他俩合并，产生一个32，<strong>代价是32</strong></p>
+<p>数组变成[32]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lessMoney</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">		PriorityQueue&lt;Integer&gt; pQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">			pQ.add(arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (pQ.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">			cur = pQ.poll() + pQ.poll();</span><br><span class="line">			sum += cur;</span><br><span class="line">			pQ.add(cur);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sum;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>一个花费数组和一个利润数组，表示一个是这个项目的花费，一个是这个项目的利润，</p>
+<p>然后给你一个初始资金W，并且每次只能做一个项目 ，你如果最多做K个项目的情况下，</p>
+<p>都做完，或者是做不下去了的时候，停</p>
+<p>问最终你的钱剩下多少。</p>
+<img src="F:/blogPic/image-20200118162207256.png" alt="image-20200118162207256" style="zoom: 67%;" />
+
+<p>第一步：生成每一个项目</p>
+<p>第二部：准备一个小根堆，谁花费低，谁在头部，把项目都放进去</p>
+<p>然后看初始资金。</p>
+<p>在小根堆里面依次弹出头部，只要比W初始资金小的都弹出来，</p>
+<p>弹出来之后放到一个大根堆里面，是根据收益高组成的大根堆</p>
+<p><strong>小根堆里放的是所有的项目，而大根堆里放的是所有解锁的项目</strong></p>
+<p>从大根堆里面弹出一个项目来，这个项目一定是所有解锁的项目中收益最高的，</p>
+<p>做完这个项目后，初始资金就会增加，</p>
+<p>然后我在看看新的初始资金能不能解锁一个新的项目</p>
+<p>把解锁的新的项目在扔到大根堆里面去</p>
+<p>大根堆里面在选一个利益最大的项目做</p>
+<p>这样来回，一直做K个 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="comment">//每个项目就是一个点，p是利润，c花费</span></span><br><span class="line">         <span class="keyword">public</span> <span class="keyword">int</span> p;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> c;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.p = p;</span><br><span class="line">			<span class="keyword">this</span>.c = c;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这是花费低的比较器，谁花费低，谁放上面</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MinCostComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Node</span>&gt; </span>&#123;</span><br><span class="line">        </span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Node o1, Node o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o1.c - o2.c;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//这是收益的比较器，谁收益高，谁放上面</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxProfitComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Node</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Node o1, Node o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o2.p - o1.p;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//K是做多少个项目，W是总共有多少钱</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findMaximizedCapital</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> W, <span class="keyword">int</span>[] Profits, <span class="keyword">int</span>[] Capital)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//形成节点（项目）</span></span><br><span class="line">		Node[] nodes = <span class="keyword">new</span> Node[Profits.length];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Profits.length; i++) &#123;</span><br><span class="line">			nodes[i] = <span class="keyword">new</span> Node(Profits[i], Capital[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//准备一个花费的小根堆，谁小谁放上面</span></span><br><span class="line">		PriorityQueue&lt;Node&gt; minCostQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> MinCostComparator());</span><br><span class="line">        <span class="comment">//准备一个利润的大根堆，谁大谁在上面</span></span><br><span class="line">		PriorityQueue&lt;Node&gt; maxProfitQ = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="keyword">new</span> MaxProfitComparator());</span><br><span class="line">        <span class="comment">//把所有的项目，加到小根堆里面去</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodes.length; i++) &#123;</span><br><span class="line">			minCostQ.add(nodes[i]);</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//我要依次左项目了</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">            <span class="comment">//所有被解锁的项目，你们都到利润谁大谁在上面的大根堆去</span></span><br><span class="line">			<span class="keyword">while</span> (!minCostQ.isEmpty() &amp;&amp; minCostQ.peek().c &lt;= W)&#123; <span class="comment">//如果花费最少的那个项目小于总的钱</span></span><br><span class="line">                <span class="comment">//那么该项目弹出来，放到大根堆中</span></span><br><span class="line">                maxProfitQ.add(minCostQ.poll());</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//如果大根堆空了，说明没有项目可以做了，不得不停</span></span><br><span class="line">			<span class="keyword">if</span> (maxProfitQ.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">return</span> W;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//我做了一个利润最大的项目，然后本金+利润</span></span><br><span class="line">			W += maxProfitQ.poll().p;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> W;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="宣讲会例子"><a href="#宣讲会例子" class="headerlink" title="宣讲会例子"></a>宣讲会例子</h2><p><img src="F:/blogPic/image-20200118172622253.png" alt="image-20200118172622253"></p>
+<p>贪心策略：按照结束时间来排序，然后淘汰掉因为做这个项目做不了的项目</p>
+<img src="F:/blogPic/image-20200118173208434.png" alt="image-20200118173208434" style="zoom:67%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是宣讲会	</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Program</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> start;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Program</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.start = start;</span><br><span class="line">			<span class="keyword">this</span>.end = end;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//按照谁先结束谁在前的比较器</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ProgramComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Program</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Program o1, Program o2)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> o1.end - o2.end;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bestArrange</span><span class="params">(Program[] programs, <span class="keyword">int</span> cur)</span> </span>&#123;</span><br><span class="line">		Arrays.sort(programs, <span class="keyword">new</span> ProgramComparator());</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; programs.length; i++) &#123;</span><br><span class="line">            <span class="comment">//如果这个项目时刻是比当前时刻大的话，可以安排</span></span><br><span class="line">			<span class="keyword">if</span> (cur &lt;= programs[i].start) &#123;</span><br><span class="line">				result++;</span><br><span class="line">                <span class="comment">//当前时刻就来到的项目的结束时刻了</span></span><br><span class="line">				cur = programs[i].end;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/18/%E8%B4%AA%E5%BF%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/18/%E8%B4%AA%E5%BF%83/" class="post-title-link" itemprop="url">贪心</a>
         </h1>
 
         <div class="post-meta">
@@ -527,7 +470,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-07 20:09:37 / 修改时间：21:02:07" itemprop="dateCreated datePublished" datetime="2020-01-07T20:09:37+08:00">2020-01-07</time>
+              <time title="创建时间：2020-01-18 08:15:26 / 修改时间：09:35:22" itemprop="dateCreated datePublished" datetime="2020-01-18T08:15:26+08:00">2020-01-18</time>
             </span>
 
           
@@ -541,45 +484,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoapgyadwj20s9096n40.jpg" alt="image-20200107201125059" style="zoom:50%;" />
+          <h3 id="什么是字典序？"><a href="#什么是字典序？" class="headerlink" title="什么是字典序？"></a>什么是字典序？</h3><p>就是在字典中出现的次数。</p>
+<p>比如“abc” 在“c”前面出现</p>
+<p>严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较</p>
+<p>比如说“abc” 和“bce”哪一个字典序小啊？</p>
+<p> abc和bce表示3位都是26进制的数，那么abc较小</p>
+<p>长度不等的时候？比如“abc”，“b”</p>
+<p>此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的</p>
+<p>‘abc’ 和‘b00’比较</p>
+<p>abc较小，因为最高位的b要比a大，</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有一个字符串数组，请你拼接字符串，</p>
+<p>比如’’ab”,”cd”,”ef”   请你拼接成字典序最小的那种方式，</p>
+<p>结果是abcdef</p>
+<p>可以按照字符串的序列排好然后拼接么？</p>
+<p>不行，比如：</p>
+<img src="F:/blogPic/image-20200118084218288.png" alt="image-20200118084218288" style="zoom:33%;" />
 
-<p>准备两张hash表，一个size变量</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaq3uv6dj20wb0b4ad1.jpg" alt="image-20200107201518949" style="zoom: 50%;" />
+<p>bba不是最小的，bab才是最小的，所以不能这样干。<br>所以排序策略：</p>
+<img src="F:/blogPic/image-20200118084637992.png" alt="image-20200118084637992" style="zoom:50%;" />
 
-<p>A进来了，就在map中存东西</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaqikwjpj20xd0eydjz.jpg" alt="image-20200107201639929" style="zoom:33%;" />
+<p>第二种是对的</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> (a + b).compareTo(b + a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">lowestString</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//按照我的排序规则排序</span></span><br><span class="line">		Arrays.sort(strs, <span class="keyword">new</span> MyComparator());</span><br><span class="line">		String res = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">			res += strs[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p>第一个map 含义： A是第0个进来的，</p>
-<p>第二个map含义：第0个进来的是A</p>
-<p>size ++;</p>
-<p>正着查，反着查，都放到map中</p>
-<p>B进来了，map中存东西。size++</p>
-<p>假设一直存到Z ：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaquu4hwj20yp0ogn3u.jpg" alt="image-20200107202100853" style="zoom:50%;" />
 
-<p>在不考虑remove和random 功能的情况下，可以这样做</p>
-<p><strong><em>因为我有大小Size，所以我用Math随机出0-25中的一个数，用这个数字做key查询map2 把value返回 ，绝对等概率</em></strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random)*size);</span><br></pre></td></tr></table></figure>
 
-<p>如果考虑remove的话</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoar5p81uj20tl0mq430.jpg" alt="image-20200107203330304" style="zoom:50%;" />
 
-<p>如果我remove 掉一个key </p>
-<p>如果进行其他操作，直接在map1，map2中remove掉的话会有问题</p>
-<p>假设删掉后12，这样的话，0-999区间就会有一个洞。</p>
-<p>假设删掉999个,</p>
-<p>然后我再随机获取的时候拿到的index 在map中没有的话，我重新在random 还是没有，这样复杂度就会上升</p>
-<p>解决方法：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoark25c4j20xu0nyte5.jpg" alt="image-20200107204155942" style="zoom: 50%;" />
 
-<p>假设要删除Str17</p>
-<p>我把Str999 扔到str17上（map1）</p>
-<p>在让17对应的字符串是Str999（map2）</p>
-<p>然后我删掉最后一条记录</p>
-<p>然后我把size从1000变成999</p>
-<p>产生洞的时候，我用最后一条数据去填这个洞，然后index 还是连续的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pool</span>&lt;<span class="title">K</span>&gt; </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;K, Integer&gt; keyIndexMap;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;Integer, K&gt; indexKeyMap;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Pool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.keyIndexMap = <span class="keyword">new</span> HashMap&lt;K, Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.indexKeyMap = <span class="keyword">new</span> HashMap&lt;Integer, K&gt;();</span><br><span class="line">			<span class="keyword">this</span>.size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//要判断map中存不存在，不存在的话才加</span></span><br><span class="line">			<span class="keyword">if</span> (!<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(key, <span class="keyword">this</span>.size);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(<span class="keyword">this</span>.size++, key);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">int</span> deleteIndex = <span class="keyword">this</span>.keyIndexMap.get(key);</span><br><span class="line">                <span class="comment">//--size是最后一个元素的位置</span></span><br><span class="line">				<span class="keyword">int</span> lastIndex = --<span class="keyword">this</span>.size;</span><br><span class="line">                <span class="comment">//把最后一个位置上的key拿出来</span></span><br><span class="line">				K lastKey = <span class="keyword">this</span>.indexKeyMap.get(lastIndex);</span><br><span class="line">                <span class="comment">//把最后一条记录填在原本要删的记录上</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(lastKey, deleteIndex);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(deleteIndex, lastKey);</span><br><span class="line">                <span class="comment">//然后remove掉最后一条记录</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.remove(key);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.remove(lastIndex);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> K <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> randomIndex = (<span class="keyword">int</span>) (Math.random() * <span class="keyword">this</span>.size); <span class="comment">// 0 ~ size -1</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.indexKeyMap.get(randomIndex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="什么是贪心？"><a href="#什么是贪心？" class="headerlink" title="什么是贪心？"></a>什么是贪心？</h2><p><strong>给你一个指标，每一个样本分出一个优先来</strong></p>
 
       
     </div>
@@ -599,7 +531,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -645,7 +577,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -658,7 +590,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -710,7 +642,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

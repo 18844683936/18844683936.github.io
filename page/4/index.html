@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/springmvc/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/02/07/springboot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/12/springmvc/" class="post-title-link" itemprop="url">springmvc</a>
+            <a href="/2020/02/07/springboot/" class="post-title-link" itemprop="url">springboot</a>
         </h1>
 
         <div class="post-meta">
@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-12 22:35:45 / 修改时间：22:46:34" itemprop="dateCreated datePublished" datetime="2020-01-12T22:35:45+08:00">2020-01-12</time>
+              <time title="创建时间：2020-02-07 14:00:39 / 修改时间：21:42:33" itemprop="dateCreated datePublished" datetime="2020-02-07T14:00:39+08:00">2020-02-07</time>
             </span>
 
           
@@ -216,37 +216,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>表现层四件事</p>
-<h3 id="响应jsp页面请求"><a href="#响应jsp页面请求" class="headerlink" title="响应jsp页面请求"></a>响应jsp页面请求</h3><ul>
-<li><p>后台：</p>
-<pre><code>Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
-Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
-如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
-如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</code></pre></li>
-<li><p>前台jsp</p>
-<ol>
-<li><pre><code class="html"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;add.action"</span>&gt;</span>提交请求<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
-<span class="comment"><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
-</li>
-<li><pre><code class="html"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">" "</span> <span class="attr">name</span>=<span class="string">"myform"</span>&gt;</span>
-    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交请求"</span>  <span class="attr">onclick</span>=<span class="string">"add()"</span>&gt;</span>
-<span class="tag">&lt;/<span class="name">form</span></span>
-    &lt;script&gt;
-        function add(){
-        document.myform.action = "<span class="tag">&lt;<span class="name">%=basePath%</span>&gt;</span>add.action";
-        document.myform.submit();
-        }
-    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></code></pre>
+          <h2 id="thymeleaf-的常用标签"><a href="#thymeleaf-的常用标签" class="headerlink" title="thymeleaf  的常用标签"></a>thymeleaf  的常用标签</h2><ol>
+<li><p>要声明是thymeleaf  下面是前三行代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="comment">&lt;!--suppress ALL--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<p>​            </p>
-<h3 id="获取jsp页面的值"><a href="#获取jsp页面的值" class="headerlink" title="获取jsp页面的值"></a>获取jsp页面的值</h3><p>​        表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
-<p>​        只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
+<ol start="2">
+<li><p>foreach</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="tag">&lt;<span class="name">h3</span> <span class="attr">th:each</span>=<span class="string">" user: $&#123;list&#125;"</span> <span class="attr">th:text</span>=<span class="string">"$&#123;user&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span>  推荐</span><br><span class="line">2. <span class="tag">&lt;<span class="name">h3</span> <span class="attr">th:each</span>=<span class="string">" user: $&#123;list&#125;"</span>&gt;</span>[[ $&#123;user&#125; ]]<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<h3 id="向jsp页面传值"><a href="#向jsp页面传值" class="headerlink" title="向jsp页面传值"></a>向jsp页面传值</h3><p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
-<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
-<h3 id="跳转jsp页面"><a href="#跳转jsp页面" class="headerlink" title="跳转jsp页面"></a>跳转jsp页面</h3><p>​    springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);<br>​    </p>
+<li><p>静态网页放到 templates 下<br>css js img 样式放在 static 下</p>
+</li>
+<li><p>超链接</p>
+<p><img src="F:/blogPic/image-20200207143222896.png" alt="image-20200207143222896"></p>
+<p>注意这里的/代表static文件夹下</p>
+</li>
+<li><p>害怕有缓存 ，关掉</p>
+<p><img src="F:/blogPic/image-20200207143706229.png" alt="image-20200207143706229"></p>
+</li>
+<li><p>如果msg为空，则不显示</p>
+<p><img src="F:/blogPic/image-20200207151536527.png" alt="image-20200207151536527"></p>
+</li>
+<li><p>设置登录拦截</p>
+<p>创建拦截器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyIntercepter</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">        Object username = request.getSession().getAttribute(<span class="string">"username"</span>);</span><br><span class="line">        <span class="keyword">if</span> (username==<span class="keyword">null</span>)&#123;</span><br><span class="line">            request.setAttribute(<span class="string">"msg"</span>,<span class="string">"您还没有登录，请登录"</span>);</span><br><span class="line">            request.getRequestDispatcher(<span class="string">"/login.html"</span>).forward(request,response);</span><br><span class="line">            <span class="keyword">return</span>  <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="8">
+<li><p>配置主页（视图解析器）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLocalResolver</span> <span class="keyword">implements</span> <span class="title">ViewResolver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">resolveViewName</span><span class="params">(String s, Locale locale)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addViewController(<span class="string">"/"</span>).setViewName(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">myViewResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyLocalResolver();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li></li>
+</ol>
 
       
     </div>
@@ -266,7 +276,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/mybatis/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/02/03/Hibernate%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -280,7 +290,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/12/mybatis/" class="post-title-link" itemprop="url">mybatis</a>
+            <a href="/2020/02/03/Hibernate%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Hibernate总结</a>
         </h1>
 
         <div class="post-meta">
@@ -289,10 +299,16 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-12 17:54:45 / 修改时间：20:05:28" itemprop="dateCreated datePublished" datetime="2020-01-12T17:54:45+08:00">2020-01-12</time>
+              <time title="创建时间：2020-02-03 18:03:14" itemprop="dateCreated datePublished" datetime="2020-02-03T18:03:14+08:00">2020-02-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-04 23:35:44" itemprop="dateModified" datetime="2020-02-04T23:35:44+08:00">2020-02-04</time>
+              </span>
 
           
 
@@ -305,92 +321,214 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先搭建好环境后</p>
-<p>在sqlMapConfig.xml文件中设置别名和扫描包</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.beans"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.vo"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.mapper"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol>
+<li><p>导包</p>
+</li>
+<li><p>在src下创建hibernate.cfg.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--前四个是里数据库四大参数--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/hibernate_day2_3<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--方言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这两个是显示sql语言和格式化SQL语言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是如果数据库中没有这些个字段就给你自动生成--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是session绑定session--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是设置事务的隔离级别--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.isolation"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--这个是把pojo中的映射文件加载到核心配置文件中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"cn/hqyj/pojo/User.hbm.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建子配置文件。要和javaBean同包</p>
+<ul>
+<li><p>有一个class标签，标签属性name和Bean的全类名相同，table 和与之对应的数据库中的表相同</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"sys_user"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>​    </p>
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>class标签的子标签：</p>
+<ul>
+<li><p>id标签，有name属性和类的主键属性相同，column和数据库中属性对应，要设置主键生成策略，一般为native </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- property标签，也有name 和 column属性
+
+- 还会有一对一，一对多，多对多的标签，后面在说</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>java 代码</p>
+<p>增加</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Configuration config = <span class="keyword">new</span> Configuration();</span><br><span class="line">    <span class="comment">//加载配置</span></span><br><span class="line">        config.configure();</span><br><span class="line">    <span class="comment">//创建Session工厂</span></span><br><span class="line">        SessionFactory factory = config.buildSessionFactory();</span><br><span class="line">    <span class="comment">//得到session</span></span><br><span class="line">        Session session = factory.openSession();</span><br><span class="line">    <span class="comment">//开启事务</span></span><br><span class="line">        Transaction transaction = session.beginTransaction();</span><br><span class="line">    <span class="comment">//------------------------关键代码--------------------------</span></span><br><span class="line">        Student student = <span class="keyword">new</span> Student(<span class="string">"zxc"</span>,<span class="number">12</span>,<span class="string">"男"</span>);</span><br><span class="line">        session.save(student);</span><br><span class="line">    <span class="comment">//----------------------------------------------------------</span></span><br><span class="line">    <span class="comment">//提交事务</span></span><br><span class="line">        transaction.commit();</span><br><span class="line">    <span class="comment">//关闭事务</span></span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        修改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line"> user.setName(<span class="string">"cg"</span>);</span><br><span class="line"><span class="comment">// session.update(user);(因为有快照机制，所以没有这句话也行)</span></span><br></pre></td></tr></table></figure>
+
+<p>​        删除</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line">      session.delete(user);</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><ol>
+<li><p>查询所有</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from Customer"</span>);<span class="comment">//from后面写的是javabean的名字，不是表名</span></span><br><span class="line">List&lt;Customer&gt; list = query.list();</span><br><span class="line"><span class="keyword">for</span>(Customer c:list)&#123;</span><br><span class="line">	System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件查询</p>
+<ul>
+<li><p>？通配符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like ?"</span>);</span><br><span class="line">      query.setString(<span class="number">0</span>, <span class="string">"%c%"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>：String通配符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like :vn"</span>);</span><br><span class="line">query.setString(<span class="string">"vn"</span>,<span class="string">"%c%"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>使用别名，注意查全部不是* 了，而是别名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select u from User u where u.name = ?"</span>);</span><br><span class="line">query.setString(<span class="number">0</span>, <span class="string">"cg"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>使用构造函数来获得某几个字段的值，其他没有的字段为空</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//from后面写的是javabean的名字，不是表名.构造函数里面必须和javabean中属性一致。</span></span><br><span class="line">Query query = session.createQuery(<span class="string">"select new User(name) from User u"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用投影来获取某几列的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      Query query = session.createQuery(<span class="string">"select cust_id,cust_name from Customer c "</span>);<span class="comment">//select后面跟的javabean中属性名</span></span><br><span class="line">List&lt;Object[]&gt; list = query.list();<span class="comment">//把一条记录的两个字段值放到Object数组中</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;list.size(); i++) &#123;<span class="comment">//然后输出每条记录的这两个字段值</span></span><br><span class="line">	Object[] obj = list.get(i);</span><br><span class="line">	System.out.println(obj[<span class="number">0</span>]+<span class="string">";"</span>+obj[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>排序，很简单，在sql 后面加上desc或者asc就可以了。</p>
+</li>
+<li><p>分页查询</p>
+<ul>
+<li>setFirstResult(a) – 从哪条记录开始，如果查询是从第一条开启，值是0 </li>
+</ul>
+<p>​              公式求第n页是哪条记录开始：  a = （当前页数-1）* 每页记录数b</p>
+<ul>
+<li>setMaxResults(b) – 每页查询的记录条数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list = query.setFirstResult(<span class="number">1</span>).setMaxResults(<span class="number">2</span>).list();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>聚合函数查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select count(u) from User u"</span>);</span><br><span class="line">List&lt;Number&gt; list = query.list();</span><br><span class="line">System.out.println(<span class="string">"结果是"</span>+list.get(<span class="number">0</span>).intValue());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用oid来查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Customer c = session.get(Customer<span class="class">.<span class="keyword">class</span>, 3<span class="title">l</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><ol>
+<li><p>一对多</p>
+<ul>
+<li><p>一的一方</p>
 <ol>
-<li><p>创建接口UserMapper.java </p>
+<li><p>javaBeans：private HashSet<Role> roles = new HashSet&lt;&gt;();</p>
+<p>​        在加上getset方法，注意要实例化,注意用Set接口来接，不能用HashSet，否则会报错。</p>
 </li>
-<li><p>创建UserMapper.xml</p>
+<li><p>hbm.xml：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span>&gt;</span> <span class="comment">&lt;!--一方JavaBean中的集合名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span><span class="comment">&lt;!--数据库中多方的外键名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">one-to-many</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.Role"</span>/&gt;</span><span class="comment">&lt;!--多方的javaBean全路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建 测试类</p>
+</ol>
+</li>
+<li><p>多的一方</p>
+<ol>
+<li><p>javaBean： private User user; 再加上getset，不需要实例化</p>
+</li>
+<li><p>hbm.xml中加入多方的维护关系</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">many-to-one</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>级联保存</p>
 <ul>
-<li><p>获得session后</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = session.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>在一的一方设置级联保存（常用）</p>
+<ol>
+<li><p>在一的一方的set上面添加属性，cascade=”save-update”</p>
+</li>
+<li><pre><code class="java">cg.getRoles().add(role);
+cg.getRoles().add(role1);
+session.save(cg);
+&lt;!--￼<span class="number">18</span>--&gt;</code></pre>
+</li>
+<li><p>保存多的一方的时候把多的一方也保存了</p>
+</li>
+</ol>
+</li>
+<li><p>双方都设置级联保存</p>
+<ol>
+<li>保存任何一个都会全部保存</li>
+</ol>
 </li>
 </ul>
 </li>
-</ol>
-<p>对应关系：</p>
-<p>​         xml文件名要和接口文件名一样</p>
-<p>​        xml文件中的namespace 是 接口的全类名</p>
-<p>​        xml 中 增删改查标签的id是接口中的方法名</p>
-<p>​        已经配过别名后resultType 和 parameterType 都可以是 该包下bean对象的类名，不区分大小写</p>
-<p>​        如果parameterType 是基本数据类型（包含String） #{随便写}，${只能写value}</p>
-<p>​        如果是pojo的话，$,#,中都写  pojo中的属性名，</p>
-<p>​        如果pojo的属性是pojo的话，就属性名.属性</p>
-<p>​        parameterType不能是List ，也就是说前台只能把List放到POJO中传给Mapper</p>
-<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>​    1.接口中方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>xml 中的配置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"add"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></span><br><span class="line">    insert into user (name,sex)  values (#&#123;name&#125;,#&#123;sex&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>​    1.  接口中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>​    2. xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span>&gt;</span></span><br><span class="line">    delete from user where  cid = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><ol>
-<li><p>接口中</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>xml</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateClass"</span> <span class="attr">parameterType</span>=<span class="string">"Classes"</span>&gt;</span></span><br><span class="line">       update classes set username = #&#123;username&#125; where cid = #&#123;id&#125;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><h5 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h5><ul>
-<li>在一的一方写一个List属性泛型为多的一方的类名</li>
-</ul>
+<li><p>级联删除</p>
 <ul>
-<li><p>xml中的写法：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMag"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"querymsg"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"querymsg"</span> <span class="attr">type</span>=<span class="string">"classes"</span>&gt;</span> 返回值类型</span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">ofType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>不设置级联删除，删除一方，多方的外键为空</p>
+</li>
+<li><p>在一的一方设置级联删除 cascade=”delete”，删除一方，多方也删除。</p>
+</li>
+<li><p>孤儿删除，在一的一方设置孤儿删除，cascade=”delete-orphan”，主类中取消关系后，外键类自动删除</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Customer customer=session.get(Customer<span class="class">.<span class="keyword">class</span>, 68)</span>;</span><br><span class="line">Linkman linkman = session.get(Linkman<span class="class">.<span class="keyword">class</span>, 94)</span>;</span><br><span class="line">customer.getLinkmans().remove(linkman);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h5 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h5><ul>
-<li><p>bean中在有外键的一方写外键对应的属性</p>
 </li>
-<li><p>xml中的写法 </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMsgByName"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"queryAllMsg"</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"queryAllMsg"</span> <span class="attr">type</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"classes"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"className"</span> <span class="attr">property</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li><p>级联的取值：</p>
+<ul>
+<li>none ：不使用级联</li>
+<li>save-update ： 级联保存</li>
+<li>delete ： 级联删除</li>
+<li>delete-orphan ：孤儿删除</li>
+<li>all ： save-update + delete</li>
+<li>all-delete-orphan : 全部 </li>
+<li><strong>为了防止产生多余的sql语句，那么需要一方来放弃外键的维护！多方不能放弃外键维护。  在<set>标签上配置一个inverse=”true”</strong></li>
+</ul>
 </li>
 </ul>
-<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where name like &apos;%$&#123;value&#125;%&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多对多</p>
+<ul>
+<li><p>首先每一方的xml都是这样的：而且在其中一方设置级联保存，这样</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span> <span class="attr">table</span>=<span class="string">"sys_role_user"</span> <span class="attr">cascade</span>=<span class="string">"save-update"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"uid"</span>/&gt;</span><span class="comment">&lt;!-- key配置：在中间表中，指向当前对象主键的外键。指向User表主键id的外键 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- many-to-many配置的是set集合中存储对象。</span></span><br><span class="line"><span class="comment">				class：配置对应的对象的全路径</span></span><br><span class="line"><span class="comment">				column：：在中间表中，指向对应对象主键的外键。指向Role的主键rid的外键。</span></span><br><span class="line"><span class="comment">			 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">"com.farsight.bean.Role"</span> <span class="attr">column</span>=<span class="string">"rid"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>而且每一方的javaBean 中都有一个Set集合来维护多对多的关系</p>
+</li>
+<li><p>级联删除</p>
+<ul>
+<li>在role角色方设置级联删除，相当于删除角色时，关联到该角色中间表数据被删掉，中间表数据关联的用户被删掉。删掉的用户在中间表的数据也被删掉</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<ul>
+<li><p><strong>在多对多关系当中：必须有一方设置放弃外键维护，也就是说有一个hbm.xml文件set标签中设置inverse=“true”</strong></p>
+<p><strong>在一对多关系当中：一般 是一方放弃外键维护，如果不放弃多执行update。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>**在哪一方设置级联保存，save那一方的对象，关联的对象也被保存。**
 
 
 
-<p>如果参数list需要迭代</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select * from user</span><br><span class="line">    <span class="comment">&lt;!-- foreach:循环放入参数的集合;collection:传入的集合的变量名称;item：每次循环将循环出的数据放到这个变量中</span></span><br><span class="line"><span class="comment">    open：开始循环拼接的字符;close： 结束循环拼接的字符;separater：循环中拼接的字符--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids!=null"</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">open</span>=<span class="string">"id in ("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">#&#123;id&#125;            </span><br><span class="line">   		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+**在多对多关系中，在某一方设置级联删除，中间表外键为该记录的数据会被删除，另一方表中的关联中间表删除数据的数据也被删除。多对多关系慎用级联删除。**</code></pre><ul>
+<li><p>解除关系</p>
+<ul>
+<li><p>解除关系只会删掉第三张表的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 6)</span>;</span><br><span class="line"> Role role = session.get(Role<span class="class">.<span class="keyword">class</span>, 22)</span>;</span><br><span class="line">user.getRoles().remove(role);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -410,7 +548,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -424,7 +562,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
+            <a href="/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">进阶面试题</a>
         </h1>
 
         <div class="post-meta">
@@ -433,10 +571,16 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-09 20:20:10 / 修改时间：21:00:14" itemprop="dateCreated datePublished" datetime="2020-01-09T20:20:10+08:00">2020-01-09</time>
+              <time title="创建时间：2020-02-02 15:54:22" itemprop="dateCreated datePublished" datetime="2020-02-02T15:54:22+08:00">2020-02-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-30 20:30:29" itemprop="dateModified" datetime="2020-03-30T20:30:29+08:00">2020-03-30</time>
+              </span>
 
           
 
@@ -449,30 +593,230 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>经典的服务器如何抗压？</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlxw4fc6j20i30m6jw9.jpg" alt="image-20200109202950349" style="zoom:33%;" />
+          <h2 id="Servlet接口中有哪些方法？-生命周期是什么？（重点）"><a href="#Servlet接口中有哪些方法？-生命周期是什么？（重点）" class="headerlink" title="Servlet接口中有哪些方法？ 生命周期是什么？（重点）"></a>Servlet接口中有哪些方法？ 生命周期是什么？（重点）</h2><p>有5个方法，其中有三个是生命周期方法</p>
+<ul>
+<li><p>init（） 创建Servlet立即执行初始化方法</p>
+</li>
+<li><p>service（）参数是request，response  执行主要功能</p>
+</li>
+<li><p>destory（） 销毁Servlet 之前执行的方法</p>
+</li>
+</ul>
+<p>还有两个方法：</p>
+<p>​        getServletConfig() 获取xml中的配置</p>
+<p>​        getServletInfo（）获取Servlet信息</p>
+<h2 id="转发和重定向的区别"><a href="#转发和重定向的区别" class="headerlink" title="转发和重定向的区别"></a>转发和重定向的区别</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>转发</th>
+<th>重定向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求次数</td>
+<td>一次请求一次响应</td>
+<td>两次请求，两次响应</td>
+</tr>
+<tr>
+<td>行为</td>
+<td>服务器行为</td>
+<td>客户端行为</td>
+</tr>
+<tr>
+<td>网址变化</td>
+<td>不变</td>
+<td>改变</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>快</td>
+<td>慢</td>
+</tr>
+<tr>
+<td>访问资源</td>
+<td>只能访问本项目</td>
+<td>可以访问其他项目</td>
+</tr>
+<tr>
+<td>request能否带值</td>
+<td>能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<h2 id="Mybatis中-和-的区别"><a href="#Mybatis中-和-的区别" class="headerlink" title="Mybatis中#{}和${}的区别"></a>Mybatis中#{}和${}的区别</h2><ul>
+<li>#{}能够防止sql注入，不能字符串拼接</li>
+<li>${}不能防止sql注入，能够字符串拼接</li>
+<li>如果是参数是基本数据类型+String类型的话，#{随便写}，${只能写value}</li>
+<li>如果是参数是Pojo的话，#和$中{都是Pojo中的属性值}</li>
+</ul>
+<h2 id="get-和-post-的区别"><a href="#get-和-post-的区别" class="headerlink" title="get 和 post 的区别"></a>get 和 post 的区别</h2><ul>
+<li>get：提交的数据拼接在url后面，速度快不安全，长度有限制64KB。</li>
+<li>post: url到服务器后，服务器根据url到客户端获取提交的数据。速度慢安全，长度无限制。</li>
+</ul>
+<h2 id="jsp中的九大内置对象"><a href="#jsp中的九大内置对象" class="headerlink" title="jsp中的九大内置对象"></a>jsp中的九大内置对象</h2><p> out  输出流<br> page this<br> config 相当于ServletConfig,用来加载xml中的信息<br> exception 错误页面才有的对象<br> pageContext 一个顶9个，召唤其它<br> request  相当于HttpServletRequest，代表一个请求<br> response 一个响应<br> session  一次会话<br> application 代表整个项目</p>
+<h2 id="jsp和Servlet的区别"><a href="#jsp和Servlet的区别" class="headerlink" title="jsp和Servlet的区别"></a>jsp和Servlet的区别</h2><p>jsp 的本质就是Servlet的简易形式，是html + Serlvet ,用来简化页面的生成，jsp更加侧重于视图， Servlet侧重于逻辑控制</p>
+<h2 id="jsp中的作用域"><a href="#jsp中的作用域" class="headerlink" title="jsp中的作用域"></a>jsp中的作用域</h2><p>page ：本页面的对象和属性</p>
+<p>request ： 一个请求中的对象和属性</p>
+<p>session： 一次会话中的对象和属性</p>
+<p>application： 一个项目的对象和属性</p>
+<h2 id="实现会话跟踪的技术有哪些"><a href="#实现会话跟踪的技术有哪些" class="headerlink" title="实现会话跟踪的技术有哪些"></a>实现会话跟踪的技术有哪些</h2><p>url重写 ， 设置表单隐藏项，cookie ，httpSession</p>
+<h2 id="过滤器有哪些作用和用法"><a href="#过滤器有哪些作用和用法" class="headerlink" title="过滤器有哪些作用和用法"></a>过滤器有哪些作用和用法</h2><p>可以改变请求的内容，重设报头信息，然后发送给目标资源</p>
+<p>用来用户认证，记录和审核用户的请求，对用户发送的数据进行过滤和替换，压缩资源的大小；</p>
+<p>对客户端的请求统一编码和对客户端进行验证</p>
+<p>实现Filter接口，同时重写Filter接口的三个方法：</p>
+<p>   init(FilterConfig config)   用于获取FilterConfig对象</p>
+<p>   doFilter(ServletRequest request,ServeltResponse response,FilterChain chain)  进行过滤处理一些业务</p>
+<p>   destroy()   销毁Filter</p>
+<h2 id="Servlet获取用户提交的数据"><a href="#Servlet获取用户提交的数据" class="headerlink" title="Servlet获取用户提交的数据"></a>Servlet获取用户提交的数据</h2><p>用request.getParameter(),如果是复选框，用getParameterValues()或者getParameterMap()</p>
+<h2 id="什么是ORM"><a href="#什么是ORM" class="headerlink" title="什么是ORM"></a>什么是ORM</h2><p>对象关系映射，就是javaBean和数据库中的表的映射</p>
+<h2 id="Mybatis中命名空间的作用"><a href="#Mybatis中命名空间的作用" class="headerlink" title="Mybatis中命名空间的作用"></a>Mybatis中命名空间的作用</h2><p> mybatis中为每一个映射文件添加一个namespace，这样不同的映射文件中sql语句的id相同也不会有冲突，只要定义的sql语句在该映射文件中id唯一就可以 。</p>
+<h2 id="Mybatis中的动态sql是什么意思"><a href="#Mybatis中的动态sql是什么意思" class="headerlink" title="Mybatis中的动态sql是什么意思"></a>Mybatis中的动态sql是什么意思</h2><p>写复杂的sql时，需要拼接sql语句，动态sql就是解决这个问题的。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">index</span>=<span class="string">"index"</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">          #&#123;item&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"title != null"</span>&gt;</span></span><br><span class="line">              and title = #&#123;title&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"content != null"</span>&gt;</span></span><br><span class="line">              and content = #&#123;content&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">              and owner = "owner1"</span><br><span class="line">          <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"title != null"</span>&gt;</span></span><br><span class="line">          and title = #&#123;title&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>前端无差别接受request</p>
-<p>我想把“左” 31 存到这个服务里。</p>
-<p>前端的request带相同的hash函数</p>
-<p>“左” 经过hash函数再取模3后会得到0,1,2中一个值</p>
-<p>如果是1 ，就把这个值存在1 这个机器上</p>
-<p>“yao”进hash函数取模3后还会得到0,1,2 中的一个值，</p>
-<p>可能是0 ，然后放到 后端的0 这号机器上</p>
-<p>因为我不同的String ，经过hash函数算完后，均匀的得到0,1,2上面的一个，</p>
-<p>所以 0 ，1， 2 这三台机器负载都均衡</p>
-<p>那我在查得过程中怎么查呢？</p>
-<p>我想查“左” 的value 是多少，到了前端，我还是用“左”进入hash函数 ，取模得到哪一个服务器</p>
-<p>就会去1 这台机器上去拿“左”向对应的年龄是多少。</p>
-<p>返回给前端，返回给用户</p>
-<p>这就是经典的 服务器的抗压结构</p>
-<hr>
-<p>但是 当我 需要加机器或者减机器的时候，这个结构就不行了。</p>
-<p>就跟hash表扩容一样，原来取模的是3，现在要取模100</p>
-<p>所有的数据归属全变了，原来放在1 机器上，接下来放到哪里呢？</p>
-<p>必须要把“左”用hash函数取模100然后知道该往那一台机器上迁移</p>
-<p>这样代价很高</p>
-<p>你就不得不把所有的 数据拿出来，重新计算一遍。然后在扔到扩完之后的机器上。</p>
+
+
+<h2 id="IOC-和-DI"><a href="#IOC-和-DI" class="headerlink" title="IOC 和 DI"></a>IOC 和 DI</h2><p>IOC 是控制反转，以前都是手动创建对象，现在有框架来创建对象</p>
+<p>注解创建 @Component @Controller @Service @Repository</p>
+<ul>
+<li><p>无参构造创建</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo0.ioc.HelloService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态工厂方法</p>
+</li>
+<li><p>实例工厂方法</p>
+</li>
+</ul>
+<p>DI是依赖注入，就是给刚才IOC创建的对象赋值</p>
+<p>注解注入 @AutoWired        @Resource        @AutoWired@Qulifiler</p>
+<ul>
+<li>构造方法注入，</li>
+<li>setter注入</li>
+<li>p命名空间注入</li>
+</ul>
+<p>一般来说，非必须的属性使用setter 必须的属性使用构造方法注入</p>
+<h2 id="bean对象的作用域"><a href="#bean对象的作用域" class="headerlink" title="bean对象的作用域"></a>bean对象的作用域</h2><ol>
+<li>Singleton 单例，在容器中只创建一次，每次getBean得到的都是同一个对象</li>
+<li>prototype 原型， 每次getBean得到的都是不同的对象</li>
+<li>request 作用域是一个请求</li>
+<li>session 作用域是一个会话</li>
+<li>global - session 作用域为一个application</li>
+</ol>
+<h2 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h2><p>概念 ：当一批对象具有通用的业务逻辑是，我们往往会写一个工具类来同一实现该业务</p>
+<p>，从而提高代码的复用性。AOP可以帮助我们管理这个工具类，降低他与使用者</p>
+<p>之间的耦合度。</p>
+<ol>
+<li>AOP可以管理工具类</li>
+<li>AOP可以进调用工具类的代码写入其使用者的方法中</li>
+<li>AOP的前提是工具类及其使用者都</li>
+</ol>
+<h2 id="如何理解横切关注"><a href="#如何理解横切关注" class="headerlink" title="如何理解横切关注"></a>如何理解横切关注</h2><p>关注的就是那些与业务逻辑无关但又不可缺少的功能点（日志，事务，安全性），横切就是把这些业务逻辑抽取出来。</p>
+<h2 id="黑"><a href="#黑" class="headerlink" title="黑"></a>黑</h2><ol>
+<li>切面对象：工具类</li>
+<li>目标对象：切入点所在的类</li>
+<li>通知：切入点所在的时机</li>
+<li>切入点：哪些方法调用工具类</li>
+</ol>
+<h2 id="springmvc-工作原理"><a href="#springmvc-工作原理" class="headerlink" title="springmvc 工作原理"></a>springmvc 工作原理</h2><p><img src="F:/blogPic/image-20200211093809204.png" alt="image-20200211093809204"></p>
+<h2 id="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"><a href="#Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗" class="headerlink" title="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"></a>Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗</h2><p>SessionFactory 是线程安全的，可以并发访问，Session 是 线程不安全的，两个线程不能够共享同一个session，为了保证Service和Dao层的session是同一个session，可以使用ThreadLocal 把Session绑定到线程上。</p>
+<p><img src="F:/blogPic/image-20200214091224845.png" alt="image-20200214091224845"></p>
+<p>当获取一方的数据的时候，多方的Set集合中没有多方的数据，就是关联级别的延迟加载</p>
+<p>lazy = true 代表延迟加载，不执行select语句</p>
+<p>在 set标签上写 lazy = true （默认）表示关联级别的延迟加载</p>
+<p>load 不执行select </p>
+<p>使用到主表的数据   执行主表的select</p>
+<p>使用到关联表的数据， 执行关联表的select</p>
+<p>lazy 还能等于extra 用啥查啥，节省内存（主要是count 加载一条，其他的大概全部都加载）</p>
+<p><img src="F:/blogPic/image-20200214100014499.png" alt="image-20200214100014499"></p>
+<p>fetch属性 为join 就变成多表查询了，以前一个get 只get改类，如果为join 就会把相关联的表也弄出来</p>
+<p>延迟加载不可用了</p>
+<p>fetch 属性为 select 的时候，意思就是执行两条sql 语句。这样就是默认的</p>
+<h2 id="session和application-的区别"><a href="#session和application-的区别" class="headerlink" title="session和application 的区别"></a>session和application 的区别</h2><ol>
+<li>作用域不同<ul>
+<li>session是用户级别的，application是web应用级别的，是一个全局作用域</li>
+<li>一个用户一个session ，每一个用户的session的各不相同。</li>
+<li>一个web应用一个application</li>
+</ul>
+</li>
+<li>生命周期不同<ul>
+<li>session 在登陆后创建，在用户注销，关闭浏览器的时候销毁</li>
+<li>application 在创建web应用程序的时候创建，在关闭应用是销毁</li>
+</ul>
+</li>
+</ol>
+<h2 id="实例化Servlet-有哪些方法"><a href="#实例化Servlet-有哪些方法" class="headerlink" title="实例化Servlet 有哪些方法"></a>实例化Servlet 有哪些方法</h2><ol>
+<li>第一次请求Servlet的时候</li>
+<li>在web.xml 中的Servlet标签中配置 loadon-startup标签，tomcat在启动的时候就会创建Servlet</li>
+</ol>
+<h2 id="Tomcat中的目录"><a href="#Tomcat中的目录" class="headerlink" title="Tomcat中的目录"></a>Tomcat中的目录</h2><p>bin ， lib ，logs ，config ，webapps， temp， work </p>
+<h2 id="Cookie-和Session的区别"><a href="#Cookie-和Session的区别" class="headerlink" title="Cookie 和Session的区别"></a>Cookie 和Session的区别</h2><ol>
+<li><p>cookie存储在客户端，不安全，Session存在服务器，安全</p>
+</li>
+<li><p>cookie 可以存放用户名等不重要的信息，可以减缓服务器的压力，session 存储比较重要的信息，session 会存在 服务器上，会占用内存</p>
+</li>
+<li><p>单个cookie保存的数据不能超过4k，很多浏览器最多保存20个cookie</p>
+</li>
+</ol>
+<p>Activity生命周期</p>
+<p> onCreate 第一个生命周期，初始化</p>
+<p>onStart： 能看见，不能交互</p>
+<p>onResume ： 能和用户交互</p>
+<p>onPause： 窗口部分被遮盖</p>
+<p>onStop： 窗口全部遮盖</p>
+<p>onRestar： 处于onStop，重新回到窗口</p>
+<p>可视生命周期：onStart onResume onPause onStop</p>
+<p>前景生命周期：onResume-onPause </p>
+<p>Activity 启动模式：</p>
+<p>​    Standard ： 默认，启动Activity每次都重新创建放到栈顶</p>
+<p>​    SingleTop：启动activity，如果栈顶有直接使用，如果栈顶没有创建</p>
+<p>​    SingelTask： 启动activity，如果栈里有，将上面对象pop出栈，使自己成为栈顶使用，如果没有，创建Activity放入栈顶使用</p>
+<p>SingleInstance ： 如果共享栈有，直接使用。如果共享栈里没有，创建对象放在共享栈使用，该activity不放入程序栈</p>
+<p>在清单配置文件中 <activity android:name  = "" android:launchMode="启动方式"></activiy></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>当前显示的是这个Activity 处于OnResume 状态。进入到list页面，显示列表窗口，Activity就处于onStop声明周期</p>
+<p>Service用来：没有显示这个页面，但是在后台依然显示，比如说音乐播放器</p>
+<p>startService 启动 stopService 停止</p>
+<p>生命周期：onCreate –onStart – onDestroy</p>
+<p>第一次启动 ： oncreate – onstart</p>
+<p>第二次启动 onstart</p>
+<p> bindService   可以传值</p>
+<p>onCreate  – onbind – onUnbind - onDestroy</p>
+<p>第一次启动 ： onCreate – onBind</p>
+<p>第二次绑定 ： onRebind</p>
+<p>startService  启动</p>
+<p> onCreate – onStart  onDestroy</p>
+<p>bindService 启动</p>
+<p>onCreate  onBind  onUnBind  onReBind on Destroy</p>
+<p>第一次执行： onCreate  onBind  第二次 ： onReBind</p>
+<p>能传值</p>
+<h2 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h2><p>intent i= new Intent（当前窗口.this,目标窗口.class）；</p>
+<p>intent i= new Intent（当前窗口.this,目标Service.class）；</p>
+<p>intent i= new Intent（）；//启动窗口使用startActivityForResult，返回窗口用这个</p>
+<p>intent i= new Intent（“myBroadcast”）；</p>
+<p>intent.putExtra(“name”,”zhangsna”);</p>
+<p>sendBroacast();</p>
+<p>安卓的四大组件：</p>
+<p>​    Activity ：窗口</p>
+<p>​    Service ： 服务</p>
+<p>BroadcastReceiver 广播接收器</p>
+<p>ContentProvider ： 内容提供者 ： 一个应用程序的数据不能访问另一个应用程序的数据，，一个应用程序通过ContentProvider对外提供数据访问的接口，其他程序可以通过他来访问</p>
+<p>主线程也就是ui线程，负责界面，处理用户的响应</p>
+<p>有anr 机制，所有的耗时操作在子线程中左，子线程不能</p>
+<p>控制ui组件</p>
+<p>在ui线程中创建Handler 对象，该对象需要重写handlerMessage方法，接受子线程发送的数据，子线程通过Handler对象调用sendMessage发送数据给ui线程</p>
+<p>xml 中 宽和高用dp 字体用 sp</p>
+<p>Android 中的  assets 目录下的东西 会原封不动的存储在设备上</p>
+<p>多媒体文件放在 raw</p>
+<p>图片放在drawble </p>
+<p>字符串 strings.xml  colors.xml arrays,xml 中防止数据</p>
+<p> 安卓可以把数据放到文件和数据库和sharedpreference</p>
+<p>Intent 可以传递 Serializable  charsequence Parcelable Bundle</p>
+<p>安卓的虚拟机 是 Dalvik</p>
+<p>安卓编译后的文件 是dex文件</p>
+<p><img src="F:/blogPic/image-20200313095654248.png" alt="image-20200313095654248"></p>
+<p>Handler  的原理</p>
+<p>负责 线程之间传递数据。把数据封装到Message对象中，通过Handler对象把Message对象发送给</p>
+<p>ui线程，ui线程将接受到Messag对象放在MessageQueue中，ui线程通过Looper把MessageQueue 中的Message取出来</p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p> 真实的数据存贮在叶子节点；非叶子节点不存贮真实的数据，只存储指引搜索方向的数据项</p>
 
       
     </div>
@@ -492,7 +836,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -538,7 +882,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -551,7 +895,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -603,7 +947,7 @@ Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/25/web/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,73 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/25/web/" class="post-title-link" itemprop="url">web</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-25 11:46:29 / 修改时间：22:58:33" itemprop="dateCreated datePublished" datetime="2019-11-25T11:46:29+08:00">2019-11-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>块元素有：<div><p><h1-6><ol><ul><br>        1.默认独占一行<br>        2.没有宽度时，默认占满一排<br>        3.<br>内嵌元素有：<a> <span> <img> <sub> &lt;sup支持所有css命令&gt; <strong>（和 b） <em>(和i 都是斜体)<br>        1.同排 可以继续跟同类的标签<br>        2.内容撑开宽度<br>        3.不支持宽和高<br>        4.不支持上下的margin，左右支持margin<br>        5.支持padding<br>border ： 1px solid red; 边界的属性<br>margin ：外边距<br>padding：块边界和块文字之间的距离<br>height：块的高度<br>weith：快的长度<br>height 和 weith 不能被内嵌元素识别<br>display:inline ; 块元素转换内嵌元素  不支持宽和高，margin值支持左右<br>display:block; 内嵌元素转换块元素<br>display:inline-block; 转换成行内块元素，支持所有css样式 </p>
-<p>·<h1 align="center"> 标题 居中 right left（默认）<br>文字格式： font - family 字体<br>            font-size 字号<br>            color 颜色<br>            <strong> <b> 加粗标签<br>            <sup><sub> 上下标 标签<br>            <del>  删除标签<br>            <em> <i> 斜体</p>
-<p>设置样式的两种方式<br>首先：行内样式优先于内部样式<br>    行内样式 用style属性来实现：属性里面有样式名 样式值 样式名 样式值<br>    空格 用 &nbsp;<br>    由于文字标签属于内嵌元素，所以不能自动换行，需要<br/><br>    设置文字格式的方法有两：<br>        利用标签 style<br>        利用行间样式css</p>
-<p>​        </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">段落格式</span><br><span class="line">段落标记 <span class="tag">&lt;<span class="name">p</span>&gt;</span> 段落标签 ，块元素  自动换行，随着网页的宽度</span><br><span class="line"><span class="tag">&lt;<span class="name">nobr</span>&gt;</span> 取消文字换行</span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span>换行</span><br><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span> 保留原始的排版方式</span><br><span class="line"><span class="tag">&lt;<span class="name">center</span>&gt;</span> 居中对齐</span><br><span class="line"><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span>fdsfdsa<span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span>自动缩进</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span> 设置水平线的宽度和高度</span><br><span class="line">width size color align noshade（去掉水平线的阴影） 设置分割线的样式 style = "border :1px dashed red"</span><br><span class="line"></span><br><span class="line">列表 ul 无序列表 ●、○、■等开头的，没有顺序的列表项目，</span><br><span class="line">			ol有序列表  按照数字或字母等顺序排列列表项目 </span><br><span class="line">		</span><br><span class="line">			给无序列表去 前面的东西 style = "list-style : none;" 写在ul里</span><br><span class="line">			无序列表的默认符号是●</span><br><span class="line">			type 的属性 有 disc  circle square  写在ul里</span><br><span class="line">图片：<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span> = <span class="string">""</span>/&gt;</span> </span><br><span class="line">	alt 图片不能显示是显示的内容</span><br><span class="line">	title 光标放上去 显示的内容</span><br><span class="line">	height</span><br><span class="line">	width</span><br><span class="line">	border 边框</span><br><span class="line">	hspace 图像水平间距</span><br><span class="line">	vspace 图像垂直间距</span><br></pre></td></tr></table></figure>
-
-
-<p>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​    </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/24/DFS%E7%AE%80%E4%BB%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/24/DFS%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">DFS简介</a>
+            <a href="/2019/12/26/%E7%94%A8%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E6%A0%88%EF%BC%8C%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">用队列实现栈，用栈实现队列</a>
         </h1>
 
         <div class="post-meta">
@@ -267,26 +201,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-11-24 18:54:38" itemprop="dateCreated datePublished" datetime="2019-11-24T18:54:38+08:00">2019-11-24</time>
+              <time title="创建时间：2019-12-26 18:15:13" itemprop="dateCreated datePublished" datetime="2019-12-26T18:15:13+08:00">2019-12-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-04 22:37:01" itemprop="dateModified" datetime="2019-12-04T22:37:01+08:00">2019-12-04</time>
+                <time title="修改时间：2020-01-06 22:12:10" itemprop="dateModified" datetime="2020-01-06T22:12:10+08:00">2020-01-06</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-            </span>
 
           
 
@@ -299,17 +222,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>什么时候用DFS</strong></p>
-<p>找所有方案的题，一定是DFS</p>
-<p>所有DFS的题，要么是排列，要么是组合</p>
-<p>任何切割问题都是组合问题</p>
-<p><img src="/images/e.png" alt="组合"></p>
-<p>所有的切割方案都对应着一种组合方案</p>
-<p> <a href="https://www.jianshu.com/p/79b05c2bfdbc" target="_blank" rel="noopener">https://www.jianshu.com/p/79b05c2bfdbc</a> </p>
-<p> <a href="https://www.jiuzhang.com/solution/palindrome-partitioning/" target="_blank" rel="noopener">https://www.jiuzhang.com/solution/palindrome-partitioning/</a> </p>
-<p> <a href="https://www.jiuzhang.com/solution/permutations/" target="_blank" rel="noopener">https://www.jiuzhang.com/solution/permutations/</a> </p>
-<p> <a href="https://www.jiuzhang.com/solution/permutations-ii/" target="_blank" rel="noopener">https://www.jiuzhang.com/solution/permutations-ii/</a> </p>
-<p> <a href="https://www.jiuzhang.com/solution/n-queens/" target="_blank" rel="noopener">https://www.jiuzhang.com/solution/n-queens/</a> </p>
+          <h3 id="队列结构实现栈"><a href="#队列结构实现栈" class="headerlink" title="队列结构实现栈"></a>队列结构实现栈</h3><p>准备两个队列。栈结构是先进后出的；</p>
+<p>向这个结构中放入1，2，3，4，5  返回的应该是 5，4，3，2，1</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rc1asj20zd0eytde.jpg" alt="image-20191226181957454" style="zoom:50%;" />
+
+<p>现在用户让你返回一个：</p>
+<p>你让1，2，3，4 到help队列中 </p>
+<p>把data队列中剩下的5 给用户返回。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoQueuesStack</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; queue;</span><br><span class="line">	<span class="keyword">private</span> Queue&lt;Integer&gt; help;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TwoQueuesStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		queue = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">		help = <span class="keyword">new</span> LinkedList&lt;Integer&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">           <span class="comment">//数永远只进data队列</span></span><br><span class="line">		queue.add(pushInt);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (queue.size() != <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		help.add(res);</span><br><span class="line">		swap();</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stack is empty!"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//出的时候，把data队列中只留一个。剩下的都给help队列</span></span><br><span class="line">		<span class="keyword">while</span> (queue.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">			help.add(queue.poll());</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//把这最后一个进队列的数保存，弹出（相当于弹栈）</span></span><br><span class="line">		<span class="keyword">int</span> res = queue.poll();</span><br><span class="line">		swap();<span class="comment">//交换两个栈的引用</span></span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Queue&lt;Integer&gt; tmp = help;</span><br><span class="line">		help = queue;</span><br><span class="line">		queue = tmp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="栈实现队列"><a href="#栈实现队列" class="headerlink" title="栈实现队列"></a>栈实现队列</h3><p>两个栈，push  pop</p>
+<p>用户添加一个数，永远放到push栈中。</p>
+<p>用户拿一个数，永远从pop栈中拿</p>
+<p>比如压栈1，2，3，4，5</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan75rhqb0j20rm0kejvd.jpg" alt="image-20191226185631836" style="zoom:50%;" />
+
+<p>用户需要拿一个数。就把push栈中所有的东西都给pop栈。顺序就有了</p>
+<p>有两个限制：</p>
+<ol>
+<li>如果push栈决定要向pop栈中倒数据，一次性倒完</li>
+<li>如果pop栈中有东西，push栈中一定不能倒数据</li>
+</ol>
+<p>倒数据行为可以发生在任意时刻。只要满足这两个限制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TwoStacksQueue</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPush;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackPop;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TwoStacksQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			stackPush = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			stackPop = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> pushInt)</span> </span>&#123;</span><br><span class="line">			stackPush.push(pushInt);</span><br><span class="line">             dao();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">poll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (stackPop.empty() &amp;&amp; stackPush.empty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Queue is empty!"</span>);</span><br><span class="line">			&#125; </span><br><span class="line">             dao();</span><br><span class="line">			<span class="keyword">return</span> stackPop.peek();</span><br><span class="line">		&#125;</span><br><span class="line">    </span><br><span class="line">    	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dao</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//如果我的pop栈不为空的话，直接return，倒不了</span></span><br><span class="line">            <span class="keyword">if</span>(!stackPop.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//一次要到完</span></span><br><span class="line">          	<span class="keyword">while</span>(!stackPush.isEmpty())&#123;</span><br><span class="line">                stackPop.push(stackPush.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -329,7 +265,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -343,7 +279,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">判断一个图是不是树状结构</a>
+            <a href="/2019/12/26/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%88%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%B7%BB%E5%8A%A0%E8%BF%94%E5%9B%9E%E6%A0%88%E4%B8%AD%E6%9C%80%E5%B0%8F%E5%85%83%E7%B4%A0%E7%9A%84%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">实现一个特殊的栈，基本功能上添加返回栈中最小元素的操作</a>
         </h1>
 
         <div class="post-meta">
@@ -352,21 +288,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2019-11-24 16:36:06 / 修改时间：19:56:41" itemprop="dateCreated datePublished" datetime="2019-11-24T16:36:06+08:00">2019-11-24</time>
+              <time title="创建时间：2019-12-26 17:30:34" itemprop="dateCreated datePublished" datetime="2019-12-26T17:30:34+08:00">2019-12-26</time>
             </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
                 </span>
-            </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:16:55" itemprop="dateModified" datetime="2020-01-06T22:16:55+08:00">2020-01-06</time>
+              </span>
 
           
 
@@ -379,17 +310,113 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>​        一棵树    有 n个节点，n-1条边</p>
-<p>​        <strong>所有点连通</strong></p>
-<p><strong>连通性问题可以使用BFS来解决</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/24/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%9B%BE%E6%98%AF%E4%B8%8D%E6%98%AF%E6%A0%91%E7%8A%B6%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+          <p>设计：</p>
+<p>准备两个栈 ，一个是data栈 一个是min栈</p>
+<p>data栈压入一个4， min 也栈压入一个4;</p>
+<p>data再压入一个5，min栈：5和min栈栈顶比较，如果5比min栈栈顶(4)小，就压5。如果min栈栈顶（4） 更小，就重复压入4 </p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bvecjj20xk0klteb.jpg" alt="image-20191226174010154" style="zoom: 33%;" />
+
+<p>此时data在压入一个3，min栈：3&lt;4 比min栈栈顶小，就压入3；</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bihc7j20ws0i2q87.jpg" alt="image-20191226174158870" style="zoom: 33%;" />
+
+<p>如果data栈压入一个6，min栈栈顶3小，重复压入一个3</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan79bz0ruj20u20ijafe.jpg" alt="image-20191226174300641" style="zoom:33%;" />
+
+<p>data栈是一个正常的栈。min栈栈顶就是这个data栈中的最小元素</p>
+<p>如果要弹出一个数的时候，data弹一个数，min弹一个数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyStack1</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackData;</span><br><span class="line">		<span class="keyword">private</span> Stack&lt;Integer&gt; stackMin;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">MyStack1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.stackData = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.stackMin = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> newNum)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123; <span class="comment">//如果min栈为空，就压入头一个数</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (newNum &lt; <span class="keyword">this</span>.getmin()) &#123;<span class="comment">//如果当前数比min栈栈顶（栈顶就是最小的数）还要小，就把这个数压到min中；</span></span><br><span class="line">				<span class="keyword">this</span>.stackMin.push(newNum);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="keyword">int</span> newMin = <span class="keyword">this</span>.stackMin.peek();<span class="comment">//如果min栈栈顶更小的话，就把min栈栈顶重复压入min栈中</span></span><br><span class="line">                  <span class="keyword">this</span>.stackMin.push(newMin);</span><br><span class="line">             &#125;</span><br><span class="line">            <span class="comment">//data栈同时压入这个数</span></span><br><span class="line">			<span class="keyword">this</span>.stackData.push(newNum);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackData.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//同时弹出</span></span><br><span class="line">			<span class="keyword">this</span>.stackMin.pop();</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackData.pop();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getmin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.stackMin.isEmpty()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Your stack is empty."</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.stackMin.peek();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/26/%E7%94%A8%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%B0%8F%E5%9B%BA%E5%AE%9A%E7%9A%84%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/26/%E7%94%A8%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%A4%A7%E5%B0%8F%E5%9B%BA%E5%AE%9A%E7%9A%84%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88/" class="post-title-link" itemprop="url">用数组结构实现大小固定的队列和栈</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-26 14:14:28" itemprop="dateCreated datePublished" datetime="2019-12-26T14:14:28+08:00">2019-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:20:03" itemprop="dateModified" datetime="2020-01-06T22:20:03+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="实现栈"><a href="#实现栈" class="headerlink" title="实现栈"></a>实现栈</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayStack</span> </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> Integer[] arr;</span><br><span class="line">		<span class="keyword">private</span> Integer size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">ArrayStack</span><span class="params">(<span class="keyword">int</span> initSize)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (initSize &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The init size is less than 0"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			arr = <span class="keyword">new</span> Integer[initSize];</span><br><span class="line">			size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> arr[size - <span class="number">1</span>];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> obj)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == arr.length) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is full"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			arr[size++] = obj;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> Integer <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is empty"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> arr[--size];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="实现队列"><a href="#实现队列" class="headerlink" title="实现队列"></a>实现队列</h3><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan7dxaxypj20ym0j2jxy.jpg" alt="image-20191226162930396" style="zoom:50%;" />
+
+<p>start 变量表示如果我要取一个数，我要把哪一个数取出来给用户</p>
+<p>end 变量表示如果我要存一个数，我应该把他填到那个位置。</p>
+<p>这两个变量都指向0的位置</p>
+<p>单独设置一个size变量来约束start和end</p>
+<p>整个数组大小是3</p>
+<p>如果size变量没有到3</p>
+<p>就把用户新给我的数放到end位置上去 这是end和size的规则</p>
+<p>size 同时和start有约束。如果size不等于0 </p>
+<p>总把start上的数给用户。</p>
+<p>所以start和end之间是解耦的。</p>
+<p>假设用户添加一个数字7，size = 0 &lt;3  把7放到end的 位置（0） end+1 = 1。size 变成1；</p>
+<p> 用户让我加6，size = 1 &lt; 3 把6 放到end的位置（1） end+1 = 2 size + 1 = 2；</p>
+<p>用户让我返回一个数，我看size是不是0 如果size（2）不是0.就返回 start指的那个数，然后start+1  size-1 = 1； </p>
+<p>如果用户要添加一个数字5 ，就把end的位置添加5   size +1 = 2  end+1 =0。end的逻辑是只要end到底了就回到开头 end会跳回到 7 的位置（也就是头一个数0）去。</p>
+<p>用户加一个数字9 ，此时 size 为2 还没有道3 ，所以我把9 放到end的位置上。end +1 = 2 ；size +1 = 3；</p>
+<p>此时用户再添加一个数，因为size已经为3 了，所以报错；</p>
+<p>这是一个循环的队列，end一旦到底就回到开头，start一直在追这个end；</p>
+<p>这种方法和之前的队列代码不同，引入了size变量。使得代码思路更加清晰。好写。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayQueue</span> </span>&#123;</span><br><span class="line">       <span class="keyword">private</span> Integer[] arr;</span><br><span class="line">       <span class="keyword">private</span> Integer size;</span><br><span class="line">       <span class="keyword">private</span> Integer start;</span><br><span class="line">       <span class="keyword">private</span> Integer end;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="title">ArrayQueue</span><span class="params">(<span class="keyword">int</span> initSize)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (initSize &lt; <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"The init size is less than 0"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           arr = <span class="keyword">new</span> Integer[initSize];</span><br><span class="line">           <span class="comment">//给这些变量初始值</span></span><br><span class="line">           size = <span class="number">0</span>;</span><br><span class="line">           start = <span class="number">0</span>;</span><br><span class="line">           end = <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> arr[start];</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> obj)</span> </span>&#123;</span><br><span class="line">           <span class="comment">//如果size等于length的话说明满了，不能添加了</span></span><br><span class="line">           <span class="keyword">if</span> (size == arr.length) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is full"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//添加的时候，size要+1；把该数字放到end的位置上。</span></span><br><span class="line">           size++;</span><br><span class="line">           arr[end] = obj;</span><br><span class="line">           <span class="comment">//如果end已经来到了最后一个位置的话，跳回到0，否则加一；</span></span><br><span class="line">           end = end == arr.length - <span class="number">1</span> ? <span class="number">0</span> : end + <span class="number">1</span>;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">poll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="comment">//如果size=0，说明队列里面已经没有东西了。</span></span><br><span class="line">           <span class="keyword">if</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(<span class="string">"The queue is empty"</span>);</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="comment">//如果不为0，size-1；</span></span><br><span class="line">           size--;</span><br><span class="line">           <span class="comment">//用tmp变量来记录此时的start，因为start要调整一下</span></span><br><span class="line">           <span class="keyword">int</span> tmp = start;</span><br><span class="line">           <span class="comment">//如果start已经来到了最后一个位置了，就调回0；否则加一；</span></span><br><span class="line">           start = start == arr.length - <span class="number">1</span> ? <span class="number">0</span> : start + <span class="number">1</span>;</span><br><span class="line">           <span class="comment">//返回start刚才指向的位置</span></span><br><span class="line">           <span class="keyword">return</span> arr[tmp];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -408,7 +435,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -454,7 +481,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -467,7 +494,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -519,7 +546,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

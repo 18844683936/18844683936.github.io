@@ -54,8 +54,13 @@
 <meta property="og:site_name" content="人间失格">
 <meta property="og:description" content="Servlet接口中有哪些方法？ 生命周期是什么？（重点）有5个方法，其中有三个是生命周期方法  init（） 创建Servlet立即执行初始化方法  service（）参数是request，response  执行主要功能  destory（） 销毁Servlet 之前执行的方法   还有两个方法： ​        getServletConfig() 获取xml中的配置 ​        g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-02T08:21:59.046Z">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200211093809204.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200214091224845.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200214100014499.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200313095654248.png">
+<meta property="og:updated_time" content="2020-03-30T12:30:29.622Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="f:&#x2F;blogPic&#x2F;image-20200211093809204.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/02/02/%E8%BF%9B%E9%98%B6%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
@@ -203,10 +208,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-02 15:54:22 / 修改时间：16:21:59" itemprop="dateCreated datePublished" datetime="2020-02-02T15:54:22+08:00">2020-02-02</time>
+              <time title="创建时间：2020-02-02 15:54:22" itemprop="dateCreated datePublished" datetime="2020-02-02T15:54:22+08:00">2020-02-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-30 20:30:29" itemprop="dateModified" datetime="2020-03-30T20:30:29+08:00">2020-03-30</time>
+              </span>
 
           
 
@@ -270,6 +281,179 @@
 <td>不能</td>
 </tr>
 </tbody></table>
+<h2 id="Mybatis中-和-的区别"><a href="#Mybatis中-和-的区别" class="headerlink" title="Mybatis中#{}和${}的区别"></a>Mybatis中#{}和${}的区别</h2><ul>
+<li>#{}能够防止sql注入，不能字符串拼接</li>
+<li>${}不能防止sql注入，能够字符串拼接</li>
+<li>如果是参数是基本数据类型+String类型的话，#{随便写}，${只能写value}</li>
+<li>如果是参数是Pojo的话，#和$中{都是Pojo中的属性值}</li>
+</ul>
+<h2 id="get-和-post-的区别"><a href="#get-和-post-的区别" class="headerlink" title="get 和 post 的区别"></a>get 和 post 的区别</h2><ul>
+<li>get：提交的数据拼接在url后面，速度快不安全，长度有限制64KB。</li>
+<li>post: url到服务器后，服务器根据url到客户端获取提交的数据。速度慢安全，长度无限制。</li>
+</ul>
+<h2 id="jsp中的九大内置对象"><a href="#jsp中的九大内置对象" class="headerlink" title="jsp中的九大内置对象"></a>jsp中的九大内置对象</h2><p> out  输出流<br> page this<br> config 相当于ServletConfig,用来加载xml中的信息<br> exception 错误页面才有的对象<br> pageContext 一个顶9个，召唤其它<br> request  相当于HttpServletRequest，代表一个请求<br> response 一个响应<br> session  一次会话<br> application 代表整个项目</p>
+<h2 id="jsp和Servlet的区别"><a href="#jsp和Servlet的区别" class="headerlink" title="jsp和Servlet的区别"></a>jsp和Servlet的区别</h2><p>jsp 的本质就是Servlet的简易形式，是html + Serlvet ,用来简化页面的生成，jsp更加侧重于视图， Servlet侧重于逻辑控制</p>
+<h2 id="jsp中的作用域"><a href="#jsp中的作用域" class="headerlink" title="jsp中的作用域"></a>jsp中的作用域</h2><p>page ：本页面的对象和属性</p>
+<p>request ： 一个请求中的对象和属性</p>
+<p>session： 一次会话中的对象和属性</p>
+<p>application： 一个项目的对象和属性</p>
+<h2 id="实现会话跟踪的技术有哪些"><a href="#实现会话跟踪的技术有哪些" class="headerlink" title="实现会话跟踪的技术有哪些"></a>实现会话跟踪的技术有哪些</h2><p>url重写 ， 设置表单隐藏项，cookie ，httpSession</p>
+<h2 id="过滤器有哪些作用和用法"><a href="#过滤器有哪些作用和用法" class="headerlink" title="过滤器有哪些作用和用法"></a>过滤器有哪些作用和用法</h2><p>可以改变请求的内容，重设报头信息，然后发送给目标资源</p>
+<p>用来用户认证，记录和审核用户的请求，对用户发送的数据进行过滤和替换，压缩资源的大小；</p>
+<p>对客户端的请求统一编码和对客户端进行验证</p>
+<p>实现Filter接口，同时重写Filter接口的三个方法：</p>
+<p>   init(FilterConfig config)   用于获取FilterConfig对象</p>
+<p>   doFilter(ServletRequest request,ServeltResponse response,FilterChain chain)  进行过滤处理一些业务</p>
+<p>   destroy()   销毁Filter</p>
+<h2 id="Servlet获取用户提交的数据"><a href="#Servlet获取用户提交的数据" class="headerlink" title="Servlet获取用户提交的数据"></a>Servlet获取用户提交的数据</h2><p>用request.getParameter(),如果是复选框，用getParameterValues()或者getParameterMap()</p>
+<h2 id="什么是ORM"><a href="#什么是ORM" class="headerlink" title="什么是ORM"></a>什么是ORM</h2><p>对象关系映射，就是javaBean和数据库中的表的映射</p>
+<h2 id="Mybatis中命名空间的作用"><a href="#Mybatis中命名空间的作用" class="headerlink" title="Mybatis中命名空间的作用"></a>Mybatis中命名空间的作用</h2><p> mybatis中为每一个映射文件添加一个namespace，这样不同的映射文件中sql语句的id相同也不会有冲突，只要定义的sql语句在该映射文件中id唯一就可以 。</p>
+<h2 id="Mybatis中的动态sql是什么意思"><a href="#Mybatis中的动态sql是什么意思" class="headerlink" title="Mybatis中的动态sql是什么意思"></a>Mybatis中的动态sql是什么意思</h2><p>写复杂的sql时，需要拼接sql语句，动态sql就是解决这个问题的。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">      <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">index</span>=<span class="string">"index"</span> </span></span><br><span class="line"><span class="tag">          <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">          #&#123;item&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"title != null"</span>&gt;</span></span><br><span class="line">              and title = #&#123;title&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">"content != null"</span>&gt;</span></span><br><span class="line">              and content = #&#123;content&#125;</span><br><span class="line">          <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">              and owner = "owner1"</span><br><span class="line">          <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"title != null"</span>&gt;</span></span><br><span class="line">          and title = #&#123;title&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="IOC-和-DI"><a href="#IOC-和-DI" class="headerlink" title="IOC 和 DI"></a>IOC 和 DI</h2><p>IOC 是控制反转，以前都是手动创建对象，现在有框架来创建对象</p>
+<p>注解创建 @Component @Controller @Service @Repository</p>
+<ul>
+<li><p>无参构造创建</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloService"</span> <span class="attr">class</span>=<span class="string">"com.farsight.demo0.ioc.HelloService"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态工厂方法</p>
+</li>
+<li><p>实例工厂方法</p>
+</li>
+</ul>
+<p>DI是依赖注入，就是给刚才IOC创建的对象赋值</p>
+<p>注解注入 @AutoWired        @Resource        @AutoWired@Qulifiler</p>
+<ul>
+<li>构造方法注入，</li>
+<li>setter注入</li>
+<li>p命名空间注入</li>
+</ul>
+<p>一般来说，非必须的属性使用setter 必须的属性使用构造方法注入</p>
+<h2 id="bean对象的作用域"><a href="#bean对象的作用域" class="headerlink" title="bean对象的作用域"></a>bean对象的作用域</h2><ol>
+<li>Singleton 单例，在容器中只创建一次，每次getBean得到的都是同一个对象</li>
+<li>prototype 原型， 每次getBean得到的都是不同的对象</li>
+<li>request 作用域是一个请求</li>
+<li>session 作用域是一个会话</li>
+<li>global - session 作用域为一个application</li>
+</ol>
+<h2 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h2><p>概念 ：当一批对象具有通用的业务逻辑是，我们往往会写一个工具类来同一实现该业务</p>
+<p>，从而提高代码的复用性。AOP可以帮助我们管理这个工具类，降低他与使用者</p>
+<p>之间的耦合度。</p>
+<ol>
+<li>AOP可以管理工具类</li>
+<li>AOP可以进调用工具类的代码写入其使用者的方法中</li>
+<li>AOP的前提是工具类及其使用者都</li>
+</ol>
+<h2 id="如何理解横切关注"><a href="#如何理解横切关注" class="headerlink" title="如何理解横切关注"></a>如何理解横切关注</h2><p>关注的就是那些与业务逻辑无关但又不可缺少的功能点（日志，事务，安全性），横切就是把这些业务逻辑抽取出来。</p>
+<h2 id="黑"><a href="#黑" class="headerlink" title="黑"></a>黑</h2><ol>
+<li>切面对象：工具类</li>
+<li>目标对象：切入点所在的类</li>
+<li>通知：切入点所在的时机</li>
+<li>切入点：哪些方法调用工具类</li>
+</ol>
+<h2 id="springmvc-工作原理"><a href="#springmvc-工作原理" class="headerlink" title="springmvc 工作原理"></a>springmvc 工作原理</h2><p><img src="F:/blogPic/image-20200211093809204.png" alt="image-20200211093809204"></p>
+<h2 id="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"><a href="#Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗" class="headerlink" title="Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"></a>Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗</h2><p>SessionFactory 是线程安全的，可以并发访问，Session 是 线程不安全的，两个线程不能够共享同一个session，为了保证Service和Dao层的session是同一个session，可以使用ThreadLocal 把Session绑定到线程上。</p>
+<p><img src="F:/blogPic/image-20200214091224845.png" alt="image-20200214091224845"></p>
+<p>当获取一方的数据的时候，多方的Set集合中没有多方的数据，就是关联级别的延迟加载</p>
+<p>lazy = true 代表延迟加载，不执行select语句</p>
+<p>在 set标签上写 lazy = true （默认）表示关联级别的延迟加载</p>
+<p>load 不执行select </p>
+<p>使用到主表的数据   执行主表的select</p>
+<p>使用到关联表的数据， 执行关联表的select</p>
+<p>lazy 还能等于extra 用啥查啥，节省内存（主要是count 加载一条，其他的大概全部都加载）</p>
+<p><img src="F:/blogPic/image-20200214100014499.png" alt="image-20200214100014499"></p>
+<p>fetch属性 为join 就变成多表查询了，以前一个get 只get改类，如果为join 就会把相关联的表也弄出来</p>
+<p>延迟加载不可用了</p>
+<p>fetch 属性为 select 的时候，意思就是执行两条sql 语句。这样就是默认的</p>
+<h2 id="session和application-的区别"><a href="#session和application-的区别" class="headerlink" title="session和application 的区别"></a>session和application 的区别</h2><ol>
+<li>作用域不同<ul>
+<li>session是用户级别的，application是web应用级别的，是一个全局作用域</li>
+<li>一个用户一个session ，每一个用户的session的各不相同。</li>
+<li>一个web应用一个application</li>
+</ul>
+</li>
+<li>生命周期不同<ul>
+<li>session 在登陆后创建，在用户注销，关闭浏览器的时候销毁</li>
+<li>application 在创建web应用程序的时候创建，在关闭应用是销毁</li>
+</ul>
+</li>
+</ol>
+<h2 id="实例化Servlet-有哪些方法"><a href="#实例化Servlet-有哪些方法" class="headerlink" title="实例化Servlet 有哪些方法"></a>实例化Servlet 有哪些方法</h2><ol>
+<li>第一次请求Servlet的时候</li>
+<li>在web.xml 中的Servlet标签中配置 loadon-startup标签，tomcat在启动的时候就会创建Servlet</li>
+</ol>
+<h2 id="Tomcat中的目录"><a href="#Tomcat中的目录" class="headerlink" title="Tomcat中的目录"></a>Tomcat中的目录</h2><p>bin ， lib ，logs ，config ，webapps， temp， work </p>
+<h2 id="Cookie-和Session的区别"><a href="#Cookie-和Session的区别" class="headerlink" title="Cookie 和Session的区别"></a>Cookie 和Session的区别</h2><ol>
+<li><p>cookie存储在客户端，不安全，Session存在服务器，安全</p>
+</li>
+<li><p>cookie 可以存放用户名等不重要的信息，可以减缓服务器的压力，session 存储比较重要的信息，session 会存在 服务器上，会占用内存</p>
+</li>
+<li><p>单个cookie保存的数据不能超过4k，很多浏览器最多保存20个cookie</p>
+</li>
+</ol>
+<p>Activity生命周期</p>
+<p> onCreate 第一个生命周期，初始化</p>
+<p>onStart： 能看见，不能交互</p>
+<p>onResume ： 能和用户交互</p>
+<p>onPause： 窗口部分被遮盖</p>
+<p>onStop： 窗口全部遮盖</p>
+<p>onRestar： 处于onStop，重新回到窗口</p>
+<p>可视生命周期：onStart onResume onPause onStop</p>
+<p>前景生命周期：onResume-onPause </p>
+<p>Activity 启动模式：</p>
+<p>​    Standard ： 默认，启动Activity每次都重新创建放到栈顶</p>
+<p>​    SingleTop：启动activity，如果栈顶有直接使用，如果栈顶没有创建</p>
+<p>​    SingelTask： 启动activity，如果栈里有，将上面对象pop出栈，使自己成为栈顶使用，如果没有，创建Activity放入栈顶使用</p>
+<p>SingleInstance ： 如果共享栈有，直接使用。如果共享栈里没有，创建对象放在共享栈使用，该activity不放入程序栈</p>
+<p>在清单配置文件中 <activity android:name  = "" android:launchMode="启动方式"></activiy></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>当前显示的是这个Activity 处于OnResume 状态。进入到list页面，显示列表窗口，Activity就处于onStop声明周期</p>
+<p>Service用来：没有显示这个页面，但是在后台依然显示，比如说音乐播放器</p>
+<p>startService 启动 stopService 停止</p>
+<p>生命周期：onCreate –onStart – onDestroy</p>
+<p>第一次启动 ： oncreate – onstart</p>
+<p>第二次启动 onstart</p>
+<p> bindService   可以传值</p>
+<p>onCreate  – onbind – onUnbind - onDestroy</p>
+<p>第一次启动 ： onCreate – onBind</p>
+<p>第二次绑定 ： onRebind</p>
+<p>startService  启动</p>
+<p> onCreate – onStart  onDestroy</p>
+<p>bindService 启动</p>
+<p>onCreate  onBind  onUnBind  onReBind on Destroy</p>
+<p>第一次执行： onCreate  onBind  第二次 ： onReBind</p>
+<p>能传值</p>
+<h2 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h2><p>intent i= new Intent（当前窗口.this,目标窗口.class）；</p>
+<p>intent i= new Intent（当前窗口.this,目标Service.class）；</p>
+<p>intent i= new Intent（）；//启动窗口使用startActivityForResult，返回窗口用这个</p>
+<p>intent i= new Intent（“myBroadcast”）；</p>
+<p>intent.putExtra(“name”,”zhangsna”);</p>
+<p>sendBroacast();</p>
+<p>安卓的四大组件：</p>
+<p>​    Activity ：窗口</p>
+<p>​    Service ： 服务</p>
+<p>BroadcastReceiver 广播接收器</p>
+<p>ContentProvider ： 内容提供者 ： 一个应用程序的数据不能访问另一个应用程序的数据，，一个应用程序通过ContentProvider对外提供数据访问的接口，其他程序可以通过他来访问</p>
+<p>主线程也就是ui线程，负责界面，处理用户的响应</p>
+<p>有anr 机制，所有的耗时操作在子线程中左，子线程不能</p>
+<p>控制ui组件</p>
+<p>在ui线程中创建Handler 对象，该对象需要重写handlerMessage方法，接受子线程发送的数据，子线程通过Handler对象调用sendMessage发送数据给ui线程</p>
+<p>xml 中 宽和高用dp 字体用 sp</p>
+<p>Android 中的  assets 目录下的东西 会原封不动的存储在设备上</p>
+<p>多媒体文件放在 raw</p>
+<p>图片放在drawble </p>
+<p>字符串 strings.xml  colors.xml arrays,xml 中防止数据</p>
+<p> 安卓可以把数据放到文件和数据库和sharedpreference</p>
+<p>Intent 可以传递 Serializable  charsequence Parcelable Bundle</p>
+<p>安卓的虚拟机 是 Dalvik</p>
+<p>安卓编译后的文件 是dex文件</p>
+<p><img src="F:/blogPic/image-20200313095654248.png" alt="image-20200313095654248"></p>
+<p>Handler  的原理</p>
+<p>负责 线程之间传递数据。把数据封装到Message对象中，通过Handler对象把Message对象发送给</p>
+<p>ui线程，ui线程将接受到Messag对象放在MessageQueue中，ui线程通过Looper把MessageQueue 中的Message取出来</p>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p> 真实的数据存贮在叶子节点；非叶子节点不存贮真实的数据，只存储指引搜索方向的数据项</p>
 
     </div>
 
@@ -335,7 +519,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet接口中有哪些方法？-生命周期是什么？（重点）"><span class="nav-number">1.</span> <span class="nav-text">Servlet接口中有哪些方法？ 生命周期是什么？（重点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转发和重定向的区别"><span class="nav-number">2.</span> <span class="nav-text">转发和重定向的区别</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet接口中有哪些方法？-生命周期是什么？（重点）"><span class="nav-number">1.</span> <span class="nav-text">Servlet接口中有哪些方法？ 生命周期是什么？（重点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转发和重定向的区别"><span class="nav-number">2.</span> <span class="nav-text">转发和重定向的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis中-和-的区别"><span class="nav-number">3.</span> <span class="nav-text">Mybatis中#{}和${}的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-和-post-的区别"><span class="nav-number">4.</span> <span class="nav-text">get 和 post 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsp中的九大内置对象"><span class="nav-number">5.</span> <span class="nav-text">jsp中的九大内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsp和Servlet的区别"><span class="nav-number">6.</span> <span class="nav-text">jsp和Servlet的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsp中的作用域"><span class="nav-number">7.</span> <span class="nav-text">jsp中的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现会话跟踪的技术有哪些"><span class="nav-number">8.</span> <span class="nav-text">实现会话跟踪的技术有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器有哪些作用和用法"><span class="nav-number">9.</span> <span class="nav-text">过滤器有哪些作用和用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet获取用户提交的数据"><span class="nav-number">10.</span> <span class="nav-text">Servlet获取用户提交的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是ORM"><span class="nav-number">11.</span> <span class="nav-text">什么是ORM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis中命名空间的作用"><span class="nav-number">12.</span> <span class="nav-text">Mybatis中命名空间的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis中的动态sql是什么意思"><span class="nav-number">13.</span> <span class="nav-text">Mybatis中的动态sql是什么意思</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC-和-DI"><span class="nav-number">14.</span> <span class="nav-text">IOC 和 DI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean对象的作用域"><span class="nav-number">15.</span> <span class="nav-text">bean对象的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是AOP"><span class="nav-number">16.</span> <span class="nav-text">什么是AOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何理解横切关注"><span class="nav-number">17.</span> <span class="nav-text">如何理解横切关注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑"><span class="nav-number">18.</span> <span class="nav-text">黑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springmvc-工作原理"><span class="nav-number">19.</span> <span class="nav-text">springmvc 工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗"><span class="nav-number">20.</span> <span class="nav-text">Hibernate中SessionFactory是线程安全的吗？Session是线程安全的吗（两个线程能够共享同一个Session吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session和application-的区别"><span class="nav-number">21.</span> <span class="nav-text">session和application 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化Servlet-有哪些方法"><span class="nav-number">22.</span> <span class="nav-text">实例化Servlet 有哪些方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat中的目录"><span class="nav-number">23.</span> <span class="nav-text">Tomcat中的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie-和Session的区别"><span class="nav-number">24.</span> <span class="nav-text">Cookie 和Session的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">25.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intent"><span class="nav-number">26.</span> <span class="nav-text">Intent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-树"><span class="nav-number">27.</span> <span class="nav-text">B+树</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -351,7 +535,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -364,7 +548,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -416,7 +600,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

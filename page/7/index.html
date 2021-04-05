@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/" class="post-title-link" itemprop="url">求完全二叉树节点的个数</a>
+            <a href="/2020/01/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="post-title-link" itemprop="url">并查集</a>
         </h1>
 
         <div class="post-meta">
@@ -201,14 +201,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-03 19:33:22" itemprop="dateCreated datePublished" datetime="2020-01-03T19:33:22+08:00">2020-01-03</time>
+              <time title="创建时间：2020-01-14 19:05:44" itemprop="dateCreated datePublished" datetime="2020-01-14T19:05:44+08:00">2020-01-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:38:32" itemprop="dateModified" datetime="2020-01-06T22:38:32+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-15 10:52:36" itemprop="dateModified" datetime="2020-01-15T10:52:36+08:00">2020-01-15</time>
               </span>
 
           
@@ -222,19 +222,69 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>要求 ： 时间复杂度小于O(n)</p>
-<p>如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg" style="zoom:50%;" />
+          <p>作用：</p>
+<ol>
+<li><p>非常快的检查两个元素是否属于一个集合</p>
+<ul>
+<li>A所在的集合在set1，B所在的集合在set2，查他两个东西是不是在一个集合</li>
+<li>一个集合可以设置成很多结构，比如说list 每个元素为node， A在list1 中，B在list2 中，通过A的到list1 ，然后看看list1中有没有B，这样不够好，需要遍历</li>
+</ul>
+</li>
+<li><p>两个元素各自所在的集合，合并在一起</p>
+<ul>
+<li><p>A所在的集合set1，set2 ，set3  和B所在的集合set4，set5，set6  这6个集合合并在一起</p>
+</li>
+<li><p>以后 这6 个里面的元素都在这个大集合里</p>
+</li>
+<li><p>假如要把set2中的内容全都给set1 ，就要遍历set2 ，这样不够好</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li>你要想用并查集，就要在第一步的时候把 所有的数据样本给他，不能是动态的（流）</li>
+</ol>
+<p>一开始，把所有的数据样本给你，比如说，一开始给你5个数：</p>
+<p>第一步，把每一个数都弄成一个集合，这个集合里面只有这一个数，并且向上的节点是指回自己的</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax10akip0j20y207k422.jpg" alt="image-20200114192657092" style="zoom:50%;" />
 
-<p>首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的</p>
-<p>然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节点数满足公式 2的3次方-1 + 当前节点   就是2的3次方</p>
-<p>右树也是完全二叉树，递归求右树的节点个数，子问题和母问题等效</p>
-<p>情况2：右子树的左边界不是L-1,也就是左子树也不一定满，但是根据定义，右子树一定是满的，就可以求出右子树的节点个数-2；</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg" style="zoom:50%;" />
+<p>自己是这个集合的代表节点</p>
+<p>集合合并：</p>
+<p>比如说1 这个集合和2 这个集合合并，就是这个样子</p>
+<img src="F:/blogPic/image-20200114192917240.png" alt="image-20200114192917240" style="zoom:50%;" />
 
-<p>那么就是<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg" style="zoom:33%;" /></p>
-<p>在对左子树进行递归</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>2的代表节点是谁？通过2 往上找，找到某一个节点，他的指针指回了自己，该节点就是2 的代表节点</p>
+<p>如果3要和这结构合并。</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax10vcw9kj20t90mdjxz.jpg" alt="image-20200114193608573" style="zoom:50%;" />
+
+<p>3的代表节点同上</p>
+<hr>
+<p>说白了，这个结构就是一个多叉树，</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax138tvs1j20nc0n0q7y.jpg" alt="image-20200114193838796" style="zoom:50%;" />
+
+<p>那么如何判断A和B是不是在一个集合？</p>
+<p>就是A不断向上找，找到代表的节点停，B不断向上找，找到代表的节点停</p>
+<p>如果他俩代表节点是同一个，表示在同一个集合里，如果是同一个代表节点，则不在同一个集合中</p>
+<hr>
+<p>合并集合</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax13yfwfqj20ye0eraf1.jpg" alt="image-20200114194237962" style="zoom:33%;" />
+
+<p>比如3，和5 所在的集合要合并 </p>
+<p>3 找到1,5 找到4</p>
+<p>判断哪一个集合元素多。 1 这个多 </p>
+<p>把少元素的挂在多元素的底下</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax14hhzhrj20e50hkmzk.jpg" alt="image-20200114194640203" style="zoom:33%;" />
+
+<p><strong><em>优化</em></strong></p>
+<img src="F:/blogPic/image-20200114195158481.png" alt="image-20200114195158481" style="zoom:33%;" />
+
+<p>整个路径上的东西，在我查完之后，同一给他打平，如果4底下还有节点的话，不管。从4开始打扁平。</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax1585yauj20h908sjtu.jpg" alt="image-20200114200650067" style="zoom:33%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">		<span class="comment">// whatever you like</span></span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">UnionFindSet</span> </span>&#123;</span><br><span class="line">        <span class="comment">//前一个Node代表这个节点，后一个Node代表这个节点的父节点</span></span><br><span class="line">		<span class="keyword">public</span> HashMap&lt;Node, Node&gt; fatherMap;</span><br><span class="line">        <span class="comment">//某一个节点，所在的集合，一共有多少个节点</span></span><br><span class="line">        <span class="comment">//Node 不表示Node的属性，表示Node所在集合的属性，代表节点</span></span><br><span class="line">		<span class="keyword">public</span> HashMap&lt;Node, Integer&gt; sizeMap;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化。一次性把所有样本都给我，</span></span><br><span class="line">        <span class="comment">//把每个节点当成一个集合</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">UnionFindSet</span><span class="params">(List&lt;Node&gt; nodes)</span> </span>&#123;</span><br><span class="line">			fatherMap = <span class="keyword">new</span> HashMap&lt;Node, Node&gt;();</span><br><span class="line">			sizeMap = <span class="keyword">new</span> HashMap&lt;Node, Integer&gt;();</span><br><span class="line">             makeSets(nodes);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeSets</span><span class="params">(List&lt;Node&gt; nodes)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">for</span> (Node node : nodes) &#123;</span><br><span class="line">                <span class="comment">//每一个节点自己形成一个集合</span></span><br><span class="line">				fatherMap.put(node, node);</span><br><span class="line">                <span class="comment">//自己就是代表节点，size是1</span></span><br><span class="line">				sizeMap.put(node, <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//找代表节点，并变扁平</span></span><br><span class="line">		<span class="function"><span class="keyword">private</span> Node <span class="title">findHead</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//找到father节点。</span></span><br><span class="line">			Node father = fatherMap.get(node);</span><br><span class="line">            <span class="comment">//如果father节点不是自己，递归</span></span><br><span class="line">			<span class="keyword">if</span> (father != node) &#123;</span><br><span class="line">				father = findHead(father);</span><br><span class="line">			&#125;</span><br><span class="line">			fatherMap.put(node, father);</span><br><span class="line">			<span class="keyword">return</span> father;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//A 所在集合和B所在集合的代表节点是否是同一个</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameSet</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> findHead(a) == findHead(b);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (a == <span class="keyword">null</span> || b == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			Node aHead = findHead(a);</span><br><span class="line">			Node bHead = findHead(b);</span><br><span class="line">            <span class="comment">//如果不在同一个集合中，就需要合并</span></span><br><span class="line">			<span class="keyword">if</span> (aHead != bHead) &#123;</span><br><span class="line">                <span class="comment">//取得A所在集合的size B所在集合的size</span></span><br><span class="line">				<span class="keyword">int</span> aSetSize= sizeMap.get(aHead);</span><br><span class="line">				<span class="keyword">int</span> bSetSize = sizeMap.get(bHead);</span><br><span class="line">                <span class="comment">//如果A的size小</span></span><br><span class="line">				<span class="keyword">if</span> (aSetSize &lt;= bSetSize) &#123;</span><br><span class="line">                    <span class="comment">//把Ahead的代表节点换成Bhead，</span></span><br><span class="line">                    <span class="comment">//把A所在的集合的代表节点挂在B所在集合的代表节点的底下</span></span><br><span class="line">					fatherMap.put(aHead, bHead);</span><br><span class="line">                    <span class="comment">//然后BHead所代表的集合的大小改变</span></span><br><span class="line">					sizeMap.put(bHead, aSetSize + bSetSize);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					fatherMap.put(bHead, aHead);</span><br><span class="line">					sizeMap.put(aHead, aSetSize + bSetSize);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非递归版本的findFather和变扁平</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax16isyyjj20k60crag4.jpg" alt="image-20200114205754462" style="zoom: 67%;" />
 
 
       
@@ -255,7 +305,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/03/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/springmvc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -269,7 +319,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/03/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/" class="post-title-link" itemprop="url">判断是否是完全二叉树</a>
+            <a href="/2020/01/12/springmvc/" class="post-title-link" itemprop="url">springmvc</a>
         </h1>
 
         <div class="post-meta">
@@ -278,16 +328,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-03 18:25:34" itemprop="dateCreated datePublished" datetime="2020-01-03T18:25:34+08:00">2020-01-03</time>
+              <time title="创建时间：2020-01-12 22:35:45 / 修改时间：22:46:34" itemprop="dateCreated datePublished" datetime="2020-01-12T22:35:45+08:00">2020-01-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 08:14:35" itemprop="dateModified" datetime="2020-01-07T08:14:35+08:00">2020-01-07</time>
-              </span>
 
           
 
@@ -300,31 +344,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg" style="zoom: 33%;" />
-
-
-<p>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</p>
-<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
-
-<p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5 id="评判标准2-：左右两个孩子不全"><a href="#评判标准2-：左右两个孩子不全" class="headerlink" title="评判标准2 ：左右两个孩子不全"></a>评判标准2 ：左右两个孩子不全</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
-
-<p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
-<p>例如：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg" alt="image-20200103184338413" style="zoom: 50%;" />
-
-
-
-<p>遇到1，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 没有 </p>
-<p>来到2，来到3，来到4，</p>
-<p>来到5，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 中了哈</p>
-<p>所以5以后的节点，6，7，8，9，10都必须是叶子节点，否则返回false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+          <p>表现层四件事</p>
+<h3 id="响应jsp页面请求"><a href="#响应jsp页面请求" class="headerlink" title="响应jsp页面请求"></a>响应jsp页面请求</h3><ul>
+<li><p>后台：</p>
+<pre><code>Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
+Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
+如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
+如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</code></pre></li>
+<li><p>前台jsp</p>
+<ol>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;add.action"</span>&gt;</span>提交请求<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+<span class="comment"><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
+</li>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">" "</span> <span class="attr">name</span>=<span class="string">"myform"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交请求"</span>  <span class="attr">onclick</span>=<span class="string">"add()"</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">form</span></span>
+    &lt;script&gt;
+        function add(){
+        document.myform.action = "<span class="tag">&lt;<span class="name">%=basePath%</span>&gt;</span>add.action";
+        document.myform.submit();
+        }
+    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></code></pre>
+</li>
+</ol>
+<p>​            </p>
+<h3 id="获取jsp页面的值"><a href="#获取jsp页面的值" class="headerlink" title="获取jsp页面的值"></a>获取jsp页面的值</h3><p>​        表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
+<p>​        只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
+</li>
+</ul>
+<h3 id="向jsp页面传值"><a href="#向jsp页面传值" class="headerlink" title="向jsp页面传值"></a>向jsp页面传值</h3><p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
+<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
+<h3 id="跳转jsp页面"><a href="#跳转jsp页面" class="headerlink" title="跳转jsp页面"></a>跳转jsp页面</h3><p>​    springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);<br>​    </p>
 
       
     </div>
@@ -344,7 +394,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/mybatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -358,7 +408,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">二叉树的序列化和反序列化</a>
+            <a href="/2020/01/12/mybatis/" class="post-title-link" itemprop="url">mybatis</a>
         </h1>
 
         <div class="post-meta">
@@ -367,16 +417,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-02 15:05:23" itemprop="dateCreated datePublished" datetime="2020-01-02T15:05:23+08:00">2020-01-02</time>
+              <time title="创建时间：2020-01-12 17:54:45 / 修改时间：20:05:28" itemprop="dateCreated datePublished" datetime="2020-01-12T17:54:45+08:00">2020-01-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:47:26" itemprop="dateModified" datetime="2020-01-06T21:47:26+08:00">2020-01-06</time>
-              </span>
 
           
 
@@ -389,18 +433,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="序列化（先序）："><a href="#序列化（先序）：" class="headerlink" title="序列化（先序）："></a>序列化（先序）：</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eyqmomj20zv0pbjzr.jpg" alt="image-20200102150642789" style="zoom: 33%;" />
+          <p>首先搭建好环境后</p>
+<p>在sqlMapConfig.xml文件中设置别名和扫描包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.beans"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.vo"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.mapper"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByPre</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="comment">//如果为空</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//当前的String是value+！</span></span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">       <span class="comment">//当前节点加上左树的字符串，加上右数的字符串</span></span><br><span class="line">	res += serialByPre(head.left);</span><br><span class="line">	res += serialByPre(head.right);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<ol>
+<li><p>创建接口UserMapper.java </p>
+</li>
+<li><p>创建UserMapper.xml</p>
+</li>
+<li><p>创建 测试类</p>
+<ul>
+<li><p>获得session后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = session.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
 
-<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByPreString</span><span class="params">(String preStr)</span> </span>&#123;</span><br><span class="line">	String[] values = preStr.split(<span class="string">"!"</span>);</span><br><span class="line">       <span class="comment">//把数组放到队列里，可以依次弹出</span></span><br><span class="line">	Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != values.length; i++) &#123;</span><br><span class="line">		queue.offer(values[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reconPreOrder(queue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给我一个队列，我还给你一个树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconPreOrder</span><span class="params">(Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">	String value = queue.poll();</span><br><span class="line">	<span class="keyword">if</span> (value.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node head = <span class="keyword">new</span> Node(Integer.valueOf(value));</span><br><span class="line">	head.left = reconPreOrder(queue);</span><br><span class="line">	head.right = reconPreOrder(queue);</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="按层序列化"><a href="#按层序列化" class="headerlink" title="按层序列化"></a>按层序列化</h1><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6eza7tbj20ym0lcjya.jpg" alt="image-20200103080010347" style="zoom: 33%;" />
 
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByLevel</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.left.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.left);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.right.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.right);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>对应关系：</p>
+<p>​         xml文件名要和接口文件名一样</p>
+<p>​        xml文件中的namespace 是 接口的全类名</p>
+<p>​        xml 中 增删改查标签的id是接口中的方法名</p>
+<p>​        已经配过别名后resultType 和 parameterType 都可以是 该包下bean对象的类名，不区分大小写</p>
+<p>​        如果parameterType 是基本数据类型（包含String） #{随便写}，${只能写value}</p>
+<p>​        如果是pojo的话，$,#,中都写  pojo中的属性名，</p>
+<p>​        如果pojo的属性是pojo的话，就属性名.属性</p>
+<p>​        parameterType不能是List ，也就是说前台只能把List放到POJO中传给Mapper</p>
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>​    1.接口中方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
 
-<h1 id="按层反序列化"><a href="#按层反序列化" class="headerlink" title="按层反序列化"></a>按层反序列化</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByLevelString</span><span class="params">(String levelStr)</span> </span>&#123;</span><br><span class="line">		String[] values = levelStr.split(<span class="string">"!"</span>);</span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">		Node head = generateNodeByString(values[index++]);</span><br><span class="line">		Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">		<span class="keyword">if</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(head);</span><br><span class="line">		&#125;</span><br><span class="line">		Node node = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			node = queue.poll();</span><br><span class="line">			node.left = generateNodeByString(values[index++]);</span><br><span class="line">			node.right = generateNodeByString(values[index++]);</span><br><span class="line">			<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> head;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">generateNodeByString</span><span class="params">(String val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (val.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Node(Integer.valueOf(val));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>xml 中的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"add"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></span><br><span class="line">    insert into user (name,sex)  values (#&#123;name&#125;,#&#123;sex&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>​    1.  接口中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>​    2. xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span>&gt;</span></span><br><span class="line">    delete from user where  cid = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><ol>
+<li><p>接口中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>xml</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateClass"</span> <span class="attr">parameterType</span>=<span class="string">"Classes"</span>&gt;</span></span><br><span class="line">       update classes set username = #&#123;username&#125; where cid = #&#123;id&#125;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><h5 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h5><ul>
+<li>在一的一方写一个List属性泛型为多的一方的类名</li>
+</ul>
+<ul>
+<li><p>xml中的写法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMag"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"querymsg"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"querymsg"</span> <span class="attr">type</span>=<span class="string">"classes"</span>&gt;</span> 返回值类型</span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">ofType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h5><ul>
+<li><p>bean中在有外键的一方写外键对应的属性</p>
+</li>
+<li><p>xml中的写法 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMsgByName"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"queryAllMsg"</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"queryAllMsg"</span> <span class="attr">type</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"classes"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"className"</span> <span class="attr">property</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where name like &apos;%$&#123;value&#125;%&apos;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果参数list需要迭代</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select * from user</span><br><span class="line">    <span class="comment">&lt;!-- foreach:循环放入参数的集合;collection:传入的集合的变量名称;item：每次循环将循环出的数据放到这个变量中</span></span><br><span class="line"><span class="comment">    open：开始循环拼接的字符;close： 结束循环拼接的字符;separater：循环中拼接的字符--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids!=null"</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">open</span>=<span class="string">"id in ("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">#&#123;id&#125;            </span><br><span class="line">   		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -421,7 +538,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -467,7 +584,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -480,7 +597,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -532,7 +649,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

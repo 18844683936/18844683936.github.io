@@ -177,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -191,7 +191,104 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/28/%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4%E7%9A%84%E4%B8%80%E7%B3%BB%E5%88%97%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">两个链表相交的一系列问题</a>
+            <a href="/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/" class="post-title-link" itemprop="url">设计RandomPool</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-07 20:09:37 / 修改时间：21:02:07" itemprop="dateCreated datePublished" datetime="2020-01-07T20:09:37+08:00">2020-01-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoapgyadwj20s9096n40.jpg" alt="image-20200107201125059" style="zoom:50%;" />
+
+<p>准备两张hash表，一个size变量</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaq3uv6dj20wb0b4ad1.jpg" alt="image-20200107201518949" style="zoom: 50%;" />
+
+<p>A进来了，就在map中存东西</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaqikwjpj20xd0eydjz.jpg" alt="image-20200107201639929" style="zoom:33%;" />
+
+<p>第一个map 含义： A是第0个进来的，</p>
+<p>第二个map含义：第0个进来的是A</p>
+<p>size ++;</p>
+<p>正着查，反着查，都放到map中</p>
+<p>B进来了，map中存东西。size++</p>
+<p>假设一直存到Z ：</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaquu4hwj20yp0ogn3u.jpg" alt="image-20200107202100853" style="zoom:50%;" />
+
+<p>在不考虑remove和random 功能的情况下，可以这样做</p>
+<p><strong><em>因为我有大小Size，所以我用Math随机出0-25中的一个数，用这个数字做key查询map2 把value返回 ，绝对等概率</em></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random)*size);</span><br></pre></td></tr></table></figure>
+
+<p>如果考虑remove的话</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoar5p81uj20tl0mq430.jpg" alt="image-20200107203330304" style="zoom:50%;" />
+
+<p>如果我remove 掉一个key </p>
+<p>如果进行其他操作，直接在map1，map2中remove掉的话会有问题</p>
+<p>假设删掉后12，这样的话，0-999区间就会有一个洞。</p>
+<p>假设删掉999个,</p>
+<p>然后我再随机获取的时候拿到的index 在map中没有的话，我重新在random 还是没有，这样复杂度就会上升</p>
+<p>解决方法：</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoark25c4j20xu0nyte5.jpg" alt="image-20200107204155942" style="zoom: 50%;" />
+
+<p>假设要删除Str17</p>
+<p>我把Str999 扔到str17上（map1）</p>
+<p>在让17对应的字符串是Str999（map2）</p>
+<p>然后我删掉最后一条记录</p>
+<p>然后我把size从1000变成999</p>
+<p>产生洞的时候，我用最后一条数据去填这个洞，然后index 还是连续的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pool</span>&lt;<span class="title">K</span>&gt; </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;K, Integer&gt; keyIndexMap;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;Integer, K&gt; indexKeyMap;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Pool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.keyIndexMap = <span class="keyword">new</span> HashMap&lt;K, Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.indexKeyMap = <span class="keyword">new</span> HashMap&lt;Integer, K&gt;();</span><br><span class="line">			<span class="keyword">this</span>.size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//要判断map中存不存在，不存在的话才加</span></span><br><span class="line">			<span class="keyword">if</span> (!<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(key, <span class="keyword">this</span>.size);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(<span class="keyword">this</span>.size++, key);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">int</span> deleteIndex = <span class="keyword">this</span>.keyIndexMap.get(key);</span><br><span class="line">                <span class="comment">//--size是最后一个元素的位置</span></span><br><span class="line">				<span class="keyword">int</span> lastIndex = --<span class="keyword">this</span>.size;</span><br><span class="line">                <span class="comment">//把最后一个位置上的key拿出来</span></span><br><span class="line">				K lastKey = <span class="keyword">this</span>.indexKeyMap.get(lastIndex);</span><br><span class="line">                <span class="comment">//把最后一条记录填在原本要删的记录上</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(lastKey, deleteIndex);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(deleteIndex, lastKey);</span><br><span class="line">                <span class="comment">//然后remove掉最后一条记录</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.remove(key);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.remove(lastIndex);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> K <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> randomIndex = (<span class="keyword">int</span>) (Math.random() * <span class="keyword">this</span>.size); <span class="comment">// 0 ~ size -1</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.indexKeyMap.get(randomIndex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/" class="post-title-link" itemprop="url">SQL专项训练</a>
         </h1>
 
         <div class="post-meta">
@@ -201,14 +298,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-28 19:48:03" itemprop="dateCreated datePublished" datetime="2019-12-28T19:48:03+08:00">2019-12-28</time>
+              <time title="创建时间：2020-01-07 10:20:21" itemprop="dateCreated datePublished" datetime="2020-01-07T10:20:21+08:00">2020-01-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:56:45" itemprop="dateModified" datetime="2020-01-06T21:56:45+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-09 21:03:07" itemprop="dateModified" datetime="2020-01-09T21:03:07+08:00">2020-01-09</time>
               </span>
 
           
@@ -222,72 +319,172 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="判断链表是否有环"><a href="#判断链表是否有环" class="headerlink" title="判断链表是否有环"></a>判断链表是否有环</h3><p>函数：如果这个单链表有环，返回第一个入环的节点，如果没有环，返回null</p>
-<h4 id="方法1-hashSet"><a href="#方法1-hashSet" class="headerlink" title="方法1 hashSet"></a>方法1 hashSet</h4><p>用hashSet，链表遍历一圈，把各个节点都放入到set中去，判断每个节点是否以前加入到set中过，如果以前加入到set中过就是有环，并且这个节点就是第一个入环的节点如果遍历到空节点，就是没有环。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Node <span class="title">hasCircle2</span> <span class="params">(Node head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head==<span class="keyword">null</span>||head.next ==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Node&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        Node cur = head;</span><br><span class="line">        <span class="keyword">while</span> (cur!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span> (set.contains(cur))&#123;</span><br><span class="line">                <span class="keyword">return</span> cur;</span><br><span class="line">            &#125;</span><br><span class="line">            set.add(cur);</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
+<p>​                学生表s                                                             老师表                              课程表                                                                                                                            </p>
+<p> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
+<ol>
+<li>查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure>
 
+<ol start="2">
+<li>查询所有课程成绩小于60分的同学的学号和姓名</li>
+</ol>
+<p>​                所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure>
 
-
-
-<h4 id="方法2：不用hashSet"><a href="#方法2：不用hashSet" class="headerlink" title="方法2：不用hashSet"></a>方法2：不用hashSet</h4><ol>
-<li><p>准备两个指针，快指针，慢指针，快指针一次走两步，慢指针一次走一步</p>
-</li>
-<li><p>如果有环，快指针和慢指针一定会相遇</p>
-</li>
-<li><p>如果快指针走的过程中遇到null了，就必然没环。</p>
-</li>
-<li><p>相遇的时候，快指针回到开头，一次走一步</p>
-</li>
-<li><p>这样的话，快指针和慢指针一定会在入环节点相遇</p>
-</li>
-<li><p>返回快指针</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">hasCircle</span> <span class="params">(Node head)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>||head.next.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         Node slow = head.next;</span><br><span class="line">         Node fast = head.next.next;</span><br><span class="line">         <span class="keyword">while</span> (slow != fast)&#123;<span class="comment">//注意这里是不等于</span></span><br><span class="line">             <span class="keyword">if</span> (fast.next==<span class="keyword">null</span>||fast.next.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">             &#125;</span><br><span class="line">             slow= slow.next;</span><br><span class="line">             fast =fast.next.next;</span><br><span class="line">         &#125;</span><br><span class="line">         fast = head;</span><br><span class="line">         <span class="keyword">while</span> (fast != slow)&#123; <span class="comment">//注意这里是不等于</span></span><br><span class="line">             fast=fast.next;</span><br><span class="line">             slow=slow.next;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> fast;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure>
 
 
 
 </li>
 </ol>
-<h3 id="两个链表的相交问题"><a href="#两个链表的相交问题" class="headerlink" title="两个链表的相交问题"></a>两个链表的相交问题</h3><h4 id="如果两个链表都没有环，就是两个无环链表相交的问题"><a href="#如果两个链表都没有环，就是两个无环链表相交的问题" class="headerlink" title="如果两个链表都没有环，就是两个无环链表相交的问题"></a>如果两个链表都没有环，就是两个无环链表相交的问题</h4><h5 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h5><p>你把链表1 放到hash中，然后遍历链表2，</p>
-<p>链表2 每遍历一个节点，你都查，看看这个节点再不在set里</p>
-<p>第一个在的，就是第一个相交的节点 </p>
-<p>如果head2 遍历到空都没有一个相同的节点在set中</p>
-<p>说明没有相交</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop3</span><span class="params">(Node head1,Node head2)</span></span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (head1==<span class="keyword">null</span>||head2==<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         HashSet&lt;Node&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">         Node cur1 = head1;</span><br><span class="line">         <span class="keyword">while</span> (cur1!=<span class="keyword">null</span>)&#123;</span><br><span class="line">             set.add(cur1);</span><br><span class="line">             cur1=cur1.next;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         Node cur2 = head2;</span><br><span class="line">         <span class="keyword">while</span> (cur2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">             <span class="keyword">if</span> (set.contains(cur2))&#123;</span><br><span class="line">                 <span class="keyword">return</span> cur2;</span><br><span class="line">             &#125;</span><br><span class="line">             cur2 = cur2.next;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="方法2-不用hashSet"><a href="#方法2-不用hashSet" class="headerlink" title="方法2:不用hashSet"></a>方法2:不用hashSet</h5><p>先遍历链表1 ，统计链表1 的长度，以及拿到链表1 的最后一个节点</p>
-<p>得到了长度1 和最后一个节点1</p>
-<p>在遍历链表2 ，统计链表2 的长度，以及拿到链表2的最后一个节点</p>
-<p>得到了长度2 和最后一个节点2</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6owx2xuj20d8071gnj.jpg" alt="image-20191229112019548" style="zoom: 50%;" />
-
-<p>先判断end1等不等与end2（是不是同一个节点）</p>
-<p>如果end1 不等于end2 ，他俩不可能相交</p>
-<p>如果end1 等于end2 ，说明相交，但不一定是第一个相交的那个节点</p>
-<p>如果len1 =100； len2 = 80；</p>
-<p>那么head1先走20步，然后head1和head2 同时走，</p>
-<p>他俩一定会走到第一个相交的节点处</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node cur1 = head1;</span><br><span class="line">    Node cur2 = head2;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (cur1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">        n++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cur2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        cur2 = cur2.next;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果end1！=end2 不相交</span></span><br><span class="line">    <span class="keyword">if</span> (cur1 != cur2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//相交 ，然后cur1 代表长链表，cur2 代表短链表</span></span><br><span class="line">    cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">    cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">    n = Math.abs(n);</span><br><span class="line">    <span class="comment">//相交，长链表先走</span></span><br><span class="line">    <span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">        n--;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">        cur1 = cur1.next;</span><br><span class="line">        cur2 = cur2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cur1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="如果两个链表都有环，就是两个有环链表相交问题"><a href="#如果两个链表都有环，就是两个有环链表相交问题" class="headerlink" title="如果两个链表都有环，就是两个有环链表相交问题"></a>如果两个链表都有环，就是两个有环链表相交问题</h4><p>有三种情况：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6owz6qyj214i0nadp0.jpg" alt="image-20191229115555769" style="zoom:33%;" />
-
-<p>如果loop1 ==loop2 就是第二种结构</p>
-<p>第一个相交的节点在上面，这就等同于无环链表相交。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            <span class="comment">//这里就和刚才单链表的相交问题高度一致</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
+<p>技巧：把符合in中条件的记录都选出来 用到了分组 和 having</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure>
 
 
 
-<p>如果loop1 ！= loop2</p>
-<p>可能是结构1 或者结构3</p>
-<p>让loop1 继续不断通过next向下走，如果loop1都转回自己了，还没有遇到loop2.，</p>
-<p>就是第一种结构，两个链表不相交，返回null</p>
-<p>如果loop1 向下走的过程中遇到了loop2，</p>
-<p>就是第二种结构。返回loop1和loop2 都行，都是第一个相交的节点</p>
-<p>结束</p>
-<h4 id="如果一个链表有环，一个链表无环，则这两个链表不相交"><a href="#如果一个链表有环，一个链表无环，则这两个链表不相交" class="headerlink" title="如果一个链表有环，一个链表无环，则这两个链表不相交"></a>如果一个链表有环，一个链表无环，则这两个链表不相交</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line">		<span class="keyword">public</span> Node next;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.value = data;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getIntersectNode</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//得到第一个入环的节点。</span></span><br><span class="line">		Node loop1 = getLoopNode(head1);</span><br><span class="line">		Node loop2 = getLoopNode(head2);</span><br><span class="line">        <span class="comment">//如果都没有环，就是两个无环链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 == <span class="keyword">null</span> &amp;&amp; loop2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> noLoop(head1, head2);<span class="comment">//两个无环链表的相交问题</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果都有环，两个有环链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 != <span class="keyword">null</span> &amp;&amp; loop2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//把链表1 的第一个入环节点和头结点传进去，链表2 的第一个入环节节点和头结点传进去</span></span><br><span class="line">			<span class="keyword">return</span> bothLoop(head1, loop1, head2, loop2);<span class="comment">//返回的是两个有环链表第一个相交的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//loop1和loop2 中有一个为空，一个不为空，这种情况下不可能相交</span></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	*</span></span><br><span class="line"><span class="comment">	*  不用hash表返回第一个入环节点</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getLoopNode</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span> || head.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//快指针一次走两步，慢指针一次走一步</span></span><br><span class="line">		Node n1 = head.next; <span class="comment">// n1 -&gt; slow</span></span><br><span class="line">		Node n2 = head.next.next; <span class="comment">// n2 -&gt; fast</span></span><br><span class="line">        <span class="comment">//快指针和慢指针在环中相遇的时候就停</span></span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">            <span class="comment">//如果快指针先走完整个链表，还没有碰到慢指针，直接返回，没有环</span></span><br><span class="line">			<span class="keyword">if</span> (n2.next == <span class="keyword">null</span> || n2.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n2 = n2.next.next;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//走到这里说明刚才快指针和慢指针相遇了</span></span><br><span class="line">        <span class="comment">//快指针到头结点，两个指针一次走一步，来找到入环节点</span></span><br><span class="line">		n2 = head; <span class="comment">// n2 -&gt; walk again from head</span></span><br><span class="line">        <span class="comment">//再次碰头的时候，就是那个入环节点了</span></span><br><span class="line">		<span class="keyword">while</span> (n1 != n2) &#123;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">			n2 = n2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> n1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//两个无环链表相交的问题</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">noLoop</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head1 == <span class="keyword">null</span> || head2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//head 1 ,head2 遍历</span></span><br><span class="line">		Node cur1 = head1;</span><br><span class="line">		Node cur2 = head2;</span><br><span class="line">        <span class="comment">//head1遍历的时候n++，head2 遍历的时候n--;所以n代表的是两个链表长度的差值</span></span><br><span class="line">		<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (cur1.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">			n++;</span><br><span class="line">            <span class="comment">//cur1 就是链表1最后一个节点</span></span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (cur2.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">			n--;</span><br><span class="line">             <span class="comment">//cur2 就是链表2最后一个节点</span></span><br><span class="line">			cur2 = cur2.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果最后一个节点都不相同，就不相交，返回null</span></span><br><span class="line">		<span class="keyword">if</span> (cur1 != cur2) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//如果n&gt;0的话，cur1（也就是长链表）就是 head1 ，否则就是head2</span></span><br><span class="line">		cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">        <span class="comment">//cur2 就作为另一个短链表，如果长链表是head1 ，cur2 就是head2</span></span><br><span class="line">		cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">        <span class="comment">//n取正数</span></span><br><span class="line">		n = Math.abs(n);</span><br><span class="line">        <span class="comment">//让长链表先走n步</span></span><br><span class="line">		<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">			n--;</span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//然后两个链表一起走，当cur1和cur2相等的时候，就是第一个相交的节点了</span></span><br><span class="line">		<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">			cur1 = cur1.next;</span><br><span class="line">			cur2 = cur2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cur1;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//两个有环链表相交的问题</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">bothLoop</span><span class="params">(Node head1, Node loop1, Node head2, Node loop2)</span> </span>&#123;</span><br><span class="line">		Node cur1 = <span class="keyword">null</span>;</span><br><span class="line">		Node cur2 = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//如果loop1和loop2相等的话，就是结构二，就成了单链表的相交问题</span></span><br><span class="line">		<span class="keyword">if</span> (loop1 == loop2) &#123;</span><br><span class="line">            <span class="comment">//这里就和刚才单链表的相交问题高度一致</span></span><br><span class="line">			cur1 = head1;</span><br><span class="line">			cur2 = head2;</span><br><span class="line">			<span class="keyword">int</span> n = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">				n++;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur2 != loop2) &#123;<span class="comment">//这里不再是null ，而是loop</span></span><br><span class="line">				n--;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			cur1 = n &gt; <span class="number">0</span> ? head1 : head2;</span><br><span class="line">			cur2 = cur1 == head1 ? head2 : head1;</span><br><span class="line">			n = Math.abs(n);</span><br><span class="line">			<span class="keyword">while</span> (n != <span class="number">0</span>) &#123;</span><br><span class="line">				n--;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != cur2) &#123;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">				cur2 = cur2.next;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> cur1;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//如果loop1 和loop2 不等，就看看是第一种结构还是第三种结构</span></span><br><span class="line">            <span class="comment">//也就是让loop1转</span></span><br><span class="line">			cur1 = loop1.next;</span><br><span class="line">			<span class="keyword">while</span> (cur1 != loop1) &#123;</span><br><span class="line">                <span class="comment">//在转的过程中如果有一个节点是loop2的话，就是第三种结构，相交</span></span><br><span class="line">				<span class="keyword">if</span> (cur1 == loop2) &#123;</span><br><span class="line">                    <span class="comment">//随便retrun一个loop1或者loop2</span></span><br><span class="line">					<span class="keyword">return</span> loop1;</span><br><span class="line">				&#125;</span><br><span class="line">				cur1 = cur1.next;</span><br><span class="line">			&#125;</span><br><span class="line">            <span class="comment">//如果转一圈之后还是没哟找到loop2。说明就是第一中结构，不相交，放回null</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="5">
+<li><p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
+</li>
+</ol>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure>
 
 
 
+
+
+<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加’*’的字段为该表的主键Client(客户表a)</p>
+<table>
+<thead>
+<tr>
+<th>*client_id</th>
+<th>client_name</th>
+<th>phone</th>
+<th>address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Zhao</td>
+<td>82880000</td>
+<td>朝阳区</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Qian</td>
+<td>82880002</td>
+<td>海淀区</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sun</td>
+<td>82881000</td>
+<td>朝阳区</td>
+</tr>
+</tbody></table>
+<p>Book(图书表d)</p>
+<table>
+<thead>
+<tr>
+<th>*book_id</th>
+<th>book_name</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>21</td>
+<td>管理学</td>
+<td>30.00</td>
+</tr>
+<tr>
+<td>22</td>
+<td>计算机网络</td>
+<td>50.00</td>
+</tr>
+<tr>
+<td>23</td>
+<td>国家地理杂志</td>
+<td>90.00</td>
+</tr>
+<tr>
+<td>24</td>
+<td>西游记</td>
+<td>20.00</td>
+</tr>
+</tbody></table>
+<p>Order2(订单表c10)</p>
+<table>
+<thead>
+<tr>
+<th>*order_id</th>
+<th>booki_id</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>11</td>
+<td>21</td>
+<td>5</td>
+</tr>
+<tr>
+<td>12</td>
+<td>22</td>
+<td>2</td>
+</tr>
+<tr>
+<td>13</td>
+<td>23</td>
+<td>2</td>
+</tr>
+<tr>
+<td>14</td>
+<td>24</td>
+<td>5</td>
+</tr>
+</tbody></table>
+<p>ClientOrder(客户订单表b1)</p>
+<table>
+<thead>
+<tr>
+<th>*client_id</th>
+<th>*order_id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>11</td>
+</tr>
+<tr>
+<td>1</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>14</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>1）请写出一条SQL语句，查询出每个客户的所有订单并安地址排序，要求输出格式如下：</p>
+<p>adress    client_name    phone    order_id</p>
+<p>2)请写出一条SQL语句，查询出每个客户订购的图书总价，要求输出格式如下：</p>
+<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;             </p>
 
       
     </div>
@@ -307,7 +504,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E6%9C%89romdom%E6%8C%87%E9%92%88%E7%9A%84%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/06/SQL%E7%BB%83%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -321,7 +518,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/28/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E6%9C%89romdom%E6%8C%87%E9%92%88%E7%9A%84%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">深度拷贝有romdom指针的单向链表</a>
+            <a href="/2020/01/06/SQL%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">SQL练习</a>
         </h1>
 
         <div class="post-meta">
@@ -331,14 +528,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-28 19:12:28" itemprop="dateCreated datePublished" datetime="2019-12-28T19:12:28+08:00">2019-12-28</time>
+              <time title="创建时间：2020-01-06 11:42:28" itemprop="dateCreated datePublished" datetime="2020-01-06T11:42:28+08:00">2020-01-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 21:57:34" itemprop="dateModified" datetime="2020-01-06T21:57:34+08:00">2020-01-06</time>
+                <time title="修改时间：2020-01-09 21:03:02" itemprop="dateModified" datetime="2020-01-09T21:03:02+08:00">2020-01-09</time>
               </span>
 
           
@@ -352,85 +549,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>用哈希表可以把每一个节点的信息存入到hashMap中，在深度拷贝的时候就可以拿到该信息进行拷贝</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">copyListWithRand1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		HashMap&lt;Node, Node&gt; map = <span class="keyword">new</span> HashMap&lt;Node, Node&gt;();</span><br><span class="line">		Node cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			map.put(cur, <span class="keyword">new</span> Node(cur.value));</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			map.get(cur).next = map.get(cur.next);</span><br><span class="line">			map.get(cur).rand = map.get(cur.rand);</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> map.get(head);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+          <ol>
+<li>把列看成变量，把where 后面看成if（flag）里的exp 里的表达式</li>
+<li>哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure>
 
+<p>1&gt;2 的表达式永远为false 所以一行也取不到</p>
+<p>既然是变量，就可以比较和运算，</p>
+<p>where是对表中的数据发挥作用，查询出数据来</p>
+<p>where发挥作用是，表示并没有discount列，发挥完才有discount列，所以，对结果中的列，要用having</p>
+<p>再次筛选，就要用having</p>
+<p>列就是变量，在每一行上，列的值都在变化。</p>
+<p>Where 条件是表达式，在哪一行上表达式为真。哪一行就取出来</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg" alt="image-20200108204009669"></p>
+<p>update main set num = num-(num%10) where num between 20 and 39</p>
+<p>把num 一定当成变量来看，因此num/10 取整 再乘以10</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%B0%86%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/28/%E5%B0%86%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/" class="post-title-link" itemprop="url">将单向链表按某值划分成左边小，中间相等，右边大的形式</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-28 18:23:31" itemprop="dateCreated datePublished" datetime="2019-12-28T18:23:31+08:00">2019-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:01:52" itemprop="dateModified" datetime="2020-01-06T22:01:52+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6ulvkwej217l0l5jx8.jpg" alt="image-20191228182637363" style="zoom: 50%;" />
-
-<p>准备3 个变量，分别是less，eq ，more</p>
-<p>先遍历链表，找到第一个小于num的节点，让less等于那个节点，找到第一个等于num的节点，让eq等于该节点。找到第一个大于num的节点，让more等于该节点</p>
-<p>一次遍历后，就找到了第一个小于num 第一个等于num 第一个大于num 的节点了，如果不存在等于num的，那么eq还是null</p>
-<p>在遍历一遍链表，先看是不是less，如果是less的话，不用管，如果不是less，让他挂在less的next上</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6ulsj2dj21270ho790.jpg" alt="image-20191228183624065" style="zoom:50%;" />
-
-<p>这样的话肯定是有稳定性的。小于num的全放到less链表上，等于num 的全放到eq链表上，大于num的全放到more链表上，</p>
-<p>然后less的尾巴和eq的头连接，eq的尾巴和more的头连接</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">listPartition2</span><span class="params">(Node head, <span class="keyword">int</span> pivot)</span> </span>&#123;</span><br><span class="line">	Node sH = <span class="keyword">null</span>; <span class="comment">// small head</span></span><br><span class="line">	Node sT = <span class="keyword">null</span>; <span class="comment">// small tail</span></span><br><span class="line">	Node eH = <span class="keyword">null</span>; <span class="comment">// equal head</span></span><br><span class="line">	Node eT = <span class="keyword">null</span>; <span class="comment">// equal tail</span></span><br><span class="line">	Node bH = <span class="keyword">null</span>; <span class="comment">// big head</span></span><br><span class="line">	Node bT = <span class="keyword">null</span>; <span class="comment">// big tail</span></span><br><span class="line">	Node next = <span class="keyword">null</span>; <span class="comment">// save next node</span></span><br><span class="line">	<span class="comment">// every node distributed to three lists</span></span><br><span class="line">	<span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">		next = head.next;</span><br><span class="line">		head.next = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (head.value &lt; pivot) &#123;</span><br><span class="line">			<span class="keyword">if</span> (sH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				sH = head;</span><br><span class="line">				sT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				sT.next = head;</span><br><span class="line">				sT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head.value == pivot) &#123;</span><br><span class="line">			<span class="keyword">if</span> (eH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				eH = head;</span><br><span class="line">				eT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				eT.next = head;</span><br><span class="line">				eT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (bH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				bH = head;</span><br><span class="line">				bT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				bT.next = head;</span><br><span class="line">				bT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		head = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// small and equal reconnect</span></span><br><span class="line">	<span class="keyword">if</span> (sT != <span class="keyword">null</span>) &#123;</span><br><span class="line">		sT.next = eH;</span><br><span class="line">		eT = eT == <span class="keyword">null</span> ? sT : eT;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// all reconnect</span></span><br><span class="line">	<span class="keyword">if</span> (eT != <span class="keyword">null</span>) &#123;</span><br><span class="line">		eT.next = bH;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sH != <span class="keyword">null</span> ? sH : eH != <span class="keyword">null</span> ? eH : bH;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>count（字段）和count（*）的区别，count（字段）查出来的是该字段不为null的所有行数，</p>
+<p>而count（*）会查出绝对行数，就算着一行全是null ，也算一行</p>
+<p>count（*） 和count（1）的区别</p>
+<p>对于myisam引擎来说是没有区别的 ，内部有一个计数变量</p>
+<p>对于innodb的话，count（*） 真的会傻不拉几的一行一行的数，效率极低</p>
+<p>一般聚合函数不单独使用，要配合分组一起用。这样意义更大</p>
+<p>严格的讲，以group by a，b，c为例，则select的列，只能在a，b，c里选择，语义上才没有矛盾</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzk6hf2j20dg0960ve.jpg" alt="image-20200109074542203"></p>
+<p>先计算所有人的平均分。</p>
+<p>select avg(score) ,name from result group by(name)</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzz8aiwj20i806qaci.jpg" alt="image-20200109080311830"></p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0d44nbj20jw0a9gq6.jpg" alt="image-20200109080604644"></p>
+<p>用score进行逻辑运算，挂科的标记成1，没有挂科的标记成0</p>
+<p>挂科数就是g的sum结果</p>
+<p>综合上面的两个sql语句</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0v7o7xj20h507tq5k.jpg" alt="image-20200109081022282"></p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm15ebucj20ih06q41h.jpg" alt="image-20200109081143171"></p>
 
       
     </div>
@@ -450,7 +603,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -496,7 +649,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -509,7 +662,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -561,7 +714,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
