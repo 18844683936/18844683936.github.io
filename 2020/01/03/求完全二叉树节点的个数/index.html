@@ -46,20 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="要求 ： 时间复杂度小于O(n) 如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1   首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的 然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节">
+  <meta name="description" content="要求 ： 时间复杂度小于O(n) 如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1 &amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651ylt7j213p0i47aj.jpg&amp;quot; style=&amp;quot;zoom:50%;&amp;quot; &#x2F;&amp;gt; 首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二">
 <meta name="keywords" content="完全二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="求完全二叉树节点的个数">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;03&#x2F;%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="要求 ： 时间复杂度小于O(n) 如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1   首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的 然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节">
+<meta property="og:description" content="要求 ： 时间复杂度小于O(n) 如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1 &amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651ylt7j213p0i47aj.jpg&amp;quot; style=&amp;quot;zoom:50%;&amp;quot; &#x2F;&amp;gt; 首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651ylt7j213p0i47aj.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651zc1aj20js0iqjwh.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651r9cij20d305u0tg.jpg">
-<meta property="og:updated_time" content="2020-01-06T14:38:32.952Z">
+<meta property="og:updated_time" content="2020-01-06T14:38:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan651ylt7j213p0i47aj.jpg">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/">
 
@@ -231,18 +227,15 @@
       
         <p>要求 ： 时间复杂度小于O(n)</p>
 <p>如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的</p>
 <p>然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节点数满足公式 2的3次方-1 + 当前节点   就是2的3次方</p>
 <p>右树也是完全二叉树，递归求右树的节点个数，子问题和母问题等效</p>
 <p>情况2：右子树的左边界不是L-1,也就是左子树也不一定满，但是根据定义，右子树一定是满的，就可以求出右子树的节点个数-2；</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg" style="zoom:50%;" />
-
-<p>那么就是<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg" style="zoom:33%;" /></p>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
+<p>那么就是&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
 <p>在对左子树进行递归</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -323,21 +316,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

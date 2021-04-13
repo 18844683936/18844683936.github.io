@@ -177,103 +177,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/07/%E8%AE%BE%E8%AE%A1RandomPool/" class="post-title-link" itemprop="url">设计RandomPool</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-07 20:09:37 / 修改时间：21:02:07" itemprop="dateCreated datePublished" datetime="2020-01-07T20:09:37+08:00">2020-01-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoapgyadwj20s9096n40.jpg" alt="image-20200107201125059" style="zoom:50%;" />
-
-<p>准备两张hash表，一个size变量</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaq3uv6dj20wb0b4ad1.jpg" alt="image-20200107201518949" style="zoom: 50%;" />
-
-<p>A进来了，就在map中存东西</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaqikwjpj20xd0eydjz.jpg" alt="image-20200107201639929" style="zoom:33%;" />
-
-<p>第一个map 含义： A是第0个进来的，</p>
-<p>第二个map含义：第0个进来的是A</p>
-<p>size ++;</p>
-<p>正着查，反着查，都放到map中</p>
-<p>B进来了，map中存东西。size++</p>
-<p>假设一直存到Z ：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaquu4hwj20yp0ogn3u.jpg" alt="image-20200107202100853" style="zoom:50%;" />
-
-<p>在不考虑remove和random 功能的情况下，可以这样做</p>
-<p><strong><em>因为我有大小Size，所以我用Math随机出0-25中的一个数，用这个数字做key查询map2 把value返回 ，绝对等概率</em></strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random)*size);</span><br></pre></td></tr></table></figure>
-
-<p>如果考虑remove的话</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoar5p81uj20tl0mq430.jpg" alt="image-20200107203330304" style="zoom:50%;" />
-
-<p>如果我remove 掉一个key </p>
-<p>如果进行其他操作，直接在map1，map2中remove掉的话会有问题</p>
-<p>假设删掉后12，这样的话，0-999区间就会有一个洞。</p>
-<p>假设删掉999个,</p>
-<p>然后我再随机获取的时候拿到的index 在map中没有的话，我重新在random 还是没有，这样复杂度就会上升</p>
-<p>解决方法：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoark25c4j20xu0nyte5.jpg" alt="image-20200107204155942" style="zoom: 50%;" />
-
-<p>假设要删除Str17</p>
-<p>我把Str999 扔到str17上（map1）</p>
-<p>在让17对应的字符串是Str999（map2）</p>
-<p>然后我删掉最后一条记录</p>
-<p>然后我把size从1000变成999</p>
-<p>产生洞的时候，我用最后一条数据去填这个洞，然后index 还是连续的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Pool</span>&lt;<span class="title">K</span>&gt; </span>&#123;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;K, Integer&gt; keyIndexMap;</span><br><span class="line">		<span class="keyword">private</span> HashMap&lt;Integer, K&gt; indexKeyMap;</span><br><span class="line">		<span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Pool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.keyIndexMap = <span class="keyword">new</span> HashMap&lt;K, Integer&gt;();</span><br><span class="line">			<span class="keyword">this</span>.indexKeyMap = <span class="keyword">new</span> HashMap&lt;Integer, K&gt;();</span><br><span class="line">			<span class="keyword">this</span>.size = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//要判断map中存不存在，不存在的话才加</span></span><br><span class="line">			<span class="keyword">if</span> (!<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(key, <span class="keyword">this</span>.size);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(<span class="keyword">this</span>.size++, key);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.keyIndexMap.containsKey(key)) &#123;</span><br><span class="line">				<span class="keyword">int</span> deleteIndex = <span class="keyword">this</span>.keyIndexMap.get(key);</span><br><span class="line">                <span class="comment">//--size是最后一个元素的位置</span></span><br><span class="line">				<span class="keyword">int</span> lastIndex = --<span class="keyword">this</span>.size;</span><br><span class="line">                <span class="comment">//把最后一个位置上的key拿出来</span></span><br><span class="line">				K lastKey = <span class="keyword">this</span>.indexKeyMap.get(lastIndex);</span><br><span class="line">                <span class="comment">//把最后一条记录填在原本要删的记录上</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.put(lastKey, deleteIndex);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.put(deleteIndex, lastKey);</span><br><span class="line">                <span class="comment">//然后remove掉最后一条记录</span></span><br><span class="line">				<span class="keyword">this</span>.keyIndexMap.remove(key);</span><br><span class="line">				<span class="keyword">this</span>.indexKeyMap.remove(lastIndex);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> K <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">this</span>.size == <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> randomIndex = (<span class="keyword">int</span>) (Math.random() * <span class="keyword">this</span>.size); <span class="comment">// 0 ~ size -1</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">this</span>.indexKeyMap.get(randomIndex);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/07/SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -305,7 +208,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-09 21:03:07" itemprop="dateModified" datetime="2020-01-09T21:03:07+08:00">2020-01-09</time>
+                <time title="修改时间：2020-01-09 21:03:06" itemprop="dateModified" datetime="2020-01-09T21:03:06+08:00">2020-01-09</time>
               </span>
 
           
@@ -320,50 +223,41 @@
 
       
           <p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
-<p>​                学生表s                                                             老师表                              课程表                                                                                                                            </p>
-<p> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
+<p>​				学生表s                                                             老师表                          	课程表</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
 <ol>
 <li>查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>查询所有课程成绩小于60分的同学的学号和姓名</li>
 </ol>
-<p>​                所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure>
-
+<p>​				所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
-<li><p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 <ol start="4">
-<li><p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
+<li>
+<p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
 <p>技巧：把符合in中条件的记录都选出来 用到了分组 和 having</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure>
-
-
-
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 <ol start="5">
-<li><p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure>
+<li>
+<p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
+<li>
+<p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
 </li>
 </ol>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加’*’的字段为该表的主键Client(客户表a)</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure></p>
+<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加'*'的字段为该表的主键Client(客户表a)</p>
 <table>
 <thead>
 <tr>
@@ -373,7 +267,8 @@
 <th>address</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>Zhao</td>
 <td>82880000</td>
@@ -391,7 +286,8 @@
 <td>82881000</td>
 <td>朝阳区</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Book(图书表d)</p>
 <table>
 <thead>
@@ -401,7 +297,8 @@
 <th>price</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>21</td>
 <td>管理学</td>
 <td>30.00</td>
@@ -421,7 +318,8 @@
 <td>西游记</td>
 <td>20.00</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Order2(订单表c10)</p>
 <table>
 <thead>
@@ -431,7 +329,8 @@
 <th>count</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>11</td>
 <td>21</td>
 <td>5</td>
@@ -451,7 +350,8 @@
 <td>24</td>
 <td>5</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>ClientOrder(客户订单表b1)</p>
 <table>
 <thead>
@@ -460,7 +360,8 @@
 <th>*order_id</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>11</td>
 </tr>
@@ -480,11 +381,13 @@
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>1）请写出一条SQL语句，查询出每个客户的所有订单并安地址排序，要求输出格式如下：</p>
-<p>adress    client_name    phone    order_id</p>
+<p>adress	client_name	phone	order_id</p>
 <p>2)请写出一条SQL语句，查询出每个客户订购的图书总价，要求输出格式如下：</p>
-<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;             </p>
+<p>client_name	total_price;
+3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;</p>
 
       
     </div>
@@ -504,7 +407,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/06/SQL%E7%BB%83%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/05/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
@@ -518,7 +421,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/06/SQL%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">SQL练习</a>
+            <a href="/2020/01/05/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">集合框架</a>
         </h1>
 
         <div class="post-meta">
@@ -528,14 +431,112 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-06 11:42:28" itemprop="dateCreated datePublished" datetime="2020-01-06T11:42:28+08:00">2020-01-06</time>
+              <time title="创建时间：2020-01-05 20:52:12" itemprop="dateCreated datePublished" datetime="2020-01-05T20:52:12+08:00">2020-01-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先上图
+<img src="https://img-blog.csdnimg.cn/20190919111553966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzMjA0NzA5,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>&lt;!-- more --&gt;</p>
+<h1>List</h1>
+<p>有序可重复，可以排序，有三种遍历方式</p>
+<ol>
+<li>通过下标和size（）来遍历</li>
+<li>用迭代器遍历</li>
+<li>用forEach</li>
+</ol>
+<h2>ArrayList：</h2>
+<p>底层是动态数组,这个数组先有一个初始大小，如果list中添加的元素超过这个大小后，就新创建一个数组，大小是这个数组的二倍，然后把原来数组中的元素复制进来。由于底层是数组，查询快，在中间增加和删除慢</p>
+<h2>LinkedList：</h2>
+<p>底层是一个双向链表，查询慢，增删快，因为查询需要一个节点一个节点的找。在中间插入和删除快。删除的话只需要</p>
+<pre><code><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span>.<span class="title">pre</span>.<span class="attr">next=</span><span class="keyword">node</span>.<span class="title">next</span>;  </span><br><span class="line"><span class="keyword">node</span>.<span class="title">next</span>.pre =<span class="keyword">node</span>.<span class="title">pre</span>;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1>Set</h1>
+<p>无序不可重复 （输入顺序和输出顺序不一致） 有两种遍历方式</p>
+<ol>
+<li>迭代器</li>
+<li>forEach</li>
+</ol>
+<h2>HashSet  （无序不可重复）</h2>
+<p>底层是HashMap，哈希表结构依赖于hashCode（）和equals（）方法，保证唯一性是通过先判断hashCode（）是否相同，如果相同的话判断equals（）返回的是否为true</p>
+<h2>TreeSet</h2>
+<p>底层是TreeMap，可以排序，分为 自然排序和比较器排序</p>
+<ol>
+<li>自然排序：元素具备比较性，让元素所属的类实现Comparable接口</li>
+<li>比较器排序：集合具备比较性，给TreeSet的构造中传一个比较器接口的子类对象Comparator<br>
+唯一性是根据comparator方法的返回值是否为0来决定的<br>
+##	LinkedHashSet<br>
+底层依赖哈希表和链表。哈希表保证元素的唯一性，链表保证元素有序</li>
+</ol>
+<h1>Map  （无序  key不可重复）</h1>
+<p>转换成keySet和EntrySet来遍历</p>
+<h2>HashMap</h2>
+<p>是基于哈希表的Map实现，哈希表保证键的唯一性。</p>
+<h2>LinkedHashMap</h2>
+<p>是Map接口的哈希表和链表的实现，有序。由哈希表保证键的唯一性，链表保证有序。</p>
+<h1>TreeMap</h1>
+<p>是基于红黑树的Map接口实现。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/05/hash%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/05/hash%E8%A1%A8/" class="post-title-link" itemprop="url">hash表</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 18:38:03" itemprop="dateCreated datePublished" datetime="2020-01-05T18:38:03+08:00">2020-01-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-09 21:03:02" itemprop="dateModified" datetime="2020-01-09T21:03:02+08:00">2020-01-09</time>
+                <time title="修改时间：2020-01-07 20:59:28" itemprop="dateModified" datetime="2020-01-07T20:59:28+08:00">2020-01-07</time>
               </span>
 
           
@@ -549,41 +550,67 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li>把列看成变量，把where 后面看成if（flag）里的exp 里的表达式</li>
-<li>哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来</li>
+          <p>hash函数：</p>
+<ol>
+<li>输入域是无穷大的</li>
+<li>输出域是固定的</li>
+<li>输入的参数如果相同的话，输出的也是相同的</li>
+<li>当输入不一样，也有可能得到相同的输出值</li>
+<li>假如输入域是0-99，输出域是0-2</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure>
-
-<p>1&gt;2 的表达式永远为false 所以一行也取不到</p>
-<p>既然是变量，就可以比较和运算，</p>
-<p>where是对表中的数据发挥作用，查询出数据来</p>
-<p>where发挥作用是，表示并没有discount列，发挥完才有discount列，所以，对结果中的列，要用having</p>
-<p>再次筛选，就要用having</p>
-<p>列就是变量，在每一行上，列的值都在变化。</p>
-<p>Where 条件是表达式，在哪一行上表达式为真。哪一行就取出来</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg" alt="image-20200108204009669"></p>
-<p>update main set num = num-(num%10) where num between 20 and 39</p>
-<p>把num 一定当成变量来看，因此num/10 取整 再乘以10</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure>
-
-<p>count（字段）和count（*）的区别，count（字段）查出来的是该字段不为null的所有行数，</p>
-<p>而count（*）会查出绝对行数，就算着一行全是null ，也算一行</p>
-<p>count（*） 和count（1）的区别</p>
-<p>对于myisam引擎来说是没有区别的 ，内部有一个计数变量</p>
-<p>对于innodb的话，count（*） 真的会傻不拉几的一行一行的数，效率极低</p>
-<p>一般聚合函数不单独使用，要配合分组一起用。这样意义更大</p>
-<p>严格的讲，以group by a，b，c为例，则select的列，只能在a，b，c里选择，语义上才没有矛盾</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzk6hf2j20dg0960ve.jpg" alt="image-20200109074542203"></p>
-<p>先计算所有人的平均分。</p>
-<p>select avg(score) ,name from result group by(name)</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzz8aiwj20i806qaci.jpg" alt="image-20200109080311830"></p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0d44nbj20jw0a9gq6.jpg" alt="image-20200109080604644"></p>
-<p>用score进行逻辑运算，挂科的标记成1，没有挂科的标记成0</p>
-<p>挂科数就是g的sum结果</p>
-<p>综合上面的两个sql语句</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0v7o7xj20h507tq5k.jpg" alt="image-20200109081022282"></p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm15ebucj20ih06q41h.jpg" alt="image-20200109081143171"></p>
+<p>&lt;img src=&quot;https://upload.cc/i1/2020/01/05/k4rAYN.png&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
+<p>​    离散型，均匀分布的性质。 0 ，1， 2 差不多都是 33 个</p>
+<p>输出和输入的规律无关 比如 陈广1 和陈广2 经过hash处理后 输出可能会差别特别大。 而且在整个输出域均匀分布</p>
+<p>hash表的细节</p>
+<p>有一个数组。比如大小是17.</p>
+<p>有一个map key 是 A value 是 2</p>
+<p>我先用key得到一个hash值，然后在对17取模就可以得到一个数字 假设是2。</p>
+<p>我先看看 2 的位置有没有元素，没有。就直接挂在 2的位置</p>
+<p>假设 还有一个map key 是A value 是 3；</p>
+<p>去数组还是找2的位置。已经有元素的是A ，比对value的值， 如果不同，替换原来value的值，相当于修改操作。</p>
+<p>如果这个数组里面没有A ，就加上一个A ,value 是3；</p>
+<p>就是如果冲突了，就往上挂，一个链表而已。</p>
+<p>数组上每个位置的元素都是均匀涨的。</p>
+<p>比说我某个链的长度是3了，那么其它链的长度也差不多是3了</p>
+<p>此时，我就进行hash表的扩容</p>
+<p>为什么扩容呢？因为我觉得这个链表的长度已经是5了。在多的话会影响效率。</p>
+<p>原来的数组大小是17.现在假设扩容后是104.</p>
+<p>以前都是对17取模，现在对104取模。原来的就失效了。</p>
+<p>所以就要把每个数据取出来重新用hash函数算一下，算完之后对104取模。重新分配他在哪一个桶里。</p>
+<p>为什么能到达O（1）呢？</p>
+<p>如果每次扩容的时候，都让长度扩大一倍，到n的时候要扩 logn的复杂度。问题是 我可以把容量扩大5倍，这样效率又要快。但还不是O（1）</p>
+<p>实际上，还可以进行离线扩容</p>
+<p>当链表已经到5了，我用的时候还用这个hash表，我在离线的时候进行扩容，当扩容结束后，在把所有的请求打到新的hash表上</p>
+<p>因为有很多的优化技巧，所以很快，可以说是O（1）的</p>
+<p>JVM中还是有一个桶，每一个桶里放一颗红黑树，是一颗平衡搜索二叉树。这样做出来的hash表</p>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaob3815j20js0mhwh8.jpg&quot; alt=&quot;image-20200107193927838&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
+<p>但是经典的结构是桶里面放链表</p>
+<hr>
+<h3>题1： 大文件</h3>
+<p>有一个大文件，每一行都有一个字符串，我想把重复的字符串打印出来</p>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaotrt14j20j80a841i.jpg&quot; alt=&quot;image-20200107194502671&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
+<p>问：你给我多少台机器啊？</p>
+<p>答：1000台</p>
+<p>你把机器编号，从0 到999</p>
+<p>问：文件存在哪里啊？</p>
+<p>答：存在一个分布式系统上</p>
+<p>问：我想处理这个大文件，按行读，又没有高效的工具啊？</p>
+<p>答: 有，你就告诉我怎么处理把</p>
+<hr>
+<p>我用这个高效的工具把每一行的数据读出来文本</p>
+<p>利用hash函数生成一个hashCode</p>
+<p>用hashCode对1000取模</p>
+<p>如果是0，就把这条文本扔给0机器</p>
+<p>如果是3，就把这条文本扔给3机器</p>
+<p>如果是999，就把这条文本扔给999机器</p>
+<p>这样一来就把大文本分到1000台机器上</p>
+<p>而且相同的文本一定会分到一台机器上（相同的输入，一定会有相同的输出，取模后还是相同的）</p>
+<p>这样的话，你有多少中不同的种类，就可以均匀的分布的1000台机器上。</p>
+<p>如果分完之后每一个的大小还是太大，</p>
+<p>你在每一台机器上把这个文件用hash函数分成小文件</p>
+<p>然后每一台机器上可以跑并行任务</p>
+<p>这样的话，就可以了。用hash函数做分流</p>
+<h3>hash函数相同输入相同输出，不同输入，均匀分布的特性</h3>
 
       
     </div>
@@ -649,21 +676,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

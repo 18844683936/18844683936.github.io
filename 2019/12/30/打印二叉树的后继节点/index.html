@@ -46,19 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。 如果一个节点，假如说X， 如果X有右子树，那么X 的后继节点一定是这个右子树最左的节点 如果X没有右子树，那么向上找，什么时候停。找到当前节点是父节点的左孩子停，那个父节点就是原始节点的后继节点   如果是6，那么我就找，那一颗数的左子树是以6结尾的，就是3嘛 如果是7，那一颗树的左子树是以7结尾的，米有啊，所以7的后继不存在， 通">
+  <meta name="description" content="&amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6kiweijj20vm0e0wjk.jpg&amp;quot; alt=&amp;quot;image-20191230223327822&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; &#x2F;&amp;gt; 中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。 如果一个节">
 <meta name="keywords" content="二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="打印二叉树的后继节点">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;30&#x2F;%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。 如果一个节点，假如说X， 如果X有右子树，那么X 的后继节点一定是这个右子树最左的节点 如果X没有右子树，那么向上找，什么时候停。找到当前节点是父节点的左孩子停，那个父节点就是原始节点的后继节点   如果是6，那么我就找，那一颗数的左子树是以6结尾的，就是3嘛 如果是7，那一颗树的左子树是以7结尾的，米有啊，所以7的后继不存在， 通">
+<meta property="og:description" content="&amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6kiweijj20vm0e0wjk.jpg&amp;quot; alt=&amp;quot;image-20191230223327822&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; &#x2F;&amp;gt; 中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。 如果一个节">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6kiweijj20vm0e0wjk.jpg">
-<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6kiyj3zj20ig0h80x5.jpg">
-<meta property="og:updated_time" content="2020-01-06T13:52:04.660Z">
+<meta property="og:updated_time" content="2020-01-06T13:52:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6kiweijj20vm0e0wjk.jpg">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/12/30/%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%90%8E%E7%BB%A7%E8%8A%82%E7%82%B9/">
 
@@ -228,15 +225,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiweijj20vm0e0wjk.jpg" alt="image-20191230223327822" style="zoom: 33%;" />
-
+        <p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiweijj20vm0e0wjk.jpg&quot; alt=&quot;image-20191230223327822&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
 <p>中序遍历后，4的后继节点是2，2的后继节点是5  ，。。。。</p>
 <p>如果一个节点，假如说X，</p>
 <p>如果X有右子树，那么X</p>
 <p>的后继节点一定是这个右子树最左的节点</p>
 <p>如果X没有右子树，那么向上找，什么时候停。找到当前节点是父节点的左孩子停，那个父节点就是原始节点的后继节点</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiyj3zj20ig0h80x5.jpg" alt="image-20191230225619863" style="zoom: 50%;" />
-
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6kiyj3zj20ig0h80x5.jpg&quot; alt=&quot;image-20191230225619863&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
 <p>如果是6，那么我就找，那一颗数的左子树是以6结尾的，就是3嘛</p>
 <p>如果是7，那一颗树的左子树是以7结尾的，米有啊，所以7的后继不存在，</p>
 <p>通过x的父指针，找到x的父，如果我发现X是这个父节点的左孩子，那不行，没有找到，指针继续指向现在节点的父节点，看看原来的那个节点是不是这个父节点的右孩子。如果是这个节点就是后继节点。</p>
@@ -245,11 +240,9 @@
 <p>先用父指针找到父节点5，看看5的左子树是不是11，不是。</p>
 <p>继续向上找5的父节点是2,2的左子树是4，不是2，所以2也不是11的后继节点</p>
 <p>继序向上找2的父节点是1,1的左子树是2，找到了，所以11的后继节点就是1；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//找后继节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getSuccessorNode</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">   </span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; <span class="comment">//如果当前节点的右子树不为空，说明有右子树。</span></span><br><span class="line">			<span class="keyword">return</span> getLeftMost(node.right);<span class="comment">//如果有右子树，就找到右子树上最左的节点</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//如果没有右子树，就找父节点</span></span><br><span class="line">			Node parent = node.parent;</span><br><span class="line">            <span class="comment">//如果父节点为空，就返回，因为最后一个节点没有后继，就会一直向上窜</span></span><br><span class="line">			<span class="keyword">while</span> (parent != <span class="keyword">null</span> &amp;&amp; parent.left != node) &#123;<span class="comment">//如果当前节点不等于父节点的左孩子，就转着while。如果当前节点等于父节点的左孩子的话，就找到了，停</span></span><br><span class="line">                <span class="comment">//向上窜，</span></span><br><span class="line">				node = parent;</span><br><span class="line">				parent = node.parent;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> parent;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个node是莫一颗子树的头部，找到这颗子树的最左的节点</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getLeftMost</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//在不为空的情况下，一路向右，就找到了最右的节点了</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">while</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> node;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="找前驱节点"><a href="#找前驱节点" class="headerlink" title="找前驱节点"></a>找前驱节点</h2><p>如果有左子树，就是左子树最右的节点</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//找后继节点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getSuccessorNode</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">   </span><br><span class="line">		<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123; <span class="comment">//如果当前节点的右子树不为空，说明有右子树。</span></span><br><span class="line">			<span class="keyword">return</span> getLeftMost(node.right);<span class="comment">//如果有右子树，就找到右子树上最左的节点</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//如果没有右子树，就找父节点</span></span><br><span class="line">			Node parent = node.parent;</span><br><span class="line">            <span class="comment">//如果父节点为空，就返回，因为最后一个节点没有后继，就会一直向上窜</span></span><br><span class="line">			<span class="keyword">while</span> (parent != <span class="keyword">null</span> &amp;&amp; parent.left != node) &#123;<span class="comment">//如果当前节点不等于父节点的左孩子，就转着while。如果当前节点等于父节点的左孩子的话，就找到了，停</span></span><br><span class="line">                <span class="comment">//向上窜，</span></span><br><span class="line">				node = parent;</span><br><span class="line">				parent = node.parent;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> parent;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这个node是莫一颗子树的头部，找到这颗子树的最左的节点</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">getLeftMost</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (node == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> node;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//在不为空的情况下，一路向右，就找到了最右的节点了</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">while</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> node;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>找前驱节点</h2>
+<p>如果有左子树，就是左子树最右的节点</p>
 <p>如果没有左子树，就向上找，当前节点是父节点的右孩子就停</p>
 
     </div>
@@ -316,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#找前驱节点"><span class="nav-number">1.</span> <span class="nav-text">找前驱节点</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">找前驱节点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -332,21 +325,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

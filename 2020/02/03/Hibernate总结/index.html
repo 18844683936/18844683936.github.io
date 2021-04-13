@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="基本操作 导包  在src下创建hibernate.cfg.xml文件 12345678910111213141516171819202122232425262728&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC        &quot;-&#x2F;&#x2F;Hibernate&#x2F;Hiberna">
+  <meta name="description" content="基本操作   导包   在src下创建hibernate.cfg.xml文件 12345678910111213141516171819202122232425262728&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC        &quot;-&#x2F;&#x2F;Hibernate&#x2F;Hibe">
 <meta name="keywords" content="框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hibernate总结">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;02&#x2F;03&#x2F;Hibernate%E6%80%BB%E7%BB%93&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="基本操作 导包  在src下创建hibernate.cfg.xml文件 12345678910111213141516171819202122232425262728&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC        &quot;-&#x2F;&#x2F;Hibernate&#x2F;Hiberna">
+<meta property="og:description" content="基本操作   导包   在src下创建hibernate.cfg.xml文件 12345678910111213141516171819202122232425262728&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&amp;gt;&amp;lt;!DOCTYPE hibernate-configuration PUBLIC        &quot;-&#x2F;&#x2F;Hibernate&#x2F;Hibe">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-04T15:35:44.176Z">
+<meta property="og:updated_time" content="2020-02-04T15:35:44.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/02/03/Hibernate%E6%80%BB%E7%BB%93/">
@@ -225,195 +225,222 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol>
-<li><p>导包</p>
+        <h2>基本操作</h2>
+<ol>
+<li>
+<p>导包</p>
 </li>
-<li><p>在src下创建hibernate.cfg.xml文件</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--前四个是里数据库四大参数--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/hibernate_day2_3<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--方言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这两个是显示sql语言和格式化SQL语言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是如果数据库中没有这些个字段就给你自动生成--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是session绑定session--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是设置事务的隔离级别--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.isolation"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--这个是把pojo中的映射文件加载到核心配置文件中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"cn/hqyj/pojo/User.hbm.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>
+<p>在src下创建hibernate.cfg.xml文件</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--前四个是里数据库四大参数--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/hibernate_day2_3<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.username"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.password"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--方言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这两个是显示sql语言和格式化SQL语言--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是如果数据库中没有这些个字段就给你自动生成--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是session绑定session--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--这个是设置事务的隔离级别--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.connection.isolation"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--这个是把pojo中的映射文件加载到核心配置文件中--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">"cn/hqyj/pojo/User.hbm.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>创建子配置文件。要和javaBean同包</p>
+<li>
+<p>创建子配置文件。要和javaBean同包</p>
 <ul>
-<li><p>有一个class标签，标签属性name和Bean的全类名相同，table 和与之对应的数据库中的表相同</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"sys_user"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>有一个class标签，标签属性name和Bean的全类名相同，table 和与之对应的数据库中的表相同</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"sys_user"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 </li>
 </ol>
 <ul>
-<li><p>class标签的子标签：</p>
+<li>
+<p>class标签的子标签：</p>
 <ul>
-<li><p>id标签，有name属性和类的主键属性相同，column和数据库中属性对应，要设置主键生成策略，一般为native </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>id标签，有name属性和类的主键属性相同，column和数据库中属性对应，要设置主键生成策略，一般为native</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 </li>
 </ul>
-<pre><code>- property标签，也有name 和 column属性
+<pre><code> - property标签，也有name 和 column属性
 
-- 还会有一对一，一对多，多对多的标签，后面在说</code></pre><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+ - 还会有一对一，一对多，多对多的标签，后面在说
+</code></pre>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE hibernate-mapping PUBLIC</span></span><br><span class="line"><span class="meta">        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"</span></span><br><span class="line"><span class="meta">        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">class</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">table</span>=<span class="string">"user"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">name</span>=<span class="string">"id"</span> <span class="attr">column</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generator</span> <span class="attr">class</span>=<span class="string">"native"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">column</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <ol start="4">
-<li><p>java 代码</p>
+<li>
+<p>java 代码</p>
 <p>增加</p>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Configuration config = <span class="keyword">new</span> Configuration();</span><br><span class="line">    <span class="comment">//加载配置</span></span><br><span class="line">        config.configure();</span><br><span class="line">    <span class="comment">//创建Session工厂</span></span><br><span class="line">        SessionFactory factory = config.buildSessionFactory();</span><br><span class="line">    <span class="comment">//得到session</span></span><br><span class="line">        Session session = factory.openSession();</span><br><span class="line">    <span class="comment">//开启事务</span></span><br><span class="line">        Transaction transaction = session.beginTransaction();</span><br><span class="line">    <span class="comment">//------------------------关键代码--------------------------</span></span><br><span class="line">        Student student = <span class="keyword">new</span> Student(<span class="string">"zxc"</span>,<span class="number">12</span>,<span class="string">"男"</span>);</span><br><span class="line">        session.save(student);</span><br><span class="line">    <span class="comment">//----------------------------------------------------------</span></span><br><span class="line">    <span class="comment">//提交事务</span></span><br><span class="line">        transaction.commit();</span><br><span class="line">    <span class="comment">//关闭事务</span></span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>​        修改</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line"> user.setName(<span class="string">"cg"</span>);</span><br><span class="line"><span class="comment">// session.update(user);(因为有快照机制，所以没有这句话也行)</span></span><br></pre></td></tr></table></figure>
-
-<p>​        删除</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line">      session.delete(user);</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><ol>
-<li><p>查询所有</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from Customer"</span>);<span class="comment">//from后面写的是javabean的名字，不是表名</span></span><br><span class="line">List&lt;Customer&gt; list = query.list();</span><br><span class="line"><span class="keyword">for</span>(Customer c:list)&#123;</span><br><span class="line">	System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        Configuration config = <span class="keyword">new</span> Configuration();</span><br><span class="line">    <span class="comment">//加载配置</span></span><br><span class="line">        config.configure();</span><br><span class="line">    <span class="comment">//创建Session工厂</span></span><br><span class="line">        SessionFactory factory = config.buildSessionFactory();</span><br><span class="line">    <span class="comment">//得到session</span></span><br><span class="line">        Session session = factory.openSession();</span><br><span class="line">    <span class="comment">//开启事务</span></span><br><span class="line">        Transaction transaction = session.beginTransaction();</span><br><span class="line">    <span class="comment">//------------------------关键代码--------------------------</span></span><br><span class="line">        Student student = <span class="keyword">new</span> Student(<span class="string">"zxc"</span>,<span class="number">12</span>,<span class="string">"男"</span>);</span><br><span class="line">        session.save(student);</span><br><span class="line">    <span class="comment">//----------------------------------------------------------</span></span><br><span class="line">    <span class="comment">//提交事务</span></span><br><span class="line">        transaction.commit();</span><br><span class="line">    <span class="comment">//关闭事务</span></span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​		修改</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line"> user.setName(<span class="string">"cg"</span>);</span><br><span class="line"><span class="comment">// session.update(user);(因为有快照机制，所以没有这句话也行)</span></span><br></pre></td></tr></table></figure></p>
+<p>​		删除</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 1)</span>;</span><br><span class="line">      session.delete(user);</span><br></pre></td></tr></table></figure></p>
+<h2>查询</h2>
+<ol>
+<li>
+<p>查询所有</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from Customer"</span>);<span class="comment">//from后面写的是javabean的名字，不是表名</span></span><br><span class="line">List&lt;Customer&gt; list = query.list();</span><br><span class="line"><span class="keyword">for</span>(Customer c:list)&#123;</span><br><span class="line">	System.out.println(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>条件查询</p>
+<li>
+<p>条件查询</p>
 <ul>
-<li><p>？通配符</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like ?"</span>);</span><br><span class="line">      query.setString(<span class="number">0</span>, <span class="string">"%c%"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+<li>
+<p>？通配符</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like ?"</span>);</span><br><span class="line">      query.setString(<span class="number">0</span>, <span class="string">"%c%"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>：String通配符</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like :vn"</span>);</span><br><span class="line">query.setString(<span class="string">"vn"</span>,<span class="string">"%c%"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>：String通配符</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"from User where name like :vn"</span>);</span><br><span class="line">query.setString(<span class="string">"vn"</span>,<span class="string">"%c%"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 </li>
 </ol>
 <ul>
-<li><p>使用别名，注意查全部不是* 了，而是别名</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select u from User u where u.name = ?"</span>);</span><br><span class="line">query.setString(<span class="number">0</span>, <span class="string">"cg"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>使用别名，注意查全部不是* 了，而是别名</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select u from User u where u.name = ?"</span>);</span><br><span class="line">query.setString(<span class="number">0</span>, <span class="string">"cg"</span>);</span><br><span class="line">List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <ul>
-<li><p>使用构造函数来获得某几个字段的值，其他没有的字段为空</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//from后面写的是javabean的名字，不是表名.构造函数里面必须和javabean中属性一致。</span></span><br><span class="line">Query query = session.createQuery(<span class="string">"select new User(name) from User u"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+<li>
+<p>使用构造函数来获得某几个字段的值，其他没有的字段为空</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//from后面写的是javabean的名字，不是表名.构造函数里面必须和javabean中属性一致。</span></span><br><span class="line">Query query = session.createQuery(<span class="string">"select new User(name) from User u"</span>);</span><br><span class="line">      List&lt;User&gt; list = query.list();</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>使用投影来获取某几列的值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      Query query = session.createQuery(<span class="string">"select cust_id,cust_name from Customer c "</span>);<span class="comment">//select后面跟的javabean中属性名</span></span><br><span class="line">List&lt;Object[]&gt; list = query.list();<span class="comment">//把一条记录的两个字段值放到Object数组中</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;list.size(); i++) &#123;<span class="comment">//然后输出每条记录的这两个字段值</span></span><br><span class="line">	Object[] obj = list.get(i);</span><br><span class="line">	System.out.println(obj[<span class="number">0</span>]+<span class="string">";"</span>+obj[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>使用投影来获取某几列的值</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      Query query = session.createQuery(<span class="string">"select cust_id,cust_name from Customer c "</span>);<span class="comment">//select后面跟的javabean中属性名</span></span><br><span class="line">List&lt;Object[]&gt; list = query.list();<span class="comment">//把一条记录的两个字段值放到Object数组中</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;list.size(); i++) &#123;<span class="comment">//然后输出每条记录的这两个字段值</span></span><br><span class="line">	Object[] obj = list.get(i);</span><br><span class="line">	System.out.println(obj[<span class="number">0</span>]+<span class="string">";"</span>+obj[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 <ul>
-<li><p>排序，很简单，在sql 后面加上desc或者asc就可以了。</p>
+<li>
+<p>排序，很简单，在sql 后面加上desc或者asc就可以了。</p>
 </li>
-<li><p>分页查询</p>
+<li>
+<p>分页查询</p>
 <ul>
-<li>setFirstResult(a) – 从哪条记录开始，如果查询是从第一条开启，值是0 </li>
+<li>setFirstResult(a) -- 从哪条记录开始，如果查询是从第一条开启，值是0</li>
 </ul>
-<p>​              公式求第n页是哪条记录开始：  a = （当前页数-1）* 每页记录数b</p>
+<p>​		      公式求第n页是哪条记录开始：  a = （当前页数-1）* 每页记录数b</p>
 <ul>
-<li>setMaxResults(b) – 每页查询的记录条数</li>
+<li>setMaxResults(b) -- 每页查询的记录条数</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list = query.setFirstResult(<span class="number">1</span>).setMaxResults(<span class="number">2</span>).list();</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list = query.setFirstResult(<span class="number">1</span>).setMaxResults(<span class="number">2</span>).list();</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>聚合函数查询</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select count(u) from User u"</span>);</span><br><span class="line">List&lt;Number&gt; list = query.list();</span><br><span class="line">System.out.println(<span class="string">"结果是"</span>+list.get(<span class="number">0</span>).intValue());</span><br></pre></td></tr></table></figure>
+<li>
+<p>聚合函数查询</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">"select count(u) from User u"</span>);</span><br><span class="line">List&lt;Number&gt; list = query.list();</span><br><span class="line">System.out.println(<span class="string">"结果是"</span>+list.get(<span class="number">0</span>).intValue());</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>用oid来查询</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Customer c = session.get(Customer<span class="class">.<span class="keyword">class</span>, 3<span class="title">l</span>)</span>;</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>用oid来查询</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Customer c = session.get(Customer<span class="class">.<span class="keyword">class</span>, 3<span class="title">l</span>)</span>;</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
-<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><ol>
-<li><p>一对多</p>
-<ul>
-<li><p>一的一方</p>
+<h2>多表查询</h2>
 <ol>
-<li><p>javaBeans：private HashSet<Role> roles = new HashSet&lt;&gt;();</p>
-<p>​        在加上getset方法，注意要实例化,注意用Set接口来接，不能用HashSet，否则会报错。</p>
-</li>
-<li><p>hbm.xml：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span>&gt;</span> <span class="comment">&lt;!--一方JavaBean中的集合名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span><span class="comment">&lt;!--数据库中多方的外键名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">one-to-many</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.Role"</span>/&gt;</span><span class="comment">&lt;!--多方的javaBean全路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>
+<p>一对多</p>
+<ul>
+<li>
+<p>一的一方</p>
+<ol>
+<li>javaBeans：private HashSet&lt;Role&gt; roles = new HashSet&lt;&gt;();</li>
+</ol>
+<p>​		在加上getset方法，注意要实例化,注意用Set接口来接，不能用HashSet，否则会报错。</p>
+<ol start="2">
+<li>
+<p>hbm.xml：</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span>&gt;</span> <span class="comment">&lt;!--一方JavaBean中的集合名字--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span><span class="comment">&lt;!--数据库中多方的外键名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">one-to-many</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.Role"</span>/&gt;</span><span class="comment">&lt;!--多方的javaBean全路径--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 </li>
-<li><p>多的一方</p>
+<li>
+<p>多的一方</p>
 <ol>
-<li><p>javaBean： private User user; 再加上getset，不需要实例化</p>
+<li>
+<p>javaBean： private User user; 再加上getset，不需要实例化</p>
 </li>
-<li><p>hbm.xml中加入多方的维护关系</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">many-to-one</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<li>
+<p>hbm.xml中加入多方的维护关系</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">many-to-one</span> <span class="attr">name</span>=<span class="string">"user"</span> <span class="attr">class</span>=<span class="string">"cn.hqyj.pojo.User"</span> <span class="attr">column</span>=<span class="string">"user_id"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 </li>
-<li><p>级联保存</p>
+<li>
+<p>级联保存</p>
 <ul>
-<li><p>在一的一方设置级联保存（常用）</p>
+<li>
+<p>在一的一方设置级联保存（常用）</p>
 <ol>
-<li><p>在一的一方的set上面添加属性，cascade=”save-update”</p>
+<li>
+<p>在一的一方的set上面添加属性，cascade=&quot;save-update&quot;</p>
 </li>
-<li><pre><code class="java">cg.getRoles().add(role);
+<li>
+<pre><code class="language-java">cg.getRoles().add(role);
 cg.getRoles().add(role1);
 session.save(cg);
-&lt;!--￼<span class="number">18</span>--&gt;</code></pre>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">  3. </span>保存一的一方就可以保存多的一方</span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>在多的一方设置级联保存</span><br><span class="line"></span><br><span class="line"><span class="bullet">  1. </span>在多的一方的set上面添加属性，cascade="save-update"</span><br><span class="line"></span><br><span class="line"><span class="bullet">  2. </span><span class="code">```</span>java</span><br><span class="line"><span class="code">     lk1.setCustomer(c);</span></span><br><span class="line"><span class="code">     lk2.setCustomer(c);</span></span><br><span class="line"><span class="code">     	</span></span><br><span class="line"><span class="code">     session.save(lk1);</span></span><br><span class="line"><span class="code">     session.save(lk2);</span></span><br></pre></td></tr></table></figure>
+
+</code></pre>
 </li>
-<li><p>保存多的一方的时候把多的一方也保存了</p>
+<li>
+<p>保存多的一方的时候把多的一方也保存了</p>
 </li>
 </ol>
 </li>
-<li><p>双方都设置级联保存</p>
+<li>
+<p>双方都设置级联保存</p>
 <ol>
 <li>保存任何一个都会全部保存</li>
 </ol>
 </li>
 </ul>
 </li>
-<li><p>级联删除</p>
+<li>
+<p>级联删除</p>
 <ul>
-<li><p>不设置级联删除，删除一方，多方的外键为空</p>
+<li>
+<p>不设置级联删除，删除一方，多方的外键为空</p>
 </li>
-<li><p>在一的一方设置级联删除 cascade=”delete”，删除一方，多方也删除。</p>
+<li>
+<p>在一的一方设置级联删除 cascade=&quot;delete&quot;，删除一方，多方也删除。</p>
 </li>
-<li><p>孤儿删除，在一的一方设置孤儿删除，cascade=”delete-orphan”，主类中取消关系后，外键类自动删除</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Customer customer=session.get(Customer<span class="class">.<span class="keyword">class</span>, 68)</span>;</span><br><span class="line">Linkman linkman = session.get(Linkman<span class="class">.<span class="keyword">class</span>, 94)</span>;</span><br><span class="line">customer.getLinkmans().remove(linkman);</span><br></pre></td></tr></table></figure>
+<li>
+<p>孤儿删除，在一的一方设置孤儿删除，cascade=&quot;delete-orphan&quot;，主类中取消关系后，外键类自动删除</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Customer customer=session.get(Customer<span class="class">.<span class="keyword">class</span>, 68)</span>;</span><br><span class="line">Linkman linkman = session.get(Linkman<span class="class">.<span class="keyword">class</span>, 94)</span>;</span><br><span class="line">customer.getLinkmans().remove(linkman);</span><br></pre></td></tr></table></figure></p>
 </li>
 </ul>
 </li>
-<li><p>级联的取值：</p>
+<li>
+<p>级联的取值：</p>
 <ul>
 <li>none ：不使用级联</li>
 <li>save-update ： 级联保存</li>
 <li>delete ： 级联删除</li>
 <li>delete-orphan ：孤儿删除</li>
 <li>all ： save-update + delete</li>
-<li>all-delete-orphan : 全部 </li>
-<li><strong>为了防止产生多余的sql语句，那么需要一方来放弃外键的维护！多方不能放弃外键维护。  在<set>标签上配置一个inverse=”true”</strong></li>
+<li>all-delete-orphan : 全部</li>
+<li><strong>为了防止产生多余的sql语句，那么需要一方来放弃外键的维护！多方不能放弃外键维护。  在&lt;set&gt;标签上配置一个inverse=”true”</strong></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>多对多</p>
+<li>
+<p>多对多</p>
 <ul>
-<li><p>首先每一方的xml都是这样的：而且在其中一方设置级联保存，这样</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span> <span class="attr">table</span>=<span class="string">"sys_role_user"</span> <span class="attr">cascade</span>=<span class="string">"save-update"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"uid"</span>/&gt;</span><span class="comment">&lt;!-- key配置：在中间表中，指向当前对象主键的外键。指向User表主键id的外键 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- many-to-many配置的是set集合中存储对象。</span></span><br><span class="line"><span class="comment">				class：配置对应的对象的全路径</span></span><br><span class="line"><span class="comment">				column：：在中间表中，指向对应对象主键的外键。指向Role的主键rid的外键。</span></span><br><span class="line"><span class="comment">			 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">"com.farsight.bean.Role"</span> <span class="attr">column</span>=<span class="string">"rid"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>
+<p>首先每一方的xml都是这样的：而且在其中一方设置级联保存，这样</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">set</span> <span class="attr">name</span>=<span class="string">"roles"</span> <span class="attr">table</span>=<span class="string">"sys_role_user"</span> <span class="attr">cascade</span>=<span class="string">"save-update"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">key</span> <span class="attr">column</span>=<span class="string">"uid"</span>/&gt;</span><span class="comment">&lt;!-- key配置：在中间表中，指向当前对象主键的外键。指向User表主键id的外键 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- many-to-many配置的是set集合中存储对象。</span></span><br><span class="line"><span class="comment">				class：配置对应的对象的全路径</span></span><br><span class="line"><span class="comment">				column：：在中间表中，指向对应对象主键的外键。指向Role的主键rid的外键。</span></span><br><span class="line"><span class="comment">			 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">many-to-many</span> <span class="attr">class</span>=<span class="string">"com.farsight.bean.Role"</span> <span class="attr">column</span>=<span class="string">"rid"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>而且每一方的javaBean 中都有一个Set集合来维护多对多的关系</p>
+<li>
+<p>而且每一方的javaBean 中都有一个Set集合来维护多对多的关系</p>
 </li>
-<li><p>级联删除</p>
+<li>
+<p>级联删除</p>
 <ul>
 <li>在role角色方设置级联删除，相当于删除角色时，关联到该角色中间表数据被删掉，中间表数据关联的用户被删掉。删掉的用户在中间表的数据也被删掉</li>
 </ul>
 </li>
-<li><p>总结：</p>
+<li>
+<p>总结：</p>
 <ul>
-<li><p><strong>在多对多关系当中：必须有一方设置放弃外键维护，也就是说有一个hbm.xml文件set标签中设置inverse=“true”</strong></p>
+<li>
+<p><strong>在多对多关系当中：必须有一方设置放弃外键维护，也就是说有一个hbm.xml文件set标签中设置inverse=“true”</strong></p>
 <p><strong>在一对多关系当中：一般 是一方放弃外键维护，如果不放弃多执行update。</strong></p>
 </li>
 </ul>
@@ -421,15 +448,20 @@ session.save(cg);
 </ul>
 </li>
 </ol>
-<pre><code>**在哪一方设置级联保存，save那一方的对象，关联的对象也被保存。**
+<pre><code>   **在哪一方设置级联保存，save那一方的对象，关联的对象也被保存。**
 
+   
 
-
-**在多对多关系中，在某一方设置级联删除，中间表外键为该记录的数据会被删除，另一方表中的关联中间表删除数据的数据也被删除。多对多关系慎用级联删除。**</code></pre><ul>
-<li><p>解除关系</p>
+   **在多对多关系中，在某一方设置级联删除，中间表外键为该记录的数据会被删除，另一方表中的关联中间表删除数据的数据也被删除。多对多关系慎用级联删除。**
+</code></pre>
 <ul>
-<li><p>解除关系只会删掉第三张表的数据</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 6)</span>;</span><br><span class="line"> Role role = session.get(Role<span class="class">.<span class="keyword">class</span>, 22)</span>;</span><br><span class="line">user.getRoles().remove(role);</span><br></pre></td></tr></table></figure></li>
+<li>
+<p>解除关系</p>
+<ul>
+<li>
+<p>解除关系只会删掉第三张表的数据</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User user = session.get(User<span class="class">.<span class="keyword">class</span>, 6)</span>;</span><br><span class="line"> Role role = session.get(Role<span class="class">.<span class="keyword">class</span>, 22)</span>;</span><br><span class="line">user.getRoles().remove(role);</span><br></pre></td></tr></table></figure></p>
+</li>
 </ul>
 </li>
 </ul>
@@ -498,7 +530,7 @@ session.save(cg);
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多表查询"><span class="nav-number">3.</span> <span class="nav-text">多表查询</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">多表查询</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -514,21 +546,17 @@ session.save(cg);
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

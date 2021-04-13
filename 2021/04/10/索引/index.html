@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="人间失格" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="如何定位并优化慢查询sql   根据慢日志定位慢查询sql 12345show variables like &amp;apos;%quer%&amp;apos;  -- show status like &amp;apos;%slow_queries%&amp;apos; -- 查询慢sql的数量set global slow_query_log = on -- 打开慢日志功能set global long_query_time = 1 --设置慢查询时间，这个变量">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql索引">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2021&#x2F;04&#x2F;10&#x2F;%E7%B4%A2%E5%BC%95&#x2F;index.html">
+<meta property="og:site_name" content="人间失格">
+<meta property="og:description" content="如何定位并优化慢查询sql   根据慢日志定位慢查询sql 12345show variables like &amp;apos;%quer%&amp;apos;  -- show status like &amp;apos;%slow_queries%&amp;apos; -- 查询慢sql的数量set global slow_query_log = on -- 打开慢日志功能set global long_query_time = 1 --设置慢查询时间，这个变量">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;093227-776748.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;093247-385658.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;092908-332150.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;092916-864881.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;092918-314691.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;092920-557732.png">
+<meta property="og:updated_time" content="2021-04-13T03:03:07.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;093227-776748.png">
+
+<link rel="canonical" href="https://hansoncheng.com/2021/04/10/%E7%B4%A2%E5%BC%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>mysql索引 | 人间失格</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">人间失格</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">陈广</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/10/%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql索引
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-10 16:31:55" itemprop="dateCreated datePublished" datetime="2021-04-10T16:31:55+08:00">2021-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-13 11:03:07" itemprop="dateModified" datetime="2021-04-13T11:03:07+08:00">2021-04-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3>如何定位并优化慢查询sql</h3>
+<ul>
+<li>
+<p>根据慢日志定位慢查询sql</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%quer%'</span>  <span class="comment">-- </span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'%slow_queries%'</span> <span class="comment">-- 查询慢sql的数量</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log = <span class="keyword">on</span> <span class="comment">-- 打开慢日志功能</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> long_query_time = <span class="number">1</span> <span class="comment">--设置慢查询时间，这个变量设置完后得重新连接 </span></span><br><span class="line"><span class="keyword">select</span>  <span class="keyword">name</span>   <span class="keyword">from</span> zk_books  <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">name</span>  <span class="keyword">desc</span> <span class="comment">-- 这条sql 是慢sql 控制台显示用了27s</span></span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/093227-776748.png" alt="image-20210412145207383"></p>
+<p><strong>slow_query_log</strong>  off 表示慢日志功能为关闭状态</p>
+<p><strong>long_query_time 10.000000</strong> 表示 当一个sql执行时间超过10s就会记录为慢sql</p>
+<p>慢日志的内容：</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\work_space\db\mysql\bin\mysqld, Version: 5.5.56 (MySQL Community Server (GPL)). started with:</span><br><span class="line">TCP Port: 3306, Named Pipe: MySQL</span><br><span class="line">Time                 Id Command    Argument</span><br><span class="line">C:\work_space\db\mysql\bin\mysqld, Version: 5.5.56 (MySQL Community Server (GPL)). started with:</span><br><span class="line">TCP Port: 3306, Named Pipe: MySQL</span><br><span class="line">Time                 Id Command    Argument</span><br><span class="line"># Time: 210412 15:07:15</span><br><span class="line"># User@Host: root[root] @ localhost [127.0.0.1]</span><br><span class="line"># Query_time: 27.249581  Lock_time: 0.000000 Rows_sent: 1000048  Rows_examined: 2000096  //query_time 是查询时间</span><br><span class="line">use ruoyi;</span><br><span class="line">SET timestamp=1618211235;</span><br><span class="line">select  z.`name`  from zk_books z ORDER BY name  desc; // 这个就是sql语句</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>
+<p>使用explain等工具分析sql</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span>  <span class="keyword">name</span>   <span class="keyword">from</span> zk_books  <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">name</span>  <span class="keyword">desc</span>  <span class="comment">--执行explain工具很快，这个sql并没有真正的去运行</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/093247-385658.png" alt="image-20210412151657181"></p>
+<p><strong>id</strong> 表示sql语句的执行顺序，比如说复合查询 里面的语句是先执行的</p>
+<p><strong>type</strong></p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092908-332150.png" alt="image-20210412152738368"></p>
+<p>如果type 为index 和all 的话 表示的是全表扫描。如果该语句是查询的话，type 又是这两个的话，就得优化一下了</p>
+<p><strong>Extra</strong></p>
+<p>​	如果extra 中出现以下两项意味着MySQL 根本不能使用索引，效率会受到重大影响</p>
+<ol>
+<li>Using filesort  表示 Mysql 会对结果使用一个外部索引排序，而不是从表里按索引次序读到相关内容。可能在内存或者磁盘上进行排序。 Mysql中无法利用索引完成的排序操作称为  文件排序</li>
+<li>Using temporary  表示Mysql 在对查询结果排序时使用临时表。常见于排序order by 和分组查询 group by</li>
+</ol>
+<p><strong>看刚才的explain  type 为 all  extra 为 using filesort 这就很需要调优了</strong></p>
+</li>
+<li>
+<p>修改sql或者尽量让sql走索引</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">TABLE</span> zk_books <span class="keyword">add</span> <span class="keyword">index</span> idx_name(<span class="keyword">name</span>) <span class="comment">--添加索引</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092916-864881.png" alt="image-20210412155405453"></p>
+<p>卧槽，添加完索引后在查询直接0.496s  直接从27s干到这么快。</p>
+<p>可以使用force index 来测试，看看哪一个索引效率比较高</p>
+</li>
+</ul>
+<h3>联合索引的最左匹配原则的成因</h3>
+<p>假设有两列 A，B，我们给A，B设置为索引，顺序是A，B，在where语句中调用 A = 多少，B = 多少的时候就会走A，B联合索引。如果我们调用 where A = 多少的时候也会走这个索引，但是我们调用B= 什么的时候他就不走这个索引了</p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092918-314691.png" alt="image-20210412165230424"></p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span> author = <span class="string">'房西苑'</span> <span class="keyword">and</span> bookState = <span class="number">1</span>;  <span class="comment">-- 走idx_union</span></span><br><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span> author = <span class="string">'房西苑'</span> ; <span class="comment">-- 走idx_union</span></span><br><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span>  bookState = <span class="number">1</span>;<span class="comment">-- 不走任何索引</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>最左前缀匹配原则：mysql会一直向右匹配知道遇到范围查询（&gt;,&lt;,between,like）就停止匹配，比如a = 3 and b = 4，and c &gt; 5 and d = 6  如果建立（abcd）顺序的索引，d是用不到索引的，如果建立 （abdc）的索引则都可以用到，abd的顺序可以任意调整</li>
+<li>= 和 in 可以乱序，比如 a = 1 and b= 2 and  c = 3 建立abc索引可以任意顺序，mysql的查询优化器会帮你一优化成索引可以识别的形式</li>
+</ol>
+<p><strong>最左匹配原则的成因：</strong></p>
+<p>mysql 创建联合索引是根据最左边也就是第一个字段进行排序，在第一个字段排序基础上，在对第二个字段进行排序（就类似于order by 字段1 再order by 字段2的一种排序规则），所以第一个字段是绝对有序，而第二个字段就是无序的了，因此直接使用第二个字段进行where查询是用不到第二个索引的</p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092920-557732.png" alt="image-20210412172952602">索引顺序是col3  col2 ，先按照col3给索引创建b+tree ，然后在根据col2查找，如果直接使用col2的话，是不能走这个b+tree的</p>
+<h3>索引是建立的越多越好嘛？</h3>
+<ul>
+<li>数据量小的表不需要建立索引，建立会增加额外的索引开销</li>
+<li>数据变更需要维护索引，因此更多的索引意味着更多的维护成本</li>
+<li>更多的索引也需要更多的存储空间</li>
+</ul>
+<h3>MyISAM 与 InnoDB 关于锁方面的区别是什么？</h3>
+<ul>
+<li>
+<p>MyISAM 默认用的是表级锁，不支持行级锁</p>
+</li>
+<li>
+<p>InnoDB默认使用的是行级锁，也支持表级锁</p>
+<ul>
+<li>
+<p>对于myisam 当对数据进行查询的时候，会自动添加一个表级别的读锁，当对数据进行增删改的时候，会添加一个写锁。 读锁未被释放的时候，另一个session对同一张表添加一个写锁的时候，就会被阻塞。直到所有的读锁都被释放为止</p>
+<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lock</span> <span class="keyword">tables</span> person_info_myisam <span class="keyword">read</span> <span class="comment">-- 手动添加读锁</span></span><br><span class="line"><span class="keyword">unlock</span> <span class="keyword">tables</span>; <span class="comment">-- 释放锁</span></span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/a/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/05/24/springDataJPA/" rel="next" title="springDataJPA">
+                  <i class="fa fa-chevron-left"></i> springDataJPA
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2021/04/13/TCP/" rel="prev" title="TCP">
+                  TCP <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">如何定位并优化慢查询sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">联合索引的最左匹配原则的成因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">索引是建立的越多越好嘛？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">MyISAM 与 InnoDB 关于锁方面的区别是什么？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="陈广"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+  <p class="site-author-name" itemprop="name">陈广</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/18844683936" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;18844683936" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mackxin" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mackxin" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/" title="http:&#x2F;&#x2F;mackxin.com&#x2F;" rel="noopener" target="_blank">Mackxin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/nav.html" title="http:&#x2F;&#x2F;mackxin.com&#x2F;nav.html" rel="noopener" target="_blank">馨客栈导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈广</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

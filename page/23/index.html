@@ -233,179 +233,132 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="垃圾回收机制："><a href="#垃圾回收机制：" class="headerlink" title="垃圾回收机制："></a>垃圾回收机制：</h1><ol>
-<li>一个对象被创建后放置在JVM的堆内存中，只有他不被程序中的任何引用时，才有可能被释放  </li>
-<li>垃圾回收机制是系统级守护线程，用来跟踪正在使用的对象和检查并回收不再使用的变量  </li>
-<li>可以有效的解决动态内存分配导致的两个问题：因内存中垃圾太多而导致的内存耗尽，因不恰当的释放内存而导致内存的非法引用。  </li>
-<li>可以调用System.gc 和Runtime.gc 来催促垃圾回收机制尽快回收内存，但是垃圾回收机制对程序员来说是透明的，不能精准的控制和操作。  </li>
-<li>JVM会让该对象掉用finallize()来进行回收，但是finallize有可能使该对象复活，导致垃圾回收机制取消对该内存的释放，如果垃圾回收机制抛出异常，不会导致程序终止  </li>
+          <h1>垃圾回收机制：</h1>
+<ol>
+<li>一个对象被创建后放置在JVM的堆内存中，只有他不被程序中的任何引用时，才有可能被释放</li>
+<li>垃圾回收机制是系统级守护线程，用来跟踪正在使用的对象和检查并回收不再使用的变量</li>
+<li>可以有效的解决动态内存分配导致的两个问题：因内存中垃圾太多而导致的内存耗尽，因不恰当的释放内存而导致内存的非法引用。</li>
+<li>可以调用System.gc 和Runtime.gc 来催促垃圾回收机制尽快回收内存，但是垃圾回收机制对程序员来说是透明的，不能精准的控制和操作。</li>
+<li>JVM会让该对象掉用finallize()来进行回收，但是finallize有可能使该对象复活，导致垃圾回收机制取消对该内存的释放，如果垃圾回收机制抛出异常，不会导致程序终止</li>
 </ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/17/%E7%AC%94%E8%AF%95%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/16/Sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/16/Sort/" class="post-title-link" itemprop="url">Sort</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-16 23:18:06" itemprop="dateCreated datePublished" datetime="2019-11-16T23:18:06+08:00">2019-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-27 08:13:18" itemprop="dateModified" datetime="2019-12-27T08:13:18+08:00">2019-12-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <hr>
-<p> title:  笔试题  </p>
-<p>tags： 算法</p>
-<p> -–   </p>
-<p>#八大排序算法  </p>
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>这个冒泡排序加入了一个优化，那就是，如果本次排序没有出现前面比后面小的情况下，就可以确定排序已经完成了。    </p>
-<p>冒泡排序就是每一次排序都确把最大的放在最后，然后下一次排序就能少排一次<br>一共排序n-1次就行了，因为最后一次没必要给那个最小的排序了，前面已经全是比他大的了。<br>每次排序因为要和比他大的做比较，所以要减1，而且每一次排序之后都会确定一个最大的元素在本次排序的最后，所以也就没有必要和上次拍完最后的那个比了，所以要减去arr.length-1;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;<span class="comment">//如果为true，证明本次排序中发生了交换，还需继续排序</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;<span class="comment">//总共排序length-1次</span></span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length - <span class="number">1</span> - i; j++) &#123;<span class="comment">//不需要与上次排序后最大的进行比较，因为是与后面的比还需要-1；</span></span><br><span class="line">              <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                  exchange(arr, j, j + <span class="number">1</span>);<span class="comment">//交换这两个位置</span></span><br><span class="line">                  flag = <span class="keyword">true</span>;<span class="comment">//本次排序出现了交换</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (flag) &#123;<span class="comment">//如果出现了交换，就设置为false，继续判断</span></span><br><span class="line">              flag = <span class="keyword">false</span>;</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="keyword">break</span>;<span class="comment">//如果没有出现交换，就证明已经排序完毕，可以推出排序了</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/16/Sort/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/11/16/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/16/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-16 18:56:09" itemprop="dateCreated datePublished" datetime="2019-11-16T18:56:09+08:00">2019-11-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-17 22:50:05" itemprop="dateModified" datetime="2019-11-17T22:50:05+08:00">2019-11-17</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><ul>
-<li>列表1</li>
-<li>列表2<br>  a子列表<br>  b子列表</li>
-</ul>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>&lt;!-- more --&gt;</p>
+<h1>java程序运行过程</h1>
+<ol>
+<li>javac 文件名(不区分大小写).java 编译器将java文件编译成与平台无关的class字节码文件</li>
+</ol>
+<ol>
+<li>java 文件名（区分大小写）  类加载器把class文件加载到内存中</li>
+<li>Java虚拟机(JVM)读取并处理class文件c</li>
+<li>运行，解释器将JVM中的代码在特定的平台上运行</li>
+</ol>
+<h1>标识符：</h1>
+<ol>
+<li>由数字字母下划线￥$组成</li>
+<li>区分大小写</li>
+<li>不能使用关键字</li>
+<li>不能使用true和false</li>
+<li>避免和JAVA类库中的类名重名</li>
+<li>不能用空格，* #</li>
+<li>长度没有限制</li>
+<li>首字母小写，从第二个单词开始首字母小写</li>
+</ol>
+<h1>数据类型：</h1>
+<p>基本数据类型：byte short int long  float double char boolean<br>
+引用数据类型：数组，接口，类</p>
+<h1>数据类型之间的转换</h1>
+<ol>
+<li>char 和 int 随便转</li>
+<li>整形的（byte short int long ）可以自动类型转换成浮点型的（float，double）
+如果同是整型或是浮点型的话，站位少的可以自动转换为占位多的</li>
+<li>short byte 在进行运算时先转成整型，在运算，所以结果是整型。  +=符号可以自动类型转换<br>
+自增，自减运算符<br>
+i=1;<br>
+i=i++;<br>
+结果是1；</li>
+</ol>
+<h1>&amp;和&amp;&amp;，|和| |区别</h1>
+<p>单一个&amp; | 的话要判断左右两边的，如果是短路&amp;&amp;，左边是false 就不判断右边的了 ||如果左边是true，就不判断右边的了</p>
+<h1>全局变量、局部变量</h1>
+<p>全局变量：类中方法外，系统默认给初始值。如果是final修饰的话必须在声明的时候就赋值<br>
+局部变量：定义在方法里，形参。</p>
+<h1>参数是基本数据类型、引用数据类型</h1>
+<p>参数是基本数据类型：形参参的改变不影响实参<br>
+参数是引用数据类型：形参的改编直接影响实参（String类型当做基本数据类型来看）</p>
+<h1>do-while和while区别</h1>
+<p>前者先执行一次，在进行判断，后者先判断，后执行</p>
+<h1>break和continue的区别</h1>
+<p>break用来结束这个循环。continue用来结束本次循环，进入下一次循环。<br>
+break还可以用在switch中 ，用于结束本次的case；否则会case击穿</p>
+<h1>eauals 和 == 区别</h1>
+<p>==既能判断基本数据类型，又能判断引用数据类型，equals只能判断引用数据类型
+==判断基本数据类型时就是看它的值是否相等，判断引用数据类型的时候判断的是地址值是否相同<br>
+equals 判断引用数据类型，如果该类重写了toString方法，判断的是内容是否相同，如果没有重写，则判断地址值是否相同</p>
+<h1>重载、重写</h1>
+<p>重载是在同一个类中，方法名相同，参数列表不同<br>
+重写是在父子类（或者接口）中，访问权限修饰符不能比父类更小，返回值类型，方法名，参数列表都相同，子类抛出的异常不能比父类的多。<br>
+方法重载是编译器多态，方法重写是运行时多态的表现<br>
+如果子类复写了父类的方法，则该方法指向子类，如果子类没有复写父类的方法，该方法会向上寻找，指向父类</p>
+<h1>static关键字</h1>
+<p>static 修饰属性，叫做静态属性，类域，修饰方法，叫做静态方法，类方法，修饰代码块，叫做静态代码块。<br>
+静态属性可静态方法可以用对象和类名来调用，静态代码快和静态方法中都不能出现this，super<br>
+static修饰的只在执行之前分配一次内存空间，所有对象或者类名访问时，访问的同一块内存空间
+静态的不可以访问非静态的，非静态的可以访问静态的和非静态的</p>
+<h1>final、fianlly、finalize</h1>
+<p>final 修饰类，类不能别继承，修饰方法，方法不能被重写，修饰属性，修饰基本数据类型，该变量不能被重新赋值，修饰引用数据类型，改变量不能指向新的内存空间。修饰全局变量（成员变量，属性），改变量必须在声明的时候赋值，修饰成员变量，可以后赋值<br>
+finally 用在处理异常上，无论try{}里面的代码报不报错，这里都执行。就算是前面return了，这里也要执行。一般用于关闭资源<br>
+finalize 用来提醒垃圾回收机制可以把这块内存清理了，但一般不会立刻清理</p>
+<h1>父子类实例化对象过程</h1>
+<p>父类静态
+子类静态<br>
+父类构造代码块，父类构造方法<br>
+子类构造代码块，子类构造方法</p>
+<h1>访问权限修饰</h1>
+<p>public 所有<br>
+protected 本类，本包，父子类<br>
+default 本类，本包<br>
+private 本类</p>
+<h1>抽象类接口的区别</h1>
+<ol>
+<li>抽象类中可以没有抽象方法 abstract 不可以省略，接口中的方法全是抽象方法，abstract可以省略</li>
+<li>抽象类中的属性可以是常量，也可以是变量，接口中的属性全都是public static final 修饰的静态常量</li>
+<li>抽象类中的方法的访问权限修饰符默认是default，接口中的默认是public</li>
+<li>抽象类中有构造方法，接口中没有构造方法</li>
+<li>抽象类提取所有子类公共方法，类必须满足是抽象类的子类关系。接口可以定义多个无关类的公共行为，这些无关类遵守相同行为协议</li>
+<li>抽象类只能是单继承，抽象了可以继承多个父接口。</li>
+</ol>
+<h1>StringBuffer和StringBuilder</h1>
+<p>StringBuffer 线程安全，效率低，StringBuffer 线程不安全，效率高<br>
+为了解决字符串频繁拼接，导致频繁的创建无用的对象影响性能。多线程用Buffer，单线程用Builder 方法为 append</p>
+<h1>String类常用方法</h1>
+<p>charAt()  contains（） toLowerCase（） toUpperCase（） getBytes() toCharArray()  startWith() endWith() equals（） equslaIgnoreCase() indexOf() isEmpty()<br>
+length()  split() concat() subString()</p>
+<h1>序列化</h1>
+<p>序列化就是把Object转成字节序列  ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;&quot;));<br>
+oos.write(p);<br>
+反序列化就是把字节序列转成Object ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;&quot;));<br>
+ois.readObject();<br>
+java类序列化条件：实现Serilizable接口；属性私有，有getset方法；有公有无参构造函数<br>
+	如果属性使用transient，static修饰，该属性的值不能被序列化。</p>
+<h1>数组和链表的区别</h1>
+<p>数组在内存中是一片连续的存储空间，所以没有地址域，更节省空间。但是内存利用率不高，查询块，在中间插入和删除慢<br>
+链表是以节点为单位的一种数据结构，每个节点有数据域和地址域。地址域中存放下一个节点的地址，这样连起来。因为有地址域，所以更加耗费内存，但是可以使用碎片化的内存。内存利用率好。查询慢，增删快。</p>
+<h1>Collection和Collections区别</h1>
+<p>Collection 是List和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分查找，同步集合等方法</p>
+<h1>三次握手</h1>
+<ol>
+<li>第一次握手<br>
+客户端向服务器发送请求报文X<br>
+服务器收到客户端发送的请求报文</li>
+<li>第二次握手<br>
+服务器向客户端发送确认报文X+1 和请求报文Y<br>
+客户端收到服务器发送的请求报文和确认报文</li>
+<li>第三次握手<br>
+客户端向服务器发送确认报文Y+1<br>
+服务器接收到客户端发来的确认报文</li>
+</ol>
+<h1>tcp udp 区别</h1>
+<p>tcp 含有三次握手。一个安全可靠稳定的传输协议。数据不会丢失，有序达到接收端。速度相对于udp慢。<br>
+udp 没有三次握手，无线路传输。不安全的一种协议，有可能丢失数据，不能保证顺序。</p>
 
       
     </div>
@@ -471,21 +424,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

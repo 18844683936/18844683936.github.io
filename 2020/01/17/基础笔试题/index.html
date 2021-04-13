@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="面向对象的特征 封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。 编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中的对">
+  <meta name="description" content="面向对象的特征  封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。  编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础笔试题">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;17&#x2F;%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="面向对象的特征 封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。 编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中的对">
+<meta property="og:description" content="面向对象的特征  封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。 继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类 多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。  编译器多态：方法重载 运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类   抽象：就是把现实生活中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-02T06:47:47.382Z">
+<meta property="og:updated_time" content="2020-04-02T06:47:46.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/17/%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AF%95%E9%A2%98/">
@@ -211,7 +211,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-02 14:47:47" itemprop="dateModified" datetime="2020-04-02T14:47:47+08:00">2020-04-02</time>
+                <time title="修改时间：2020-04-02 14:47:46" itemprop="dateModified" datetime="2020-04-02T14:47:46+08:00">2020-04-02</time>
               </span>
 
           
@@ -225,17 +225,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="面向对象的特征"><a href="#面向对象的特征" class="headerlink" title="面向对象的特征"></a>面向对象的特征</h2><ol>
+        <h2>面向对象的特征</h2>
+<ol>
 <li>封装：隐藏对象的属性和实现细节，仅仅对外提供公共的访问接口。</li>
 <li>继承：继承是从已有类得到继承信息创建类的过程。提供信息的是父类，得到信息的是子类</li>
-<li>多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。<ul>
+<li>多态：一个类的多种形态，就是用同一个对象调用同一个方法得到的结果不同。
+<ul>
 <li>编译器多态：方法重载</li>
 <li>运行时多态：方法重写 ，子类重写了父类的方法，则该方法指向子类，子类没有重写父类的方法，该方法会向上寻找，指向父类</li>
 </ul>
 </li>
 <li>抽象：就是把现实生活中的对象抽象成类，对象的行为作为类的方法，对象的属性，作为类的属性</li>
 </ol>
-<h2 id="访问权限修饰符"><a href="#访问权限修饰符" class="headerlink" title="访问权限修饰符"></a>访问权限修饰符</h2><table>
+<h2>访问权限修饰符</h2>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -245,7 +248,8 @@
 <th>private</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>本类</td>
 <td>ok</td>
 <td>ok</td>
@@ -273,102 +277,204 @@
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
-<h2 id="基本数据类型有哪些"><a href="#基本数据类型有哪些" class="headerlink" title="基本数据类型有哪些?"></a>基本数据类型有哪些?</h2><p>基本数据类型：byte short int long float double char boolean<br>引用数据类型：数组，接口，类 </p>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><ol>
+</tbody>
+</table>
+<h2>基本数据类型有哪些?</h2>
+<p>基本数据类型：byte short int long float double char boolean
+引用数据类型：数组，接口，类</p>
+<h2>数据类型转换</h2>
+<ol>
 <li>char 能转成int int 不能转成char</li>
-<li>整形的（byte short int long ）可以自动类型转换成浮点型的（float，double）<br>如果同是整型或是浮点型的话，站位少的可以自动转换为占位多的</li>
-<li>short byte 在进行运算时先转成整型，在运算，所以结果是整型。 +=符号可以自动类型转换<br>自增，自减运算符<br>i=1;<br>i=i++;<br>结果是1；</li>
+<li>整形的（byte short int long ）可以自动类型转换成浮点型的（float，double）
+如果同是整型或是浮点型的话，站位少的可以自动转换为占位多的</li>
+<li>short byte 在进行运算时先转成整型，在运算，所以结果是整型。 +=符号可以自动类型转换
+自增，自减运算符
+i=1;
+i=i++;
+结果是1；</li>
 </ol>
-<h2 id="float-f-3-4-是否正确"><a href="#float-f-3-4-是否正确" class="headerlink" title="float f=3.4;是否正确"></a>float f=3.4;是否正确</h2><p>不对，3.4默认是double 类型，而double类型不能自动类型转换为float类型 因该是3.4f</p>
-<h2 id="short-s1-1-s1-s1-1-有错吗-short-s1-1-s1-1-有错吗？"><a href="#short-s1-1-s1-s1-1-有错吗-short-s1-1-s1-1-有错吗？" class="headerlink" title="short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？"></a>short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</h2><p>前面的有错，short类型参加运算时都要转换成int类型进行运算，所以右边最后是int类型，而左边是short类型，short类型不能自动类型转换为int类型</p>
+<h2>float f=3.4;是否正确</h2>
+<p>不对，3.4默认是double 类型，而double类型不能自动类型转换为float类型 因该是3.4f</p>
+<h2>short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</h2>
+<p>前面的有错，short类型参加运算时都要转换成int类型进行运算，所以右边最后是int类型，而左边是short类型，short类型不能自动类型转换为int类型</p>
 <p>后面的没错，因为扩展赋值运算符强制转换</p>
-<h2 id="switch-是否能作用在byte-上，是否能作用在long-上，是否能作用在String上"><a href="#switch-是否能作用在byte-上，是否能作用在long-上，是否能作用在String上" class="headerlink" title="switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上"></a>switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</h2><p>byte short int char  java7后支持String</p>
-<h2 id="Thread类的sleep和wait-的区别"><a href="#Thread类的sleep和wait-的区别" class="headerlink" title="Thread类的sleep和wait 的区别"></a>Thread类的sleep和wait 的区别</h2><p> <strong>sleep()方法</strong>正在执行的线程主动让出CPU（然后CPU就可以去执行其他任务），在sleep指定时间后CPU再回到该线程继续往下执行(注意：sleep方法只让出了CPU，而并不会释放同步资源锁！！！) </p>
-<p>wait方法,当前线程让自己暂时退让出同步资源锁，以便其他正在等待该资源的线程得到该资源进而运行，只有调用了该对象的notify()方法，之前调用wait()的线程才会解除wait状态，可以去参与竞争同步资源锁，进而得到执行。 </p>
-<p>sleep 方法 是 线程类Thread的静态方法，使线程暂停指定的时间 ，把CPU让出来，然后cpu去执行其他任务，时间到后，该线程进入就绪状态，抢到CPU后继续执行该线程 ,并不会释放同步资源锁<br>wait 方法 是 Object类的方法，使线程退出同步资源锁，进入到等待队列，以便其他正在等待该资源的线程得到该资源，调用notify/notifyAll 唤醒指定线程或者所有线程，进入到就绪状态，然后抢cpu</p>
-<p>原文链接：<a href="https://blog.csdn.net/u012050154/article/details/50903326" target="_blank" rel="noopener">https://blog.csdn.net/u012050154/article/details/50903326</a></p>
-<h2 id="当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B"><a href="#当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B" class="headerlink" title="当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B"></a>当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</h2><p>不能，因为要进入方法B，就需要一个锁对象，有因为已经有线程进入了A方法了，说明锁对象已经被占用，则方法B的线程就会去等锁池中等待。</p>
-<h2 id="线程的三种方式"><a href="#线程的三种方式" class="headerlink" title="线程的三种方式"></a>线程的三种方式</h2><ol>
-<li><ul>
-<li><p>继承Thread类 重写run放方法</p>
+<h2>switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</h2>
+<p>byte short int char  java7后支持String</p>
+<h2>Thread类的sleep和wait 的区别</h2>
+<p><strong>sleep()方法</strong>正在执行的线程主动让出CPU（然后CPU就可以去执行其他任务），在sleep指定时间后CPU再回到该线程继续往下执行(注意：sleep方法只让出了CPU，而并不会释放同步资源锁！！！)</p>
+<p>wait方法,当前线程让自己暂时退让出同步资源锁，以便其他正在等待该资源的线程得到该资源进而运行，只有调用了该对象的notify()方法，之前调用wait()的线程才会解除wait状态，可以去参与竞争同步资源锁，进而得到执行。</p>
+<p>sleep 方法 是 线程类Thread的静态方法，使线程暂停指定的时间 ，把CPU让出来，然后cpu去执行其他任务，时间到后，该线程进入就绪状态，抢到CPU后继续执行该线程 ,并不会释放同步资源锁
+wait 方法 是 Object类的方法，使线程退出同步资源锁，进入到等待队列，以便其他正在等待该资源的线程得到该资源，调用notify/notifyAll 唤醒指定线程或者所有线程，进入到就绪状态，然后抢cpu</p>
+<p>原文链接：https://blog.csdn.net/u012050154/article/details/50903326</p>
+<h2>当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</h2>
+<p>不能，因为要进入方法B，就需要一个锁对象，有因为已经有线程进入了A方法了，说明锁对象已经被占用，则方法B的线程就会去等锁池中等待。</p>
+<h2>线程的三种方式</h2>
+<ol>
+<li>
+<ul>
+<li>
+<p>继承Thread类 重写run放方法</p>
 </li>
-<li><p>new 该类</p>
+<li>
+<p>new 该类</p>
 </li>
-<li><p>该类.start();</p>
+<li>
+<p>该类.start();</p>
 </li>
 </ul>
 </li>
-<li><ul>
+<li>
+<ul>
 <li>实现Runnable接口重写run方法</li>
 <li>new 类名（）；</li>
 <li>new Thread（该类名）；</li>
 <li>th.start()；</li>
 </ul>
 </li>
-<li><p>new Thread（new Runnable（）{</p>
-<p>​        重写run方法</p>
-<p>}）.start()；</p>
+<li>
+<p>new Thread（new Runnable（）{</p>
 </li>
 </ol>
-<h2 id="synchronized关键字的用法"><a href="#synchronized关键字的用法" class="headerlink" title="synchronized关键字的用法"></a>synchronized关键字的用法</h2><p>synchronized（锁对象）{代码}  锁对象相同能同步，锁对象 不同不能同步</p>
+<p>​		重写run方法</p>
+<p>}）.start()；</p>
+<h2>synchronized关键字的用法</h2>
+<p>synchronized（锁对象）{代码}  锁对象相同能同步，锁对象 不同不能同步</p>
 <p>synchronized 实例方法，锁对象是this。两个线程</p>
 <p>如果用同一个对象的同步实例方法访问能同步</p>
 <p>synchronized 静态方法 锁对象是 该类.class  ，无论如何都能同步</p>
-<h2 id="List-Set-Map"><a href="#List-Set-Map" class="headerlink" title="List Set Map"></a>List Set Map</h2><p><strong>List  特性</strong>：有序可重复<br><strong>常用方法</strong>：<br>        add () 添加一个元素<br>        addAll() 参数是一个实现了Connection的集合。将这个集合中的所有元素都添加到集合中<br>        remove()传一个下标 remove掉该下标上的元素，返回true或者false 传一个Object remove掉第一次出现的        该元素。<br>        clear()清空集合<br>        set()两个参数。第一个参数是下标，第二个参数数Object 用指定的元素替换集合中指定位置的元素<br>        get();参数是下标,得到该下标的元素<br>        size();返回集合的大小<br>        toArray()<br><strong>遍历</strong>：<br>    有三种方法<br>    foreach   iterat or  普通for<br><strong>排序</strong>：<br>    1.让元素具有比较性,让元素实现Comparable接口重写CompareTo()方法; 然后使用工具了collections.sort(list);<br>    2.使用 collections.sort(list，new Comparator(){<br>        重写Compare()接口；<br>    });<br><strong>实现List接口的有ArrayList Vector LinkedList</strong><br>    ArrayList 底层是动态数组，查询块，从中间增加删除慢 线程不安全 速度快。可以使用<br>    List list = Collections.synchronizedList(new ArrayList(…)); 来线程安全化</p>
+<h2>List Set Map</h2>
+<p><strong>List  特性</strong>：有序可重复
+<strong>常用方法</strong>：
+		add () 添加一个元素
+		addAll() 参数是一个实现了Connection的集合。将这个集合中的所有元素都添加到集合中
+		remove()传一个下标 remove掉该下标上的元素，返回true或者false 传一个Object remove掉第一次出现的		该元素。
+		clear()清空集合
+		set()两个参数。第一个参数是下标，第二个参数数Object 用指定的元素替换集合中指定位置的元素
+		get();参数是下标,得到该下标的元素
+		size();返回集合的大小
+		toArray()
+<strong>遍历</strong>：
+	有三种方法
+	foreach   iterat or  普通for
+<strong>排序</strong>：
+	1.让元素具有比较性,让元素实现Comparable接口重写CompareTo()方法; 然后使用工具了collections.sort(list);
+	2.使用 collections.sort(list，new Comparator(){
+		重写Compare()接口；
+	});
+<strong>实现List接口的有ArrayList Vector LinkedList</strong>
+	ArrayList 底层是动态数组，查询块，从中间增加删除慢 线程不安全 速度快。可以使用
+	List list = Collections.synchronizedList(new ArrayList(...)); 来线程安全化</p>
 <p>​    LinkedList 底层是双向链表，查询慢，增删快。线程不安全，速度快</p>
-<p>​    Vector 底层是数组，查询块，增删慢，线程安全 速度慢（已过时）</p>
-<p><strong>Set 特性</strong>：无序不可重复<br>    <strong>常用方法</strong>：<br>        add,remove,contans,size,clear<br>    <strong>遍历</strong><br>        foreach iterator<br>    <strong>实现set接口的有TreeSet 和 HashSet LinkedHashSet</strong></p>
-<p><strong>TreeSet</strong> </p>
+<p>​	Vector 底层是数组，查询块，增删慢，线程安全 速度慢（已过时）</p>
+<p><strong>Set 特性</strong>：无序不可重复
+	<strong>常用方法</strong>：
+		add,remove,contans,size,clear
+	<strong>遍历</strong>
+		foreach iterator
+	<strong>实现set接口的有TreeSet 和 HashSet LinkedHashSet</strong></p>
+<p><strong>TreeSet</strong></p>
 <p>底层是红黑树（平衡二叉搜索树） 平衡：对于任何一个节点，左右子树的高度之差不能超过1  ，二叉搜索树： 对于任何一个节点，左子树都比该节点小，右子树都比该节点大。</p>
 <p><strong>如果要存自定义的类必须定义比较规则</strong>：</p>
-<p>1.集合的元素具有比较性  元素实现Comparable接口 重写Compareto方法<br>2.集合本身具有比较性   创建集合的时候传递一个匿名内部类 new Comparor() </p>
-<p><strong>HashSet</strong><br><strong>如果要存自定义的类，那么自定义类中需要重写hashCode()和equals()</strong><br><em>底层是哈希表。经典的哈希表结构是由数组+链表的形式构成的。hash函数的输入是无穷大，输出是一个有限的区间。相同的输入得到相同的输出。输出的值都均匀分布。</em><br><em>先使用hash函数得到一个哈希值然后取模数组长度放到对应的桶中。比如说 元素A 放到1号桶中，再次向集合中放元素A的话得到相同的桶位置，然后使用equals看看相不相等。相等就证明是同一个元素。不进行操作。</em><br><em>如果添加一个元素B  经过计算后也是放到1号桶中。然后使用equals看看相不相等。不相等，证明不是同一个元素，然后和链表的第二个元素比较看看相不相等，以此类推，如果都不相等，就在链表的最后添加该元素</em><br><em>java中的Hash表是数组+红黑树的结构。</em></p>
+<p>1.集合的元素具有比较性  元素实现Comparable接口 重写Compareto方法
+2.集合本身具有比较性   创建集合的时候传递一个匿名内部类 new Comparor()</p>
+<p><strong>HashSet</strong>
+<strong>如果要存自定义的类，那么自定义类中需要重写hashCode()和equals()</strong>
+<em>底层是哈希表。经典的哈希表结构是由数组+链表的形式构成的。hash函数的输入是无穷大，输出是一个有限的区间。相同的输入得到相同的输出。输出的值都均匀分布。</em>
+<em>先使用hash函数得到一个哈希值然后取模数组长度放到对应的桶中。比如说 元素A 放到1号桶中，再次向集合中放元素A的话得到相同的桶位置，然后使用equals看看相不相等。相等就证明是同一个元素。不进行操作。</em>
+<em>如果添加一个元素B  经过计算后也是放到1号桶中。然后使用equals看看相不相等。不相等，证明不是同一个元素，然后和链表的第二个元素比较看看相不相等，以此类推，如果都不相等，就在链表的最后添加该元素</em>
+<em>java中的Hash表是数组+红黑树的结构。</em></p>
 <p><strong>LinkedHashSet</strong> 保证输入和输出有序。</p>
-<p><strong>Map 特性：key - value  key 无序不可重复</strong><br>    <strong>常用方法</strong>：<br>        put<br>        remove<br>        clear<br>        containsKey<br>        containsValue<br>    <strong>遍历</strong>：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</span><br><span class="line">		Set&lt;Map.Entry&lt;String, String&gt;&gt; set = map.entrySet();</span><br><span class="line">		<span class="keyword">for</span> (Map.Entry&lt;String,String&gt; entry: set) &#123;</span><br><span class="line">			System.out.println(entry.getKey()+<span class="string">"---"</span>+entry.getValue());</span><br><span class="line">		&#125;</span><br><span class="line"><span class="number">2</span>.keySet</span><br><span class="line">        Set&lt;String&gt; keySet = map.keySet();</span><br><span class="line">		<span class="keyword">for</span> (String s : keySet)&#123;</span><br><span class="line">			System.out.println(<span class="string">"key:"</span>+s+<span class="string">"---value:"</span>+map.get(s));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>HashMap</strong> : 底层是哈希表   线程不安全，效率高。能存null，如果需要将自定义类对象作为HashMap的key，那么自定义类中需要重写hashCode()和equals()<br><strong>TreeMap</strong> 底层是红黑树 如果将自定义的对象作为key 的话吗，那么需要给自定义的类实现Compareable接口或者在TreeMap的构造器中new Comparator();</p>
-<p><strong>ConcurrentHashMap 线程安全，效率也高</strong><br><strong>hashTable 线程安全，效率低 ，不能存null。</strong></p>
-<h2 id="java中的流"><a href="#java中的流" class="headerlink" title="java中的流"></a>java中的流</h2><p>字节流和字符流 还有缓冲流和转换流和对象流;<br>FileInputStream BufferedInputStream ObjectInputStream,InputStreamReader<br>FileReader  BufferedReader</p>
-<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p><strong>就是把对象变成字节序列。便于网络传输</strong></p>
-<p>oos =new ObjectOutputStream(new FileOutputStream(“”));<br>oos.writeObject(new Product());<br>Product这个类要实现Serializable接口。有get set方法。如果属性使用transient，static修饰，该属性的值不能被序列化。</p>
-<p><strong>反序列化就是把字节序列变成对象。</strong><br>    ObjectInputStream(new FileInputStream(“”));<br>    ois.readObject();</p>
-<h2 id="打印所有文件（递归）"><a href="#打印所有文件（递归）" class="headerlink" title="打印所有文件（递归）"></a>打印所有文件（递归）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">digui</span><span class="params">()</span></span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"F:\\学习文件\\刘意视频\\刘意视频源码\\day20_递归_字节流"</span>);</span><br><span class="line">    printName(file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">(File file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (file==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    File[] files = file.listFiles();</span><br><span class="line">    <span class="keyword">for</span> (File temp:files)&#123;</span><br><span class="line">        <span class="keyword">if</span> (temp.isDirectory())&#123;</span><br><span class="line">            printName(temp);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(temp.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="jdbc-操作数据库"><a href="#jdbc-操作数据库" class="headerlink" title="jdbc 操作数据库"></a>jdbc 操作数据库</h2><p>1.加载驱动：class.forName(“数据库连包”);<br>2.获取连接：driverManner.getConnection();<br>3.创建sql con.preparedStatement(“”); ps.setInt(1,””);<br>4.执行sql ps.excuteQuery();  返回一个ResultSet rs   </p>
+<p><strong>Map 特性：key - value  key 无序不可重复</strong>
+	<strong>常用方法</strong>：
+		put
+		remove
+		clear
+		containsKey
+		containsValue
+	<strong>遍历</strong>：</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</span><br><span class="line">		Set&lt;Map.Entry&lt;String, String&gt;&gt; set = map.entrySet();</span><br><span class="line">		<span class="keyword">for</span> (Map.Entry&lt;String,String&gt; entry: set) &#123;</span><br><span class="line">			System.out.println(entry.getKey()+<span class="string">"---"</span>+entry.getValue());</span><br><span class="line">		&#125;</span><br><span class="line"><span class="number">2</span>.keySet</span><br><span class="line">        Set&lt;String&gt; keySet = map.keySet();</span><br><span class="line">		<span class="keyword">for</span> (String s : keySet)&#123;</span><br><span class="line">			System.out.println(<span class="string">"key:"</span>+s+<span class="string">"---value:"</span>+map.get(s));</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>HashMap</strong> : 底层是哈希表   线程不安全，效率高。能存null，如果需要将自定义类对象作为HashMap的key，那么自定义类中需要重写hashCode()和equals()
+<strong>TreeMap</strong> 底层是红黑树 如果将自定义的对象作为key 的话吗，那么需要给自定义的类实现Compareable接口或者在TreeMap的构造器中new Comparator();</p>
+<p><strong>ConcurrentHashMap 线程安全，效率也高</strong>
+<strong>hashTable 线程安全，效率低 ，不能存null。</strong></p>
+<h2>java中的流</h2>
+<p>字节流和字符流 还有缓冲流和转换流和对象流;
+FileInputStream BufferedInputStream ObjectInputStream,InputStreamReader
+FileReader  BufferedReader</p>
+<h2>序列化</h2>
+<p><strong>就是把对象变成字节序列。便于网络传输</strong></p>
+<p>oos =new ObjectOutputStream(new FileOutputStream(&quot;&quot;));
+oos.writeObject(new Product());
+Product这个类要实现Serializable接口。有get set方法。如果属性使用transient，static修饰，该属性的值不能被序列化。</p>
+<p><strong>反序列化就是把字节序列变成对象。</strong>
+	ObjectInputStream(new FileInputStream(&quot;&quot;));
+	ois.readObject();</p>
+<h2>打印所有文件（递归）</h2>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">digui</span><span class="params">()</span></span>&#123;</span><br><span class="line">    File file = <span class="keyword">new</span> File(<span class="string">"F:\\学习文件\\刘意视频\\刘意视频源码\\day20_递归_字节流"</span>);</span><br><span class="line">    printName(file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printName</span><span class="params">(File file)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (file==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    File[] files = file.listFiles();</span><br><span class="line">    <span class="keyword">for</span> (File temp:files)&#123;</span><br><span class="line">        <span class="keyword">if</span> (temp.isDirectory())&#123;</span><br><span class="line">            printName(temp);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(temp.getName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>jdbc 操作数据库</h2>
+<p>1.加载驱动：class.forName(&quot;数据库连包&quot;);
+2.获取连接：driverManner.getConnection();
+3.创建sql con.preparedStatement(&quot;&quot;); ps.setInt(1,&quot;&quot;);
+4.执行sql ps.excuteQuery();  返回一个ResultSet rs</p>
 <ul>
 <li>ps.excute() 增删改放回false  查询返回true。然后在调用getResultSet() 和getUpdateCount（）来处理数据</li>
 <li>ps.excuteUpdate() 增删改用这个，返回影响行数</li>
 </ul>
-<p>5.处理结果 while(rs.next){rs.getInt(“empno”);}<br>6.关闭流</p>
-<h2 id="Statement和PreparedStatement有什么区别？哪个性能更好？"><a href="#Statement和PreparedStatement有什么区别？哪个性能更好？" class="headerlink" title="Statement和PreparedStatement有什么区别？哪个性能更好？"></a>Statement和PreparedStatement有什么区别？哪个性能更好？</h2><p>1.可以带参数，避免了麻烦且不安全的字符串拼接，防止sql注入<br>2.性能高，因为每一个preparestatement都和一个sql模板绑定在一起，先把sql模板传给数据库，数据库检验，编译，然后传参，第二次执行的时候就直接传参就行了。</p>
-<h2 id="连接池："><a href="#连接池：" class="headerlink" title="连接池："></a>连接池：</h2><p>创建连接和销毁连接需要耗费大量的资源，尤其是服务器不在本地，需要tcp3次握手来创建连接，4次挥手关闭连接，所以事先创建好若干个连放入pool中，使用的时候直接从池中拿试用完毕后也不需要关闭，归还给连接池就可以。提升了系统访问数据库的效率，连接池也就是典型的空间换时间的列子</p>
-<h2 id="六原则一法则："><a href="#六原则一法则：" class="headerlink" title="六原则一法则："></a>六原则一法则：</h2><p>单一职责原则：一个类只做他应该做的事情<br>开闭原则；一个软件体系只对扩开房，对修改关闭<br>依赖倒置原则：面向接口编程<br>里氏替换原则：子类可以替换父类<br>接口隔离原则：一个接口的功能应该小儿专，不能大而全<br>合成聚合复用原则：推荐使用合成或者聚合的关系来复用代码<br>迪米特法则：一个类应该对其他类尽可能少的了解</p>
-<h2 id="事务的ACID"><a href="#事务的ACID" class="headerlink" title="事务的ACID"></a>事务的ACID</h2><p>原子性：事务中的操作时不可再分割的，要么全部成功，要么全部失败<br>一致性：事务操作前后业务数据保持一致<br>隔离性：事务并发操作的时候要隔离开来<br>持久性：数据到达数据库后不能再出现意外，哪怕是数据库崩溃了，也要通过日志来回复过来</p>
-<h2 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h2><ol>
+<p>5.处理结果 while(rs.next){rs.getInt(&quot;empno&quot;);}
+6.关闭流</p>
+<h2>Statement和PreparedStatement有什么区别？哪个性能更好？</h2>
+<p>1.可以带参数，避免了麻烦且不安全的字符串拼接，防止sql注入
+2.性能高，因为每一个preparestatement都和一个sql模板绑定在一起，先把sql模板传给数据库，数据库检验，编译，然后传参，第二次执行的时候就直接传参就行了。</p>
+<h2>连接池：</h2>
+<p>创建连接和销毁连接需要耗费大量的资源，尤其是服务器不在本地，需要tcp3次握手来创建连接，4次挥手关闭连接，所以事先创建好若干个连放入pool中，使用的时候直接从池中拿试用完毕后也不需要关闭，归还给连接池就可以。提升了系统访问数据库的效率，连接池也就是典型的空间换时间的列子</p>
+<h2>六原则一法则：</h2>
+<p>单一职责原则：一个类只做他应该做的事情<br>
+开闭原则；一个软件体系只对扩开房，对修改关闭
+依赖倒置原则：面向接口编程
+里氏替换原则：子类可以替换父类
+接口隔离原则：一个接口的功能应该小儿专，不能大而全
+合成聚合复用原则：推荐使用合成或者聚合的关系来复用代码
+迪米特法则：一个类应该对其他类尽可能少的了解</p>
+<h2>事务的ACID</h2>
+<p>原子性：事务中的操作时不可再分割的，要么全部成功，要么全部失败
+一致性：事务操作前后业务数据保持一致
+隔离性：事务并发操作的时候要隔离开来
+持久性：数据到达数据库后不能再出现意外，哪怕是数据库崩溃了，也要通过日志来回复过来</p>
+<h2>垃圾回收机制</h2>
+<ol>
 <li>一个对象被创建后放置在JVM的堆内存中，只有当程序中没其他的对象引用他时才有可能被释放</li>
 <li>垃圾回收机制是系统级守护线程，用来跟踪正在使用的对象，检查并回收不在使用的变量</li>
 <li>可以有效的解决因为动态内存分配导致的两大问题，因垃圾过多导致内存耗尽，因为非法的释放内存导致内存的非法引用</li>
 <li>可以调用System.gc 和 Runtime.gc 来催促系统尽快回收垃圾，但是垃圾回收机制对于程序员来时是透明的，不能精准的操控垃圾回收机制</li>
 <li>JVM会让对象调用finallize方法来进行回收，但是finallize可能会造成该对象的复活，导致垃圾回收机制取消该内存的释放，如果垃圾回收机制抛出异常，不会导致程序终止</li>
 </ol>
-<h2 id="amp-和-amp-amp-，-和-区别"><a href="#amp-和-amp-amp-，-和-区别" class="headerlink" title="&amp;和&amp;&amp;，|和| |区别"></a>&amp;和&amp;&amp;，|和| |区别</h2><p>单一个&amp; | 的话要判断左右两边的，如果是短路&amp;&amp;，左边是false 就不判断右边的了 ||如果左边是true，就不判断右边的了</p>
-<h2 id="全局变量、局部变量"><a href="#全局变量、局部变量" class="headerlink" title="全局变量、局部变量"></a>全局变量、局部变量</h2><p>全局变量：类中方法外，系统默认给初始值。如果是final修饰的话必须在声明的时候就赋值<br>局部变量：定义在方法里，形参。</p>
-<h2 id="方法的参数"><a href="#方法的参数" class="headerlink" title="方法的参数"></a>方法的参数</h2><p>参数是基本数据类型 ， 形参的改变不影响实参</p>
+<h2>&amp;和&amp;&amp;，|和| |区别</h2>
+<p>单一个&amp; | 的话要判断左右两边的，如果是短路&amp;&amp;，左边是false 就不判断右边的了 ||如果左边是true，就不判断右边的了</p>
+<h2>全局变量、局部变量</h2>
+<p>全局变量：类中方法外，系统默认给初始值。如果是final修饰的话必须在声明的时候就赋值
+局部变量：定义在方法里，形参。</p>
+<h2>方法的参数</h2>
+<p>参数是基本数据类型 ， 形参的改变不影响实参</p>
 <p>参数是引用数据类型， 如果该参数不指向其他内存的话，形参的改变影响实参</p>
-<h2 id="do-while和while区别"><a href="#do-while和while区别" class="headerlink" title="do-while和while区别"></a>do-while和while区别</h2><p>do while 先执行一次，在判断</p>
+<h2>do-while和while区别</h2>
+<p>do while 先执行一次，在判断</p>
 <p>while 先 判断 在执行</p>
-<h2 id="final、fianlly、finalize"><a href="#final、fianlly、finalize" class="headerlink" title="final、fianlly、finalize"></a>final、fianlly、finalize</h2><p>final 修饰类，类不能被继承，修饰方法，方法不能被重写，修饰属性，修饰基本数据类型，该值不能改变，修饰引用数据类型，该变量不能指向新的内存空间，修饰 全局变量，必须在声明的时候赋值，修饰局部变量，可以后赋值</p>
+<h2>final、fianlly、finalize</h2>
+<p>final 修饰类，类不能被继承，修饰方法，方法不能被重写，修饰属性，修饰基本数据类型，该值不能改变，修饰引用数据类型，该变量不能指向新的内存空间，修饰 全局变量，必须在声明的时候赋值，修饰局部变量，可以后赋值</p>
 <p>finally 和 try catch 配合使用，用于异常处理，不论try 里面 报不报异常，都会指向finally</p>
 <p>finalize 用来提醒垃圾回收机制过来回收这个内存</p>
-<h2 id="父子类实例化对象过程"><a href="#父子类实例化对象过程" class="headerlink" title="父子类实例化对象过程"></a>父子类实例化对象过程</h2><p>父类静态</p>
+<h2>父子类实例化对象过程</h2>
+<p>父类静态</p>
 <p>子类静态</p>
 <p>父类构造代码块，父类构造方法</p>
 <p>子类构造代码块，子类构造方法</p>
-<h2 id="访问权限修饰"><a href="#访问权限修饰" class="headerlink" title="访问权限修饰"></a>访问权限修饰</h2><p>public 所有<br>protected 本类，本包，父子类<br>default 本类，本包<br>private 本类</p>
-<h2 id="抽象类接口的区别"><a href="#抽象类接口的区别" class="headerlink" title="抽象类接口的区别"></a>抽象类接口的区别</h2><table>
+<h2>访问权限修饰</h2>
+<p>public 所有
+protected 本类，本包，父子类
+default 本类，本包
+private 本类</p>
+<h2>抽象类接口的区别</h2>
+<table>
 <thead>
 <tr>
 <th></th>
@@ -376,7 +482,8 @@
 <th>接口</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>构造方法</td>
 <td>有</td>
 <td>没有</td>
@@ -406,16 +513,21 @@
 <td>默认是default</td>
 <td>默认是public</td>
 </tr>
-</tbody></table>
-<h2 id="StringBuffer和StringBuilder"><a href="#StringBuffer和StringBuilder" class="headerlink" title="StringBuffer和StringBuilder"></a>StringBuffer和StringBuilder</h2><p>StringBuffer 线程安全，效率低，StringBuilder 线程不安全，效率高</p>
+</tbody>
+</table>
+<h2>StringBuffer和StringBuilder</h2>
+<p>StringBuffer 线程安全，效率低，StringBuilder 线程不安全，效率高</p>
 <p>为了解决字符串频繁拼接，导致频繁的创建无用的对象影响性能，多线程用Buffer，单线程用Builder 方法为append</p>
-<h2 id="Collection-和-Collections-的区别"><a href="#Collection-和-Collections-的区别" class="headerlink" title="Collection 和 Collections 的区别"></a>Collection 和 Collections 的区别</h2><p>Collection 是 List 和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分，线程安全化，乱序等</p>
-<h2 id="Error-和Exception-的区别"><a href="#Error-和Exception-的区别" class="headerlink" title="Error 和Exception 的区别"></a>Error 和Exception 的区别</h2><p> Exception和Error都是Throwable的子类 </p>
-<p> Exception是java程序运行中可预料的异常情况，咱们可以获取到这种异常，并且对这种异常进行业务外的处理。 </p>
-<p> Error是java程序运行中不可预料的异常情况，这种异常发生以后，会直接导致JVM不可处理或者不可恢复的情况。所以这种异常不可能抓取到，比如OutOfMemoryError、NoClassDefFoundError等。 </p>
-<p>其中的Exception又分为检查性异常和非检查性异常。两个根本的区别在于，检查性异常 必须在编写代码时，使用try catch捕获（比如：IOException异常）。非检查性异常 在代码编写使，可以忽略捕获操作（比如：ArrayIndexOutOfBoundsException），这种异常是在代码编写或者使用过程中通过规范可以避免发生的。<br>原文链接：[](<a href="https://blog.csdn.net/weixin" target="_blank" rel="noopener">https://blog.csdn.net/weixin</a></p>
+<h2>Collection 和 Collections 的区别</h2>
+<p>Collection 是 List 和Set的父接口，Collections是操作集合的工具类，里面有静态方法用来排序，二分，线程安全化，乱序等</p>
+<h2>Error 和Exception 的区别</h2>
+<p>Exception和Error都是Throwable的子类</p>
+<p>Exception是java程序运行中可预料的异常情况，咱们可以获取到这种异常，并且对这种异常进行业务外的处理。</p>
+<p>Error是java程序运行中不可预料的异常情况，这种异常发生以后，会直接导致JVM不可处理或者不可恢复的情况。所以这种异常不可能抓取到，比如OutOfMemoryError、NoClassDefFoundError等。</p>
+<p>其中的Exception又分为检查性异常和非检查性异常。两个根本的区别在于，检查性异常 必须在编写代码时，使用try catch捕获（比如：IOException异常）。非检查性异常 在代码编写使，可以忽略捕获操作（比如：ArrayIndexOutOfBoundsException），这种异常是在代码编写或者使用过程中通过规范可以避免发生的。
+原文链接：[](https://blog.csdn.net/weixin</p>
 <p>_42124070/article/details/80833629)</p>
-<p> <a href="https://blog.csdn.net/carson073/article/details/90665131" target="_blank" rel="noopener">https://blog.csdn.net/carson073/article/details/90665131</a>  springmvc 转发和重定向</p>
+<p>https://blog.csdn.net/carson073/article/details/90665131  springmvc 转发和重定向</p>
 
     </div>
 
@@ -481,7 +593,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象的特征"><span class="nav-number">1.</span> <span class="nav-text">面向对象的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问权限修饰符"><span class="nav-number">2.</span> <span class="nav-text">访问权限修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本数据类型有哪些"><span class="nav-number">3.</span> <span class="nav-text">基本数据类型有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型转换"><span class="nav-number">4.</span> <span class="nav-text">数据类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#float-f-3-4-是否正确"><span class="nav-number">5.</span> <span class="nav-text">float f=3.4;是否正确</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#short-s1-1-s1-s1-1-有错吗-short-s1-1-s1-1-有错吗？"><span class="nav-number">6.</span> <span class="nav-text">short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#switch-是否能作用在byte-上，是否能作用在long-上，是否能作用在String上"><span class="nav-number">7.</span> <span class="nav-text">switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread类的sleep和wait-的区别"><span class="nav-number">8.</span> <span class="nav-text">Thread类的sleep和wait 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B"><span class="nav-number">9.</span> <span class="nav-text">当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的三种方式"><span class="nav-number">10.</span> <span class="nav-text">线程的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized关键字的用法"><span class="nav-number">11.</span> <span class="nav-text">synchronized关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Set-Map"><span class="nav-number">12.</span> <span class="nav-text">List Set Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java中的流"><span class="nav-number">13.</span> <span class="nav-text">java中的流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#序列化"><span class="nav-number">14.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打印所有文件（递归）"><span class="nav-number">15.</span> <span class="nav-text">打印所有文件（递归）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdbc-操作数据库"><span class="nav-number">16.</span> <span class="nav-text">jdbc 操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Statement和PreparedStatement有什么区别？哪个性能更好？"><span class="nav-number">17.</span> <span class="nav-text">Statement和PreparedStatement有什么区别？哪个性能更好？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接池："><span class="nav-number">18.</span> <span class="nav-text">连接池：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六原则一法则："><span class="nav-number">19.</span> <span class="nav-text">六原则一法则：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的ACID"><span class="nav-number">20.</span> <span class="nav-text">事务的ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收机制"><span class="nav-number">21.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#amp-和-amp-amp-，-和-区别"><span class="nav-number">22.</span> <span class="nav-text">&amp;和&amp;&amp;，|和| |区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量、局部变量"><span class="nav-number">23.</span> <span class="nav-text">全局变量、局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法的参数"><span class="nav-number">24.</span> <span class="nav-text">方法的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#do-while和while区别"><span class="nav-number">25.</span> <span class="nav-text">do-while和while区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final、fianlly、finalize"><span class="nav-number">26.</span> <span class="nav-text">final、fianlly、finalize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#父子类实例化对象过程"><span class="nav-number">27.</span> <span class="nav-text">父子类实例化对象过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问权限修饰"><span class="nav-number">28.</span> <span class="nav-text">访问权限修饰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类接口的区别"><span class="nav-number">29.</span> <span class="nav-text">抽象类接口的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuffer和StringBuilder"><span class="nav-number">30.</span> <span class="nav-text">StringBuffer和StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection-和-Collections-的区别"><span class="nav-number">31.</span> <span class="nav-text">Collection 和 Collections 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-和Exception-的区别"><span class="nav-number">32.</span> <span class="nav-text">Error 和Exception 的区别</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">面向对象的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">访问权限修饰符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">基本数据类型有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">数据类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">5.</span> <span class="nav-text">float f=3.4;是否正确</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">6.</span> <span class="nav-text">short s1 = 1; s1 = s1 + 1;有错吗?short s1 = 1; s1 += 1;有错吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">7.</span> <span class="nav-text">switch 是否能作用在byte 上，是否能作用在long 上，是否能作用在String上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">8.</span> <span class="nav-text">Thread类的sleep和wait 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">9.</span> <span class="nav-text">当一个线程进入一个对象的synchronized方法A之后，其它线程是否可进入此对象的synchronized方法B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">10.</span> <span class="nav-text">线程的三种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">11.</span> <span class="nav-text">synchronized关键字的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">12.</span> <span class="nav-text">List Set Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">13.</span> <span class="nav-text">java中的流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">14.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">15.</span> <span class="nav-text">打印所有文件（递归）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">16.</span> <span class="nav-text">jdbc 操作数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">17.</span> <span class="nav-text">Statement和PreparedStatement有什么区别？哪个性能更好？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">18.</span> <span class="nav-text">连接池：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">19.</span> <span class="nav-text">六原则一法则：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">20.</span> <span class="nav-text">事务的ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">21.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">22.</span> <span class="nav-text">&amp;和&amp;&amp;，|和| |区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">23.</span> <span class="nav-text">全局变量、局部变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">24.</span> <span class="nav-text">方法的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">25.</span> <span class="nav-text">do-while和while区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">26.</span> <span class="nav-text">final、fianlly、finalize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">27.</span> <span class="nav-text">父子类实例化对象过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">28.</span> <span class="nav-text">访问权限修饰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">29.</span> <span class="nav-text">抽象类接口的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">30.</span> <span class="nav-text">StringBuffer和StringBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">31.</span> <span class="nav-text">Collection 和 Collections 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">32.</span> <span class="nav-text">Error 和Exception 的区别</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -497,21 +609,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

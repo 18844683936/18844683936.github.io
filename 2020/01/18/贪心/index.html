@@ -46,18 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="什么是字典序？就是在字典中出现的次数。 比如“abc” 在“c”前面出现 严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较 比如说“abc” 和“bce”哪一个字典序小啊？  abc和bce表示3位都是26进制的数，那么abc较小 长度不等的时候？比如“abc”，“b” 此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的 ‘abc’ 和‘b00’比较 abc">
+  <meta name="description" content="什么是字典序？ 就是在字典中出现的次数。 比如“abc” 在“c”前面出现 严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较 比如说“abc” 和“bce”哪一个字典序小啊？ abc和bce表示3位都是26进制的数，那么abc较小 长度不等的时候？比如“abc”，“b” 此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的 ‘abc’ 和‘b00’比较 abc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="贪心">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;18&#x2F;%E8%B4%AA%E5%BF%83&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="什么是字典序？就是在字典中出现的次数。 比如“abc” 在“c”前面出现 严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较 比如说“abc” 和“bce”哪一个字典序小啊？  abc和bce表示3位都是26进制的数，那么abc较小 长度不等的时候？比如“abc”，“b” 此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的 ‘abc’ 和‘b00’比较 abc">
+<meta property="og:description" content="什么是字典序？ 就是在字典中出现的次数。 比如“abc” 在“c”前面出现 严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较 比如说“abc” 和“bce”哪一个字典序小啊？ abc和bce表示3位都是26进制的数，那么abc较小 长度不等的时候？比如“abc”，“b” 此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的 ‘abc’ 和‘b00’比较 abc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200118084218288.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200118084637992.png">
-<meta property="og:updated_time" content="2020-01-18T01:35:22.008Z">
+<meta property="og:updated_time" content="2020-01-18T01:35:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="f:&#x2F;blogPic&#x2F;image-20200118084218288.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/18/%E8%B4%AA%E5%BF%83/">
 
@@ -221,34 +218,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="什么是字典序？"><a href="#什么是字典序？" class="headerlink" title="什么是字典序？"></a>什么是字典序？</h3><p>就是在字典中出现的次数。</p>
+        <h3>什么是字典序？</h3>
+<p>就是在字典中出现的次数。</p>
 <p>比如“abc” 在“c”前面出现</p>
 <p>严格来讲，a-z的字符就是26个数字，当长度一样的时候，就是字面值的比较</p>
 <p>比如说“abc” 和“bce”哪一个字典序小啊？</p>
-<p> abc和bce表示3位都是26进制的数，那么abc较小</p>
+<p>abc和bce表示3位都是26进制的数，那么abc较小</p>
 <p>长度不等的时候？比如“abc”，“b”</p>
 <p>此时把短的东西后面补上ascll码值为0的东西，让他变成长度为3的</p>
 <p>‘abc’ 和‘b00’比较</p>
 <p>abc较小，因为最高位的b要比a大，</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有一个字符串数组，请你拼接字符串，</p>
-<p>比如’’ab”,”cd”,”ef”   请你拼接成字典序最小的那种方式，</p>
+<h2>题目</h2>
+<p>有一个字符串数组，请你拼接字符串，</p>
+<p>比如''ab&quot;,&quot;cd&quot;,&quot;ef&quot;   请你拼接成字典序最小的那种方式，</p>
 <p>结果是abcdef</p>
 <p>可以按照字符串的序列排好然后拼接么？</p>
 <p>不行，比如：</p>
-<img src="F:/blogPic/image-20200118084218288.png" alt="image-20200118084218288" style="zoom:33%;" />
-
-<p>bba不是最小的，bab才是最小的，所以不能这样干。<br>所以排序策略：</p>
-<img src="F:/blogPic/image-20200118084637992.png" alt="image-20200118084637992" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200118084218288.png&quot; alt=&quot;image-20200118084218288&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
+<p>bba不是最小的，bab才是最小的，所以不能这样干。
+所以排序策略：</p>
+<p>&lt;img src=&quot;F:/blogPic/image-20200118084637992.png&quot; alt=&quot;image-20200118084637992&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>第二种是对的</p>
 <p>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> (a + b).compareTo(b + a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">lowestString</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//按照我的排序规则排序</span></span><br><span class="line">		Arrays.sort(strs, <span class="keyword">new</span> MyComparator());</span><br><span class="line">		String res = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">			res += strs[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="什么是贪心？"><a href="#什么是贪心？" class="headerlink" title="什么是贪心？"></a>什么是贪心？</h2><p><strong>给你一个指标，每一个样本分出一个优先来</strong></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> (a + b).compareTo(b + a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">lowestString</span><span class="params">(String[] strs)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//按照我的排序规则排序</span></span><br><span class="line">		Arrays.sort(strs, <span class="keyword">new</span> MyComparator());</span><br><span class="line">		String res = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">			res += strs[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>什么是贪心？</h2>
+<p><strong>给你一个指标，每一个样本分出一个优先来</strong></p>
 
     </div>
 
@@ -311,7 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是字典序？"><span class="nav-number">1.</span> <span class="nav-text">什么是字典序？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number"></span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是贪心？"><span class="nav-number"></span> <span class="nav-text">什么是贪心？</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">什么是字典序？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">什么是贪心？</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -327,21 +321,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

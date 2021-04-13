@@ -46,26 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="前缀树其实也是树 比如说有几个字符串   “abc”， 还有一个头节点   要把“abc”这个字符串加到这棵树上 这个头节点没有走向a的路，所以   注意，字母是填在路上的 然后看当前节点有没有一条走向b的路。没有，然后添加一个节点   有没有走向c的路？没有，那就添加一个节点   现在还要把“bce”添加到这棵树中 从头节点开始有没有走向b的路？没有，所以添加一个节点：（因为前缀不同，上来就走了">
+  <meta name="description" content="前缀树其实也是树 比如说有几个字符串   “abc”， 还有一个头节点 &amp;lt;img src=&amp;quot;F:&#x2F;blogPic&#x2F;image-20200115193802178.png&amp;quot; alt=&amp;quot;image-20200115193802178&amp;quot; style=&amp;quot;zoom:50%;&amp;quot; &#x2F;&amp;gt; 要把“abc”这个字符串加到这棵树上 这个头节点没有走">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前缀树">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;15&#x2F;%E5%89%8D%E7%BC%80%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="前缀树其实也是树 比如说有几个字符串   “abc”， 还有一个头节点   要把“abc”这个字符串加到这棵树上 这个头节点没有走向a的路，所以   注意，字母是填在路上的 然后看当前节点有没有一条走向b的路。没有，然后添加一个节点   有没有走向c的路？没有，那就添加一个节点   现在还要把“bce”添加到这棵树中 从头节点开始有没有走向b的路？没有，所以添加一个节点：（因为前缀不同，上来就走了">
+<meta property="og:description" content="前缀树其实也是树 比如说有几个字符串   “abc”， 还有一个头节点 &amp;lt;img src=&amp;quot;F:&#x2F;blogPic&#x2F;image-20200115193802178.png&amp;quot; alt=&amp;quot;image-20200115193802178&amp;quot; style=&amp;quot;zoom:50%;&amp;quot; &#x2F;&amp;gt; 要把“abc”这个字符串加到这棵树上 这个头节点没有走">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115193802178.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115193833100.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115194046183.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115194207954.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115194409660.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115194505542.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115194935342.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115195141249.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115201130131.png">
-<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200115212421247.png">
-<meta property="og:updated_time" content="2020-01-18T00:10:23.630Z">
+<meta property="og:updated_time" content="2020-01-18T00:10:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="f:&#x2F;blogPic&#x2F;image-20200115193802178.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/15/%E5%89%8D%E7%BC%80%E6%A0%91/">
 
@@ -221,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-18 08:10:23" itemprop="dateModified" datetime="2020-01-18T08:10:23+08:00">2020-01-18</time>
+                <time title="修改时间：2020-01-18 08:10:22" itemprop="dateModified" datetime="2020-01-18T08:10:22+08:00">2020-01-18</time>
               </span>
 
           
@@ -238,72 +227,65 @@
         <p>前缀树其实也是树</p>
 <p>比如说有几个字符串   “abc”，</p>
 <p>还有一个头节点</p>
-<img src="F:/blogPic/image-20200115193802178.png" alt="image-20200115193802178" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115193802178.png&quot; alt=&quot;image-20200115193802178&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p><strong><em>要把“abc”这个字符串加到这棵树上</em></strong></p>
 <p>这个头节点没有走向a的路，所以</p>
-<img src="F:/blogPic/image-20200115193833100.png" alt="image-20200115193833100" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115193833100.png&quot; alt=&quot;image-20200115193833100&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>注意，字母是填在路上的</p>
 <p>然后看当前节点有没有一条走向b的路。没有，然后添加一个节点</p>
-<img src="F:/blogPic/image-20200115194046183.png" alt="image-20200115194046183" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115194046183.png&quot; alt=&quot;image-20200115194046183&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>有没有走向c的路？没有，那就添加一个节点</p>
-<img src="F:/blogPic/image-20200115194207954.png" alt="image-20200115194207954" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115194207954.png&quot; alt=&quot;image-20200115194207954&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p><strong><em>现在还要把“bce”添加到这棵树中</em></strong></p>
 <p>从头节点开始有没有走向b的路？没有，所以添加一个节点：（因为前缀不同，上来就走了两条路）</p>
-<img src="F:/blogPic/image-20200115194409660.png" alt="image-20200115194409660" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115194409660.png&quot; alt=&quot;image-20200115194409660&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>以此类推，吧“bce”添加进去后，树的形状是：</p>
-<img src="F:/blogPic/image-20200115194505542.png" alt="image-20200115194505542" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115194505542.png&quot; alt=&quot;image-20200115194505542&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p><strong><em>现在，要把“abd” 加入到这颗树中</em></strong></p>
 <ul>
-<li><p>头节点有没有走向a的路？<strong><em>有</em></strong></p>
-<p> 复用，不重复建造节点</p>
+<li>
+<p>头节点有没有走向a的路？<strong><em>有</em></strong></p>
+<p>复用，不重复建造节点</p>
 </li>
-<li><p>然后看走向a的那个节点有没有走向b的路？ 有</p>
+<li>
+<p>然后看走向a的那个节点有没有走向b的路？ 有</p>
 <p>继续复用</p>
 </li>
-<li><p>然后看走向b的这个节点有没有走向d的路？没有</p>
+<li>
+<p>然后看走向b的这个节点有没有走向d的路？没有</p>
 <p>创建一个节点，路径为d：</p>
 </li>
 </ul>
-  <img src="F:/blogPic/image-20200115194935342.png" alt="image-20200115194935342" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115194935342.png&quot; alt=&quot;image-20200115194935342&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p><strong>同样的道理，把“bef ”加入到树中</strong></p>
-<img src="F:/blogPic/image-20200115195141249.png" alt="image-20200115195141249" style="zoom:50%;" />
-
-<h3 id="作用1"><a href="#作用1" class="headerlink" title="作用1"></a>作用1</h3><p>​        比如现在已经加入了n个字符串</p>
-<p>​        <strong>我想让你查一下，是否某一个字符串是以“be”开始的</strong></p>
-<p>​        很好查的。有走向b的路么？有，有走向e的路么？有。</p>
-<p>​        所以一定有字符串是以be开头的</p>
-<h3 id="作用2"><a href="#作用2" class="headerlink" title="作用2"></a>作用2</h3><p>​        <strong>现在查一下，你加的字符串中，有没有加入过“be”这个字符串</strong></p>
-<p>​        以前的结构不够用了，因为be是被复用的，无法找出加没加过be。</p>
-<p>​        <strong>所以现在加上一个属性：有多少个字符串是以此字符结尾的</strong></p>
-<p>​        此时：刚才那棵树就变成了这个样子：</p>
-<img src="F:/blogPic/image-20200115201130131.png" alt="image-20200115201130131" style="zoom:50%;" />
-
-<p>​        如果你找be 的话，你找到e后看看这个节点是0还是几？</p>
-<p>​        就可以找到有多少个字符串是以be结尾的了</p>
-<h3 id="作用3"><a href="#作用3" class="headerlink" title="作用3"></a>作用3</h3><p>​        我给你一个字符串</p>
-<p>​        <strong>请你告诉我，有多少个字符串以他作为前缀？</strong></p>
-<p>​        <strong>在加入一个数据项：每一个节点被划过多少次</strong></p>
-<p>​        就可以统计出有多少个了</p>
+<p>&lt;img src=&quot;F:/blogPic/image-20200115195141249.png&quot; alt=&quot;image-20200115195141249&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
+<h3>作用1</h3>
+<p>​		比如现在已经加入了n个字符串</p>
+<p>​		<strong>我想让你查一下，是否某一个字符串是以“be”开始的</strong></p>
+<p>​		很好查的。有走向b的路么？有，有走向e的路么？有。</p>
+<p>​		所以一定有字符串是以be开头的</p>
+<h3>作用2</h3>
+<p>​		<strong>现在查一下，你加的字符串中，有没有加入过“be”这个字符串</strong></p>
+<p>​		以前的结构不够用了，因为be是被复用的，无法找出加没加过be。</p>
+<p>​		<strong>所以现在加上一个属性：有多少个字符串是以此字符结尾的</strong></p>
+<p>​		此时：刚才那棵树就变成了这个样子：</p>
+<p>&lt;img src=&quot;F:/blogPic/image-20200115201130131.png&quot; alt=&quot;image-20200115201130131&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
+<p>​		如果你找be 的话，你找到e后看看这个节点是0还是几？</p>
+<p>​		就可以找到有多少个字符串是以be结尾的了</p>
+<h3>作用3</h3>
+<p>​		我给你一个字符串</p>
+<p>​		<strong>请你告诉我，有多少个字符串以他作为前缀？</strong></p>
+<p>​		<strong>在加入一个数据项：每一个节点被划过多少次</strong></p>
+<p>​		就可以统计出有多少个了</p>
 <p><strong>代码细节</strong>：</p>
 <p><strong>如何检查下一个路存不存在</strong>？</p>
 <p>因为你提前准备好了26条路，而且都没有挂东西，都是null</p>
 <p>检查一条路指的节点是不是null这件事来标记这条路存在不存在</p>
 <p>删除的时候，怎么插入的就怎么删，但是有一点区别</p>
-<img src="F:/blogPic/image-20200115212421247.png" alt="image-20200115212421247" style="zoom:80%;" />
-
-<p>我要删除abc的话，就是沿途path–，最后end-1</p>
-<p>但是如果删的时候，词频已经是1个了，比如说kgzte </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        <span class="comment">//有多少个字符串到达过这个节点</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> path;</span><br><span class="line">        <span class="comment">//有多少个字符串是以这个个节点结尾的</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line">        <span class="comment">//这个是路，比如说，强行规定只能是26个字母,小写，a-z</span></span><br><span class="line">		<span class="keyword">public</span> TrieNode[] nexts;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			path = <span class="number">0</span>;</span><br><span class="line">			end = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//那这个节点就有26条路</span></span><br><span class="line">			nexts = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这个就是头</span></span><br><span class="line">		<span class="keyword">private</span> TrieNode root;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//删除</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//存在才删嘛，不存在直接返回</span></span><br><span class="line">			<span class="keyword">if</span> (search(word) != <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">				TrieNode node = root;</span><br><span class="line">				<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">					index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                    <span class="comment">//如果path--变成0了，底下的直接为null，然后return</span></span><br><span class="line">					<span class="keyword">if</span> (--node.nexts[index].path == <span class="number">0</span>) &#123;</span><br><span class="line">						node.nexts[index] = <span class="keyword">null</span>;</span><br><span class="line">						<span class="keyword">return</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					node = node.nexts[index];</span><br><span class="line">				&#125;</span><br><span class="line">				node.end--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询和插入一样，都是挨个儿找，只不过最后不进行path++，而是把该节点的node返回</span></span><br><span class="line">        <span class="comment">//来判断有么有该字符串</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (word == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//如果下一个是null的话，表名根本就么有这个字符串</span></span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> node.end;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//求某一个字符串，前缀的数量是多少</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">prefixNumber</span><span class="params">(String pre)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (pre == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = pre.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="comment">//如果找的找的发现没有了，说明没有这个前缀</span></span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">             <span class="comment">//找到最后一个字符停，看他的path是多少</span></span><br><span class="line">			<span class="keyword">return</span> node.path;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuoa"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoac"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoab"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoad"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuoa"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuoa"</span>));</span><br><span class="line">		System.out.println(trie.prefixNumber(<span class="string">"zuo"</span>));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>&lt;img src=&quot;F:/blogPic/image-20200115212421247.png&quot; alt=&quot;image-20200115212421247&quot; style=&quot;zoom:80%;&quot; /&gt;</p>
+<p>我要删除abc的话，就是沿途path--，最后end-1</p>
+<p>但是如果删的时候，词频已经是1个了，比如说kgzte</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        <span class="comment">//有多少个字符串到达过这个节点</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> path;</span><br><span class="line">        <span class="comment">//有多少个字符串是以这个个节点结尾的</span></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">int</span> end;</span><br><span class="line">        <span class="comment">//这个是路，比如说，强行规定只能是26个字母,小写，a-z</span></span><br><span class="line">		<span class="keyword">public</span> TrieNode[] nexts;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			path = <span class="number">0</span>;</span><br><span class="line">			end = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//那这个节点就有26条路</span></span><br><span class="line">			nexts = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这个就是头</span></span><br><span class="line">		<span class="keyword">private</span> TrieNode root;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		<span class="comment">//删除</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//存在才删嘛，不存在直接返回</span></span><br><span class="line">			<span class="keyword">if</span> (search(word) != <span class="number">0</span>) &#123;</span><br><span class="line">				<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">				TrieNode node = root;</span><br><span class="line">				<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">					index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                    <span class="comment">//如果path--变成0了，底下的直接为null，然后return</span></span><br><span class="line">					<span class="keyword">if</span> (--node.nexts[index].path == <span class="number">0</span>) &#123;</span><br><span class="line">						node.nexts[index] = <span class="keyword">null</span>;</span><br><span class="line">						<span class="keyword">return</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					node = node.nexts[index];</span><br><span class="line">				&#125;</span><br><span class="line">				node.end--;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//查询和插入一样，都是挨个儿找，只不过最后不进行path++，而是把该节点的node返回</span></span><br><span class="line">        <span class="comment">//来判断有么有该字符串</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (word == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = word.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//如果下一个是null的话，表名根本就么有这个字符串</span></span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> node.end;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//求某一个字符串，前缀的数量是多少</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">prefixNumber</span><span class="params">(String pre)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (pre == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">char</span>[] chs = pre.toCharArray();</span><br><span class="line">			TrieNode node = root;</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chs.length; i++) &#123;</span><br><span class="line">				index = chs[i] - <span class="string">'a'</span>;</span><br><span class="line">                <span class="comment">//如果找的找的发现没有了，说明没有这个前缀</span></span><br><span class="line">				<span class="keyword">if</span> (node.nexts[index] == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				node = node.nexts[index];</span><br><span class="line">			&#125;</span><br><span class="line">             <span class="comment">//找到最后一个字符停，看他的path是多少</span></span><br><span class="line">			<span class="keyword">return</span> node.path;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuo"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.delete(<span class="string">"zuo"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuo"</span>));</span><br><span class="line">		trie.insert(<span class="string">"zuoa"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoac"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoab"</span>);</span><br><span class="line">		trie.insert(<span class="string">"zuoad"</span>);</span><br><span class="line">		trie.delete(<span class="string">"zuoa"</span>);</span><br><span class="line">		System.out.println(trie.search(<span class="string">"zuoa"</span>));</span><br><span class="line">		System.out.println(trie.prefixNumber(<span class="string">"zuo"</span>));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -366,7 +348,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用1"><span class="nav-number">1.</span> <span class="nav-text">作用1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用2"><span class="nav-number">2.</span> <span class="nav-text">作用2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用3"><span class="nav-number">3.</span> <span class="nav-text">作用3</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">作用1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">作用2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">作用3</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,21 +364,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

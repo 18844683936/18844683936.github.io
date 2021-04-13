@@ -46,14 +46,14 @@
   };
 </script>
 
-  <meta name="description" content="struts的springMVC的区别。（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。 （2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性 Spri">
+  <meta name="description" content="struts的springMVC的区别。 （1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。 （2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性 Spr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="struts和springMVC的区别">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;29&#x2F;struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="struts的springMVC的区别。（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。 （2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性 Spri">
+<meta property="og:description" content="struts的springMVC的区别。 （1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。 （2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性 Spr">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-12T15:08:35.483Z">
+<meta property="og:updated_time" content="2020-01-12T15:08:34.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/12/29/struts%E5%92%8CspringMVC%E7%9A%84%E5%8C%BA%E5%88%AB/">
@@ -210,7 +210,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-12 23:08:35" itemprop="dateModified" datetime="2020-01-12T23:08:35+08:00">2020-01-12</time>
+                <time title="修改时间：2020-01-12 23:08:34" itemprop="dateModified" datetime="2020-01-12T23:08:34+08:00">2020-01-12</time>
               </span>
 
           
@@ -224,51 +224,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="struts的springMVC的区别。"><a href="#struts的springMVC的区别。" class="headerlink" title="struts的springMVC的区别。"></a>struts的springMVC的区别。</h1><p>（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。</p>
+        <h1>struts的springMVC的区别。</h1>
+<p>（1）springmvc的入口是一个servlet即前端控制器（DispatchServlet），而struts2入口是一个filter过虑器（StrutsPrepareAndExecuteFilter）。</p>
 <p>（2）springmvc是基于方法开发(一个url对应一个方法)，请求参数传递到方法的形参，struts2是基于类开发，传递参数是通过类的属性</p>
-<h4 id="SpringMVC创键是在该类上添加-Controller注解就可以了。"><a href="#SpringMVC创键是在该类上添加-Controller注解就可以了。" class="headerlink" title="SpringMVC创键是在该类上添加@Controller注解就可以了。"></a>SpringMVC创键是在该类上添加@Controller注解就可以了。</h4><ul>
+<h4>SpringMVC创键是在该类上添加@Controller注解就可以了。</h4>
+<ul>
 <li>请求方式1:</li>
 </ul>
-<p>​    前台路径：类名别名！方法名.action </p>
-<p>​    后台 配置动态方法常量,</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.UserAction"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<p>​	前台路径：类名别名！方法名.action</p>
+<p>​	后台 配置动态方法常量,</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"userAction"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.UserAction"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>请求方式2:</li>
 </ul>
-<p>​    前台路径：类名_方法名.action </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.&#123;1&#125;"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<p>​	前台路径：类名_方法名.action</p>
+<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"*_*"</span> <span class="attr">class</span>=<span class="string">"com.hqyj.action.&#123;1&#125;"</span> <span class="attr">method</span>=<span class="string">"&#123;2&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>Struts前台向后台传递数据方式：</p>
 <p>表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
 <ol>
-<li><p>和Action中属性名一致</p>
+<li>
+<p>和Action中属性名一致</p>
 </li>
-<li><p>封装成POJO，写在类的属性中，如果这样，前台获取值需要类名.属性名  </p>
+<li>
+<p>封装成POJO，写在类的属性中，如果这样，前台获取值需要类名.属性名</p>
 </li>
-<li><p>实现ModelDriven接口，前台就不用类名.属性名了，直接属性名。</p>
+<li>
+<p>实现ModelDriven接口，前台就不用类名.属性名了，直接属性名。</p>
 <p>action中的属性都要有getSet方法</p>
 </li>
 </ol>
 <p>SpringMVC：</p>
 <ol>
-<li><p>只要和请求的方法的形参的参数名相同就可以了，</p>
+<li>
+<p>只要和请求的方法的形参的参数名相同就可以了，</p>
 </li>
-<li><p>还可以使用request.getParametor()来获取</p>
+<li>
+<p>还可以使用request.getParametor()来获取</p>
 </li>
-<li><p>把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，</p>
+<li>
+<p>把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，</p>
 <p>此时前台中得name的值就不是参数名了，而是pojo的属性名。</p>
 <p>如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。</p>
 <p>后台向前台传值</p>
 <p>struts直接操作对应的属性就可以</p>
-<p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
-<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
+<p>springMVC 可以用ModelAndView.addObject(&quot;obj&quot;,obj)来传递</p>
+<p>或者在参数中声明一个Model model ，使用model.addAttribute(&quot;obj&quot;,obj);</p>
 </li>
 </ol>
 <p>跳转到前台页面：</p>
-<p>struts用return一个字符串，并在action标签中配置result标签 name= “字符串名” 标签的值是该jsp页面的全路径 </p>
-<p>springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);</p>
+<p>struts用return一个字符串，并在action标签中配置result标签 name= &quot;字符串名&quot; 标签的值是该jsp页面的全路径</p>
+<p>springMVC配好视图解析器后直接return&quot;jsp页面的名字&quot; 或者ModelAndView .setViewName(&quot;jsp页面的名字&quot;);</p>
 
     </div>
 
@@ -331,7 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#struts的springMVC的区别。"><span class="nav-number">1.</span> <span class="nav-text">struts的springMVC的区别。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringMVC创键是在该类上添加-Controller注解就可以了。"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">SpringMVC创键是在该类上添加@Controller注解就可以了。</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">struts的springMVC的区别。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">SpringMVC创键是在该类上添加@Controller注解就可以了。</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -347,21 +353,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

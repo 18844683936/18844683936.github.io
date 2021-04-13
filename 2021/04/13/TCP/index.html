@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="人间失格" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="TCP ​	是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式   序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正">
+<meta name="keywords" content="TCP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP">
+<meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2021&#x2F;04&#x2F;13&#x2F;TCP&#x2F;index.html">
+<meta property="og:site_name" content="人间失格">
+<meta property="og:description" content="TCP ​	是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式   序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;110030-896154.gif">
+<meta property="og:updated_time" content="2021-04-13T03:03:09.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;110030-896154.gif">
+
+<link rel="canonical" href="https://hansoncheng.com/2021/04/13/TCP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>TCP | 人间失格</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">人间失格</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">陈广</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/13/TCP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-13 10:19:19 / 修改时间：11:03:09" itemprop="dateCreated datePublished" datetime="2021-04-13T10:19:19+08:00">2021-04-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3>TCP</h3>
+<p>​	是一种面向连接的，可靠的，基于字节流的传输层通信协议</p>
+<h3>TCP的报文格式</h3>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/110030-896154.gif" alt="图片加载中"></p>
+<ul>
+<li>序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始</li>
+<li>确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正确的收到了a发送的到序号206为止的数据（107+100-1），因此b期望收到a的下个数据序号就是207 于是，b在发送给a的确认报文段中会把ACK确认号置为207</li>
+<li>数据偏移：由于头部有可选字段，长度不固定，所以他指出TCP报文的数据距离TCP报文的起始处有多远</li>
+<li>保留域</li>
+<li>TCP Flags：控制域 总共有8个
+<ul>
+<li>URG：紧急指针标识 为1时有效</li>
+<li>ACk： 确认序号标识 上面的确认号是否有效就是靠这个标识位控制的</li>
+<li>PSH:  push标志 为1 表示接收方接收到后应尽快将报文交给应用程序，而不是放入缓冲区</li>
+<li>RST：重置连接标志</li>
+<li>SYN：同步序号，用于建立连接过程</li>
+<li>FIN： 用于释放连接</li>
+</ul>
+</li>
+<li>Window窗口：滑动窗口的大小，发送端接收端的缓存大小，以此控制发送端发送数据的速度来达到流量控制</li>
+<li>校验和： 奇偶校验</li>
+<li>紧急指针: 只有TCP的URG有效时，指出报文的紧急数据的字节数</li>
+</ul>
+<h3>说说TCP的三次握手</h3>
+<ul>
+<li>第一次握手： 建立连接时，客户端发送SYN包（seq = x）到服务器，并进入到SYN_SEND的状态，等待服务器确认</li>
+<li>第二次握手： 服务器收到客户段发送来的SYN包，发送确认包ACK（ack = x+1），同时自己也发送一个SYN包（syn = y）即 ACK + SYN 包 ，此时服务器进入到SYN_RECV的状态</li>
+<li>第三次握手： 客户端收到服务器的SYN+ACK包，然后发送服务器发送确认包ACK（ack = y=1）,此包发送完毕，服务器和客户端进入到ESTABLISH的状态，完成三次握手</li>
+</ul>
+<h3>为什么需要三次握手才能建立起连接</h3>
+<p><strong>为了初始化序号的初始值</strong></p>
+<p>通信的双方要互相通知对方自己的序号，也就是x,y,这个序号要作为以后数据通信的序号，TCP会用这个序号来拼接数据，因此在服务器回发他序号后，还需要发送确认报文给服务器，告诉服务器，客户当已经收到了你的序号了</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/a/TCP/" rel="tag"># TCP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2021/04/10/%E7%B4%A2%E5%BC%95/" rel="next" title="mysql索引">
+                  <i class="fa fa-chevron-left"></i> mysql索引
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">TCP的报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">说说TCP的三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">为什么需要三次握手才能建立起连接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="陈广"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+  <p class="site-author-name" itemprop="name">陈广</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/18844683936" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;18844683936" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mackxin" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mackxin" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/" title="http:&#x2F;&#x2F;mackxin.com&#x2F;" rel="noopener" target="_blank">Mackxin</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://mackxin.com/nav.html" title="http:&#x2F;&#x2F;mackxin.com&#x2F;nav.html" rel="noopener" target="_blank">馨客栈导航</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈广</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

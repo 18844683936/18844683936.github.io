@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="描述给一棵二叉树，找到有最大平均值的子树。返回子树的根结点">
-<meta name="keywords" content="二叉树,分治法,打擂台">
+  <meta name="description" content="描述 给一棵二叉树，找到有最大平均值的子树。返回子树的根结点 &amp;lt;!-- more --&amp;gt; 样例 样例 1 输入： 12345		     1			  &#x2F;      \-5         11  &#x2F;   \     &#x2F;     \    1     2   4       -2 输出：11(它是一个TreeNode) 样例 2 输入： 123		     1			  &#x2F;      \-">
+<meta name="keywords" content="二叉树,打擂台,分治法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树最大平均值的子树">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;21&#x2F;%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%AD%90%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="描述给一棵二叉树，找到有最大平均值的子树。返回子树的根结点">
+<meta property="og:description" content="描述 给一棵二叉树，找到有最大平均值的子树。返回子树的根结点 &amp;lt;!-- more --&amp;gt; 样例 样例 1 输入： 12345		     1			  &#x2F;      \-5         11  &#x2F;   \     &#x2F;     \    1     2   4       -2 输出：11(它是一个TreeNode) 样例 2 输入： 123		     1			  &#x2F;      \-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-24T05:24:07.222Z">
+<meta property="og:updated_time" content="2019-11-24T05:24:06.000Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/11/21/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E5%B9%B3%E5%9D%87%E5%80%BC%E7%9A%84%E5%AD%90%E6%A0%91/">
@@ -211,7 +211,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-24 13:24:07" itemprop="dateModified" datetime="2019-11-24T13:24:07+08:00">2019-11-24</time>
+                <time title="修改时间：2019-11-24 13:24:06" itemprop="dateModified" datetime="2019-11-24T13:24:06+08:00">2019-11-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,26 +236,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>描述<br>给一棵二叉树，找到有最大平均值的子树。返回子树的根结点</p>
-<a id="more"></a>
-
-<p>样例<br>样例 1</p>
+        <p>描述
+给一棵二叉树，找到有最大平均值的子树。返回子树的根结点</p>
+<p>&lt;!-- more --&gt;</p>
+<p>样例
+样例 1</p>
 <p>输入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>         <span class="number">11</span></span><br><span class="line">  /   \     /     \</span><br><span class="line">    <span class="number">1</span>     <span class="number">2</span>   <span class="number">4</span>       -<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>输出：11(它是一个TreeNode)<br>样例 2</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>         <span class="number">11</span></span><br><span class="line">  /   \     /     \</span><br><span class="line">    <span class="number">1</span>     <span class="number">2</span>   <span class="number">4</span>       -<span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p>输出：11(它是一个TreeNode)
+样例 2</p>
 <p>输入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>        <span class="number">11</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>输出：11(它是一个TreeNode)<br>————————————————</p>
-<blockquote>
-</blockquote>
-<p>&lt;! –more –&gt;</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">		     <span class="number">1</span></span><br><span class="line">			  /      \</span><br><span class="line">-<span class="number">5</span>        <span class="number">11</span></span><br></pre></td></tr></table></figure></p>
+<p>输出：11(它是一个TreeNode)
+————————————————</p>
+<blockquote></blockquote>
+<p>&lt;! --more --&gt;</p>
 
     </div>
 
@@ -266,8 +261,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/a/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag"># 二叉树</a>
-              <a href="/a/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag"># 分治法</a>
               <a href="/a/%E6%89%93%E6%93%82%E5%8F%B0/" rel="tag"># 打擂台</a>
+              <a href="/a/%E5%88%86%E6%B2%BB%E6%B3%95/" rel="tag"># 分治法</a>
           </div>
 
         
@@ -338,21 +333,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

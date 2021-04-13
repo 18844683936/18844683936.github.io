@@ -46,19 +46,19 @@
   };
 </script>
 
-  <meta name="description" content="​                学生表s                                                             老师表                              课程表">
+  <meta name="description" content="​				学生表s                                                             老师表                          	课程表 sc 成绩表  查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc">
 <meta name="keywords" content="sql,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL专项训练">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;07&#x2F;SQL%E4%B8%93%E9%A1%B9%E8%AE%AD%E7%BB%83&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="​                学生表s                                                             老师表                              课程表">
+<meta property="og:description" content="​				学生表s                                                             老师表                          	课程表 sc 成绩表  查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)  123456789101112	select  			s1.s   &#x2F;&#x2F;查询学号​	from ​			sc">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59ctm9vj209904hgm4.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cr63wj204303nwel.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cqj9qj206003jdfx.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59cs23mj205n09sq3k.jpg">
-<meta property="og:updated_time" content="2020-01-09T13:03:07.847Z">
+<meta property="og:updated_time" content="2020-01-09T13:03:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan59ctm9vj209904hgm4.jpg">
 
@@ -216,7 +216,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-09 21:03:07" itemprop="dateModified" datetime="2020-01-09T21:03:07+08:00">2020-01-09</time>
+                <time title="修改时间：2020-01-09 21:03:06" itemprop="dateModified" datetime="2020-01-09T21:03:06+08:00">2020-01-09</time>
               </span>
 
           
@@ -231,50 +231,41 @@
 
       
         <p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59ctm9vj209904hgm4.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cr63wj204303nwel.jpg" alt="img"> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cqj9qj206003jdfx.jpg" alt="img"></p>
-<p>​                学生表s                                                             老师表                              课程表                                                                                                                            </p>
-<p> <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
+<p>​				学生表s                                                             老师表                          	课程表</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan59cs23mj205n09sq3k.jpg" alt="img">sc 成绩表</p>
 <ol>
 <li>查询“1”课程比“2”课程成绩高的所有学生的学号(类型题1)</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	select  </span><br><span class="line">			s1.s   //查询学号</span><br><span class="line"></span><br><span class="line">​	from </span><br><span class="line"></span><br><span class="line">​			sc s1, sc s2</span><br><span class="line"></span><br><span class="line">​	where </span><br><span class="line"></span><br><span class="line">​			s1.s = s2.s //同一个学生</span><br><span class="line">			s1.c=1, s2.c = 2// 同一个学生的1课程和2课程</span><br><span class="line">			s1.score&gt;s2.score//同一个学生的1课程比2课程 分数高</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
 <li>查询所有课程成绩小于60分的同学的学号和姓名</li>
 </ol>
-<p>​                所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure>
-
+<p>​				所有课程成绩小于60分。代表的是最大的课程成绩小于60 分，最大可以用聚合函数max（）来表示</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	sc.id , student.name</span><br><span class="line">from </span><br><span class="line">	sc  ,student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s//去笛卡尔积</span><br><span class="line">group by</span><br><span class="line">	sc.id </span><br><span class="line">having </span><br><span class="line">	max(sc.score)&lt;60</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
-<li><p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure>
-
-
-
+<li>
+<p>查询至少有一门课与学号为“1”的同学所学相同的同学的学号和姓名</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s ,student.name</span><br><span class="line">from </span><br><span class="line">	sc , student</span><br><span class="line">where </span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and </span><br><span class="line">	sc.c in (select sc.c from sc where sc.s = 1)  //课程只要在 学号为1 同学的课程表中 的 都满足条件（至少有一门课）</span><br><span class="line">and sc.s !=  1 // 同学1 也满足条件，需要单独去除</span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 <ol start="4">
-<li><p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
+<li>
+<p>查询学过“1”并且也学过编号“2”课程的同学的学号、姓名。（类型2）</p>
 <p>技巧：把符合in中条件的记录都选出来 用到了分组 和 having</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure>
-
-
-
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.name</span><br><span class="line">from</span><br><span class="line">	sc , student</span><br><span class="line">where</span><br><span class="line">	sc.s = student.s //去笛卡尔积</span><br><span class="line">and</span><br><span class="line">	sc.c in(1,2)  //课程为 1，或者 2 的 学生</span><br><span class="line">group by </span><br><span class="line">	sc.s    //按照学生分组</span><br><span class="line">having </span><br><span class="line">	count(1)=2;  // 总共的记录有两条 ，就代表了 课程1，课程2 都要有。也就满足了 学过1 也学过2的条件了</span><br></pre></td></tr></table></figure></p>
 </li>
 </ol>
 <ol start="5">
-<li><p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure>
+<li>
+<p>查询各科成绩前三名的记录（不用考虑成绩并列的情况）</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">		c.cname  ,max(s.score)</span><br><span class="line">from </span><br><span class="line">		sc s </span><br><span class="line">left join</span><br><span class="line">		course c</span><br><span class="line">on  </span><br><span class="line">		s.c = course.c</span><br><span class="line">group by</span><br><span class="line">		s.c</span><br></pre></td></tr></table></figure></p>
 </li>
-<li><p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
+<li>
+<p>查询和“2”号的同学学习课程完全相同的其他同学学号和姓名(类型2)</p>
 </li>
 </ol>
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加’*’的字段为该表的主键Client(客户表a)</p>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select </span><br><span class="line">	student.s,student.id</span><br><span class="line">from </span><br><span class="line">	sc, student </span><br><span class="line">where </span><br><span class="line">	sc.s = student.s</span><br><span class="line">and </span><br><span class="line">	sc.c in (select c from sc where sc.s = 2) //课程只要和2号同学一样就行</span><br><span class="line">group by</span><br><span class="line">	sc.s //的同学 ，代表 分组</span><br><span class="line">having</span><br><span class="line"> 	count(*) = (select count(*) from sc where sc.s = 2)</span><br></pre></td></tr></table></figure></p>
+<p>以下是一个简化的网上书店订单管理系统，包含四张表，前面增加'*'的字段为该表的主键Client(客户表a)</p>
 <table>
 <thead>
 <tr>
@@ -284,7 +275,8 @@
 <th>address</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>Zhao</td>
 <td>82880000</td>
@@ -302,7 +294,8 @@
 <td>82881000</td>
 <td>朝阳区</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Book(图书表d)</p>
 <table>
 <thead>
@@ -312,7 +305,8 @@
 <th>price</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>21</td>
 <td>管理学</td>
 <td>30.00</td>
@@ -332,7 +326,8 @@
 <td>西游记</td>
 <td>20.00</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Order2(订单表c10)</p>
 <table>
 <thead>
@@ -342,7 +337,8 @@
 <th>count</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>11</td>
 <td>21</td>
 <td>5</td>
@@ -362,7 +358,8 @@
 <td>24</td>
 <td>5</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>ClientOrder(客户订单表b1)</p>
 <table>
 <thead>
@@ -371,7 +368,8 @@
 <th>*order_id</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>11</td>
 </tr>
@@ -391,11 +389,13 @@
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>1）请写出一条SQL语句，查询出每个客户的所有订单并安地址排序，要求输出格式如下：</p>
-<p>adress    client_name    phone    order_id</p>
+<p>adress	client_name	phone	order_id</p>
 <p>2)请写出一条SQL语句，查询出每个客户订购的图书总价，要求输出格式如下：</p>
-<p>client_name    total_price;<br>3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;             </p>
+<p>client_name	total_price;
+3)请写出一条SQL语句，查出每个客户订购的图书总价，要要求输出格式如下：client_name phone order_id;</p>
 
     </div>
 
@@ -413,8 +413,8 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2020/01/06/SQL%E7%BB%83%E4%B9%A0/" rel="next" title="SQL练习">
-                  <i class="fa fa-chevron-left"></i> SQL练习
+                <a href="/2020/01/05/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" rel="next" title="集合框架">
+                  <i class="fa fa-chevron-left"></i> 集合框架
                 </a>
             </div>
 
@@ -477,21 +477,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>

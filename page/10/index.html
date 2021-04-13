@@ -177,132 +177,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/05/hash%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/05/hash%E8%A1%A8/" class="post-title-link" itemprop="url">hash表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-05 18:38:03" itemprop="dateCreated datePublished" datetime="2020-01-05T18:38:03+08:00">2020-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 20:59:29" itemprop="dateModified" datetime="2020-01-07T20:59:29+08:00">2020-01-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>hash函数：</p>
-<ol>
-<li>输入域是无穷大的</li>
-<li>输出域是固定的</li>
-<li>输入的参数如果相同的话，输出的也是相同的</li>
-<li>当输入不一样，也有可能得到相同的输出值</li>
-<li>假如输入域是0-99，输出域是0-2</li>
-</ol>
-<img src="https://upload.cc/i1/2020/01/05/k4rAYN.png" style="zoom:33%;" />
-
-<p>​    离散型，均匀分布的性质。 0 ，1， 2 差不多都是 33 个</p>
-<p>输出和输入的规律无关 比如 陈广1 和陈广2 经过hash处理后 输出可能会差别特别大。 而且在整个输出域均匀分布 </p>
-<p>hash表的细节</p>
-<p>有一个数组。比如大小是17. </p>
-<p>有一个map key 是 A value 是 2</p>
-<p>我先用key得到一个hash值，然后在对17取模就可以得到一个数字 假设是2。</p>
-<p>我先看看 2 的位置有没有元素，没有。就直接挂在 2的位置</p>
-<p>假设 还有一个map key 是A value 是 3；</p>
-<p>去数组还是找2的位置。已经有元素的是A ，比对value的值， 如果不同，替换原来value的值，相当于修改操作。</p>
-<p>如果这个数组里面没有A ，就加上一个A ,value 是3；</p>
-<p>就是如果冲突了，就往上挂，一个链表而已。 </p>
-<p>数组上每个位置的元素都是均匀涨的。</p>
-<p>比说我某个链的长度是3了，那么其它链的长度也差不多是3了</p>
-<p>此时，我就进行hash表的扩容 </p>
-<p>为什么扩容呢？因为我觉得这个链表的长度已经是5了。在多的话会影响效率。</p>
-<p>原来的数组大小是17.现在假设扩容后是104.</p>
-<p>以前都是对17取模，现在对104取模。原来的就失效了。</p>
-<p>所以就要把每个数据取出来重新用hash函数算一下，算完之后对104取模。重新分配他在哪一个桶里。</p>
-<p>为什么能到达O（1）呢？</p>
-<p>如果每次扩容的时候，都让长度扩大一倍，到n的时候要扩 logn的复杂度。问题是 我可以把容量扩大5倍，这样效率又要快。但还不是O（1）</p>
-<p>实际上，还可以进行离线扩容</p>
-<p>当链表已经到5了，我用的时候还用这个hash表，我在离线的时候进行扩容，当扩容结束后，在把所有的请求打到新的hash表上</p>
-<p>因为有很多的优化技巧，所以很快，可以说是O（1）的</p>
-<p>JVM中还是有一个桶，每一个桶里放一颗红黑树，是一颗平衡搜索二叉树。这样做出来的hash表</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaob3815j20js0mhwh8.jpg" alt="image-20200107193927838" style="zoom:33%;" />
-
-<p>但是经典的结构是桶里面放链表</p>
-<hr>
-<h3 id="题1：-大文件"><a href="#题1：-大文件" class="headerlink" title="题1： 大文件"></a>题1： 大文件</h3><p>有一个大文件，每一行都有一个字符串，我想把重复的字符串打印出来</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaoaotrt14j20j80a841i.jpg" alt="image-20200107194502671" style="zoom: 50%;" />
-
-<p>问：你给我多少台机器啊？</p>
-<p>答：1000台</p>
-<p>你把机器编号，从0 到999</p>
-<p>问：文件存在哪里啊？</p>
-<p>答：存在一个分布式系统上</p>
-<p>问：我想处理这个大文件，按行读，又没有高效的工具啊？</p>
-<p>答: 有，你就告诉我怎么处理把</p>
-<hr>
-<p>我用这个高效的工具把每一行的数据读出来文本</p>
-<p>利用hash函数生成一个hashCode</p>
-<p>用hashCode对1000取模</p>
-<p>如果是0，就把这条文本扔给0机器</p>
-<p>如果是3，就把这条文本扔给3机器</p>
-<p>如果是999，就把这条文本扔给999机器</p>
-<p>这样一来就把大文本分到1000台机器上</p>
-<p>而且相同的文本一定会分到一台机器上（相同的输入，一定会有相同的输出，取模后还是相同的）</p>
-<p>这样的话，你有多少中不同的种类，就可以均匀的分布的1000台机器上。</p>
-<p>如果分完之后每一个的大小还是太大，</p>
-<p>你在每一台机器上把这个文件用hash函数分成小文件</p>
-<p>然后每一台机器上可以跑并行任务</p>
-<p>这样的话，就可以了。用hash函数做分流</p>
-<h3 id="hash函数相同输入相同输出，不同输入，均匀分布的特性"><a href="#hash函数相同输入相同输出，不同输入，均匀分布的特性" class="headerlink" title="hash函数相同输入相同输出，不同输入，均匀分布的特性"></a>hash函数相同输入相同输出，不同输入，均匀分布的特性</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/03/%E6%B1%82%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%AA%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -350,18 +224,15 @@
       
           <p>要求 ： 时间复杂度小于O(n)</p>
 <p>如果一棵树是满二叉树，高度是l，那么节点的个数是2的l次方-1</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg" style="zoom:50%;" />
-
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651ylt7j213p0i47aj.jpg&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
 <p>首先，先遍历二叉树的左边界，因为已经告诉你这是一颗完全二叉树了，你遍历出这个二叉树的左边界，就能求出这棵树的高度了，代价是logn的</p>
 <p>然后遍历X右子树的左边界，右子树的左边界到没到最后一层，如果这个右子树的左边界到了最后一层，X的左子树就是满的，而且左子树的高度也能求出来 -1 就是3. 左树的节点数满足公式 2的3次方-1 + 当前节点   就是2的3次方</p>
 <p>右树也是完全二叉树，递归求右树的节点个数，子问题和母问题等效</p>
 <p>情况2：右子树的左边界不是L-1,也就是左子树也不一定满，但是根据定义，右子树一定是满的，就可以求出右子树的节点个数-2；</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg" style="zoom:50%;" />
-
-<p>那么就是<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg" style="zoom:33%;" /></p>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651zc1aj20js0iqjwh.jpg&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
+<p>那么就是&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan651r9cij20d305u0tg.jpg&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
 <p>在对左子树进行递归</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nodeNum</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//主函数，head ，第一层，调用函数找到总体深度</span></span><br><span class="line">		<span class="keyword">return</span> bs(head, <span class="number">1</span>, mostLeftLevel(head, <span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//node 是当前节点， level是当前节点第几层， h 是 固定的值，表示总共的深度  返回值是 以node为头的整颗节点的个数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bs</span><span class="params">(Node node, <span class="keyword">int</span> level, <span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果level到了最后一层，那这个node就是叶子节点</span></span><br><span class="line">		<span class="keyword">if</span> (level == h) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">//右子树最左的深度有没有到最后一层 ，如果相等，就是情况1，</span></span><br><span class="line">       </span><br><span class="line">		<span class="keyword">if</span> (mostLeftLevel(node.right, level + <span class="number">1</span>) == h) &#123;</span><br><span class="line">             <span class="comment">//左边界碰到低了，这棵树除了左子树和当前节点总共有2的层数方。层数就是 h-level  </span></span><br><span class="line">            <span class="comment">// + 递归去求右子树的节点个数</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level)) + bs(node.right, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;<span class="comment">//否则就是右子树的h总+1没有到h总，就是 右树高度就是比左树少一个，所以-1</span></span><br><span class="line">			<span class="keyword">return</span> (<span class="number">1</span> &lt;&lt; (h - level - <span class="number">1</span>)) + bs(node.left, level + <span class="number">1</span>, h);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//head 在第一层，一直向左走，走到不能再走的时候就。。。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">mostLeftLevel</span><span class="params">(Node node, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">			level++;</span><br><span class="line">			node = node.left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> level - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -412,7 +283,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-07 08:14:35" itemprop="dateModified" datetime="2020-01-07T08:14:35+08:00">2020-01-07</time>
+                <time title="修改时间：2020-01-07 08:14:34" itemprop="dateModified" datetime="2020-01-07T08:14:34+08:00">2020-01-07</time>
               </span>
 
           
@@ -426,31 +297,97 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg" style="zoom: 33%;" />
-
-
+          <p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
 <p>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</p>
-<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
-
+<h5>评判标准1：有右孩子没有左孩子，就不行</h5>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg&quot; alt=&quot;image-20200103183821296&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
 <p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5 id="评判标准2-：左右两个孩子不全"><a href="#评判标准2-：左右两个孩子不全" class="headerlink" title="评判标准2 ：左右两个孩子不全"></a>评判标准2 ：左右两个孩子不全</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
-
+<h5>评判标准2 ：左右两个孩子不全</h5>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg&quot; alt=&quot;image-20200103183720106&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
 <p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
 <p>例如：</p>
-<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg" alt="image-20200103184338413" style="zoom: 50%;" />
-
-
-
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg&quot; alt=&quot;image-20200103184338413&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
 <p>遇到1，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 没有 </p>
+<p>中情况2了么（左右两个孩子不全）？ 没有</p>
 <p>来到2，来到3，来到4，</p>
 <p>来到5，中情况1了没（有右没左）？没有</p>
 <p>中情况2了么（左右两个孩子不全）？ 中了哈</p>
 <p>所以5以后的节点，6，7，8，9，10都必须是叶子节点，否则返回false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/02/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">二叉树的序列化和反序列化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-02 15:05:23" itemprop="dateCreated datePublished" datetime="2020-01-02T15:05:23+08:00">2020-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 21:47:26" itemprop="dateModified" datetime="2020-01-06T21:47:26+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1>序列化（先序）：</h1>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6eyqmomj20zv0pbjzr.jpg&quot; alt=&quot;image-20200102150642789&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByPre</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="comment">//如果为空</span></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">       <span class="comment">//当前的String是value+！</span></span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">       <span class="comment">//当前节点加上左树的字符串，加上右数的字符串</span></span><br><span class="line">	res += serialByPre(head.left);</span><br><span class="line">	res += serialByPre(head.right);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1>反序列化</h1>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByPreString</span><span class="params">(String preStr)</span> </span>&#123;</span><br><span class="line">	String[] values = preStr.split(<span class="string">"!"</span>);</span><br><span class="line">       <span class="comment">//把数组放到队列里，可以依次弹出</span></span><br><span class="line">	Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;String&gt;();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != values.length; i++) &#123;</span><br><span class="line">		queue.offer(values[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> reconPreOrder(queue);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给我一个队列，我还给你一个树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconPreOrder</span><span class="params">(Queue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">	String value = queue.poll();</span><br><span class="line">	<span class="keyword">if</span> (value.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Node head = <span class="keyword">new</span> Node(Integer.valueOf(value));</span><br><span class="line">	head.left = reconPreOrder(queue);</span><br><span class="line">	head.right = reconPreOrder(queue);</span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1>按层序列化</h1>
+<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6eza7tbj20ym0lcjya.jpg&quot; alt=&quot;image-20200103080010347&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">serialByLevel</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"#!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String res = head.value + <span class="string">"!"</span>;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		<span class="keyword">if</span> (head.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.left.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.left);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (head.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">			res += head.right.value + <span class="string">"!"</span>;</span><br><span class="line">			queue.offer(head.right);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			res += <span class="string">"#!"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1>按层反序列化</h1>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">reconByLevelString</span><span class="params">(String levelStr)</span> </span>&#123;</span><br><span class="line">		String[] values = levelStr.split(<span class="string">"!"</span>);</span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">		Node head = generateNodeByString(values[index++]);</span><br><span class="line">		Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">		<span class="keyword">if</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(head);</span><br><span class="line">		&#125;</span><br><span class="line">		Node node = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">			node = queue.poll();</span><br><span class="line">			node.left = generateNodeByString(values[index++]);</span><br><span class="line">			node.right = generateNodeByString(values[index++]);</span><br><span class="line">			<span class="keyword">if</span> (node.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.left);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (node.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">				queue.offer(node.right);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> head;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">generateNodeByString</span><span class="params">(String val)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (val.equals(<span class="string">"#"</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Node(Integer.valueOf(val));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -516,21 +453,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span></a>
+        <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">35</span>
-        <span class="site-state-item-name">标签</span></a>
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
