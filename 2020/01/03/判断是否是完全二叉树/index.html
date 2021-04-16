@@ -46,16 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="&amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; &#x2F;&amp;gt; 完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行 &amp;lt;img src=&amp;quot;h">
+  <meta name="description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：左右两个孩子不全  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都">
 <meta name="keywords" content="二叉树,BFS,完全二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="判断是否是完全二叉树">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;03&#x2F;%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="&amp;lt;img src=&amp;quot;http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg&amp;quot; style=&amp;quot;zoom: 33%;&amp;quot; &#x2F;&amp;gt; 完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行 &amp;lt;img src=&amp;quot;h">
+<meta property="og:description" content="完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。 评判标准1：有右孩子没有左孩子，就不行  我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false 评判标准2 ：左右两个孩子不全  boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689aakpj20ok07p40a.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689cp6pj20pf0bl42c.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan6898p7aj20f20h1whv.jpg">
 <meta property="og:updated_time" content="2020-01-07T00:14:34.000Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dly1gan689hlrfj20je0lxn1h.jpg">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/03/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%98%AF%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91/">
 
@@ -225,23 +230,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
+        <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689hlrfj20je0lxn1h.jpg" style="zoom: 33%;" />
+
+
 <p>完全二叉树是 一颗二叉树 满足 上面的层都是满的，新的层都是从左向右的。</p>
-<h5>评判标准1：有右孩子没有左孩子，就不行</h5>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg&quot; alt=&quot;image-20200103183821296&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
+<h5 id="评判标准1：有右孩子没有左孩子，就不行"><a href="#评判标准1：有右孩子没有左孩子，就不行" class="headerlink" title="评判标准1：有右孩子没有左孩子，就不行"></a>评判标准1：有右孩子没有左孩子，就不行</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689aakpj20ok07p40a.jpg" alt="image-20200103183821296" style="zoom: 33%;" />
+
 <p>我依次拿到的1，2，3，4，5，6，7，8，9，在这个过程中任何一个节点，有右孩子没有左孩子，直接返回false</p>
-<h5>评判标准2 ：左右两个孩子不全</h5>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg&quot; alt=&quot;image-20200103183720106&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
+<h5 id="评判标准2-：左右两个孩子不全"><a href="#评判标准2-：左右两个孩子不全" class="headerlink" title="评判标准2 ：左右两个孩子不全"></a>评判标准2 ：左右两个孩子不全</h5><img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan689cp6pj20pf0bl42c.jpg" alt="image-20200103183720106" style="zoom: 33%;" />
+
 <p>boolean flag = false;在2之前都为false，满足2的条件后就为true，代表一个阶段，后面遇到的所有节点，都必须是叶子节点</p>
 <p>例如：</p>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg&quot; alt=&quot;image-20200103184338413&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6898p7aj20f20h1whv.jpg" alt="image-20200103184338413" style="zoom: 50%;" />
+
+
+
 <p>遇到1，中情况1了没（有右没左）？没有</p>
-<p>中情况2了么（左右两个孩子不全）？ 没有</p>
+<p>中情况2了么（左右两个孩子不全）？ 没有 </p>
 <p>来到2，来到3，来到4，</p>
 <p>来到5，中情况1了没（有右没左）？没有</p>
 <p>中情况2了么（左右两个孩子不全）？ 中了哈</p>
 <p>所以5以后的节点，6，7，8，9，10都必须是叶子节点，否则返回false</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCBT</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Queue&lt;Node&gt; queue = <span class="keyword">new</span> LinkedList&lt;Node&gt;();</span><br><span class="line">       <span class="comment">//leaf表示是否开启最后阶段</span></span><br><span class="line">	<span class="keyword">boolean</span> leaf = <span class="keyword">false</span>;</span><br><span class="line">	Node l = <span class="keyword">null</span>;</span><br><span class="line">	Node r = <span class="keyword">null</span>;</span><br><span class="line">       </span><br><span class="line">	queue.offer(head);</span><br><span class="line">	<span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">		head = queue.poll();</span><br><span class="line">		l = head.left;</span><br><span class="line">		r = head.right;</span><br><span class="line">		<span class="keyword">if</span> ((leaf &amp;&amp; (l != <span class="keyword">null</span> || r != <span class="keyword">null</span>)) <span class="comment">//开启了叶子结点的阶段，并且左孩子或右孩子都不等于空 不满足该节点是叶子结点的条件，返回false</span></span><br><span class="line">               || </span><br><span class="line">               (l == <span class="keyword">null</span> &amp;&amp; r != <span class="keyword">null</span>)) &#123;<span class="comment">//如果一个节点，左孩子为空，右孩子不为空，就是情况1，直接return false</span></span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//BFS，先加左，后加右</span></span><br><span class="line">		<span class="keyword">if</span> (l != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(l);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (r != <span class="keyword">null</span>) &#123;</span><br><span class="line">			queue.offer(r);</span><br><span class="line">		&#125;</span><br><span class="line">           <span class="comment">//阶段开启</span></span><br><span class="line">            <span class="keyword">if</span>(l==<span class="keyword">null</span> || r==<span class="keyword">null</span>)&#123;</span><br><span class="line">           	leaf = <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
     </div>
 
@@ -309,7 +322,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">评判标准1：有右孩子没有左孩子，就不行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">评判标准2 ：左右两个孩子不全</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准1：有右孩子没有左孩子，就不行"><span class="nav-number">1.</span> <span class="nav-text">评判标准1：有右孩子没有左孩子，就不行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#评判标准2-：左右两个孩子不全"><span class="nav-number">2.</span> <span class="nav-text">评判标准2 ：左右两个孩子不全</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -325,7 +338,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -334,7 +347,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

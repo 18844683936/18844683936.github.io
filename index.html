@@ -177,6 +177,356 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/13/%E9%98%B2%E6%AD%A2XSS%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/13/%E9%98%B2%E6%AD%A2XSS%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">抵御跨站脚本XSS攻击</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-13 17:35:53" itemprop="dateCreated datePublished" datetime="2021-04-13T17:35:53+08:00">2021-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-15 18:03:41" itemprop="dateModified" datetime="2021-04-15T18:03:41+08:00">2021-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="XSS-攻击的危害"><a href="#XSS-攻击的危害" class="headerlink" title="XSS 攻击的危害"></a>XSS 攻击的危害</h3><p>XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常时JavaScript。攻击成功后，攻击者可能得到包括但不限于更高的权限，会话和cookie等各种内容</p>
+<p>例如用户在发帖或者注册的时候，在文本框中输入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript">alert(<span class="string">'xss'</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这段代码如果不经过转义处理，而直接保存到数据库。将来视图层渲染的时候，把这段代码输出到页面上，那么script 标签的内容就会被执行</p>
+<p>通常情况下，我们登录到某个网站。如果网站使用HttpSession 保存登录凭证，那么SessionId 会以cookie的形式保存在浏览器上。如果黑客在这个网页发帖的时候，填写的javaScript代码是用来获取Cookie内容的，并且把Cookie内容通过Ajax发送给黑客自己的电脑。于是只要有人在这个网站上浏览黑客发的贴子，那么试图层渲染Html页面，就会执行注入的XSS脚本，于是你的Cookie信息就泄露了。黑客在自己的电脑上构建出Cookie，就可以冒充已经登录的用户</p>
+<p>所以避免XSS攻击最有效的方法就是对用户输入的数据进行转义，然后存储到数据库里面。等到试图层渲染Html页面的时候。转义后的文字是不会被当作JavaScript执行的，这就可以抵御XSS攻击</p>
+<h3 id="导入依赖库"><a href="#导入依赖库" class="headerlink" title="导入依赖库"></a>导入依赖库</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.hutool<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hutool-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义请求包装类"><a href="#定义请求包装类" class="headerlink" title="定义请求包装类"></a>定义请求包装类</h3><p>我们平时写Web项目遇到的 HttpServletRequest ，它其实是个接口。如果我们想要重新定义请 求类，扩展这个接口是最不应该的。因为 HttpServletRequest 接口中抽象方法太多了，我们逐 一实现起来太耗费时间。所以我们应该挑选一个简单一点的自定义请求类的方式。那就是继承 HttpServletRequestWrapper 父类。</p>
+<p>JavaEE只是一个标准，具体的实现由各家应用服务器厂商来完成。比如说 Tomcat 在实现 Servlet 规范的时候，就自定义了 HttpServletRequest 接口的实现类。同时JavaEE规范还定义 了 HttpServletRequestWrapper ，这个类是请求类的包装类，用上了装饰器模式。不得不说这里 用到的设计模式真的非常棒，无论各家应用服务器厂商怎么去实现 HttpServletRequest 接口， 用户想要自定义请求，只需要继承 HttpServletRequestWrapper ，对应覆盖某个方法即可，然后 把请求传入请求包装类，装饰器模式就会替代请求对象中对应的某个方法。用户的代码和服务器 厂商的代码完全解耦，我们不用关心 HttpServletRequest 接口是怎么实现的，借助于包装类我 们可以随意修改请求中的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.emos.wx.config.xss;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.hutool.core.util.StrUtil;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.http.HtmlUtil;</span><br><span class="line"><span class="keyword">import</span> cn.hutool.json.JSONUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ReadListener;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletInputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequestWrapper;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XssHttpServletRequestWrapper</span> <span class="keyword">extends</span> <span class="title">HttpServletRequestWrapper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XssHttpServletRequestWrapper</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getParameter</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        String value= <span class="keyword">super</span>.getParameter(name);</span><br><span class="line">        <span class="keyword">if</span>(!StrUtil.hasEmpty(value))&#123;</span><br><span class="line">            value=HtmlUtil.filter(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String[] getParameterValues(String name) &#123;</span><br><span class="line">        String[] values= <span class="keyword">super</span>.getParameterValues(name);</span><br><span class="line">        <span class="keyword">if</span>(values!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;values.length;i++)&#123;</span><br><span class="line">                String value=values[i];</span><br><span class="line">                <span class="keyword">if</span>(!StrUtil.hasEmpty(value))&#123;</span><br><span class="line">                    value=HtmlUtil.filter(value);</span><br><span class="line">                &#125;</span><br><span class="line">                values[i]=value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> values;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, String[]&gt; getParameterMap() &#123;</span><br><span class="line">        Map&lt;String, String[]&gt; parameters = <span class="keyword">super</span>.getParameterMap();</span><br><span class="line">        LinkedHashMap&lt;String, String[]&gt; map=<span class="keyword">new</span> LinkedHashMap();</span><br><span class="line">        <span class="keyword">if</span>(parameters!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span> (String key:parameters.keySet())&#123;</span><br><span class="line">                String[] values=parameters.get(key);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; values.length; i++) &#123;</span><br><span class="line">                    String value = values[i];</span><br><span class="line">                    <span class="keyword">if</span> (!StrUtil.hasEmpty(value)) &#123;</span><br><span class="line">                        value = HtmlUtil.filter(value);</span><br><span class="line">                    &#125;</span><br><span class="line">                    values[i] = value;</span><br><span class="line">                &#125;</span><br><span class="line">                map.put(key,values);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getHeader</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        String value= <span class="keyword">super</span>.getHeader(name);</span><br><span class="line">        <span class="keyword">if</span> (!StrUtil.hasEmpty(value)) &#123;</span><br><span class="line">            value = HtmlUtil.filter(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServletInputStream <span class="title">getInputStream</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        InputStream in= <span class="keyword">super</span>.getInputStream();</span><br><span class="line">        InputStreamReader reader=<span class="keyword">new</span> InputStreamReader(in, Charset.forName(<span class="string">"UTF-8"</span>));</span><br><span class="line">        BufferedReader buffer=<span class="keyword">new</span> BufferedReader(reader);</span><br><span class="line">        StringBuffer body=<span class="keyword">new</span> StringBuffer();</span><br><span class="line">        String line=buffer.readLine();</span><br><span class="line">        <span class="keyword">while</span>(line!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            body.append(line);</span><br><span class="line">            line=buffer.readLine();</span><br><span class="line">        &#125;</span><br><span class="line">        buffer.close();</span><br><span class="line">        reader.close();</span><br><span class="line">        in.close();</span><br><span class="line">        Map&lt;String,Object&gt; map=JSONUtil.parseObj(body.toString());</span><br><span class="line">        Map&lt;String,Object&gt; result=<span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String key:map.keySet())&#123;</span><br><span class="line">            Object val=map.get(key);</span><br><span class="line">            <span class="keyword">if</span>(val <span class="keyword">instanceof</span> String)&#123;</span><br><span class="line">                <span class="keyword">if</span>(!StrUtil.hasEmpty(val.toString()))&#123;</span><br><span class="line">                    result.put(key,HtmlUtil.filter(val.toString()));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                result.put(key,val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        String json=JSONUtil.toJsonStr(result);</span><br><span class="line">        ByteArrayInputStream bain=<span class="keyword">new</span> ByteArrayInputStream(json.getBytes());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServletInputStream() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> bain.read();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFinished</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isReady</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setReadListener</span><span class="params">(ReadListener readListener)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建过滤器，把所有的请求对象传入到包装类"><a href="#创建过滤器，把所有的请求对象传入到包装类" class="headerlink" title="创建过滤器，把所有的请求对象传入到包装类"></a>创建过滤器，把所有的请求对象传入到包装类</h3><p>为了让刚刚定义的包装类生效，我们还要在 com.example.emos.wx.config.xss 中创建 XssFilter 过滤器。过滤器拦截所有请求，然后把请求传入包装类，这样包装类就能覆盖所有请 求的参数方法，用户从请求中获得数据，全都经过转义。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.emos.wx.config.xss;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="meta">@WebFilter</span>(urlPatterns = <span class="string">"/*"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XssFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletRequest request= (HttpServletRequest) servletRequest;</span><br><span class="line">        XssHttpServletRequestWrapper wrapper=<span class="keyword">new</span> XssHttpServletRequestWrapper(request);</span><br><span class="line">        filterChain.doFilter(wrapper,servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="给主类添加注解"><a href="#给主类添加注解" class="headerlink" title="给主类添加注解"></a>给主类添加注解</h3><p>给SpringBoot主类添加 @ServletComponentScan 注解。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/13/%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/13/%E9%94%81/" class="post-title-link" itemprop="url">锁</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-13 11:34:07" itemprop="dateCreated datePublished" datetime="2021-04-13T11:34:07+08:00">2021-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-15 18:03:38" itemprop="dateModified" datetime="2021-04-15T18:03:38+08:00">2021-04-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="MyISAM-与-InnoDB-关于锁方面的区别是什么？"><a href="#MyISAM-与-InnoDB-关于锁方面的区别是什么？" class="headerlink" title="MyISAM 与 InnoDB 关于锁方面的区别是什么？"></a>MyISAM 与 InnoDB 关于锁方面的区别是什么？</h3><ul>
+<li><p>MyISAM 默认用的是表级锁，不支持行级锁</p>
+<ul>
+<li>表级锁会锁住整张表，锁按级别可以分两种：共享锁和排他锁，上了共享锁后依然支持上共享锁，不支持上排他锁。要是线上了排他锁，就不支持在上读锁和写锁了。共享锁和排他锁也同样支持innoDB引擎</li>
+<li>InnoDB支持事务，但是commit是自动提交的，执行起来和myisam看起来差不多，其实innodb用的是二段所，也就是加锁和解锁是分成两个步骤来进行的，即对同一个事务里的一批操作进行加锁，等到commit的时候在对加上的锁统一进行解锁，而当前commit是自动提交的，看起来和myisam没有区别</li>
+</ul>
+</li>
+<li><p>InnoDB默认使用的是行级锁，也支持表级锁</p>
+<ul>
+<li><p>对于myisam 当对数据进行查询的时候，会自动添加一个表级别的读锁，当对数据进行增删改的时候，会添加一个表级别写锁。 读锁未被释放的时候，另一个session对同一张表添加一个写锁的时候，就会被阻塞。直到所有的读锁都被释放为止</p>
+</li>
+<li><p>读锁也叫共享锁，当对数据添加读锁时，在对该表进行查询的时候不会被阻塞</p>
+</li>
+<li><p>写锁，也叫排他锁 就是增删改 或者sql 后面添加 select for update </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lock</span> <span class="keyword">tables</span> person_info_myisam <span class="keyword">read</span> <span class="comment">-- 手动添加读锁</span></span><br><span class="line"><span class="keyword">unlock</span> <span class="keyword">tables</span>; <span class="comment">-- 释放锁</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'autocommit'</span>;<span class="comment">--看看innodbde commit是否是自动执行</span></span><br><span class="line"><span class="keyword">set</span> autocommit = <span class="number">0</span> ;<span class="comment">--关闭自动提交，仅仅在本session中</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> zk_books <span class="keyword">where</span> <span class="keyword">id</span>  =<span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<p>  innoDB在sql没有用到索引的时候，用的是表级锁，在sql用到索引的时候，用的是行级锁</p>
+<p>  myisam 引擎默认用的是表级锁，不支持行级锁 innodb 用的是行级锁，也支持表级锁，无论是表锁还是行锁，均分为共享锁和排他锁</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th>session1排他锁</th>
+<th>session2 共享锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">session1 排他锁</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td align="center">session1共享锁</td>
+<td>冲突</td>
+<td>兼容</td>
+</tr>
+</tbody></table>
+<p>  也就是只有session1和session2都是共享锁，才不会冲突</p>
+<h4 id="是不是行级锁要比表级锁要好"><a href="#是不是行级锁要比表级锁要好" class="headerlink" title="是不是行级锁要比表级锁要好"></a>是不是行级锁要比表级锁要好</h4><p>  锁的粒度越细，代价越高，相比表级锁，在表的头部直接加锁来讲，行级锁还有扫描到某行的时候对其上锁，这样代价是比较大的，innoDB支持事务的同时也相比myisam带来了更大的开销，innodb有且只有一个聚集索引，数据文件是和索引绑定在一起的，必须要有主键，通过主键索引效率很高，但是辅助索引需要查两次，先查到主键，然后在通过主键查询到数据，而myisam是非聚集索引，数据文件是分离的，索引保存的是数据文件的指针，主键索引和辅助索引是独立的，因此myisam在纯检索中，也就是增删改很少的系统中，其性能要好于innodb</p>
+<h4 id="myisam-适合的场景"><a href="#myisam-适合的场景" class="headerlink" title="myisam 适合的场景"></a>myisam 适合的场景</h4><ul>
+<li><p>频繁执行全表count语句，对于innodb来讲，是不保存表的具体行数的，执行select count(*)的时候需要重新统计，但是myisam 用一个变量保存了表的行数</p>
+</li>
+<li><p>对数据进行增删改的频率不高，查询非常频繁，因为增删改要涉及到锁表操作</p>
+</li>
+<li><p>没有事务</p>
+<h4 id="innoDB-适合的场景"><a href="#innoDB-适合的场景" class="headerlink" title="innoDB 适合的场景"></a>innoDB 适合的场景</h4></li>
+<li><p>数据增删改查都很频繁 ，增删改的适合只是改行被锁，避免了阻塞 ，不像myisam 每次增删改都会锁住表</p>
+</li>
+<li><p>可靠性要求比较高，要求支持事务</p>
+<h4 id="数据库锁的分类"><a href="#数据库锁的分类" class="headerlink" title="数据库锁的分类"></a>数据库锁的分类</h4></li>
+<li><p>按锁的粒度来划分，可以分为表级锁，行级锁，页级锁，其中innodb默认支持行级锁，也支持表级锁，myisam 只支持表级锁</p>
+</li>
+<li><p>按锁级别划分，可分为共享锁，排他锁</p>
+</li>
+<li><p>按加锁方式划分，可分为自动锁，显示锁 自动锁就是默认添加的锁，显示锁就是 后面加的select for update ，locked share mode</p>
+</li>
+<li><p>按操作划分 DML锁，对数据进行操作上的锁，就是对数据操作的增删改查，DDL锁，对表的结构进行变更的 ，比如 alter table ,加上的锁就是ddl锁</p>
+</li>
+<li><p>按使用方式划分可以分为 乐观锁，悲观锁</p>
+<ul>
+<li><p>悲观锁： 本系统对外界的修改持保守的态度，在整个数据处理的过程中，将数据处于锁定状态，悲观锁的实现往往依赖数据库的锁机制，能真正保证数据访问的排他性，否则，即使在系统中使用了加锁机制，也无法保证外部系统不会修改数据，</p>
+</li>
+<li><p>悲观并发策略实际上是先取锁后访问的保守策略，为数据处理的安全提供了保障，但是在效率方面，处理+锁的机制会让数据库产生额外的开销，增加产生死锁的机会，另外在只读型事务处理中，由于不会产生冲突，也没必要使用锁，如果上锁会增加系统负担，同时还会降低并行性，一个事务如果锁定了某行数据，其他事务就得等待该事务处理完才能处理</p>
+</li>
+<li><p>乐观锁认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会对数据的更新与否提供检测，如果发生冲突了，就返回错误的信息，让用户决定如何去做，相对于悲观锁，乐观锁并不会使用数据库提供的锁机制，一般的实现，就是记录数据的版本，有两种方式</p>
+<ul>
+<li><p>使用版本号 </p>
+<p>​    数据每更新一次，就对version+1，当提交更新的时候，去判断数据库表对应的当前版本信息与第一次取出来version值进行比对，如果相等，则更新，否则认为是过期数据    </p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/14/134328-488091.png" alt="image-20210414120043223"></p>
+</li>
+<li><p>使用时间戳</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据库事务的四大特性"><a href="#数据库事务的四大特性" class="headerlink" title="数据库事务的四大特性"></a>数据库事务的四大特性</h3><p>ACID</p>
+<ul>
+<li>原子性：事务包含的所有操作，要么全部成功，要么全部失败回滚</li>
+<li>一致性：事务应确保数据的状态从一个一致的状态转为另一个一致的状态，应满足完整性约束，比如A，B之前互相转账，不管转几次，转多少钱，总的钱不会发生变化</li>
+<li>隔离性： 一个事务的执行不应该影响其他事务的执行</li>
+<li>持久性：一个事务的提交，他对数据库的修改应当永久存在数据库中，持久性意味着当系统或者介质发生故障时，必须确保以提交事务的更新不能丢失。即对已提交事务的更新能恢复，一旦事务被提交，DBMS要提供额外的冗余，让系统耐得住故障。所以持久性主要在于DBMS的回复性能，就拿innoDB来说，他会将所有对页面的修改操作，写入一个专门的文件，并在数据库启动时，从此文件进行恢复操作，这个文件就是 redo log file，在这里保证了innoDB的持久性</li>
+</ul>
+<h3 id="事务隔离级别以及各级别下的并发访问问题"><a href="#事务隔离级别以及各级别下的并发访问问题" class="headerlink" title="事务隔离级别以及各级别下的并发访问问题"></a>事务隔离级别以及各级别下的并发访问问题</h3><ul>
+<li><p>丢失更新</p>
+<p>​        即一个事务的更新覆盖率另一个事务的更新，mysql所有事务隔离级别在数据库层面上均可避免</p>
+<table>
+<thead>
+<tr>
+<th>取款事务</th>
+<th>存款事务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开始事务</td>
+<td>开始事务</td>
+</tr>
+<tr>
+<td>查询转账余额为100元</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>查询转账余额为100元</td>
+</tr>
+<tr>
+<td></td>
+<td>存入20元，余额变成120元</td>
+</tr>
+<tr>
+<td></td>
+<td>提交事务</td>
+</tr>
+<tr>
+<td>取出10元，余额变为90元</td>
+<td></td>
+</tr>
+<tr>
+<td>回滚事务，余额恢复为100元</td>
+<td>更新丢失</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>脏读</p>
+<pre><code>指的是一个事务读到了另一个事务未提交的更新数据，该种问题，可以在 **已提交读**事务隔离级别以上避免</code></pre><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@tx_isolation;<span class="comment">--查看事务的隔离级别 mysql 的innod默认是 可重复读</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">session</span> <span class="keyword">transaction</span> <span class="keyword">isolation</span> <span class="keyword">level</span> <span class="keyword">read</span> uncommitted; <span class="comment">-- 设置事务隔离级别为读未提交</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不可重复读</p>
+<p>​        指的是 事务A多次重复读取同一数据，事务B在事务A多次读取的过程中，对数据做了更新并提交，导致事务A多次读取同一数据结果不一致。可怕的是，在事务A中，你不知道自己读到的数据是否可靠。</p>
+<p>​        解决方法，将隔离级别 在调大一级，设置成innodb默认的事务隔离级别：<strong>可重复读</strong>，支持多次重复读，能读到相同的结果。</p>
+</li>
+<li><p>幻读</p>
+<p>指的是事务A读 取与搜索结果相匹配的若干行，事务B以插入或者修改行等方式来修改事务A的<strong>结果集</strong>，导致事务A看起来像出现幻觉一样。事务A查询总共有4条数据，然后事务B添加了一条数据，然后事务A对所有的数据进行update操作，发现影响的行数竟然是5</p>
+<p>​        如何避免幻读：将事务的隔离级别设置成最高的 串行。</p>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/14/172024-351518.png" alt="image-20210414172022612"></p>
+</li>
+<li><p>不可重复读和幻读看起来很像，不可重复读侧重于对同一数据的修改，幻读则侧重于新增或删除</p>
+</li>
+</ul>
+<p>###　RC、RR级别下的InnoDB的非阻塞读如何实现</p>
+<p>read commit  和 repetable read</p>
+<p>离不开下面的三点：</p>
+<ul>
+<li><p><strong>每行数据除了存储数据外，还有额外的一些字段，DB_TRX_ID,DB_ROLL_PTR,DB_ROW_ID字段</strong>，</p>
+<ul>
+<li>DB_TRX_ID 该字段用来表示最近一次对本行记录做修改（update,delete）的事务的Id,</li>
+<li>DB_ROLL_PTR ,roll 回滚的意思，PTR 指针的意思，即回滚指针，指写入回滚段RollBackSegment的undo日志记录，如果一行记录被更新，则undo log record 包含重建该行记录被更新之前记录所必需的信息</li>
+<li>DB_ROLL_ID,即行号，包含一个随着新行插入而单调递增的行ID ，当由InnoDB自动产生聚集索引时，聚集索引会包括这个行ID的值，否则这个行ID 不会出现在任何索引中。（就是之前我们没有主键也没有索引的时候，mysql会为我们创建一个自增的隐藏主键，即这个DB_ROLL_ID ）</li>
+</ul>
+</li>
+<li><p><strong>还需要依托undo日志，当我们对数据操作时，就会产生undo日志，undo记录中存储的是老版数据，当一个旧的事务需要读取数据时，为了能读取到老版本的数据，需要顺着undo链，找到满足其可见性的记录。</strong>undo log 主要分为两种</p>
+<ul>
+<li>insert undo log  表示事务对新记录产生的log，只在事务回滚时需要，并且在事务提交后会立即丢弃</li>
+<li>update undo log 事务对其进行update 和delete产生的undo log，不仅在事务回滚是需要，快照读也需要，所以不能随便删除，只有当数据库所使用的快照中不涉及该日志记录，对应的回滚日志才会被perge线程删除 </li>
+</ul>
+<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/15/170410-338696.png" alt="image-20210415165230037"></p>
+<p>假设 DB_ROW_ID 被事务A 做修改，将原来Field2里面的值从12改成了32，流程如下</p>
+<ul>
+<li>首先用排他锁锁定该行</li>
+<li>然后把该行修改前的值拷贝一份到undo log里面</li>
+<li>然后修改当前行的值，填写事务id，使用回滚指针指向Undo log中修改前的地址</li>
+<li>假设数据库还有别的事务再用快照读取该日志记录，那么对应的undo log 还没有被清除，此时，某个事务又对同一行数据做了修改，将该数据的Field从13 改成了45<img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/15/165052-172605.png" alt="image-20210415164745714"></li>
+<li>这样会又增加一条Undo log 日志 ，他按照修改的顺序，从近到远，通过DB_ROLL_PTR 给连接起来</li>
+</ul>
+</li>
+<li><p><strong>read view  主要是用来做可见性判断的，即当我们去执行快照读，select的时候，会针对我们查询的数据，创建出一个read view，来决定当前事务看到的是哪个版本的数据，</strong>有可能是当前最新版本的数据，也许只允许你看undo log中 只允许你看的版本的日志。</p>
+<ul>
+<li>read view遵循一个可见性算法，主要是要将修改的数据的DB_TRX_ID 取出来与系统其他活跃事务做对比，如果大于或者等于这些ID 的话，就通过DB_ROLL_PTR指针去取出undo log 上一层的DB_TRX_ID,直到小于这些活跃事务id为止，这样就保证了获取到的数据版本是当前可见的最稳定的数据版本</li>
+</ul>
+</li>
+</ul>
+<p>  正是因为生成时机的不同，造成了RC ，RR级别下的两种不同可见性</p>
+<ul>
+<li><p>repeatable read 级别下 session 在start transaction 后的第一条快照读，会创建一条快照，即read view ，将当前系统中活跃的其他事务记录起来，此后在调用快照读的时候，还是用的同一个 read view </p>
+</li>
+<li><p>而在 read commit 级别下事务中每条select 语句也就是每次调用快照读的时候，都会创建一个新的快照</p>
+<p>这就是之前为什么在RC read commit 下能用快照读看到别的事务对表数据提交的增删改，而在RR 下，如果首次使用快照读，是在别的事务对数据做出增删改并提交之前的，此后即便别的事务对数据做了增删改并提交，还是读不到数据变更的原因，对于RR来讲，首次事务的时机是相当重要的</p>
+<p><strong>正因为以上的三个因子，才使得innodb 在RC ，RR级别支持非阻塞读，而读取数据时的非阻塞，就是所谓的MVCC，而innodb的非阻塞读机制，实现了仿照版的MVCC（多版本并发控制）读不加锁，读写不冲突，在读多写少的应用中，读写不冲突是非常重要的，极大的增加了系统的并分性能，那这里为什么仅实现了伪MVCC机制呢？因为并没有实现核心的多版本共存，undo log 中的内容只是串行化的结果，记录的多个事务的过程，不属于多版本共存</strong></p>
+</li>
+</ul>
+<h3 id="InnoDB可重复读隔离级别下如何避免幻读"><a href="#InnoDB可重复读隔离级别下如何避免幻读" class="headerlink" title="InnoDB可重复读隔离级别下如何避免幻读"></a>InnoDB可重复读隔离级别下如何避免幻读</h3><ul>
+<li><p>表象：快照读（非阻塞读） – 伪Mvvc来避免幻行，前提是在RR级别下</p>
+<ul>
+<li><p>当前读：select ….lock in share mode , select .. for update </p>
+</li>
+<li><p>当前读:   update ,dalete,insert,</p>
+</li>
+<li><p>当前读就是加了锁的增删改查语句，不管你上的是共享锁还是排他锁，均为当前读，为啥叫做当前读呢？<strong>因为记录的是当前的最新版本，并且读取之后，还需要保证其他事务不能修改当前事务，对读取的记录加锁</strong></p>
+</li>
+<li><p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/15/095400-663786.png" alt="image-20210415095358583"></p>
+<p>当update语句交给mysql 后，sql程序实例会根据where条件，读取满足条件的第一条数据，InnoDB引擎会将第一条记录返回并加锁，mysql 程序实例收到后会发起更新这行的操作，一条记录更新完成后，在读取下一条记录。</p>
+<p>如果在这个过程中，如果其他事务提交了最新满足条件的记录，这个过程也能读到最新的版本</p>
+</li>
+<li><p>快照读：就是普通的select 操作，不加锁的非阻塞读，select  这个是在事务隔离级别不为串行化的前提下才成立的。如果是串行下，就会退化成 select ….lock in share mode 。出现快照读，是出于提升并发性能的考虑，快照读的实现是基于多版本并发控制即MVCC，MVCC可以看成是行级锁的变种，在很多情况下避免了加锁操作，因此开销更低 ，既然基于多版本，那么快照读读到的就有可能不是最先版本，可能是之前的历史版本</p>
+</li>
+<li><p>在 可重复读的 级别下 快照读，返回的版本与另一个事务没有修改之前返回的版本相同，当前读，返回的是另一个事务已经修改的版本</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/13/TCP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,7 +552,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-13 10:19:19 / 修改时间：11:03:09" itemprop="dateCreated datePublished" datetime="2021-04-13T10:19:19+08:00">2021-04-13</time>
+              <time title="创建时间：2021-04-13 10:19:19 / 修改时间：17:56:02" itemprop="dateCreated datePublished" datetime="2021-04-13T10:19:19+08:00">2021-04-13</time>
             </span>
 
           
@@ -216,17 +566,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3>TCP</h3>
-<p>​	是一种面向连接的，可靠的，基于字节流的传输层通信协议</p>
-<h3>TCP的报文格式</h3>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/110030-896154.gif" alt="图片加载中"></p>
+          <h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>​    是一种面向连接的，可靠的，基于字节流的传输层通信协议</p>
+<h3 id="TCP的报文格式"><a href="#TCP的报文格式" class="headerlink" title="TCP的报文格式"></a>TCP的报文格式</h3><p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/110030-896154.gif" alt="图片加载中"></p>
 <ul>
 <li>序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始</li>
 <li>确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正确的收到了a发送的到序号206为止的数据（107+100-1），因此b期望收到a的下个数据序号就是207 于是，b在发送给a的确认报文段中会把ACK确认号置为207</li>
 <li>数据偏移：由于头部有可选字段，长度不固定，所以他指出TCP报文的数据距离TCP报文的起始处有多远</li>
 <li>保留域</li>
-<li>TCP Flags：控制域 总共有8个
-<ul>
+<li>TCP Flags：控制域 总共有8个<ul>
 <li>URG：紧急指针标识 为1时有效</li>
 <li>ACk： 确认序号标识 上面的确认号是否有效就是靠这个标识位控制的</li>
 <li>PSH:  push标志 为1 表示接收方接收到后应尽快将报文交给应用程序，而不是放入缓冲区</li>
@@ -239,207 +586,14 @@
 <li>校验和： 奇偶校验</li>
 <li>紧急指针: 只有TCP的URG有效时，指出报文的紧急数据的字节数</li>
 </ul>
-<h3>说说TCP的三次握手</h3>
-<ul>
+<h3 id="说说TCP的三次握手"><a href="#说说TCP的三次握手" class="headerlink" title="说说TCP的三次握手"></a>说说TCP的三次握手</h3><ul>
 <li>第一次握手： 建立连接时，客户端发送SYN包（seq = x）到服务器，并进入到SYN_SEND的状态，等待服务器确认</li>
 <li>第二次握手： 服务器收到客户段发送来的SYN包，发送确认包ACK（ack = x+1），同时自己也发送一个SYN包（syn = y）即 ACK + SYN 包 ，此时服务器进入到SYN_RECV的状态</li>
 <li>第三次握手： 客户端收到服务器的SYN+ACK包，然后发送服务器发送确认包ACK（ack = y=1）,此包发送完毕，服务器和客户端进入到ESTABLISH的状态，完成三次握手</li>
 </ul>
-<h3>为什么需要三次握手才能建立起连接</h3>
-<p><strong>为了初始化序号的初始值</strong></p>
+<h3 id="为什么需要三次握手才能建立起连接"><a href="#为什么需要三次握手才能建立起连接" class="headerlink" title="为什么需要三次握手才能建立起连接"></a>为什么需要三次握手才能建立起连接</h3><p><strong>为了初始化序号的初始值</strong></p>
 <p>通信的双方要互相通知对方自己的序号，也就是x,y,这个序号要作为以后数据通信的序号，TCP会用这个序号来拼接数据，因此在服务器回发他序号后，还需要发送确认报文给服务器，告诉服务器，客户当已经收到了你的序号了</p>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2021/04/10/%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/10/%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">mysql索引</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-10 16:31:55" itemprop="dateCreated datePublished" datetime="2021-04-10T16:31:55+08:00">2021-04-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-04-13 11:03:07" itemprop="dateModified" datetime="2021-04-13T11:03:07+08:00">2021-04-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3>如何定位并优化慢查询sql</h3>
-<ul>
-<li>
-<p>根据慢日志定位慢查询sql</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%quer%'</span>  <span class="comment">-- </span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'%slow_queries%'</span> <span class="comment">-- 查询慢sql的数量</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> slow_query_log = <span class="keyword">on</span> <span class="comment">-- 打开慢日志功能</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> long_query_time = <span class="number">1</span> <span class="comment">--设置慢查询时间，这个变量设置完后得重新连接 </span></span><br><span class="line"><span class="keyword">select</span>  <span class="keyword">name</span>   <span class="keyword">from</span> zk_books  <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">name</span>  <span class="keyword">desc</span> <span class="comment">-- 这条sql 是慢sql 控制台显示用了27s</span></span><br></pre></td></tr></table></figure></p>
-</li>
-</ul>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/093227-776748.png" alt="image-20210412145207383"></p>
-<p><strong>slow_query_log</strong>  off 表示慢日志功能为关闭状态</p>
-<p><strong>long_query_time 10.000000</strong> 表示 当一个sql执行时间超过10s就会记录为慢sql</p>
-<p>慢日志的内容：</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">C:\work_space\db\mysql\bin\mysqld, Version: 5.5.56 (MySQL Community Server (GPL)). started with:</span><br><span class="line">TCP Port: 3306, Named Pipe: MySQL</span><br><span class="line">Time                 Id Command    Argument</span><br><span class="line">C:\work_space\db\mysql\bin\mysqld, Version: 5.5.56 (MySQL Community Server (GPL)). started with:</span><br><span class="line">TCP Port: 3306, Named Pipe: MySQL</span><br><span class="line">Time                 Id Command    Argument</span><br><span class="line"># Time: 210412 15:07:15</span><br><span class="line"># User@Host: root[root] @ localhost [127.0.0.1]</span><br><span class="line"># Query_time: 27.249581  Lock_time: 0.000000 Rows_sent: 1000048  Rows_examined: 2000096  //query_time 是查询时间</span><br><span class="line">use ruoyi;</span><br><span class="line">SET timestamp=1618211235;</span><br><span class="line">select  z.`name`  from zk_books z ORDER BY name  desc; // 这个就是sql语句</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>
-<p>使用explain等工具分析sql</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span>  <span class="keyword">name</span>   <span class="keyword">from</span> zk_books  <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">name</span>  <span class="keyword">desc</span>  <span class="comment">--执行explain工具很快，这个sql并没有真正的去运行</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/093247-385658.png" alt="image-20210412151657181"></p>
-<p><strong>id</strong> 表示sql语句的执行顺序，比如说复合查询 里面的语句是先执行的</p>
-<p><strong>type</strong></p>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092908-332150.png" alt="image-20210412152738368"></p>
-<p>如果type 为index 和all 的话 表示的是全表扫描。如果该语句是查询的话，type 又是这两个的话，就得优化一下了</p>
-<p><strong>Extra</strong></p>
-<p>​	如果extra 中出现以下两项意味着MySQL 根本不能使用索引，效率会受到重大影响</p>
-<ol>
-<li>Using filesort  表示 Mysql 会对结果使用一个外部索引排序，而不是从表里按索引次序读到相关内容。可能在内存或者磁盘上进行排序。 Mysql中无法利用索引完成的排序操作称为  文件排序</li>
-<li>Using temporary  表示Mysql 在对查询结果排序时使用临时表。常见于排序order by 和分组查询 group by</li>
-</ol>
-<p><strong>看刚才的explain  type 为 all  extra 为 using filesort 这就很需要调优了</strong></p>
-</li>
-<li>
-<p>修改sql或者尽量让sql走索引</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">TABLE</span> zk_books <span class="keyword">add</span> <span class="keyword">index</span> idx_name(<span class="keyword">name</span>) <span class="comment">--添加索引</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092916-864881.png" alt="image-20210412155405453"></p>
-<p>卧槽，添加完索引后在查询直接0.496s  直接从27s干到这么快。</p>
-<p>可以使用force index 来测试，看看哪一个索引效率比较高</p>
-</li>
-</ul>
-<h3>联合索引的最左匹配原则的成因</h3>
-<p>假设有两列 A，B，我们给A，B设置为索引，顺序是A，B，在where语句中调用 A = 多少，B = 多少的时候就会走A，B联合索引。如果我们调用 where A = 多少的时候也会走这个索引，但是我们调用B= 什么的时候他就不走这个索引了</p>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092918-314691.png" alt="image-20210412165230424"></p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span> author = <span class="string">'房西苑'</span> <span class="keyword">and</span> bookState = <span class="number">1</span>;  <span class="comment">-- 走idx_union</span></span><br><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span> author = <span class="string">'房西苑'</span> ; <span class="comment">-- 走idx_union</span></span><br><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> zk_books <span class="keyword">where</span>  bookState = <span class="number">1</span>;<span class="comment">-- 不走任何索引</span></span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>最左前缀匹配原则：mysql会一直向右匹配知道遇到范围查询（&gt;,&lt;,between,like）就停止匹配，比如a = 3 and b = 4，and c &gt; 5 and d = 6  如果建立（abcd）顺序的索引，d是用不到索引的，如果建立 （abdc）的索引则都可以用到，abd的顺序可以任意调整</li>
-<li>= 和 in 可以乱序，比如 a = 1 and b= 2 and  c = 3 建立abc索引可以任意顺序，mysql的查询优化器会帮你一优化成索引可以识别的形式</li>
-</ol>
-<p><strong>最左匹配原则的成因：</strong></p>
-<p>mysql 创建联合索引是根据最左边也就是第一个字段进行排序，在第一个字段排序基础上，在对第二个字段进行排序（就类似于order by 字段1 再order by 字段2的一种排序规则），所以第一个字段是绝对有序，而第二个字段就是无序的了，因此直接使用第二个字段进行where查询是用不到第二个索引的</p>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/092920-557732.png" alt="image-20210412172952602">索引顺序是col3  col2 ，先按照col3给索引创建b+tree ，然后在根据col2查找，如果直接使用col2的话，是不能走这个b+tree的</p>
-<h3>索引是建立的越多越好嘛？</h3>
-<ul>
-<li>数据量小的表不需要建立索引，建立会增加额外的索引开销</li>
-<li>数据变更需要维护索引，因此更多的索引意味着更多的维护成本</li>
-<li>更多的索引也需要更多的存储空间</li>
-</ul>
-<h3>MyISAM 与 InnoDB 关于锁方面的区别是什么？</h3>
-<ul>
-<li>
-<p>MyISAM 默认用的是表级锁，不支持行级锁</p>
-</li>
-<li>
-<p>InnoDB默认使用的是行级锁，也支持表级锁</p>
-<ul>
-<li>
-<p>对于myisam 当对数据进行查询的时候，会自动添加一个表级别的读锁，当对数据进行增删改的时候，会添加一个写锁。 读锁未被释放的时候，另一个session对同一张表添加一个写锁的时候，就会被阻塞。直到所有的读锁都被释放为止</p>
-<p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lock</span> <span class="keyword">tables</span> person_info_myisam <span class="keyword">read</span> <span class="comment">-- 手动添加读锁</span></span><br><span class="line"><span class="keyword">unlock</span> <span class="keyword">tables</span>; <span class="comment">-- 释放锁</span></span><br></pre></td></tr></table></figure></p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/05/24/springDataJPA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/24/springDataJPA/" class="post-title-link" itemprop="url">springDataJPA</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-24 16:34:54 / 修改时间：16:35:44" itemprop="dateCreated datePublished" datetime="2020-05-24T16:34:54+08:00">2020-05-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -504,7 +658,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -513,7 +667,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

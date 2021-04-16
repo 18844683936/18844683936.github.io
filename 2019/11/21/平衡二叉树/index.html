@@ -46,16 +46,18 @@
   };
 </script>
 
-  <meta name="description" content="证明一棵树是不是平衡二叉树 平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1 下面这颗树就是平衡的  &amp;lt;!-- more --&amp;gt; 而这颗树就不是平衡的  思路：  左右子树高度差不能超过1 得到左子树高度和右子树高度 判断是否满足条件，只有左子树和右子树都平衡的时候才是平衡二叉树  12345678910111213141516171819202122232425262728">
+  <meta name="description" content="证明一棵树是不是平衡二叉树 平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1 下面这颗树就是平衡的">
 <meta name="keywords" content="二叉树,平衡二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡二叉树">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;21&#x2F;%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="证明一棵树是不是平衡二叉树 平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1 下面这颗树就是平衡的  &amp;lt;!-- more --&amp;gt; 而这颗树就不是平衡的  思路：  左右子树高度差不能超过1 得到左子树高度和右子树高度 判断是否满足条件，只有左子树和右子树都平衡的时候才是平衡二叉树  12345678910111213141516171819202122232425262728">
+<meta property="og:description" content="证明一棵树是不是平衡二叉树 平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1 下面这颗树就是平衡的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;images&#x2F;a.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;images&#x2F;b.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;my&#x2F;image-20200103084743544.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;my&#x2F;image-20200103084906675.png">
 <meta property="og:updated_time" content="2020-01-03T00:49:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;images&#x2F;a.png">
@@ -243,7 +245,8 @@
 <p>平衡二叉树：对于任何一个节点，他的左右子树高度差不能超过1</p>
 <p>下面这颗树就是平衡的</p>
 <p><img src="/images/a.png" alt="haha"></p>
-<p>&lt;!-- more --&gt;</p>
+<a id="more"></a>
+
 <p>而这颗树就不是平衡的</p>
 <p><img src="/images/b.png" alt="image"></p>
 <p>思路：</p>
@@ -252,9 +255,12 @@
 <li>得到左子树高度和右子树高度</li>
 <li>判断是否满足条件，只有左子树和右子树都平衡的时候才是平衡二叉树</li>
 </ol>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> isBalanceHelper2(root).isBalance;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isBalanceHelper</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//如果是空节点，返回true</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//得到左子树的高度</span></span><br><span class="line">       <span class="keyword">int</span> leftHight = getHeight(root.left);</span><br><span class="line">       <span class="comment">//得到右子树的高度</span></span><br><span class="line">       <span class="keyword">int</span> rightHight = getHeight(root.right);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//左子树和右子树都平衡的并且这棵树也是平衡的（左右子树的高度差不超过1）</span></span><br><span class="line">       <span class="keyword">return</span> isBalanceHelper(root.left) &amp;&amp; isBalanceHelper(root.right) &amp;&amp; </span><br><span class="line">           Math.abs(leftHight - rightHight) &lt;= <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回这棵树的高度</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getHeight</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//如果是空节点的话，返回高度0</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//高度为左子树的高度+右子树的高度+1</span></span><br><span class="line">       <span class="keyword">return</span> getHeight(root.left) + getHeight(root.right) + <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
-<p>&lt;img src=&quot;../../my/image-20200103084743544.png&quot; alt=&quot;image-20200103084743544&quot; style=&quot;zoom: 67%;&quot; /&gt;</p>
-<p>&lt;img src=&quot;../../my/image-20200103084906675.png&quot; alt=&quot;image-20200103084906675&quot; style=&quot;zoom: 67%;&quot; /&gt;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBalance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> isBalanceHelper2(root).isBalance;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isBalanceHelper</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">//如果是空节点，返回true</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//得到左子树的高度</span></span><br><span class="line">       <span class="keyword">int</span> leftHight = getHeight(root.left);</span><br><span class="line">       <span class="comment">//得到右子树的高度</span></span><br><span class="line">       <span class="keyword">int</span> rightHight = getHeight(root.right);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//左子树和右子树都平衡的并且这棵树也是平衡的（左右子树的高度差不超过1）</span></span><br><span class="line">       <span class="keyword">return</span> isBalanceHelper(root.left) &amp;&amp; isBalanceHelper(root.right) &amp;&amp; </span><br><span class="line">           Math.abs(leftHight - rightHight) &lt;= <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//返回这棵树的高度</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getHeight</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//如果是空节点的话，返回高度0</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//高度为左子树的高度+右子树的高度+1</span></span><br><span class="line">       <span class="keyword">return</span> getHeight(root.left) + getHeight(root.right) + <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<img src="../../my/image-20200103084743544.png" alt="image-20200103084743544" style="zoom: 67%;" />
+
+<img src="../../my/image-20200103084906675.png" alt="image-20200103084906675" style="zoom: 67%;" />
+
 
     </div>
 
@@ -336,7 +342,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -345,7 +351,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

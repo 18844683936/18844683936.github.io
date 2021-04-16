@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="表现层四件事 响应jsp页面请求   后台： 		Controller类写注解@RequestMapping(value=&amp;quot;user&amp;quot;)，叫做窄化请求 		Controller方法写注解@RequestMapping(value=&amp;quot;add&amp;quot;)，响应请求 		如果后台没有窄化请求,jsp页面请求：&amp;lt;%=basePath%&amp;gt;add.action">
+  <meta name="description" content="表现层四件事 响应jsp页面请求 后台： Controller类写注解@RequestMapping(value=&amp;quot;user&amp;quot;)，叫做窄化请求 Controller方法写注解@RequestMapping(value=&amp;quot;add&amp;quot;)，响应请求 如果后台没有窄化请求,jsp页面请求：&amp;lt;%=basePath%&amp;gt;add.action 如果后台有窄化请求,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springmvc">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;12&#x2F;springmvc&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="表现层四件事 响应jsp页面请求   后台： 		Controller类写注解@RequestMapping(value=&amp;quot;user&amp;quot;)，叫做窄化请求 		Controller方法写注解@RequestMapping(value=&amp;quot;add&amp;quot;)，响应请求 		如果后台没有窄化请求,jsp页面请求：&amp;lt;%=basePath%&amp;gt;add.action">
+<meta property="og:description" content="表现层四件事 响应jsp页面请求 后台： Controller类写注解@RequestMapping(value=&amp;quot;user&amp;quot;)，叫做窄化请求 Controller方法写注解@RequestMapping(value=&amp;quot;add&amp;quot;)，响应请求 如果后台没有窄化请求,jsp页面请求：&amp;lt;%=basePath%&amp;gt;add.action 如果后台有窄化请求,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-12T14:46:34.000Z">
 <meta name="twitter:card" content="summary">
@@ -219,49 +219,36 @@
 
       
         <p>表现层四件事</p>
-<h3>响应jsp页面请求</h3>
-<ul>
-<li>
-<p>后台：
-		Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
-		Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
-		如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
-		如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</p>
-</li>
-<li>
-<p>前台jsp</p>
+<h3 id="响应jsp页面请求"><a href="#响应jsp页面请求" class="headerlink" title="响应jsp页面请求"></a>响应jsp页面请求</h3><ul>
+<li><p>后台：</p>
+<pre><code>Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
+Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
+如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
+如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</code></pre></li>
+<li><p>前台jsp</p>
 <ol>
-<li>
-<pre><code class="language-html">&lt;a href=&quot;&lt;%=basePath%&gt;add.action&quot;&gt;提交请求&lt;/a&gt;
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure>
-
-</code></pre>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;add.action"</span>&gt;</span>提交请求<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+<span class="comment"><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
 </li>
-<li>
-<pre><code class="language-html">&lt;form action=&quot; &quot; name=&quot;myform&quot;&gt;
-    &lt;input type=&quot;button&quot; value=&quot;提交请求&quot;  onclick=&quot;add()&quot;&gt;
-&lt;/form
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">" "</span> <span class="attr">name</span>=<span class="string">"myform"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交请求"</span>  <span class="attr">onclick</span>=<span class="string">"add()"</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">form</span></span>
     &lt;script&gt;
         function add(){
-        document.myform.action = &quot;&lt;%=basePath%&gt;add.action&quot;;
+        document.myform.action = "<span class="tag">&lt;<span class="name">%=basePath%</span>&gt;</span>add.action";
         document.myform.submit();
         }
-    &lt;/script&gt;
-</code></pre>
+    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></code></pre>
 </li>
 </ol>
-<p>​</p>
-<h3>获取jsp页面的值</h3>
-<p>​		表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
-<p>​		只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
+<p>​            </p>
+<h3 id="获取jsp页面的值"><a href="#获取jsp页面的值" class="headerlink" title="获取jsp页面的值"></a>获取jsp页面的值</h3><p>​        表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
+<p>​        只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
 </li>
 </ul>
-<h3>向jsp页面传值</h3>
-<p>springMVC 可以用ModelAndView.addObject(&quot;obj&quot;,obj)来传递</p>
-<p>或者在参数中声明一个Model model ，使用model.addAttribute(&quot;obj&quot;,obj);</p>
-<h3>跳转jsp页面</h3>
-<p>​	springMVC配好视图解析器后直接return&quot;jsp页面的名字&quot; 或者ModelAndView .setViewName(&quot;jsp页面的名字&quot;);
-​</p>
+<h3 id="向jsp页面传值"><a href="#向jsp页面传值" class="headerlink" title="向jsp页面传值"></a>向jsp页面传值</h3><p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
+<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
+<h3 id="跳转jsp页面"><a href="#跳转jsp页面" class="headerlink" title="跳转jsp页面"></a>跳转jsp页面</h3><p>​    springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);<br>​    </p>
 
     </div>
 
@@ -324,7 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">响应jsp页面请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">获取jsp页面的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">向jsp页面传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">跳转jsp页面</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#响应jsp页面请求"><span class="nav-number">1.</span> <span class="nav-text">响应jsp页面请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取jsp页面的值"><span class="nav-number">2.</span> <span class="nav-text">获取jsp页面的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向jsp页面传值"><span class="nav-number">3.</span> <span class="nav-text">向jsp页面传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转jsp页面"><span class="nav-number">4.</span> <span class="nav-text">跳转jsp页面</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -340,7 +327,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -349,7 +336,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

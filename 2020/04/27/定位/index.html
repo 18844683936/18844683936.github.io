@@ -226,7 +226,10 @@
       
         <p>在触发  menu 的 删除ToolStripDelteChuFang_Click事件之前 触发了组件的MouseDown事件。在这个事件上做校验</p>
 <p>用Point 这个类来得到点击的位置。然后用这个点来看是否在树上。</p>
-<p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ftvPrescription_MouseDown</span>(<span class="params"><span class="keyword">object</span> sender, MouseEventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>      &#123;</span><br><span class="line">          <span class="keyword">if</span> (e.Button == MouseButtons.Right)</span><br><span class="line">          &#123;</span><br><span class="line">              Point ClickPoint = <span class="keyword">new</span> Point(e.X, e.Y);</span><br><span class="line">              TreeNode CurrentNode = ftvPrescription.GetNodeAt(ClickPoint);</span><br><span class="line">              <span class="keyword">if</span> (CurrentNode != <span class="literal">null</span>)<span class="comment">//判断你点的是不是一个节点</span></span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="keyword">this</span>.删除ToolStripDelteChuFang.Visible = <span class="literal">true</span>;</span><br><span class="line">                  ftvPrescription.SelectedNode = CurrentNode;<span class="comment">//选中这个节点</span></span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span></span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="keyword">this</span>.删除ToolStripDelteChuFang.Visible = <span class="literal">false</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ftvPrescription_MouseDown</span>(<span class="params"><span class="keyword">object</span> sender, MouseEventArgs e</span>)</span></span><br><span class="line"><span class="function"></span>      &#123;</span><br><span class="line">          <span class="keyword">if</span> (e.Button == MouseButtons.Right)</span><br><span class="line">          &#123;</span><br><span class="line">              Point ClickPoint = <span class="keyword">new</span> Point(e.X, e.Y);</span><br><span class="line">              TreeNode CurrentNode = ftvPrescription.GetNodeAt(ClickPoint);</span><br><span class="line">              <span class="keyword">if</span> (CurrentNode != <span class="literal">null</span>)<span class="comment">//判断你点的是不是一个节点</span></span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="keyword">this</span>.删除ToolStripDelteChuFang.Visible = <span class="literal">true</span>;</span><br><span class="line">                  ftvPrescription.SelectedNode = CurrentNode;<span class="comment">//选中这个节点</span></span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">else</span></span><br><span class="line">              &#123;</span><br><span class="line">                  <span class="keyword">this</span>.删除ToolStripDelteChuFang.Visible = <span class="literal">false</span>;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
     </div>
 
@@ -304,7 +307,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -313,7 +316,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

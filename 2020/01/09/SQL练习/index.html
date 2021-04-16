@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="把列看成变量，把where 后面看成if（flag）里的exp 里的表达式 哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来  1select * from student where 1&amp;gt;2 1&amp;gt;2 的表达式永远为false 所以一行也取不到 既然是变量，就可以比较和运算， where是对表中的数据发挥作用，查询出数据来 where发挥作用是，表示并没有discount">
+  <meta name="description" content="把列看成变量，把where 后面看成if（flag）里的exp 里的表达式 哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来  1select * from student where 1&amp;gt;2  1&amp;gt;2 的表达式永远为false 所以一行也取不到 既然是变量，就可以比较和运算， where是对表中的数据发挥作用，查询出数据来 where发挥作用是，表示并没有discoun">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL练习">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;09&#x2F;SQL%E7%BB%83%E4%B9%A0&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="把列看成变量，把where 后面看成if（flag）里的exp 里的表达式 哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来  1select * from student where 1&amp;gt;2 1&amp;gt;2 的表达式永远为false 所以一行也取不到 既然是变量，就可以比较和运算， where是对表中的数据发挥作用，查询出数据来 where发挥作用是，表示并没有discount">
+<meta property="og:description" content="把列看成变量，把where 后面看成if（flag）里的exp 里的表达式 哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来  1select * from student where 1&amp;gt;2  1&amp;gt;2 的表达式永远为false 所以一行也取不到 既然是变量，就可以比较和运算， where是对表中的数据发挥作用，查询出数据来 where发挥作用是，表示并没有discoun">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg">
 <meta property="og:image" content="http:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;9c52df3dgy1gaqlzk6hf2j20dg0960ve.jpg">
@@ -228,7 +228,8 @@
 <li>把列看成变量，把where 后面看成if（flag）里的exp 里的表达式</li>
 <li>哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来</li>
 </ol>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure>
+
 <p>1&gt;2 的表达式永远为false 所以一行也取不到</p>
 <p>既然是变量，就可以比较和运算，</p>
 <p>where是对表中的数据发挥作用，查询出数据来</p>
@@ -239,7 +240,8 @@
 <p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg" alt="image-20200108204009669"></p>
 <p>update main set num = num-(num%10) where num between 20 and 39</p>
 <p>把num 一定当成变量来看，因此num/10 取整 再乘以10</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure>
+
 <p>count（字段）和count（*）的区别，count（字段）查出来的是该字段不为null的所有行数，</p>
 <p>而count（*）会查出绝对行数，就算着一行全是null ，也算一行</p>
 <p>count（*） 和count（1）的区别</p>
@@ -334,7 +336,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -343,7 +345,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

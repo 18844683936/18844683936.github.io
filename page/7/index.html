@@ -177,6 +177,223 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/14/%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="post-title-link" itemprop="url">并查集</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-14 19:05:44" itemprop="dateCreated datePublished" datetime="2020-01-14T19:05:44+08:00">2020-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-15 10:52:36" itemprop="dateModified" datetime="2020-01-15T10:52:36+08:00">2020-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>作用：</p>
+<ol>
+<li><p>非常快的检查两个元素是否属于一个集合</p>
+<ul>
+<li>A所在的集合在set1，B所在的集合在set2，查他两个东西是不是在一个集合</li>
+<li>一个集合可以设置成很多结构，比如说list 每个元素为node， A在list1 中，B在list2 中，通过A的到list1 ，然后看看list1中有没有B，这样不够好，需要遍历</li>
+</ul>
+</li>
+<li><p>两个元素各自所在的集合，合并在一起</p>
+<ul>
+<li><p>A所在的集合set1，set2 ，set3  和B所在的集合set4，set5，set6  这6个集合合并在一起</p>
+</li>
+<li><p>以后 这6 个里面的元素都在这个大集合里</p>
+</li>
+<li><p>假如要把set2中的内容全都给set1 ，就要遍历set2 ，这样不够好</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li>你要想用并查集，就要在第一步的时候把 所有的数据样本给他，不能是动态的（流）</li>
+</ol>
+<p>一开始，把所有的数据样本给你，比如说，一开始给你5个数：</p>
+<p>第一步，把每一个数都弄成一个集合，这个集合里面只有这一个数，并且向上的节点是指回自己的</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax10akip0j20y207k422.jpg" alt="image-20200114192657092" style="zoom:50%;" />
+
+<p>自己是这个集合的代表节点</p>
+<p>集合合并：</p>
+<p>比如说1 这个集合和2 这个集合合并，就是这个样子</p>
+<img src="F:/blogPic/image-20200114192917240.png" alt="image-20200114192917240" style="zoom:50%;" />
+
+<p>2的代表节点是谁？通过2 往上找，找到某一个节点，他的指针指回了自己，该节点就是2 的代表节点</p>
+<p>如果3要和这结构合并。</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax10vcw9kj20t90mdjxz.jpg" alt="image-20200114193608573" style="zoom:50%;" />
+
+<p>3的代表节点同上</p>
+<hr>
+<p>说白了，这个结构就是一个多叉树，</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax138tvs1j20nc0n0q7y.jpg" alt="image-20200114193838796" style="zoom:50%;" />
+
+<p>那么如何判断A和B是不是在一个集合？</p>
+<p>就是A不断向上找，找到代表的节点停，B不断向上找，找到代表的节点停</p>
+<p>如果他俩代表节点是同一个，表示在同一个集合里，如果是同一个代表节点，则不在同一个集合中</p>
+<hr>
+<p>合并集合</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax13yfwfqj20ye0eraf1.jpg" alt="image-20200114194237962" style="zoom:33%;" />
+
+<p>比如3，和5 所在的集合要合并 </p>
+<p>3 找到1,5 找到4</p>
+<p>判断哪一个集合元素多。 1 这个多 </p>
+<p>把少元素的挂在多元素的底下</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax14hhzhrj20e50hkmzk.jpg" alt="image-20200114194640203" style="zoom:33%;" />
+
+<p><strong><em>优化</em></strong></p>
+<img src="F:/blogPic/image-20200114195158481.png" alt="image-20200114195158481" style="zoom:33%;" />
+
+<p>整个路径上的东西，在我查完之后，同一给他打平，如果4底下还有节点的话，不管。从4开始打扁平。</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax1585yauj20h908sjtu.jpg" alt="image-20200114200650067" style="zoom:33%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">		<span class="comment">// whatever you like</span></span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">UnionFindSet</span> </span>&#123;</span><br><span class="line">        <span class="comment">//前一个Node代表这个节点，后一个Node代表这个节点的父节点</span></span><br><span class="line">		<span class="keyword">public</span> HashMap&lt;Node, Node&gt; fatherMap;</span><br><span class="line">        <span class="comment">//某一个节点，所在的集合，一共有多少个节点</span></span><br><span class="line">        <span class="comment">//Node 不表示Node的属性，表示Node所在集合的属性，代表节点</span></span><br><span class="line">		<span class="keyword">public</span> HashMap&lt;Node, Integer&gt; sizeMap;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//初始化。一次性把所有样本都给我，</span></span><br><span class="line">        <span class="comment">//把每个节点当成一个集合</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">UnionFindSet</span><span class="params">(List&lt;Node&gt; nodes)</span> </span>&#123;</span><br><span class="line">			fatherMap = <span class="keyword">new</span> HashMap&lt;Node, Node&gt;();</span><br><span class="line">			sizeMap = <span class="keyword">new</span> HashMap&lt;Node, Integer&gt;();</span><br><span class="line">             makeSets(nodes);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeSets</span><span class="params">(List&lt;Node&gt; nodes)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">for</span> (Node node : nodes) &#123;</span><br><span class="line">                <span class="comment">//每一个节点自己形成一个集合</span></span><br><span class="line">				fatherMap.put(node, node);</span><br><span class="line">                <span class="comment">//自己就是代表节点，size是1</span></span><br><span class="line">				sizeMap.put(node, <span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//找代表节点，并变扁平</span></span><br><span class="line">		<span class="function"><span class="keyword">private</span> Node <span class="title">findHead</span><span class="params">(Node node)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//找到father节点。</span></span><br><span class="line">			Node father = fatherMap.get(node);</span><br><span class="line">            <span class="comment">//如果father节点不是自己，递归</span></span><br><span class="line">			<span class="keyword">if</span> (father != node) &#123;</span><br><span class="line">				father = findHead(father);</span><br><span class="line">			&#125;</span><br><span class="line">			fatherMap.put(node, father);</span><br><span class="line">			<span class="keyword">return</span> father;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//A 所在集合和B所在集合的代表节点是否是同一个</span></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSameSet</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> findHead(a) == findHead(b);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">if</span> (a == <span class="keyword">null</span> || b == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			Node aHead = findHead(a);</span><br><span class="line">			Node bHead = findHead(b);</span><br><span class="line">            <span class="comment">//如果不在同一个集合中，就需要合并</span></span><br><span class="line">			<span class="keyword">if</span> (aHead != bHead) &#123;</span><br><span class="line">                <span class="comment">//取得A所在集合的size B所在集合的size</span></span><br><span class="line">				<span class="keyword">int</span> aSetSize= sizeMap.get(aHead);</span><br><span class="line">				<span class="keyword">int</span> bSetSize = sizeMap.get(bHead);</span><br><span class="line">                <span class="comment">//如果A的size小</span></span><br><span class="line">				<span class="keyword">if</span> (aSetSize &lt;= bSetSize) &#123;</span><br><span class="line">                    <span class="comment">//把Ahead的代表节点换成Bhead，</span></span><br><span class="line">                    <span class="comment">//把A所在的集合的代表节点挂在B所在集合的代表节点的底下</span></span><br><span class="line">					fatherMap.put(aHead, bHead);</span><br><span class="line">                    <span class="comment">//然后BHead所代表的集合的大小改变</span></span><br><span class="line">					sizeMap.put(bHead, aSetSize + bSetSize);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					fatherMap.put(bHead, aHead);</span><br><span class="line">					sizeMap.put(aHead, aSetSize + bSetSize);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非递归版本的findFather和变扁平</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gax16isyyjj20k60crag4.jpg" alt="image-20200114205754462" style="zoom: 67%;" />
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/springmvc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/12/springmvc/" class="post-title-link" itemprop="url">springmvc</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-12 22:35:45 / 修改时间：22:46:34" itemprop="dateCreated datePublished" datetime="2020-01-12T22:35:45+08:00">2020-01-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>表现层四件事</p>
+<h3 id="响应jsp页面请求"><a href="#响应jsp页面请求" class="headerlink" title="响应jsp页面请求"></a>响应jsp页面请求</h3><ul>
+<li><p>后台：</p>
+<pre><code>Controller类写注解@RequestMapping(value=&quot;user&quot;)，叫做窄化请求
+Controller方法写注解@RequestMapping(value=&quot;add&quot;)，响应请求
+如果后台没有窄化请求,jsp页面请求：&lt;%=basePath%&gt;add.action
+如果后台有窄化请求,jsp页面请求：&lt;%=basePath%&gt;user/add.action</code></pre></li>
+<li><p>前台jsp</p>
+<ol>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;add.action"</span>&gt;</span>提交请求<span class="tag">&lt;/<span class="name">a</span>&gt;</span>
+<span class="comment"><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ```html</span><br><span class="line">   &lt;<span class="keyword">form</span> action=<span class="string">"&lt;%=basePath%&gt;add.action"</span> onsubmit=<span class="string">"return add()"</span>&gt;</span><br><span class="line">   	&lt;<span class="keyword">input</span> <span class="keyword">type</span>=<span class="string">"submit"</span> value=<span class="string">"提交请求"</span>/&gt;</span><br><span class="line">   &lt;/<span class="keyword">form</span>&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
+</li>
+<li><pre><code class="html"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">" "</span> <span class="attr">name</span>=<span class="string">"myform"</span>&gt;</span>
+    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"提交请求"</span>  <span class="attr">onclick</span>=<span class="string">"add()"</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">form</span></span>
+    &lt;script&gt;
+        function add(){
+        document.myform.action = "<span class="tag">&lt;<span class="name">%=basePath%</span>&gt;</span>add.action";
+        document.myform.submit();
+        }
+    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></code></pre>
+</li>
+</ol>
+<p>​            </p>
+<h3 id="获取jsp页面的值"><a href="#获取jsp页面的值" class="headerlink" title="获取jsp页面的值"></a>获取jsp页面的值</h3><p>​        表单中的input标签的name属性值 和 超链接中=号左边的单词</p>
+<p>​        只要和请求的方法的形参的参数名相同就可以了，还可以使用request.getParametor()来获取把前台的数据封装到POJO中，方法的形参写 POJO pojo就行，此时前台中得name的值就不是参数名了，而是pojo的属性名。如果是复杂pojo ，name的值也可以是pojo的属性名.属性名。后台向前台传值</p>
+</li>
+</ul>
+<h3 id="向jsp页面传值"><a href="#向jsp页面传值" class="headerlink" title="向jsp页面传值"></a>向jsp页面传值</h3><p>springMVC 可以用ModelAndView.addObject(“obj”,obj)来传递</p>
+<p>或者在参数中声明一个Model model ，使用model.addAttribute(“obj”,obj);</p>
+<h3 id="跳转jsp页面"><a href="#跳转jsp页面" class="headerlink" title="跳转jsp页面"></a>跳转jsp页面</h3><p>​    springMVC配好视图解析器后直接return”jsp页面的名字” 或者ModelAndView .setViewName(“jsp页面的名字”);<br>​    </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/12/mybatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -218,255 +435,90 @@
       
           <p>首先搭建好环境后</p>
 <p>在sqlMapConfig.xml文件中设置别名和扫描包</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.beans"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.vo"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.mapper"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>​</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.beans"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.vo"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"cn.hqyj.mapper"</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
 <ol>
-<li>
-<p>创建接口UserMapper.java</p>
+<li><p>创建接口UserMapper.java </p>
 </li>
-<li>
-<p>创建UserMapper.xml</p>
+<li><p>创建UserMapper.xml</p>
 </li>
-<li>
-<p>创建 测试类</p>
+<li><p>创建 测试类</p>
 <ul>
-<li>
-<p>获得session后</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = session.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure></p>
+<li><p>获得session后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UserMapper mapper = session.getMapper(UserMapper<span class="class">.<span class="keyword">class</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 </li>
 </ol>
 <p>对应关系：</p>
-<p>​		 xml文件名要和接口文件名一样</p>
-<p>​		xml文件中的namespace 是 接口的全类名</p>
-<p>​		xml 中 增删改查标签的id是接口中的方法名</p>
-<p>​		已经配过别名后resultType 和 parameterType 都可以是 该包下bean对象的类名，不区分大小写</p>
-<p>​		如果parameterType 是基本数据类型（包含String） #{随便写}，${只能写value}</p>
-<p>​		如果是pojo的话，$,#,中都写  pojo中的属性名，</p>
-<p>​		如果pojo的属性是pojo的话，就属性名.属性</p>
-<p>​		parameterType不能是List ，也就是说前台只能把List放到POJO中传给Mapper</p>
-<h3>增</h3>
-<p>​	1.接口中方法</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>​         xml文件名要和接口文件名一样</p>
+<p>​        xml文件中的namespace 是 接口的全类名</p>
+<p>​        xml 中 增删改查标签的id是接口中的方法名</p>
+<p>​        已经配过别名后resultType 和 parameterType 都可以是 该包下bean对象的类名，不区分大小写</p>
+<p>​        如果parameterType 是基本数据类型（包含String） #{随便写}，${只能写value}</p>
+<p>​        如果是pojo的话，$,#,中都写  pojo中的属性名，</p>
+<p>​        如果pojo的属性是pojo的话，就属性名.属性</p>
+<p>​        parameterType不能是List ，也就是说前台只能把List放到POJO中传给Mapper</p>
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><p>​    1.接口中方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
+
 <ol start="2">
-<li>
-<p>xml 中的配置</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"add"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></span><br><span class="line">    insert into user (name,sex)  values (#&#123;name&#125;,#&#123;sex&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<li><p>xml 中的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"add"</span> <span class="attr">parameterType</span>=<span class="string">"User"</span>&gt;</span></span><br><span class="line">    insert into user (name,sex)  values (#&#123;name&#125;,#&#123;sex&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
-<h3>删</h3>
-<p>​	1.  接口中</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><p>​    1.  接口中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br></pre></td></tr></table></figure>
+
 <p>​    2. xml</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span>&gt;</span></span><br><span class="line">    delete from user where  cid = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3>改</h3>
-<ol>
-<li>
-<p>接口中</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"delete"</span> <span class="attr">parameterType</span>=<span class="string">"Integer"</span>&gt;</span></span><br><span class="line">    delete from user where  cid = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><ol>
+<li><p>接口中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(User user)</span></span></span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>xml</li>
 </ol>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateClass"</span> <span class="attr">parameterType</span>=<span class="string">"Classes"</span>&gt;</span></span><br><span class="line">       update classes set username = #&#123;username&#125; where cid = #&#123;id&#125;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateClass"</span> <span class="attr">parameterType</span>=<span class="string">"Classes"</span>&gt;</span></span><br><span class="line">       update classes set username = #&#123;username&#125; where cid = #&#123;id&#125;</span><br><span class="line">   <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
-<h3>查</h3>
-<h5>一对多</h5>
-<ul>
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><h5 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h5><ul>
 <li>在一的一方写一个List属性泛型为多的一方的类名</li>
 </ul>
 <ul>
-<li>
-<p>xml中的写法：</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMag"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"querymsg"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"querymsg"</span> <span class="attr">type</span>=<span class="string">"classes"</span>&gt;</span> 返回值类型</span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">ofType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<li><p>xml中的写法：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMag"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"querymsg"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">   <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"querymsg"</span> <span class="attr">type</span>=<span class="string">"classes"</span>&gt;</span> 返回值类型</span><br><span class="line">       <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">ofType</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
-<h5>一对一</h5>
-<ul>
-<li>
-<p>bean中在有外键的一方写外键对应的属性</p>
+<h5 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h5><ul>
+<li><p>bean中在有外键的一方写外键对应的属性</p>
 </li>
-<li>
-<p>xml中的写法</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMsgByName"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"queryAllMsg"</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"queryAllMsg"</span> <span class="attr">type</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"classes"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"className"</span> <span class="attr">property</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<li><p>xml中的写法 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"queryAllMsgByName"</span> <span class="attr">parameterType</span>=<span class="string">"String"</span> <span class="attr">resultMap</span>=<span class="string">"queryAllMsg"</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"queryAllMsg"</span> <span class="attr">type</span>=<span class="string">"student"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"sid"</span> <span class="attr">property</span>=<span class="string">"sid"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"name"</span> <span class="attr">property</span>=<span class="string">"name"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">"classes"</span> <span class="attr">javaType</span>=<span class="string">"classes"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"cid"</span> <span class="attr">property</span>=<span class="string">"cid"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"className"</span> <span class="attr">property</span>=<span class="string">"className"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
-<h3>模糊查询</h3>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where name like &apos;%$&#123;value&#125;%&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where name like &apos;%$&#123;value&#125;%&apos;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>如果参数list需要迭代</p>
-<p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select * from user</span><br><span class="line">    <span class="comment">&lt;!-- foreach:循环放入参数的集合;collection:传入的集合的变量名称;item：每次循环将循环出的数据放到这个变量中</span></span><br><span class="line"><span class="comment">    open：开始循环拼接的字符;close： 结束循环拼接的字符;separater：循环中拼接的字符--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids!=null"</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">open</span>=<span class="string">"id in ("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">#&#123;id&#125;            </span><br><span class="line">   		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select * from user</span><br><span class="line">    <span class="comment">&lt;!-- foreach:循环放入参数的集合;collection:传入的集合的变量名称;item：每次循环将循环出的数据放到这个变量中</span></span><br><span class="line"><span class="comment">    open：开始循环拼接的字符;close： 结束循环拼接的字符;separater：循环中拼接的字符--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"ids!=null"</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"ids"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">open</span>=<span class="string">"id in ("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">#&#123;id&#125;            </span><br><span class="line">   		<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/SQL%E7%BB%83%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/SQL%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">SQL练习</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-01-09 21:03:02" itemprop="dateCreated datePublished" datetime="2020-01-09T21:03:02+08:00">2020-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>把列看成变量，把where 后面看成if（flag）里的exp 里的表达式</li>
-<li>哪些行被取出来？ 哪一行能让flag为真，哪一行就能被取出来</li>
-</ol>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where 1&gt;2</span><br></pre></td></tr></table></figure></p>
-<p>1&gt;2 的表达式永远为false 所以一行也取不到</p>
-<p>既然是变量，就可以比较和运算，</p>
-<p>where是对表中的数据发挥作用，查询出数据来</p>
-<p>where发挥作用是，表示并没有discount列，发挥完才有discount列，所以，对结果中的列，要用having</p>
-<p>再次筛选，就要用having</p>
-<p>列就是变量，在每一行上，列的值都在变化。</p>
-<p>Where 条件是表达式，在哪一行上表达式为真。哪一行就取出来</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlz3g820j209y0dmmzl.jpg" alt="image-20200108204009669"></p>
-<p>update main set num = num-(num%10) where num between 20 and 39</p>
-<p>把num 一定当成变量来看，因此num/10 取整 再乘以10</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update main set num = floor(num/10)*10  where num &gt;=20 and num &lt;=39;</span><br></pre></td></tr></table></figure></p>
-<p>count（字段）和count（*）的区别，count（字段）查出来的是该字段不为null的所有行数，</p>
-<p>而count（*）会查出绝对行数，就算着一行全是null ，也算一行</p>
-<p>count（*） 和count（1）的区别</p>
-<p>对于myisam引擎来说是没有区别的 ，内部有一个计数变量</p>
-<p>对于innodb的话，count（*） 真的会傻不拉几的一行一行的数，效率极低</p>
-<p>一般聚合函数不单独使用，要配合分组一起用。这样意义更大</p>
-<p>严格的讲，以group by a，b，c为例，则select的列，只能在a，b，c里选择，语义上才没有矛盾</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzk6hf2j20dg0960ve.jpg" alt="image-20200109074542203"></p>
-<p>先计算所有人的平均分。</p>
-<p>select avg(score) ,name from result group by(name)</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlzz8aiwj20i806qaci.jpg" alt="image-20200109080311830"></p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0d44nbj20jw0a9gq6.jpg" alt="image-20200109080604644"></p>
-<p>用score进行逻辑运算，挂科的标记成1，没有挂科的标记成0</p>
-<p>挂科数就是g的sum结果</p>
-<p>综合上面的两个sql语句</p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm0v7o7xj20h507tq5k.jpg" alt="image-20200109081022282"></p>
-<p><img src="http://ww1.sinaimg.cn/large/9c52df3dgy1gaqm15ebucj20ih06q41h.jpg" alt="image-20200109081143171"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2020/01/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/09/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="post-title-link" itemprop="url">一致性哈希</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-01-09 20:20:10 / 修改时间：21:00:14" itemprop="dateCreated datePublished" datetime="2020-01-09T20:20:10+08:00">2020-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>经典的服务器如何抗压？</p>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dgy1gaqlxw4fc6j20i30m6jw9.jpg&quot; alt=&quot;image-20200109202950349&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
-<p>前端无差别接受request</p>
-<p>我想把“左” 31 存到这个服务里。</p>
-<p>前端的request带相同的hash函数</p>
-<p>“左” 经过hash函数再取模3后会得到0,1,2中一个值</p>
-<p>如果是1 ，就把这个值存在1 这个机器上</p>
-<p>“yao”进hash函数取模3后还会得到0,1,2 中的一个值，</p>
-<p>可能是0 ，然后放到 后端的0 这号机器上</p>
-<p>因为我不同的String ，经过hash函数算完后，均匀的得到0,1,2上面的一个，</p>
-<p>所以 0 ，1， 2 这三台机器负载都均衡</p>
-<p>那我在查得过程中怎么查呢？</p>
-<p>我想查“左” 的value 是多少，到了前端，我还是用“左”进入hash函数 ，取模得到哪一个服务器</p>
-<p>就会去1 这台机器上去拿“左”向对应的年龄是多少。</p>
-<p>返回给前端，返回给用户</p>
-<p>这就是经典的 服务器的抗压结构</p>
-<hr>
-<p>但是 当我 需要加机器或者减机器的时候，这个结构就不行了。</p>
-<p>就跟hash表扩容一样，原来取模的是3，现在要取模100</p>
-<p>所有的数据归属全变了，原来放在1 机器上，接下来放到哪里呢？</p>
-<p>必须要把“左”用hash函数取模100然后知道该往那一台机器上迁移</p>
-<p>这样代价很高</p>
-<p>你就不得不把所有的 数据拿出来，重新计算一遍。然后在扔到扩完之后的机器上。</p>
 
       
     </div>
@@ -532,7 +584,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -541,7 +593,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

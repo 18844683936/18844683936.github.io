@@ -46,17 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置 &amp;lt;img src=&amp;quot;F:&#x2F;blogPic&#x2F;image-20200120090529143.png&amp;quot; alt=&amp;quot;image-20200120090529143&amp;quot; style=&amp;quot;zoom:33%;&amp;quot; &#x2F;&amp;gt; 求">
+  <meta name="description" content="str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置   求d之前的最长前缀和最长后缀的匹配程度，前缀不能包含最后一个字符，后缀也不能包含第一个字符     前缀长度 后缀长度 是否相等    1 a c 不相等   2 ab bc 不相等   3 abc abc 相等，但他是最长的么？   4 abcd cabc 不   5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KMP">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2020&#x2F;01&#x2F;19&#x2F;KMP&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置 &amp;lt;img src=&amp;quot;F:&#x2F;blogPic&#x2F;image-20200120090529143.png&amp;quot; alt=&amp;quot;image-20200120090529143&amp;quot; style=&amp;quot;zoom:33%;&amp;quot; &#x2F;&amp;gt; 求">
+<meta property="og:description" content="str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置   求d之前的最长前缀和最长后缀的匹配程度，前缀不能包含最后一个字符，后缀也不能包含第一个字符     前缀长度 后缀长度 是否相等    1 a c 不相等   2 ab bc 不相等   3 abc abc 相等，但他是最长的么？   4 abcd cabc 不   5">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200120090529143.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200120093157681.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200120094345676.png">
+<meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200120095025478.png">
 <meta property="og:image" content="f:&#x2F;blogPic&#x2F;image-20200120100622590.png">
 <meta property="og:updated_time" content="2020-01-20T02:44:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="f:&#x2F;blogPic&#x2F;image-20200120100622590.png">
+<meta name="twitter:image" content="f:&#x2F;blogPic&#x2F;image-20200120090529143.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2020/01/19/KMP/">
 
@@ -227,7 +231,8 @@
 
       
         <p>str1 和str2 是两个字符串，想看看str1的某一个字串，是不是和str2一样，如果是一样，请返回str2开始的位置</p>
-<p>&lt;img src=&quot;F:/blogPic/image-20200120090529143.png&quot; alt=&quot;image-20200120090529143&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
+<img src="F:/blogPic/image-20200120090529143.png" alt="image-20200120090529143" style="zoom:33%;" />
+
 <p>求d之前的最长前缀和最长后缀的匹配程度，前缀不能包含最后一个字符，后缀也不能包含第一个字符</p>
 <table>
 <thead>
@@ -238,8 +243,7 @@
 <th>是否相等</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>1</td>
 <td>a</td>
 <td>c</td>
@@ -275,18 +279,22 @@
 <td>abcabc</td>
 <td>相等，但是前缀不能取最后一个字符，后缀不能取第一个字符，这种情况排除</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>所以d位置上的最长前缀和最长后缀的匹配程度是3。</p>
-<p>&lt;img src=&quot;F:/blogPic/image-20200120093157681.png&quot; alt=&quot;image-20200120093157681&quot; style=&quot;zoom:50%;&quot; /&gt;</p>
+<img src="F:/blogPic/image-20200120093157681.png" alt="image-20200120093157681" style="zoom:50%;" />
+
 <p>根据str2来求这个信息。每个位置的信息都求。生成一个next数组</p>
 <p>有一个函数，你给他一个str，他给你一个数组。数组长度和str2相等，表示每个位置上的前面的那一坨字符串最长前缀和最长后缀的匹配信息。</p>
 <p>先看0位置，前面没有字符串，所以默认-1</p>
 <p>1位置是b，他前面这坨字符串是a。但问题是前缀不能包含最后一个字符，后缀不能包含第一个字符。而他有只有一个字符。所以人为规定 是0</p>
 <p>2位置前面的字符串是ab ，最长前缀和最长后缀不存在相等的情况，是0</p>
 <p>3知网前面是aba，是1</p>
-<p>&lt;img src=&quot;F:/blogPic/image-20200120094345676.png&quot; alt=&quot;image-20200120094345676&quot; style=&quot;zoom: 67%;&quot; /&gt;</p>
-<p>&lt;img src=&quot;F:/blogPic/image-20200120095025478.png&quot; alt=&quot;image-20200120095025478&quot; style=&quot;zoom:67%;&quot; /&gt;</p>
+<img src="F:/blogPic/image-20200120094345676.png" alt="image-20200120094345676" style="zoom: 67%;" />
+
+
+
+<img src="F:/blogPic/image-20200120095025478.png" alt="image-20200120095025478" style="zoom:67%;" />
+
 <p>在str1中开始的位置是i位置，在str2中开始的位置是0位置，一路都相等，什么时候不等呢？</p>
 <p>X位置和Y位置没配上，</p>
 <p>之前的方法的话，就从i+1的位置重新匹配一遍</p>
@@ -295,7 +303,10 @@
 <p>y位置的信息是最长前缀和最长后缀相等的长度。所以和str1对应。位置为j。</p>
 <p>现在用从j开始和str2的0位置匹配</p>
 <p>但是现在有是和前面的那一坨一样。所以从z位置比较和x是否一样</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndexOf</span><span class="params">(String s, String m)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (s == <span class="keyword">null</span> || m == <span class="keyword">null</span> || m.length() &lt; <span class="number">1</span> || s.length() &lt; m.length()) &#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">char</span>[] ss = s.toCharArray();</span><br><span class="line">	<span class="keyword">char</span>[] ms = m.toCharArray();</span><br><span class="line">	<span class="keyword">int</span> si = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> mi = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span>[] next = getNextArray(ms);</span><br><span class="line">      </span><br><span class="line">	<span class="keyword">while</span> (si &lt; ss.length &amp;&amp; mi &lt; ms.length) &#123;</span><br><span class="line">            <span class="comment">//如果si指向的ss和mi指向的ms相等</span></span><br><span class="line">		<span class="keyword">if</span> (ss[si] == ms[mi]) &#123;</span><br><span class="line">			si++;</span><br><span class="line">			mi++;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (next[mi] == -<span class="number">1</span>) &#123;</span><br><span class="line">			si++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			mi = next[mi];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mi == ms.length ? si - mi : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNextArray(<span class="keyword">char</span>[] ms) &#123;</span><br><span class="line">	<span class="keyword">if</span> (ms.length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; -<span class="number">1</span> &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[ms.length];</span><br><span class="line">	next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">	next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pos = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> cn = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (pos &lt; next.length) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ms[pos - <span class="number">1</span>] == ms[cn]) &#123;</span><br><span class="line">			next[pos++] = ++cn;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (cn &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			cn = next[cn];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			next[pos++] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	String str = <span class="string">"abcabcababaccc"</span>;</span><br><span class="line">	String match = <span class="string">"ababa"</span>;</span><br><span class="line">	System.out.println(getIndexOf(str, match));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getIndexOf</span><span class="params">(String s, String m)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (s == <span class="keyword">null</span> || m == <span class="keyword">null</span> || m.length() &lt; <span class="number">1</span> || s.length() &lt; m.length()) &#123;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">char</span>[] ss = s.toCharArray();</span><br><span class="line">	<span class="keyword">char</span>[] ms = m.toCharArray();</span><br><span class="line">	<span class="keyword">int</span> si = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> mi = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span>[] next = getNextArray(ms);</span><br><span class="line">      </span><br><span class="line">	<span class="keyword">while</span> (si &lt; ss.length &amp;&amp; mi &lt; ms.length) &#123;</span><br><span class="line">            <span class="comment">//如果si指向的ss和mi指向的ms相等</span></span><br><span class="line">		<span class="keyword">if</span> (ss[si] == ms[mi]) &#123;</span><br><span class="line">			si++;</span><br><span class="line">			mi++;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (next[mi] == -<span class="number">1</span>) &#123;</span><br><span class="line">			si++;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			mi = next[mi];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mi == ms.length ? si - mi : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getNextArray(<span class="keyword">char</span>[] ms) &#123;</span><br><span class="line">	<span class="keyword">if</span> (ms.length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; -<span class="number">1</span> &#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[ms.length];</span><br><span class="line">	next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">	next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> pos = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">int</span> cn = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (pos &lt; next.length) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ms[pos - <span class="number">1</span>] == ms[cn]) &#123;</span><br><span class="line">			next[pos++] = ++cn;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (cn &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			cn = next[cn];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			next[pos++] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	String str = <span class="string">"abcabcababaccc"</span>;</span><br><span class="line">	String match = <span class="string">"ababa"</span>;</span><br><span class="line">	System.out.println(getIndexOf(str, match));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
     </div>
 
@@ -373,7 +384,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -382,7 +393,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

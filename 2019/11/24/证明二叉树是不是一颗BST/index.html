@@ -46,16 +46,18 @@
   };
 </script>
 
-  <meta name="description" content="证明一颗二叉树是不是一颗二叉搜索树 &amp;lt;img src=&amp;quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;WliMnN.png&amp;quot; style=&amp;quot;zoom: 50%;&amp;quot; &#x2F;&amp;gt; &amp;lt;!-- more --&amp;gt; 思路2：搜索二叉树一般都不会有重复节点的，可以把重复节点的压缩成一个节点，节点中放list。 搜索二叉树中序遍历都是升序">
+  <meta name="description" content="证明一颗二叉树是不是一颗二叉搜索树">
 <meta name="keywords" content="二叉树,分治法,BST">
 <meta property="og:type" content="article">
 <meta property="og:title" content="证明二叉树是不是一颗BST">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;11&#x2F;24&#x2F;%E8%AF%81%E6%98%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E9%A2%97BST&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="证明一颗二叉树是不是一颗二叉搜索树 &amp;lt;img src=&amp;quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;WliMnN.png&amp;quot; style=&amp;quot;zoom: 50%;&amp;quot; &#x2F;&amp;gt; &amp;lt;!-- more --&amp;gt; 思路2：搜索二叉树一般都不会有重复节点的，可以把重复节点的压缩成一个节点，节点中放list。 搜索二叉树中序遍历都是升序">
+<meta property="og:description" content="证明一颗二叉树是不是一颗二叉搜索树">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;WliMnN.png">
 <meta property="og:updated_time" content="2020-01-05T12:54:16.000Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;01&#x2F;05&#x2F;WliMnN.png">
 
 <link rel="canonical" href="https://hansoncheng.com/2019/11/24/%E8%AF%81%E6%98%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E9%A2%97BST/">
 
@@ -237,22 +239,30 @@
 
       
         <p>证明一颗二叉树是不是一颗二叉搜索树</p>
-<p>&lt;img src=&quot;https://upload.cc/i1/2020/01/05/WliMnN.png&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
-<p>&lt;!-- more --&gt;</p>
+<img src="https://upload.cc/i1/2020/01/05/WliMnN.png" style="zoom: 50%;" />
+
+<a id="more"></a>
+
+
+
+
 <p>思路2：搜索二叉树一般都不会有重复节点的，可以把重复节点的压缩成一个节点，节点中放list。</p>
 <p>搜索二叉树中序遍历都是升序的。</p>
 <p>思路</p>
 <ol>
-<li>左子树都比根节点小</li>
+<li><p>左子树都比根节点小</p>
+<ul>
+<li><p>需要用左子树的最大节点的值  </p>
+<pre><code>2.   右子树都不小于根节点 </code></pre></li>
+<li><p>需要用右子树的最小节点的值</p>
+</li>
+</ul>
+</li>
 </ol>
-<pre><code>-  需要用左子树的最大节点的值  
-  
-     	  2.   右子树都不小于根节点 
-  
-  - 需要用右子树的最小节点的值
-</code></pre>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先，我的左右子树要提供什么样的信息才能判断这棵树是不是bst</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultType2</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这颗树是不是二叉搜索树</span></span><br><span class="line">    <span class="keyword">boolean</span> isBst;</span><br><span class="line">    <span class="comment">//如果是的话，这颗二叉搜索树的最小值的节点。和这颗二叉树的最大值的节点</span></span><br><span class="line">    TreeNode minNode,maxNode;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResultType2</span><span class="params">(<span class="keyword">boolean</span> isBst)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isBst = isBst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//证明是不是一颗BST</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBST</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> isBSTHelper(root).isBst;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResultType2 <span class="title">isBSTHelper</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//如果节点为空，为BST</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">true</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//分治，看看左子树是不是BST，右子树是不是BST，并把判断信息返回</span></span><br><span class="line">       ResultType2 left = isBSTHelper(root.left);</span><br><span class="line">       ResultType2 right = isBSTHelper(root.right);</span><br><span class="line">	<span class="comment">//如果左子树或者右子树有一个不是二叉搜索树的话，这颗树就不是二叉搜索树</span></span><br><span class="line">       <span class="keyword">if</span> (!left.isBst || !right.isBst) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//走到这一步证明左右子树都是BST</span></span><br><span class="line">       <span class="comment">//如果左子树的最大值比根节点大的话，这棵树就不是BST</span></span><br><span class="line">       <span class="comment">//如果是叶子结点的话，它的左右子树都是BSt但是都是空，排除这种情况加上了非空判断</span></span><br><span class="line">       <span class="keyword">if</span> (left.maxNode != <span class="keyword">null</span> &amp;&amp; left.maxNode.val &gt; root.val) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">      <span class="comment">//如果右子树的最小节点小于根节点的指的时候，这棵树就不是BST</span></span><br><span class="line">       <span class="keyword">if</span> (right.minNode != <span class="keyword">null</span> &amp;&amp; right.minNode.val &lt; root.val) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">	<span class="comment">//走到最后，这棵树就是BST了</span></span><br><span class="line">       ResultType2 result = <span class="keyword">new</span> ResultType2(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//这棵树的最小节点是左子树的最小节点。</span></span><br><span class="line">       result.minNode = left.minNode != <span class="keyword">null</span> ? left.minNode : root;</span><br><span class="line">       <span class="comment">//这棵树的最大节点是右子树的最大节点</span></span><br><span class="line">       result.maxNode = right.maxNode != <span class="keyword">null</span> ? right.maxNode : root;</span><br><span class="line">	<span class="comment">//  把结果返回</span></span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先，我的左右子树要提供什么样的信息才能判断这棵树是不是bst</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultType2</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这颗树是不是二叉搜索树</span></span><br><span class="line">    <span class="keyword">boolean</span> isBst;</span><br><span class="line">    <span class="comment">//如果是的话，这颗二叉搜索树的最小值的节点。和这颗二叉树的最大值的节点</span></span><br><span class="line">    TreeNode minNode,maxNode;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResultType2</span><span class="params">(<span class="keyword">boolean</span> isBst)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isBst = isBst;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//证明是不是一颗BST</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isBST</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> isBSTHelper(root).isBst;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResultType2 <span class="title">isBSTHelper</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//如果节点为空，为BST</span></span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">true</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//分治，看看左子树是不是BST，右子树是不是BST，并把判断信息返回</span></span><br><span class="line">       ResultType2 left = isBSTHelper(root.left);</span><br><span class="line">       ResultType2 right = isBSTHelper(root.right);</span><br><span class="line">	<span class="comment">//如果左子树或者右子树有一个不是二叉搜索树的话，这颗树就不是二叉搜索树</span></span><br><span class="line">       <span class="keyword">if</span> (!left.isBst || !right.isBst) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//走到这一步证明左右子树都是BST</span></span><br><span class="line">       <span class="comment">//如果左子树的最大值比根节点大的话，这棵树就不是BST</span></span><br><span class="line">       <span class="comment">//如果是叶子结点的话，它的左右子树都是BSt但是都是空，排除这种情况加上了非空判断</span></span><br><span class="line">       <span class="keyword">if</span> (left.maxNode != <span class="keyword">null</span> &amp;&amp; left.maxNode.val &gt; root.val) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">      <span class="comment">//如果右子树的最小节点小于根节点的指的时候，这棵树就不是BST</span></span><br><span class="line">       <span class="keyword">if</span> (right.minNode != <span class="keyword">null</span> &amp;&amp; right.minNode.val &lt; root.val) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ResultType2(<span class="keyword">false</span>);</span><br><span class="line">       &#125;</span><br><span class="line">	<span class="comment">//走到最后，这棵树就是BST了</span></span><br><span class="line">       ResultType2 result = <span class="keyword">new</span> ResultType2(<span class="keyword">true</span>);</span><br><span class="line">       <span class="comment">//这棵树的最小节点是左子树的最小节点。</span></span><br><span class="line">       result.minNode = left.minNode != <span class="keyword">null</span> ? left.minNode : root;</span><br><span class="line">       <span class="comment">//这棵树的最大节点是右子树的最大节点</span></span><br><span class="line">       result.maxNode = right.maxNode != <span class="keyword">null</span> ? right.maxNode : root;</span><br><span class="line">	<span class="comment">//  把结果返回</span></span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -335,7 +345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -344,7 +354,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

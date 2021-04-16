@@ -46,13 +46,13 @@
   };
 </script>
 
-  <meta name="description" content="master公式 T（N） = a*T(N&#x2F;b) +O(N^d)   log(b,a)  &amp;gt; d  ----&amp;gt;  O(N^ log(b,a))   log(b,a)  = d  ----&amp;gt;  O(N^d * logN)   log(b,a)  &amp;lt; d  ----&amp;gt;  O(N^d)   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子">
+  <meta name="description" content="master公式 T（N） = a*T(N&#x2F;b) +O(N^d)  log(b,a)  &amp;gt; d  —-&amp;gt;  O(N^ log(b,a))  log(b,a)  = d  —-&amp;gt;  O(N^d * logN)  log(b,a)  &amp;lt; d  —-&amp;gt;  O(N^d)      a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的">
 <meta name="keywords" content="时间复杂度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="递归分治的时间复杂度">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;%E9%80%92%E5%BD%92%E5%88%86%E6%B2%BB%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="master公式 T（N） = a*T(N&#x2F;b) +O(N^d)   log(b,a)  &amp;gt; d  ----&amp;gt;  O(N^ log(b,a))   log(b,a)  = d  ----&amp;gt;  O(N^d * logN)   log(b,a)  &amp;lt; d  ----&amp;gt;  O(N^d)   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子">
+<meta property="og:description" content="master公式 T（N） = a*T(N&#x2F;b) +O(N^d)  log(b,a)  &amp;gt; d  —-&amp;gt;  O(N^ log(b,a))  log(b,a)  = d  —-&amp;gt;  O(N^d * logN)  log(b,a)  &amp;lt; d  —-&amp;gt;  O(N^d)      a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-27T00:13:12.000Z">
 <meta name="twitter:card" content="summary">
@@ -239,18 +239,15 @@
         <p>master公式</p>
 <p>T（N） = a*T(N/b) +O(N^d)</p>
 <ol>
-<li>
-<p>log(b,a)  &gt; d  ----&gt;  O(N^ log(b,a))</p>
+<li><p>log(b,a)  &gt; d  —-&gt;  O(N^ log(b,a))</p>
 </li>
-<li>
-<p>log(b,a)  = d  ----&gt;  O(N^d * logN)</p>
+<li><p>log(b,a)  = d  —-&gt;  O(N^d * logN)</p>
 </li>
-<li>
-<p>log(b,a)  &lt; d  ----&gt;  O(N^d)</p>
+<li><p>log(b,a)  &lt; d  —-&gt;  O(N^d)</p>
 </li>
 </ol>
-<p>a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
-<p>限制条件：划分子问题的规模是一样的</p>
+<p>   a是一共这个过程发生多少次 ，b是子问题的样本量， N是父问题的样本量  d是除去子问题还需要的复杂度</p>
+<p>   限制条件：划分子问题的规模是一样的</p>
 
     </div>
 
@@ -331,7 +328,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -340,7 +337,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

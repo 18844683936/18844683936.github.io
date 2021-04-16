@@ -177,6 +177,149 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E6%9C%89romdom%E6%8C%87%E9%92%88%E7%9A%84%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/28/%E6%B7%B1%E5%BA%A6%E6%8B%B7%E8%B4%9D%E6%9C%89romdom%E6%8C%87%E9%92%88%E7%9A%84%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">深度拷贝有romdom指针的单向链表</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-28 19:12:28" itemprop="dateCreated datePublished" datetime="2019-12-28T19:12:28+08:00">2019-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 21:57:34" itemprop="dateModified" datetime="2020-01-06T21:57:34+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用哈希表可以把每一个节点的信息存入到hashMap中，在深度拷贝的时候就可以拿到该信息进行拷贝</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">copyListWithRand1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		HashMap&lt;Node, Node&gt; map = <span class="keyword">new</span> HashMap&lt;Node, Node&gt;();</span><br><span class="line">		Node cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			map.put(cur, <span class="keyword">new</span> Node(cur.value));</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			map.get(cur).next = map.get(cur.next);</span><br><span class="line">			map.get(cur).rand = map.get(cur.rand);</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> map.get(head);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%B0%86%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
+      <meta itemprop="name" content="陈广">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人间失格">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/28/%E5%B0%86%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E6%8C%89%E6%9F%90%E5%80%BC%E5%88%92%E5%88%86%E6%88%90%E5%B7%A6%E8%BE%B9%E5%B0%8F%EF%BC%8C%E4%B8%AD%E9%97%B4%E7%9B%B8%E7%AD%89%EF%BC%8C%E5%8F%B3%E8%BE%B9%E5%A4%A7%E7%9A%84%E5%BD%A2%E5%BC%8F/" class="post-title-link" itemprop="url">将单向链表按某值划分成左边小，中间相等，右边大的形式</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-28 18:23:31" itemprop="dateCreated datePublished" datetime="2019-12-28T18:23:31+08:00">2019-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 22:01:52" itemprop="dateModified" datetime="2020-01-06T22:01:52+08:00">2020-01-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6ulvkwej217l0l5jx8.jpg" alt="image-20191228182637363" style="zoom: 50%;" />
+
+<p>准备3 个变量，分别是less，eq ，more</p>
+<p>先遍历链表，找到第一个小于num的节点，让less等于那个节点，找到第一个等于num的节点，让eq等于该节点。找到第一个大于num的节点，让more等于该节点</p>
+<p>一次遍历后，就找到了第一个小于num 第一个等于num 第一个大于num 的节点了，如果不存在等于num的，那么eq还是null</p>
+<p>在遍历一遍链表，先看是不是less，如果是less的话，不用管，如果不是less，让他挂在less的next上</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6ulsj2dj21270ho790.jpg" alt="image-20191228183624065" style="zoom:50%;" />
+
+<p>这样的话肯定是有稳定性的。小于num的全放到less链表上，等于num 的全放到eq链表上，大于num的全放到more链表上，</p>
+<p>然后less的尾巴和eq的头连接，eq的尾巴和more的头连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Node <span class="title">listPartition2</span><span class="params">(Node head, <span class="keyword">int</span> pivot)</span> </span>&#123;</span><br><span class="line">	Node sH = <span class="keyword">null</span>; <span class="comment">// small head</span></span><br><span class="line">	Node sT = <span class="keyword">null</span>; <span class="comment">// small tail</span></span><br><span class="line">	Node eH = <span class="keyword">null</span>; <span class="comment">// equal head</span></span><br><span class="line">	Node eT = <span class="keyword">null</span>; <span class="comment">// equal tail</span></span><br><span class="line">	Node bH = <span class="keyword">null</span>; <span class="comment">// big head</span></span><br><span class="line">	Node bT = <span class="keyword">null</span>; <span class="comment">// big tail</span></span><br><span class="line">	Node next = <span class="keyword">null</span>; <span class="comment">// save next node</span></span><br><span class="line">	<span class="comment">// every node distributed to three lists</span></span><br><span class="line">	<span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">		next = head.next;</span><br><span class="line">		head.next = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">if</span> (head.value &lt; pivot) &#123;</span><br><span class="line">			<span class="keyword">if</span> (sH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				sH = head;</span><br><span class="line">				sT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				sT.next = head;</span><br><span class="line">				sT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head.value == pivot) &#123;</span><br><span class="line">			<span class="keyword">if</span> (eH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				eH = head;</span><br><span class="line">				eT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				eT.next = head;</span><br><span class="line">				eT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (bH == <span class="keyword">null</span>) &#123;</span><br><span class="line">				bH = head;</span><br><span class="line">				bT = head;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				bT.next = head;</span><br><span class="line">				bT = head;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		head = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// small and equal reconnect</span></span><br><span class="line">	<span class="keyword">if</span> (sT != <span class="keyword">null</span>) &#123;</span><br><span class="line">		sT.next = eH;</span><br><span class="line">		eT = eT == <span class="keyword">null</span> ? sT : eT;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// all reconnect</span></span><br><span class="line">	<span class="keyword">if</span> (eT != <span class="keyword">null</span>) &#123;</span><br><span class="line">		eT.next = bH;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sH != <span class="keyword">null</span> ? sH : eH != <span class="keyword">null</span> ? eH : bH;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E9%93%BE%E8%A1%A8%E6%98%AF%E4%B8%8D%E6%98%AF%E5%9B%9E%E6%96%87%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -223,169 +366,30 @@
 
       
           <p>思路1： 把这个链表遍历，放到一个栈中，比对这个栈和链表是否相等</p>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqxcnnj20zb0i0420.jpg&quot; alt=&quot;image-20191228142941519&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need n extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		Stack&lt;Node&gt; stack = <span class="keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">		Node cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			stack.push(cur);</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head.value != stack.pop().value) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			head = head.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqxcnnj20zb0i0420.jpg" alt="image-20191228142941519" style="zoom:33%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need n extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome1</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		Stack&lt;Node&gt; stack = <span class="keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">		Node cur = head;</span><br><span class="line">		<span class="keyword">while</span> (cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">			stack.push(cur);</span><br><span class="line">			cur = cur.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head.value != stack.pop().value) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			head = head.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <p>思路2：两个指针，快指针一次走两步，慢指针一次走一步，当快指针走完的时候，慢指针刚好走到中点的位置</p>
 <p>，然后慢指针后面的部分压栈。</p>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqzwvwj21090hzn13.jpg&quot; alt=&quot;image-20191228143304823&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqzwvwj21090hzn13.jpg" alt="image-20191228143304823" style="zoom:33%;" />
+
 <p>然后从头遍历链表，和栈一一比对，当栈弹完了都相同，就返回true</p>
 <p>思路3：（面试）</p>
 <p>还是两个指针，快指针一次走两步，慢指针一次走一步，当快指针走完的时候，慢指针刚好走到中点的位置</p>
-<p>&lt;img src=&quot;http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqwds0j20vt0foaeh.jpg&quot; alt=&quot;image-20191228143745858&quot; style=&quot;zoom: 50%;&quot; /&gt;</p>
+<img src="http://ww1.sinaimg.cn/large/9c52df3dly1gan6wqwds0j20vt0foaeh.jpg" alt="image-20191228143745858" style="zoom: 50%;" />
+
 <p>然后从中点逆序，然后左右两个变量，都从1开始，每走一步比对一不一样。走到中点位置（有一个为null），停。</p>
 <p>不管一不一样都要走到中点的位置，然后把用户的链表还原；</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need O(1) extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome3</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Node n1 = head;</span><br><span class="line">		Node n2 = head;</span><br><span class="line">		<span class="keyword">while</span> (n2.next != <span class="keyword">null</span> &amp;&amp; n2.next.next != <span class="keyword">null</span>) &#123; <span class="comment">// find mid node</span></span><br><span class="line">			n1 = n1.next; <span class="comment">// n1 -&gt; mid</span></span><br><span class="line">			n2 = n2.next.next; <span class="comment">// n2 -&gt; end</span></span><br><span class="line">		&#125;</span><br><span class="line">		n2 = n1.next; <span class="comment">// n2 -&gt; right part first node</span></span><br><span class="line">		n1.next = <span class="keyword">null</span>; <span class="comment">// mid.next -&gt; null</span></span><br><span class="line">		Node n3 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (n2 != <span class="keyword">null</span>) &#123; <span class="comment">// right part convert</span></span><br><span class="line">			n3 = n2.next; <span class="comment">// n3 -&gt; save next node</span></span><br><span class="line">			n2.next = n1; <span class="comment">// next of right node convert</span></span><br><span class="line">			n1 = n2; <span class="comment">// n1 move</span></span><br><span class="line">			n2 = n3; <span class="comment">// n2 move</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		n3 = n1;<span class="comment">// n3 -&gt; save last node</span></span><br><span class="line">		n2 = head;<span class="comment">// n2 -&gt; left first node</span></span><br><span class="line">		<span class="keyword">boolean</span> res = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span> &amp;&amp; n2 != <span class="keyword">null</span>) &#123; <span class="comment">// check palindrome</span></span><br><span class="line">			<span class="keyword">if</span> (n1.value != n2.value) &#123;</span><br><span class="line">				res = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n1 = n1.next; <span class="comment">// left to mid</span></span><br><span class="line">			n2 = n2.next; <span class="comment">// right to mid</span></span><br><span class="line">		&#125;</span><br><span class="line">		n1 = n3.next;  </span><br><span class="line">		n3.next = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span>) &#123; <span class="comment">// recover list</span></span><br><span class="line">			n2 = n1.next;</span><br><span class="line">			n1.next = n3;</span><br><span class="line">			n3 = n1;</span><br><span class="line">			n1 = n2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// need O(1) extra space</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalindrome3</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Node n1 = head;</span><br><span class="line">		Node n2 = head;</span><br><span class="line">		<span class="keyword">while</span> (n2.next != <span class="keyword">null</span> &amp;&amp; n2.next.next != <span class="keyword">null</span>) &#123; <span class="comment">// find mid node</span></span><br><span class="line">			n1 = n1.next; <span class="comment">// n1 -&gt; mid</span></span><br><span class="line">			n2 = n2.next.next; <span class="comment">// n2 -&gt; end</span></span><br><span class="line">		&#125;</span><br><span class="line">		n2 = n1.next; <span class="comment">// n2 -&gt; right part first node</span></span><br><span class="line">		n1.next = <span class="keyword">null</span>; <span class="comment">// mid.next -&gt; null</span></span><br><span class="line">		Node n3 = <span class="keyword">null</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span> (n2 != <span class="keyword">null</span>) &#123; <span class="comment">// right part convert</span></span><br><span class="line">			n3 = n2.next; <span class="comment">// n3 -&gt; save next node</span></span><br><span class="line">			n2.next = n1; <span class="comment">// next of right node convert</span></span><br><span class="line">			n1 = n2; <span class="comment">// n1 move</span></span><br><span class="line">			n2 = n3; <span class="comment">// n2 move</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		n3 = n1;<span class="comment">// n3 -&gt; save last node</span></span><br><span class="line">		n2 = head;<span class="comment">// n2 -&gt; left first node</span></span><br><span class="line">		<span class="keyword">boolean</span> res = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span> &amp;&amp; n2 != <span class="keyword">null</span>) &#123; <span class="comment">// check palindrome</span></span><br><span class="line">			<span class="keyword">if</span> (n1.value != n2.value) &#123;</span><br><span class="line">				res = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n1 = n1.next; <span class="comment">// left to mid</span></span><br><span class="line">			n2 = n2.next; <span class="comment">// right to mid</span></span><br><span class="line">		&#125;</span><br><span class="line">		n1 = n3.next;  </span><br><span class="line">		n3.next = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (n1 != <span class="keyword">null</span>) &#123; <span class="comment">// recover list</span></span><br><span class="line">			n2 = n1.next;</span><br><span class="line">			n1.next = n3;</span><br><span class="line">			n3 = n1;</span><br><span class="line">			n1 = n2;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
 <p>version1.2</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isP2</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//设置是否是回文链表，因为不管是不是都要重构链表，不能直接返回。</span></span><br><span class="line">        <span class="keyword">boolean</span> flag  = <span class="keyword">true</span>;</span><br><span class="line">        Node fast = head;</span><br><span class="line">        Node slow = head;</span><br><span class="line">        <span class="comment">//快指针一次走两步，慢指针一次走一步，最后，慢指针的位置就是链表的中点</span></span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到中点后，从中点开始反转链表</span></span><br><span class="line">        Node cur = slow.next;</span><br><span class="line">        <span class="comment">//中点的next为null</span></span><br><span class="line">        slow.next = <span class="keyword">null</span>;</span><br><span class="line">        Node temp = cur;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = cur.next;</span><br><span class="line">            cur.next = slow;</span><br><span class="line">            slow = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//反转链表最后，慢指针指的是最后一个节点。</span></span><br><span class="line">        <span class="comment">//开始比对是否是回文链表</span></span><br><span class="line">        Node start = head;</span><br><span class="line">        Node end = slow;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//这一步可以改一下，把后面的end ！=null 可以去掉，你可以自己验证一下</span></span><br><span class="line">        <span class="keyword">while</span> (start != <span class="keyword">null</span>&amp;&amp;end!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (start.value != end.value) &#123;</span><br><span class="line">                <span class="comment">//如果不是回文链表，flag变成false</span></span><br><span class="line">                flag =<span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            start = start.next;</span><br><span class="line">            end = end.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断完成后，重构这个链表（从end开始向前重构）</span></span><br><span class="line">        <span class="comment">//把end 变回 最后一个节点。</span></span><br><span class="line">        end = slow;</span><br><span class="line">        cur = end.next;</span><br><span class="line">        temp = cur;</span><br><span class="line">        end.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = cur.next;</span><br><span class="line">            cur.next = end;</span><br><span class="line">            end = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isP2</span><span class="params">(Node head)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//设置是否是回文链表，因为不管是不是都要重构链表，不能直接返回。</span></span><br><span class="line">        <span class="keyword">boolean</span> flag  = <span class="keyword">true</span>;</span><br><span class="line">        Node fast = head;</span><br><span class="line">        Node slow = head;</span><br><span class="line">        <span class="comment">//快指针一次走两步，慢指针一次走一步，最后，慢指针的位置就是链表的中点</span></span><br><span class="line">        <span class="keyword">while</span> (fast.next != <span class="keyword">null</span> &amp;&amp; fast.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到中点后，从中点开始反转链表</span></span><br><span class="line">        Node cur = slow.next;</span><br><span class="line">        <span class="comment">//中点的next为null</span></span><br><span class="line">        slow.next = <span class="keyword">null</span>;</span><br><span class="line">        Node temp = cur;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = cur.next;</span><br><span class="line">            cur.next = slow;</span><br><span class="line">            slow = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//反转链表最后，慢指针指的是最后一个节点。</span></span><br><span class="line">        <span class="comment">//开始比对是否是回文链表</span></span><br><span class="line">        Node start = head;</span><br><span class="line">        Node end = slow;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//这一步可以改一下，把后面的end ！=null 可以去掉，你可以自己验证一下</span></span><br><span class="line">        <span class="keyword">while</span> (start != <span class="keyword">null</span>&amp;&amp;end!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (start.value != end.value) &#123;</span><br><span class="line">                <span class="comment">//如果不是回文链表，flag变成false</span></span><br><span class="line">                flag =<span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            start = start.next;</span><br><span class="line">            end = end.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断完成后，重构这个链表（从end开始向前重构）</span></span><br><span class="line">        <span class="comment">//把end 变回 最后一个节点。</span></span><br><span class="line">        end = slow;</span><br><span class="line">        cur = end.next;</span><br><span class="line">        temp = cur;</span><br><span class="line">        end.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (temp != <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp = cur.next;</span><br><span class="line">            cur.next = end;</span><br><span class="line">            end = cur;</span><br><span class="line">            cur = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/28/%E6%89%93%E5%8D%B0%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E7%9A%84%E5%85%AC%E5%85%B1%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">打印两个有序链表的公共部分</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-28 14:02:47" itemprop="dateCreated datePublished" datetime="2019-12-28T14:02:47+08:00">2019-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:05:00" itemprop="dateModified" datetime="2020-01-06T22:05:00+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>用归并排序中的外排merge的那部分思想，只有相等的时候才打印，不相等的时候直接到下一个节点</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCommonPart</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Common Part: "</span>);</span><br><span class="line">		<span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head1.value &lt; head2.value) &#123;</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head1.value &gt; head2.value) &#123;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(head1.value + <span class="string">" "</span>);</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hansoncheng.com/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxB_T79S9obWcfLgEV_wMSIPMYdkG66zzc3gDdcs7SwURI4SY3Ww&s">
-      <meta itemprop="name" content="陈广">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="人间失格">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/28/%E5%9C%A8%E8%A1%8C%E5%92%8C%E5%88%97%E9%83%BD%E6%8E%92%E5%A5%BD%E5%BA%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E4%B8%AD%E6%89%BE%E6%95%B0/" class="post-title-link" itemprop="url">在行和列都排好序的矩阵中找数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-28 12:56:00" itemprop="dateCreated datePublished" datetime="2019-12-28T12:56:00+08:00">2019-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 22:23:58" itemprop="dateModified" datetime="2020-01-06T22:23:58+08:00">2020-01-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&lt;img src=&quot;https://upload.cc/i1/2020/01/05/8ODvfQ.png&quot; style=&quot;zoom:33%;&quot; /&gt;</p>
-<p>如题，如图，找4这个数。</p>
-<p>可以从右上角开始找6，</p>
-<p>6比4 大，</p>
-<p>所以6下面的就可以排除了，</p>
-<p>向左走一位是5，</p>
-<p>5 也比4大，</p>
-<p>再向左走是3，</p>
-<p>3比4 小，</p>
-<p>所以3左边的都比4小，</p>
-<p>向下走一位是5，</p>
-<p>5比4 大，</p>
-<p>所以向左走一位，是2，</p>
-<p>2比4小，</p>
-<p>所以向下走一位是4，</p>
-<p>找到啦。</p>
-<p>&lt;img src=&quot;https://upload.cc/i1/2020/01/05/8U7uD3.png&quot; style=&quot;zoom: 33%;&quot; /&gt;</p>
-<p>时间复杂度是O（m+n）的</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isContains</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> K)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> row = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> col = matrix[<span class="number">0</span>].length - <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span> (row &lt; matrix.length &amp;&amp; col &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (matrix[row][col] == K) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (matrix[row][col] &gt; K) &#123;</span><br><span class="line">				col--;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				row++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span>[][] matrix = <span class="keyword">new</span> <span class="keyword">int</span>[][] &#123; &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> &#125;,<span class="comment">// 0</span></span><br><span class="line">				&#123; <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span> &#125;,<span class="comment">// 1</span></span><br><span class="line">				&#123; <span class="number">23</span>, <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>, <span class="number">28</span>, <span class="number">29</span> &#125;,<span class="comment">// 2</span></span><br><span class="line">				&#123; <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">50</span> &#125;,<span class="comment">// 3</span></span><br><span class="line">				&#123; <span class="number">65</span>, <span class="number">66</span>, <span class="number">67</span>, <span class="number">68</span>, <span class="number">69</span>, <span class="number">70</span>, <span class="number">71</span> &#125;,<span class="comment">// 4</span></span><br><span class="line">				&#123; <span class="number">96</span>, <span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">111</span>, <span class="number">122</span> &#125;,<span class="comment">// 5</span></span><br><span class="line">				&#123; <span class="number">166</span>, <span class="number">176</span>, <span class="number">186</span>, <span class="number">187</span>, <span class="number">190</span>, <span class="number">195</span>, <span class="number">200</span> &#125;,<span class="comment">// 6</span></span><br><span class="line">				&#123; <span class="number">233</span>, <span class="number">243</span>, <span class="number">321</span>, <span class="number">341</span>, <span class="number">356</span>, <span class="number">370</span>, <span class="number">380</span> &#125; <span class="comment">// 7</span></span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">int</span> K = <span class="number">233</span>;</span><br><span class="line">		System.out.println(isContains(matrix, K));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -451,7 +455,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -460,7 +464,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

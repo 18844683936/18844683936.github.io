@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料 工程中的排序： 					1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别） 					2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别） 					3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来 					4. 如果长度较大，用的是快排和堆排序，有一">
+  <meta name="description" content="关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料 工程中的排序： 1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）    2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）    3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来    4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2019&#x2F;12&#x2F;16&#x2F;%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料 工程中的排序： 					1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别） 					2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别） 					3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来 					4. 如果长度较大，用的是快排和堆排序，有一">
+<meta property="og:description" content="关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料 工程中的排序： 1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）    2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）    3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来    4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-12-16T12:29:20.000Z">
 <meta name="twitter:card" content="summary">
@@ -220,18 +220,21 @@
       
         <p>关于排序的稳定性： 为什么需要稳定性？因为现实世界中不想要抹去原来的排序的资料</p>
 <p>工程中的排序：</p>
-<pre><code>					1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）
-					2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）
-					3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来
-					4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程中如果进行到数组长度小于60的话就直接使用插排了（在递归时有一个判断 如果L&gt;R-60 的话就直接插排）
-</code></pre>
-<p>冒泡排序：可以实现稳点，两个相邻的树比较的时候，前面的和后面的相同，则不交换。continue？</p>
+<pre><code>1. 如果是基本数据类型，就用快排（因为基本数据类型相同的值无差别）
+   2. 如果是引用数据类型，就用归并排序（引用数据类型不同的对象有差别）
+   3. 如果长度小于60，就用插排。因为常数项极少，O（n2）的劣势体现不出来
+   4. 如果长度较大，用的是快排和堆排序，有一个分值的过程。这个过程中如果进行到数组长度小于60的话就直接使用插排了（在递归时有一个判断 如果L&gt;R-60 的话就直接插排）</code></pre><p>冒泡排序：可以实现稳点，两个相邻的树比较的时候，前面的和后面的相同，则不交换。continue？</p>
 <p>选择排序。：不可以实现稳定性</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">0</span>&#125;</span><br><span class="line"><span class="comment">//原理是：找到一个最小的，第一个交换，所以 0 这个就会和第一个5交换</span></span><br><span class="line"><span class="comment">//所以第一个5 就跨越了 两个5 。所以不稳定</span></span><br></pre></td></tr></table></figure></p>
-<p>插入排序：可以实现稳定性</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">//第一次排序后  5,6,6,7</span></span><br><span class="line"><span class="comment">//第二次向前排序的时候，如果和前面的6相同的话。就不交换了</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">0</span>&#125;</span><br><span class="line"><span class="comment">//原理是：找到一个最小的，第一个交换，所以 0 这个就会和第一个5交换</span></span><br><span class="line"><span class="comment">//所以第一个5 就跨越了 两个5 。所以不稳定</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>插入排序：可以实现稳定性    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> [] arr = &#123;<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">6</span>&#125;</span><br><span class="line"><span class="comment">//第一次排序后  5,6,6,7</span></span><br><span class="line"><span class="comment">//第二次向前排序的时候，如果和前面的6相同的话。就不交换了</span></span><br></pre></td></tr></table></figure>
+
 <p>归并排序：可以实现稳点性</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr1 :[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]      arr2:  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">新的数组：[] </span><br><span class="line"><span class="comment">//如果arr1 的3和arr的3  相同的话，把arr1 的3 添加到新的数组中,如果相等，添加左边的</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr1 :[<span class="number">3</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]      arr2:  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">新的数组：[] </span><br><span class="line"><span class="comment">//如果arr1 的3和arr的3  相同的话，把arr1 的3 添加到新的数组中,如果相等，添加左边的</span></span><br></pre></td></tr></table></figure>
+
 <p>快速排序：不可以实现稳点性</p>
 <p>partition的过程做不成稳点性。随机选择一个数字。</p>
 <p>堆排序：不可以实现稳点性 因为在建立大根堆的过程中就把稳点性破坏了。</p>
@@ -312,7 +315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -321,7 +324,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

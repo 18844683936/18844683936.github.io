@@ -46,16 +46,16 @@
   };
 </script>
 
-  <meta name="description" content="TCP ​	是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式   序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正">
+  <meta name="description" content="TCP​    是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式  序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b">
 <meta name="keywords" content="TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP">
 <meta property="og:url" content="https:&#x2F;&#x2F;hansoncheng.com&#x2F;2021&#x2F;04&#x2F;13&#x2F;TCP&#x2F;index.html">
 <meta property="og:site_name" content="人间失格">
-<meta property="og:description" content="TCP ​	是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式   序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正">
+<meta property="og:description" content="TCP​    是一种面向连接的，可靠的，基于字节流的传输层通信协议 TCP的报文格式  序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始 确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;110030-896154.gif">
-<meta property="og:updated_time" content="2021-04-13T03:03:09.653Z">
+<meta property="og:updated_time" content="2021-04-13T09:56:02.667Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com&#x2F;undefined&#x2F;202104&#x2F;13&#x2F;110030-896154.gif">
 
@@ -207,7 +207,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-04-13 10:19:19 / 修改时间：11:03:09" itemprop="dateCreated datePublished" datetime="2021-04-13T10:19:19+08:00">2021-04-13</time>
+              <time title="创建时间：2021-04-13 10:19:19 / 修改时间：17:56:02" itemprop="dateCreated datePublished" datetime="2021-04-13T10:19:19+08:00">2021-04-13</time>
             </span>
 
           
@@ -221,17 +221,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3>TCP</h3>
-<p>​	是一种面向连接的，可靠的，基于字节流的传输层通信协议</p>
-<h3>TCP的报文格式</h3>
-<p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/110030-896154.gif" alt="图片加载中"></p>
+        <h3 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h3><p>​    是一种面向连接的，可靠的，基于字节流的传输层通信协议</p>
+<h3 id="TCP的报文格式"><a href="#TCP的报文格式" class="headerlink" title="TCP的报文格式"></a>TCP的报文格式</h3><p><img src="https://blog-1305043867.cos.ap-shenzhen-fsi.myqcloud.com/undefined/202104/13/110030-896154.gif" alt="图片加载中"></p>
 <ul>
 <li>序号：占4个字节，TCP连接中的字节都按照顺序编号，比如一段报文的序号字段值就是107，而携带的字段有100个，那么下个报文段就是从107+100=207开始</li>
 <li>确认号： 占4个字节，是期望收到对方报文的第一个数据字节的序号，例如b收到a发送过来的报文，其序列号字段是107，而数据长度是100个字节，这表明了b正确的收到了a发送的到序号206为止的数据（107+100-1），因此b期望收到a的下个数据序号就是207 于是，b在发送给a的确认报文段中会把ACK确认号置为207</li>
 <li>数据偏移：由于头部有可选字段，长度不固定，所以他指出TCP报文的数据距离TCP报文的起始处有多远</li>
 <li>保留域</li>
-<li>TCP Flags：控制域 总共有8个
-<ul>
+<li>TCP Flags：控制域 总共有8个<ul>
 <li>URG：紧急指针标识 为1时有效</li>
 <li>ACk： 确认序号标识 上面的确认号是否有效就是靠这个标识位控制的</li>
 <li>PSH:  push标志 为1 表示接收方接收到后应尽快将报文交给应用程序，而不是放入缓冲区</li>
@@ -244,14 +241,12 @@
 <li>校验和： 奇偶校验</li>
 <li>紧急指针: 只有TCP的URG有效时，指出报文的紧急数据的字节数</li>
 </ul>
-<h3>说说TCP的三次握手</h3>
-<ul>
+<h3 id="说说TCP的三次握手"><a href="#说说TCP的三次握手" class="headerlink" title="说说TCP的三次握手"></a>说说TCP的三次握手</h3><ul>
 <li>第一次握手： 建立连接时，客户端发送SYN包（seq = x）到服务器，并进入到SYN_SEND的状态，等待服务器确认</li>
 <li>第二次握手： 服务器收到客户段发送来的SYN包，发送确认包ACK（ack = x+1），同时自己也发送一个SYN包（syn = y）即 ACK + SYN 包 ，此时服务器进入到SYN_RECV的状态</li>
 <li>第三次握手： 客户端收到服务器的SYN+ACK包，然后发送服务器发送确认包ACK（ack = y=1）,此包发送完毕，服务器和客户端进入到ESTABLISH的状态，完成三次握手</li>
 </ul>
-<h3>为什么需要三次握手才能建立起连接</h3>
-<p><strong>为了初始化序号的初始值</strong></p>
+<h3 id="为什么需要三次握手才能建立起连接"><a href="#为什么需要三次握手才能建立起连接" class="headerlink" title="为什么需要三次握手才能建立起连接"></a>为什么需要三次握手才能建立起连接</h3><p><strong>为了初始化序号的初始值</strong></p>
 <p>通信的双方要互相通知对方自己的序号，也就是x,y,这个序号要作为以后数据通信的序号，TCP会用这个序号来拼接数据，因此在服务器回发他序号后，还需要发送确认报文给服务器，告诉服务器，客户当已经收到了你的序号了</p>
 
     </div>
@@ -277,6 +272,9 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2021/04/13/%E9%94%81/" rel="prev" title="锁">
+                  锁 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -315,7 +313,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">TCP的报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">说说TCP的三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">为什么需要三次握手才能建立起连接</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">1.</span> <span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP的报文格式"><span class="nav-number">2.</span> <span class="nav-text">TCP的报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说说TCP的三次握手"><span class="nav-number">3.</span> <span class="nav-text">说说TCP的三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要三次握手才能建立起连接"><span class="nav-number">4.</span> <span class="nav-text">为什么需要三次握手才能建立起连接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -331,7 +329,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -340,7 +338,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

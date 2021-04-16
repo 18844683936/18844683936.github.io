@@ -226,7 +226,8 @@
 
       
         <p>用归并排序中的外排merge的那部分思想，只有相等的时候才打印，不相等的时候直接到下一个节点</p>
-<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCommonPart</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Common Part: "</span>);</span><br><span class="line">		<span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head1.value &lt; head2.value) &#123;</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head1.value &gt; head2.value) &#123;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(head1.value + <span class="string">" "</span>);</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCommonPart</span><span class="params">(Node head1, Node head2)</span> </span>&#123;</span><br><span class="line">		System.out.print(<span class="string">"Common Part: "</span>);</span><br><span class="line">		<span class="keyword">while</span> (head1 != <span class="keyword">null</span> &amp;&amp; head2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (head1.value &lt; head2.value) &#123;</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (head1.value &gt; head2.value) &#123;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.print(head1.value + <span class="string">" "</span>);</span><br><span class="line">				head1 = head1.next;</span><br><span class="line">				head2 = head2.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -307,7 +308,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -316,7 +317,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
