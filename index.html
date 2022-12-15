@@ -353,54 +353,6 @@
 
 
   
-    <article id="post-专注" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="C:\Users\陈广\AppData\Roaming\Typora\typora-user-images\image-20220810085106093.png" alt="image-20220810085106093"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/08/10/%E4%B8%93%E6%B3%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-面试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1691,9 +1643,177 @@ private ContainerSingleton()&#123;
 
 
   
+    <article id="post-建造者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/31/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">建造者模式</a>
+    </h1>
+  
+
+        
+        <a href="/2022/03/31/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2022-03-31T11:50:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="定义与类型"><a href="#定义与类型" class="headerlink" title="定义与类型"></a>定义与类型</h2><ol>
+<li>定义:将一个复杂对象的构建与他的表示分离，使得同样的构建过程可以创建不同的表示</li>
+<li>用户只需要指定需要构造的类型就可以得到他们，建造过程及细节不需要知道</li>
+<li>就是如何一步一步建造一个包含多个组件的对象，相同的构建过程可以创建不同的产品，</li>
+</ol>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ol>
+<li>如果一个对象有非常复杂的内部结构（很多属性）</li>
+<li>并且想把复杂对象的创建和适用分离</li>
+</ol>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>封装性好，创建和适用分离</li>
+<li>扩展性好，建造类之间独立，一定程度上解耦</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>产生多余的Builder对象</li>
+<li>产品内部发生变化，建造者都需要修改，成本较大</li>
+</ol>
+<h2 id="和工厂模式比较"><a href="#和工厂模式比较" class="headerlink" title="和工厂模式比较"></a>和工厂模式比较</h2><ol>
+<li>建造者模式更注重于方法的调用顺序，而工厂模式注重于创建产品</li>
+<li>创建对象的力度不同，建造者模式可以创建复杂的产品，由各种复杂的部件组成，工厂模式创建出来的都是一个样子</li>
+<li>关注点不同，工厂模式注重把这个对象创建出来就ok了，而建造者模式，不止要创建出这个产品，还要知道这个产品都是由哪些部件组成的</li>
+<li>建造者模式再某些场景，比如，一定的顺序决定了产出的产品不一样，这里也要对顺序进行跳转，但是工厂并不关心顺序</li>
+<li>当创建一个对象需要很多步骤时，适合适用建造者模式，而通过一个简单的方法就要创建出一个简单的对象时，适合适用工厂相关模式</li>
+</ol>
+<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><ol>
+<li><p><img src="C:\Users\陈广\AppData\Roaming\Typora\typora-user-images\image-20220331134511603.png" alt="image-20220331134511603"></p>
+</li>
+<li><p><img src="C:\Users\陈广\AppData\Roaming\Typora\typora-user-images\image-20220331141938843.png" alt="image-20220331141938843"></p>
+</li>
+<li><p>```java<br>public class Course {</p>
+<pre><code>private String courseName;
+private String coursePPt;
+private String courseVideo;
+private String courseArticle;
+private String courseQA;
+
+
+public Course(CourseBuilder courseBuilder)&#123;
+    this.courseName = courseBuilder.courseName;
+    this.coursePPt = courseBuilder.coursePPt;
+    this.courseVideo = courseBuilder.courseVideo;
+    this.courseArticle = courseBuilder.courseArticle;
+    this.courseQA = courseBuilder.courseQA;
+&#125;
+
+
+@Override
+public String toString() &#123;
+    return &quot;Course&#123;&quot; +
+            &quot;courseName=&#39;&quot; + courseName + &#39;\&#39;&#39; +
+            &quot;, coursePPt=&#39;&quot; + coursePPt + &#39;\&#39;&#39; +
+            &quot;, courseVideo=&#39;&quot; + courseVideo + &#39;\&#39;&#39; +
+            &quot;, courseArticle=&#39;&quot; + courseArticle + &#39;\&#39;&#39; +
+            &quot;, courseQA=&#39;&quot; + courseQA + &#39;\&#39;&#39; +
+            &#39;&#125;&#39;;
+&#125;
+
+public static class CourseBuilder&#123;
+    private String courseName;
+    private String coursePPt;
+    private String courseVideo;
+    private String courseArticle;
+    private String courseQA;
+
+    public CourseBuilder buildCourseName(String courseName)&#123;
+        this.courseName = courseName;
+        return this;
+    &#125;
+    public CourseBuilder buildCoursePPt(String coursePPt)&#123;
+        this.coursePPt = coursePPt;
+        return this;
+    &#125;
+    public CourseBuilder buildCourseVideo(String courseVideo)&#123;
+        this.courseVideo = courseVideo;
+        return this;
+    &#125;
+    public CourseBuilder buildCourseArticle(String courseArticle)&#123;
+        this.courseArticle = courseArticle;
+        return this;
+    &#125;
+    public CourseBuilder buildCourseQA(String courseQA)&#123;
+        this.courseQA = courseQA;
+        return this;
+    &#125;
+
+    public Course build()&#123;
+        return new Course(this);
+    &#125;
+
+&#125;
+</code></pre>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;java</span><br><span class="line">   public class Test &#123;</span><br><span class="line">       public static void main(String[] args) &#123;</span><br><span class="line">           Course course &#x3D; new Course.CourseBuilder()</span><br><span class="line">                   .buildCourseArticle(&quot;文章&quot;)</span><br><span class="line">                   .buildCourseName(&quot;title&quot;)</span><br><span class="line">                   .buildCoursePPt(&quot;ppt&quot;)</span><br><span class="line">                   .buildCourseVideo(&quot;video&quot;)</span><br><span class="line">                   .buildCourseQA(&quot;qa&quot;)</span><br><span class="line">                   .build();</span><br><span class="line">   </span><br><span class="line">           System.out.println(course);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+<li></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/03/31/%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1788,11 +1908,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
+                <a href="javascript:void(0)" class="js-tag color3">框架</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">框架</a>
+                <a href="javascript:void(0)" class="js-tag color4">DFS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1813,10 +1933,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">jpa</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1848,11 +1964,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">c#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">完全二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1865,14 +1993,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">回文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">c#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">完全二叉树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1896,15 +2016,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">布隆过滤器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">归并排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
+                <a href="javascript:void(0)" class="js-tag color1">布隆过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1912,7 +2028,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">平衡二叉树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">桶排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单向链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1924,19 +2048,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">单向链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BST</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">时间复杂度</a>
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
